@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/font-icon.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+  </head>
+  <body>
+    <div class="wrap" id="wrap">
+      <!-- 搜索 -->
+      <div class="search-page">
+        <!-- top顶部 -->
+        <div class="top-bar">
+          <div class="search-wrap">
+            <a href="javascript:;" class="cancel-btn" onclick="api.closeWin({animation: {type: 'none'}});">取消</a>
+            <div class="search-bg">
+              <i class="icon-m icon-search"></i>
+              <input type="text" placeholder="搜主播/直播间" class="input-search" id="keyword">
+            </div>
+          </div>
+          <div class="top-bar-line"></div>
+        </div>
+        <!-- top顶部 -->
+
+        <!-- 搜索历史记录 -->
+        <div class="search-history" id="history">
+          <ul id="historyList">
+            <li>
+              <div class="clear-history" id="cleanHistory">
+                清空搜索历史
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- 搜索历史记录 end-->
+
+        <!-- 搜索无记录 -->
+        <div class="search-no hidden" id="noResult">暂无搜索记录</div>
+        <!-- 搜索无记录 end-->
+
+        <!-- 搜索结果 -->
+        <div class="search-ok hidden" id="result">
+          <div class="tab-c">
+            <ul class="clearfix"  id="tab">
+              <li class="active" tapmode="active">直播间</li>
+              <li tapmode="active">主播</li>
+            </ul>
+          </div>
+          <!-- tab对应的直播间选项 -->
+          <div class="search-room">
+            <div class="video-list-wrap js-result hidden">
+              <ul id="liveList">
+              </ul>
+            </div>
+          </div>
+          <!-- tab对应的直播间选项 end-->
+
+          <!-- tab对应的主播选项 -->
+          <div class="search-anchor js-result hidden">
+            <div class="anchor-list">
+              <ul id="hostList">
+              </ul>
+            </div>
+          </div>
+          <!-- tab对应的主播选项 end-->
+
+          <!-- tab搜索为空时 -->
+          <div class="search-tab-no hidden" id="noTabResult">
+            抱歉,没有找到相关的内容
+          </div>
+          <!-- tab搜索为空时 end-->
+        </div>
+        <!-- 搜索结果 end-->
+
+
+      </div>
+      <!-- 搜索 end-->
+    </div>
+  </body>
+  <script src="../script/lib/jquery-2.1.1.min.js"></script>
+  <script src="../script/api.js"></script>
+  <script src="../script/common.js"></script>
+  <script src="../script/search.js"></script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>侧边栏</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="copyright" content="www.apicloud.com" />
+<link rel="stylesheet" type="text/css" href="../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../css/common.css" />
+</head>
+<body class="sidebar_bg">
+  <div class="sidebar_box">
+    <!-- banner部分 -->
+    <div class="banner"><img src="../image/logox2.png" alt=""></div>
+    <!-- banner部分 end-->
+
+    <!-- 搜索部分 -->
+    <div class="search">
+      <div class="search-in">
+        <i></i>
+        <input type="text" placeholder="搜索" disabled>
+      </div>
+    </div>
+    <!-- 搜索部分 end-->
+
+    <!-- 导航列表部分 -->
+    <div class="sidebar_list">
+      <div class="til">浏览</div>
+      <ul class="sidebar_game_list">
+        <li class="clearfix">
+          <i class="icon_list icon_game"></i>
+          <div class="main_name">游戏</div>
+          <i class="icon_next"></i>
+        </li>
+        <li class="clearfix">
+          <i class="icon_list icon_live"></i>
+          <div class="main_name">直播间</div>
+          <i class="icon_next"></i>
+        </li>
+      </ul>
+      <div class="til">推荐游戏</div>
+      <ul id="gameList" class="sidebar_game_list"></ul>
+      <div class="til">推荐直播间</div>
+      <ul id="liveList" class="sidebar_game_list"></ul>
+    </div>
+    <!-- 导航列表部分 end-->
+
+    <!-- 底部按钮 -->
+    <div class="foot_btn">
+      <a href="javascript:;" onclick="api.openWin({name:'login',url:'login.html',delay:300,bgColor:'#FFF'});">登录</a>
+      <a href="javascript:;" onclick="api.openWin({name:'reg',url:'reg.html',delay:300,bgColor:'#FFF'});">注册</a>
+    </div>
+    <!-- 底部按钮 end-->
+    
+  </div>
+</body>
+<script src="../script/api.js"></script>
+<script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/common.js"></script>
+<!-- <script src="../script/homefixed.js"></script> -->
+</html>

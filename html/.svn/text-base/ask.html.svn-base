@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <title>每日一问</title>
+</head>
+<body>
+<div class="wrap">
+  <!-- 每日一问 -->
+  <div class="day-box ask-page">
+    <!-- top顶部 -->
+    <div class="top-bar">
+      <div class="top-bar-bd">
+        <p class="title">
+          <i class="icon-m icon-close" onclick="api.closeWin();"></i>
+          每日一问
+        </p>
+      </div>
+      <div class="top-bar-line"></div>
+    </div>
+    <!-- top顶部 -->
+    
+    <div class="bd">
+
+      <div class="day-list">
+        <ul>
+          <li id="title"></li>
+          <li id="answerOne" class="js-answer"><i class="icon-m icon-unchecked"></i><span></span></li>
+          <li id="answerTwo" class="js-answer"><i class="icon-m icon-unchecked"></i><span></span></li>
+        </ul>
+      </div>
+
+      <div class="footer-btn">
+        <div class="btn-group btn-block" id="btn-submit">提交</div>
+      </div>
+    </div>
+  </div>
+  <!-- 每日一问 end-->
+</div>
+<script src="../script/api.js"></script>
+<script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/common.js"></script>
+<script type="text/javascript" src="../script/ask.js"></script>
+</body>
+</html>

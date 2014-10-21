@@ -1,0 +1,289 @@
+
+apiready = function() {
+
+  var ui = {
+    $lolList : $('#lolList')
+  , $dota2List : $('#dota2List')
+  , $sgsList : $('#sgsList')
+  , $otherList : $('#otherList')
+  }
+  var timer = setTimeout(function(){
+    api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: false
+    });
+  }, 2000);
+	var oPage = {
+		init : function() {
+      this.view();
+      this.listen();
+		},
+
+		view : function() {
+      var self = this;
+
+      api.setRefreshHeaderInfo({
+        visible: true,
+        loadingImgae: 'widget://image/refresh-white.png',
+        bgColor: '#ccc',
+        textColor: '#fff',
+        textDown: '下拉可以刷新',
+        textUp: '松开即可刷新',
+        showTime: false
+      }, function(ret, err){
+        // alert(ret);
+        self.loadData();
+      });
+
+
+      self.loadData();
+
+		},
+		listen : function() {
+      // $('#slide').on('click',  'div', function() {
+      //   api.openWin({name:'BFDemo',url:'rooms.html'});
+      // });
+      
+      //进入直播间
+      $(document).on('click', 'li[name=enterRooms]', function() {
+        var roomid = this.id
+        ,   which = $(this).attr('which')
+        ,   fansTitle = $(this).attr('fansTitle')
+        
+        api.openWin({
+            name:'rooms'
+          , url:'rooms.html?id=' + roomid + '&which=' + which + '&fansTitle=' + fansTitle
+          // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
+          , delay:300
+          , bgColor:'#FFF'
+        });
+
+      });
+		},
+    loadData : function() {
+      var self = this;
+      self.getDataIndex(URLConfig('liveIndex'), function(ret, err) {
+        if (ret) {
+          if(ret['code'] == 0) {
+            self.renderSlider(ret['lives']);
+            self.renderLiveData(ret['lives']);
+            clearTimeout(timer);
+          }else{
+            api.alert({msg : ret['message']});
+          }
+        } else {
+            api.alert({
+                msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+            });
+        };
+      });
+
+      //英雄联盟
+      self.getDataIndex(URLConfig('gameLiveIndex',{'id' : 6, 'num' : 4,'page' : 1}), function(ret, err) {
+        if (ret) {
+          if(ret['code'] == 0) {
+            self.renderGameLiveData(ret['data']['rooms'], ui.$lolList);
+          }else{
+            api.alert({msg : ret['message']});
+          }
+        } else {
+            api.alert({
+                msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+            });
+        };
+      });
+      //dota2
+      self.getDataIndex(URLConfig('gameLiveIndex',{'id' : 10, 'num' : 4,'page' : 1}), function(ret, err) {
+        if (ret) {
+          if(ret['code'] == 0) {
+            self.renderGameLiveData(ret['data']['rooms'], ui.$dota2List);
+          }else{
+            api.alert({msg : ret['message']});
+          }
+        } else {
+            api.alert({
+                msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+            });
+        };
+      });
+      //三国杀
+      self.getDataIndex(URLConfig('gameLiveIndex',{'id' : 13, 'num' : 4,'page' : 1}), function(ret, err) {
+        if (ret) {
+          if(ret['code'] == 0) {
+            self.renderGameLiveData(ret['data']['rooms'], ui.$sgsList);
+          }else{
+            api.alert({msg : ret['message']});
+          }
+        } else {
+            api.alert({
+                msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+            });
+        };
+      });
+      //其它
+      self.getDataIndex(URLConfig('otherLiveIndex'), function(ret, err) {
+        if (ret) {
+          if(ret['code'] == 0) {
+            var html = self.renderGameLiveData(ret['data']['rooms'], ui.$otherList);
+          }else{
+            api.alert({msg : ret['message']});
+          }
+        } else {
+            api.alert({
+                msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+            });
+        };
+      });
+      api.refreshHeaderLoadDone();
+
+    },
+
+    getDataIndex : function(url,callback) {
+      $.ajax({
+        url : url,
+        type : 'get',
+        dataType : 'json',
+        success : function(data) {
+          callback(data)
+        }
+      });
+
+    },
+
+<<<<<<< .mine
+    renderGameLiveData : function(data) {
+      var width = api.winWidth;
+      var htmlStr = '';
+      for(var i=0; i<data.length; i++) {
+        // alert(JSON.stringify(data[i]))
+        // alert('renderGameLiveData>'+data[i]['VideoType'])
+        var which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO';
+
+        htmlStr += '<li id="'+data[i]['id']+'" which="'+which+'" fansTitle="'+data[i]['fansTitle']+'" name="enterRooms">'
+        + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
+        + '<div class="til">'+data[i]['title']+'</div>'
+        + '<div class="detail clearfix">'
+        + '<span class="audience"><i class="icon-m icon-user"></i>'+data[i]['online']+'</span>'
+        + '<p class="anchor"><i class="icon-m icon-ta"></i>'+data[i]['nickname']+'</p>'
+        + '</div></li>';
+      }
+      return htmlStr;
+=======
+    renderGameLiveData : function(data, $dom) {
+      //var width = api.winWidth;
+      // var htmlStr = '';
+      // for(var i=0; i<data.length; i++) {
+      //   htmlStr += '<li id="'+data[i]['id']+'" name="game">'
+      //   + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
+      //   + '<div class="til">'+data[i]['title']+'</div>'
+      //   + '<div class="detail clearfix">'
+      //   + '<span class="audience"><i class="icon-m icon-user"></i>'+data[i]['online']+'</span>'
+      //   + '<p class="anchor"><i class="icon-m icon-ta"></i>'+data[i]['nickname']+'</p>'
+      //   + '</div></li>';
+      // }
+      // return htmlStr;
+      $dom.find('li').each(function(){
+        $self = $(this);
+        var i = $self.index();
+        $self.attr('id', data[i]['id'])
+        $self.find('.til').empty().text(data[i]['title']);
+        $self.find('.js-online').empty().text(data[i]['online']);
+        $self.find('.js-nickname').empty().text(data[i]['nickname']);
+        $self.find('img').attr('src', data[i]['bpic']);
+      })
+>>>>>>> .r130
+    },
+
+    renderLiveData : function(data) {
+<<<<<<< .mine
+      var width = api.winWidth;
+      var htmlStr = '';
+      for(var i=0; i<data.length; i++) {
+        var which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO';
+
+        htmlStr += '<li id="'+data[i]['id']+'" which="'+which+'" fansTitle="'+data[i]['fansTitle']+'" name="enterRooms">'
+        + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
+        + '<div class="til">'+data[i]['title']+'</div>'
+        + '<div class="detail clearfix">'
+        + '<span class="audience"><i class="icon-m icon-user"></i>'+data[i]['online']+'</span>'
+        + '<p class="anchor"><i class="icon-m icon-ta"></i>'+data[i]['nickname']+'</p>'
+        + '</div></li>';
+      }
+      $('#indexLiveList').html(htmlStr);
+=======
+      // var width = api.winWidth;
+      // var htmlStr = '';
+      // for(var i=0; i<data.length; i++) {
+      //   htmlStr += '<li id="'+data[i]['id']+'" name="game">'
+      //   + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
+      //   + '<div class="til">'+data[i]['title']+'</div>'
+      //   + '<div class="detail clearfix">'
+      //   + '<span class="audience"><i class="icon-m icon-user"></i>'+data[i]['online']+'</span>'
+      //   + '<p class="anchor"><i class="icon-m icon-ta"></i>'+data[i]['nickname']+'</p>'
+      //   + '</div></li>';
+      // }
+      //$('#indexLiveList').html(htmlStr);
+      $('#indexLiveList>li').each(function(){
+        $self = $(this);
+        var i = $self.index();
+        $self.attr('id', data[i]['id'])
+        $self.find('.til').empty().text(data[i]['title']);
+        $self.find('.js-online').empty().text(data[i]['online']);
+        $self.find('.js-nickname').empty().text(data[i]['nickname']);
+        $self.find('img').attr('src', data[i]['bpic']);
+      })
+      api.hideProgress();
+>>>>>>> .r130
+    },
+    //渲染首页swipe插件
+    renderSlider : function(data) {
+      var self = this;
+      if(window.isSlided){
+        $('#banner-content>li').each(function(){
+          $self = $(this);
+          var i = $self.index();
+          $self.attr('id', data[i]['id'])
+          $self.find('.title').empty().text(data[i]['title']);
+          $self.find('img').attr('src', data[i]['bpic']);
+        })
+        return;
+      }
+      var width = api.winWidth;
+      var htmlStr = '';
+      for(var i=0; i<data.length; i++) {
+        var which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO';
+
+        htmlStr += '<li name="enterRooms" which="'+which+'" fansTitle="'+data[i]['fansTitle']+'" id="'+data[i]['id']+'">'
+                +  '<img src="'+data[i]['bpic']+'" class="show-pic" />'
+                +  '<p class="title">'+data[i]['title']+'</p>'
+                +  '</li>';
+      }
+      var pointerStr = '<span class="dot dib active"></span>';
+      for(var i=1; i<data.length; i++) {
+        pointerStr += '<span class="dot dib"></span>';
+      }
+      $('#dotBox').empty().html(pointerStr);
+      $('#banner-content').empty().html(htmlStr);
+      var slide = $api.byId('slider');
+      window.mySwipe = Swipe(slide, {
+        // startSlide: 2,
+        // speed: 400,
+        auto: 3000,
+        continuous: true,
+        disableScroll: false,
+        stopPropagation: false,
+        callback: function(index, elem) {
+          $('#dotBox span.active').removeClass('active');
+          $('#dotBox span:eq('+index+')').addClass('active');
+        },
+        transitionEnd: function(index, elem) {}
+      });
+      window.isSlided = true;
+    }
+
+	}
+	oPage.init();
+}

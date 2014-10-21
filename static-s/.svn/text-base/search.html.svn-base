@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=1,minimum-scale=1,user-scalable=1,width=device-width,initial-scale=1"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <link rel="stylesheet" href="../css/common-s.css">
+  <link rel="stylesheet" href="../css/api.css">
+  <title>搜索</title>
+</head>
+<body>
+<div class="wrap">
+  <!-- 搜索 -->
+  <div class="search-page">
+    <!-- top顶部 -->
+    <div class="top-bar">
+      <div class="search-wrap">
+        <a href="javascript:;" class="cancel-btn">取消</a>
+        <div class="search-bg">
+          <i class="icon-m icon-search"></i>
+          <input type="text" placeholder="搜主播/直播间" class="input-search">
+        </div>
+      </div>
+      <div class="top-bar-line"></div>
+    </div>
+    <!-- top顶部 -->
+
+    <!-- 搜索历史记录 -->
+    <div class="search-history hidden">
+      <ul>
+        <li>
+          <div class="pull-right">
+            <i class="icon-m icon-close"></i>
+          </div>
+          <i class="icon-m icon-timepiece"></i>
+          24小时
+        </li>
+        <li>
+          <div class="pull-right">
+            <i class="icon-m icon-close"></i>
+          </div>
+          <i class="icon-m icon-timepiece"></i>
+          我们
+        </li>
+        <li>
+          <div class="pull-right">
+            <i class="icon-m icon-close"></i>
+          </div>
+          <i class="icon-m icon-timepiece"></i>
+          英雄联盟
+        </li>
+        <li>
+          <div class="clear-history">
+            清空搜索历史
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- 搜索历史记录 end-->
+
+    <!-- 搜索无记录 -->
+    <div class="search-no hidden">暂无搜索记录</div>
+    <!-- 搜索无记录 end-->
+    
+    <!-- 搜索结果 -->
+    <div class="search-ok">
+      <div class="tab-c">
+        <ul class="clearfix">
+          <li>直播间</li>
+          <li class="active">主播</li>
+        </ul>
+      </div>
+      <!-- tab对应的直播间选项 -->
+      <div class="search-room hidden">
+        <div class="video-list-wrap">
+          <ul class="clearfix">
+            <li>
+              <img src="../image/pic01.jpg" alt="" class="game-pic">
+              <div class="til">微笑19:00准时开播</div>
+              <div class="detail clearfix">
+                <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+                <p class="anchor"><i class="icon-m icon-boy"></i>微笑</p>
+              </div>
+            </li>
+            <li>
+              <img src="../image/pic01.jpg" alt="" class="game-pic">
+              <div class="til">微笑19:00准时开播</div>
+              <div class="detail clearfix">
+                <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+                <p class="anchor"><i class="icon-m icon-boy"></i>微笑</p>
+              </div>
+            </li>
+            <li>
+              <img src="../image/pic01.jpg" alt="" class="game-pic">
+              <div class="til">微笑19:00准时开播</div>
+              <div class="detail clearfix">
+                <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+                <p class="anchor"><i class="icon-m icon-girl"></i>微笑</p>
+              </div>
+            </li>
+            <li>
+              <img src="../image/pic01.jpg" alt="" class="game-pic">
+              <div class="til">微笑19:00准时开播</div>
+              <div class="detail clearfix">
+                <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+                <p class="anchor"><i class="icon-m icon-boy"></i>微笑</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- tab对应的直播间选项 end-->
+
+      <!-- tab对应的主播选项 -->
+      <div class="search-anchor">
+        <div class="anchor-list">
+          <ul>
+            <li class="clearfix">
+              <img src="../image/user.jpg" alt="" class="user-photo">
+              <div class="pull-left">
+                <p class="user-name">weixiao</p>
+                <p class="order-count">25444人订阅</p>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img src="../image/user.jpg" alt="" class="user-photo">
+              <div class="pull-left">
+                <p class="user-name">weixiao</p>
+                <p class="order-count">25444人订阅</p>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img src="../image/user.jpg" alt="" class="user-photo">
+              <div class="pull-left">
+                <p class="user-name">weixiao</p>
+                <p class="order-count">25444人订阅</p>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img src="../image/user.jpg" alt="" class="user-photo">
+              <div class="pull-left">
+                <p class="user-name">weixiao</p>
+                <p class="order-count">25444人订阅</p>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img src="../image/user.jpg" alt="" class="user-photo">
+              <div class="pull-left">
+                <p class="user-name">weixiao</p>
+                <p class="order-count">25444人订阅</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- tab对应的主播选项 end-->
+      
+      <!-- tab搜索为空时 -->
+      <div class="search-tab-no hidden">
+        抱歉,没有找到相关的内容
+      </div>
+      <!-- tab搜索为空时 end-->
+    </div>
+    <!-- 搜索结果 end-->
+
+
+  </div>
+  <!-- 搜索 end-->
+</div>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+
+apiready = function() {
+
+  var ui = {
+  	$gameList: $('#gameList')
+  }
+
+	var oPage = {
+		init : function() {
+      this.view();
+      this.listen();
+		},
+		pageNow : 1,
+		ajaxing : 0,
+
+		view : function() {
+      var self = this;
+
+      api.setRefreshHeaderInfo({
+        visible: true,
+        loadingImgae: 'widget://image/refresh-white.png',
+        bgColor: '#ccc',
+        textColor: '#fff',
+        textDown: '下拉可以刷新',
+        textUp: '松开即可刷新',
+        showTime: false
+      }, function(ret, err){
+        self.ajaxing = 0;
+        self.pageNow = 1;
+        self.loadData();
+      });
+      self.loadData();
+
+		},
+		listen : function() {
+      var self = this;
+      $(window).scroll(function(){
+		    // 当滚动到最底部以上200像素时， 加载新内容
+		    if ($(document).height() - $(this).scrollTop() - $(this).height()<200){
+				  if(self.ajaxing == 1){
+		      	return;
+		      }
+		    	self.loadData();
+		    }
+			});
+      ui.$gameList.on('click', 'li',function() {
+        var id = $(this).attr('id');
+        $api.setStorage('gameId', id);
+        api.execScript({
+          name: 'root',
+          script: 'openGameLive();'
+        });
+      });
+		},
+    loadData : function() {
+      var self = this;
+      if(self.ajaxing == 1){
+      	return;
+      }
+      self.ajaxing = 1;
+      self.getDataIndex(URLConfig('gameList', {
+      	'num': 12
+      , 'page': self.pageNow
+      }), function(data) {
+      	if(self.pageNow == 1){
+			  	ui.$gameList.empty(); 									 	//第一页加载时先清空
+			  }
+        self.renderGameData(data['games']);
+        self.pageNow = self.pageNow +1;
+        if(12 == data['games'].length){
+        	self.ajaxing = 0;  												//返回不足12条则表示加载完毕
+        }else{
+          api.toast({
+            msg: '已经到底了',
+            duration:2000,
+            location: 'top'
+          })
+        };
+      });
+    },
+
+    getDataIndex : function(url,callback) {
+      var self = this;
+      var timer = null;
+      var nDelay = 500;
+      if (!timer) {
+        timer = setTimeout(function(){
+          api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+          });
+        }, nDelay);
+      }
+      api.toast({
+        msg: '努力加载中...',
+        duration: 1000,
+        location: 'top'
+      });
+      api.ajax({
+        url : url,
+        method : 'get',
+        dataType : 'json'
+      }, function(ret, err) {
+          clearTimeout(timer);
+          timer = null;
+          api.hideProgress();
+          if(ret) {
+            if(ret['code'] == 0) {
+              callback(ret['data']);
+            } else{
+              api.alert({msg : ret['message']});
+            }
+          } else{
+            api.alert({
+              msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+            });
+          }
+        });
+      api.refreshHeaderLoadDone();
+
+    },
+
+    renderGameData : function(data) {
+      var width = api.winWidth;
+      var htmlStr = '';
+      for(var i=0; i<data.length; i++) {
+        htmlStr += '<li id="'+data[i]['id']+'">'
+        + '<div class="game-a"><img src="'+ data[i]['spic'] +'" width="'+ width +'">'+ data[i]['name']
+        + '<div></li>';
+      }
+      ui.$gameList.append(htmlStr);
+    }
+
+	}
+	oPage.init();
+}

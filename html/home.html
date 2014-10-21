@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/api.css">
+  <title>我的</title>
+</head>
+<body>
+<div class="wrap">
+  <!-- 我的 -->
+  <div class="my-page">
+    <!-- top顶部 -->
+    <div class="my-top">
+      <i class="icon-m icon-operate js-setting"></i>
+      <!-- 登陆的时候显示该层-->
+      <div class="user-detail clearfix" style="display:none" id="box-center">
+        <div class="user-photo">
+          <img src="../image/user.jpg" alt="" id="photo">
+        </div>
+        
+        <div class="user-mes">
+          <p class="name" id="personal"></p>
+          <p>
+            <span class="money">
+              <i class="money-icon gold-icon"></i><span id="gold"></span>
+            </span>
+            <span class="money">
+              <i class="money-icon silver-icon"></i><span id="coin"></span>
+            </span>
+            <a href="javascript:;" class="add-btn" id="recharge">充值</a>
+          </p>
+        </div>
+      </div>
+      <!-- 登陆的时候显示该层 end-->
+
+      <!-- 未登录的时候显示该层 -->
+      <div class="user-detail clearfix" style="display:none" id="box-uncenter">
+        <div class="user-photo">
+          <img src="../image/avatar.gif" alt="">
+        </div>
+        
+        <div class="user-mes">
+          <a href="javascript:;" class="register-btn" id="btn-login">登录</a>
+        </div>
+      </div>
+      <!-- 未登录的时候显示该层 end-->
+    </div>
+    <!-- top顶部 -->
+    
+    <!-- 广告 -->
+    <div class="ad"><img src="../image/ad.jpg" alt=""></div>
+    <!-- 广告 -->
+
+    <div class="bd">
+      <ul class="task-list" id="box-list">
+        <li id="records">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-collect-line"></i>我的订阅</p>
+            <p class="tip" id="recordsInfo">3位主播正在直播中</p>
+          </div>
+        </li>
+        <li id="task">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-mission"></i>每日任务</p>
+            <p class="tip" id="taskInfo"></p>
+          </div>
+        </li>
+        <li id="history">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-timepiece"></i>观看历史</p>
+            <p class="tip" id="historyInfo">35分钟前观看"burning喝水揍起来"</p>
+          </div>
+        </li>
+        <li id="wealth">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-mywallet"></i>我的钱包</p>
+            <p class="tip">查看送礼充值记录</p>
+          </div>
+        </li>
+        <li id="feed-back">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-theproblemoffeedback"></i>问题反馈</p>
+            <p class="tip">反馈问题有机会获得大量战旗币</p>
+          </div>
+        </li>
+        <li class="js-setting">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-operate"></i>应用设置</p>
+            <p class="tip">战旗TV客户端设置</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 我的 end-->
+
+  <script src="../script/api.js"></script>
+  <script src="../script/lib/jquery-2.1.1.min.js"></script>
+  <script src="../script/common.js"></script>
+  <script src="../script/home.js"></script>
+</div>
+</body>
+</html>

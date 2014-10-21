@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=1,minimum-scale=1,user-scalable=1,width=device-width,initial-scale=1"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/common-s.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <link rel="stylesheet" href="../css/api.css">
+  <title>送礼</title>
+</head>
+<body>
+<div class="wrap">
+  <!-- 赠送礼物弹层 -->
+  <div class="live-pop">
+
+    <!-- 数量输入框 -->
+    <div class="count-pop">
+      <div class="arrow arrow-bottom">123</div>
+      <ul>
+        <li>其他</li>
+        <li>520</li>
+        <li>233</li>
+        <li>10</li>
+      </ul>
+    </div>
+    <!-- 数量输入框 end-->
+    <div class="title">
+      赠送礼物
+      <span class="pull-right"><i class="icon-m icon-mywallet"></i>充值金币</span>
+    </div>
+    <!-- 礼物列表 -->
+    <ul class="gift-list clearfix">
+      <li class="active">
+        <div class="gift-border"><img src="../image/gift-crnk.png" class="gift-icon"></div>
+        <p>大宝剑</p>
+      </li>
+      <li>
+        <div class="gift-border"><img src="../image/gift-dbj.png" class="gift-icon"></div>
+        <p>超人内裤</p>
+      </li>
+      <li>
+        <div class="gift-border"><img src="../image/gift-mlt.png" class="gift-icon"></div>
+        <p>麻辣烫</p>
+      </li>
+      <li>
+        <div class="gift-border"><img src="../image/gift-d.png" class="gift-icon"></div>
+        <p>锅</p>
+      </li>
+      <li>
+        <div class="gift-border"><img src="../image/gift-l.png" class="gift-icon"></div>
+        <p>溜</p>
+      </li>
+      <li>
+        <div class="gift-border"><img src="../image/gift-g.png" class="gift-icon"></div>
+        <p>顶</p>
+      </li>
+    </ul>
+    <!-- 礼物列表 end-->
+
+    <!-- 礼物价钱显示 -->
+    <div class="gift-price">
+      大宝剑：66000金币
+    </div>
+    <!-- 礼物价钱显示 end-->
+
+    <!-- 赠送详情 -->
+    <div class="send-detail">
+      <span class="send-btn">赠送</span>
+      数量：<span class="input-count">1314</span>个
+    </div>
+    <!-- 赠送详情 end-->
+  </div>
+  <!-- 赠送礼物弹层 end-->
+</div>
+</body>
+</html>
+
+

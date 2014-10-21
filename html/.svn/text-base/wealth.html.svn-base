@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/api.css">
+  <title>充值记录</title>
+</head>
+<body>
+<div class="wrap">
+  <div class="record">
+    <!-- top顶部 -->
+    <div class="top-bar" id="header">
+      <!-- 下拉弹层 -->
+      <div class="up-div" id="btn-up" style="display:none"><span data-type="giftuse">送礼记录</span></div>
+      <!--- 下拉弹层 -->
+      <div class="top-bar-bd">
+        <p class="title">
+          <i class="icon-m icon-left" onclick="api.closeWin()"></i>
+          <span id="btn-down"><span data-type="charge">充值记录</span></span><span class="arrow arrow-bottom"></span>
+        </p>
+      </div>
+      <div class="top-bar-line"></div>
+    </div>
+    <!-- top顶部 -->
+  </div>
+</div>
+</body>
+<script src="../script/api.js"></script>
+<script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script>
+  function fGetOrder(type){
+    switch (type){
+      case 'charge':
+        api.execScript({
+          frameName: 'wealth-con',
+            script: 'fInitInfo("charge");'
+          });
+        break;
+      case 'giftuse':
+        api.execScript({
+          frameName: 'wealth-con',
+            script: 'fInitInfo("giftuse");'
+          });
+        break;
+    }
+  }
+  apiready = function(){
+    var width = api.winWidth;
+    var headBottom = $('#header').offset().top + $('#header').height();
+    var headPos = 64;
+    var height = (api.winHeight*2 - headBottom)/2;
+    if(api.systemType === 'android') {
+      height = height - 25;
+    }
+    api.openFrame({
+        name: 'wealth-con',
+        url: './wealth-con.html',
+        bounces: true,
+        opaque: true,
+        vScrollBarEnabled: false,
+        rect: {
+          x: 0,
+          y: headPos,
+          w: width,
+          h: height
+        }
+    });
+
+    $('#btn-down').on('click', function() {
+      $('#btn-up').toggle();
+    });
+    $('#btn-up').on('click', function() {
+      var $this = $(this)
+        , $span1 = $this.find('span')
+        , $span2 = $('#btn-down').find('span');
+      $('#btn-down').html($span1);
+      $this.hide();
+      $this.html($span2);
+      fGetOrder($span1.data('type'));
+    });
+  };
+</script>
+</html>

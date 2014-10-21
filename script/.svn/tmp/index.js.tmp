@@ -1,0 +1,157 @@
+//frame whether open
+function isOpened(frmName){
+  var i = 0;
+  var len = window.frameArr.length;
+  var mark = false;
+  for(i; i<len; i++){
+    if(window.frameArr[i] === frmName){
+      mark = true;
+      return mark;
+    }
+  }
+  return mark;
+}
+
+function openTab(type, pageParam){
+  var self = this;
+  var width = api.winWidth;
+  var navPos = $('#footer').offset().top;
+  var headPos = 64;
+  var headBottom = $('#head').offset().top + $('#head').height();
+  var height = (navPos - headBottom)*0.5;
+  type = type || 'main';
+
+  //默认把live关掉
+  api.closeFrame({
+    name: 'gameLive'
+  });
+
+  //record page id
+  window.prevPid = window.curPid;
+  window.curPid = type;
+
+  if(window.prevPid !== window.curPid){
+    if(isOpened(type)){
+      api.setFrameAttr({
+        name: type,
+        hidden: false
+      });
+    }else{
+
+      api.openFrame({
+        name: type,
+        url: './html/'+ type +'.html',
+        bounces: true,
+        opaque: true,
+        vScrollBarEnabled: false,
+        pageParam: pageParam,
+        rect: {
+          x: 0,
+          y: headPos,
+          w: width,
+          h: height
+        }
+      });
+    }
+    if(window.prevPid){
+      api.setFrameAttr({
+        name: prevPid,
+        hidden: true
+      });
+    }
+    if(!isOpened(type)){
+      //save frame name
+      window.frameArr.push(type);
+    }
+  }
+}
+
+function openGameLive(){
+  var width = api.winWidth;
+  var navPos = $('#footer').offset().top;
+  var headPos = 64;
+  var headBottom = $('#head').offset().top + $('#head').height();
+  var height = (navPos - headBottom)*0.5;
+  api.openFrame({
+    name: 'gameLive',
+    url: './html/gameLive.html',
+    bounces: true,
+    opaque: true,
+    vScrollBarEnabled: false,
+    pageParam: {},
+    rect: {
+      x: 0,
+      y: headPos,
+      w: width,
+      h: height
+    }
+  });
+}
+
+
+apiready = function() {
+
+  var ui = {
+  }
+
+  var oPage = {
+    init : function() {
+      this.view();
+      this.listen();
+    },
+
+    view : function() {
+      var self = this;
+      //已经打开的frame
+      window.frameArr = [];
+      //当前页面
+      window.curPid = '';
+      //上一张页面
+      window.prevPid = '';
+
+      // var head = $api.byId('head');
+      // $api.fixIos7Bar(head);
+      //var obj = api.require('tabBar');
+      // obj.open({
+      //     bgImg:'widget://res/tabBar_bg.png',
+      //     selectImg:'widget://res/selecte_tabBar.png',
+      //     items:[
+      //       {img:'widget://image/tabbar/home.png'},
+      //       {img:'widget://image/tabbar/news-icon.png'},
+      //       {img:'widget://image/tabbar/life-icon.png'},
+      //       {img:'widget://image/tabbar/user-icon.png'}
+      //     ]
+      // },function(ret,err){
+      //   var frame = [
+      //     'main'
+      //   , 'game'
+      //   , 'live'
+      //   , 'gamelist'
+      //   ];
+      //   openTab(frame[ret.index]);
+      // });
+      api.parseTapmode();
+      //初始化打开main
+      openTab('main');
+
+    },
+    listen : function()　{
+      var self = this;
+      $('#footer-nav').on('click', 'li',function(){
+        $self = $(this);
+        var idx = $self.index();
+        var frame = [
+          'main'
+        , 'live'
+        , 'game'
+        , 'home'
+        ];
+        openTab(frame[idx]);
+        $('#footer-nav>li').removeClass('active');
+        $self.addClass('active');
+      })
+    }
+
+  }
+  oPage.init();
+}
