@@ -43,6 +43,10 @@
           if(yp.query('user')) {  //应用设置
             $('#pageName').text('应用设置');
             $('#titleName, #titleArea, #zhanqiSuport, #zhanqiSuportArea').removeClass('hidden');
+            $('#nickname').text($api.getStorage('user')['nickname']);
+            if(api.systemType == 'ios') {
+              $('#evaluation').removeClass('hidden');
+            }
           }
         }catch(e) { }
         

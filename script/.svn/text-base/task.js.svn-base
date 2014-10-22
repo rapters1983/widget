@@ -7,11 +7,23 @@ var oPageConfig = {
       , ask: { type: 'ask', status: 0, default_txt: '回答问题轻松获得100战旗币奖励', btn_default_txt: '回答问题', complete_txt: '已回答今日问题，您可领取100战旗币', btn_complete_txt: '点击领取', btn_finish_txt: '已领取', show_area: 0, show_status: 1, action_class: '', jump_url: '', task_icon: 'icon-Dailyask', show: true, title: '每日一问' }
       , share: { type: 'share', status: 0, default_txt: '每成功邀请一个即可获得100战旗币', btn_default_txt: '分享直播', complete_txt: '分享成功，您可领取XXX战旗币', btn_complete_txt: '点击领取', btn_finish_txt: '已领取', show_area: 1, show_status: 1, action_class: '', jump_url: '', task_icon: 'icon-share', show: true, title: '分享直播' }
       }   
-    , aTaskDefault: [{ type: 'regist', status: 0 }, { type: 'phone', status: 0 }, { type: 'avatar', status: 0 }, { type: 'sign', status: 0 }, { type: 'ask', status: 2 }, { type: 'share', status: 0 }]
+    , aTaskDefault: [{ type: 'regist', status: 0 }, { type: 'phone', status: 0 }, { type: 'avatar', status: 0 }, { type: 'sign', status: 0 }, { type: 'ask', status: 0 }, { type: 'share', status: 0 }]
     };
 apiready = function() {
 
   api.addEventListener({name:'viewappear'}, function(ret, err){
+    fInitInfo();
+  });
+
+  api.setRefreshHeaderInfo({
+    visible: true,
+    loadingImgae: 'widget://image/refresh-white.png',
+    bgColor: '#ccc',
+    textColor: '#fff',
+    textDown: '下拉试试...',
+    textUp: '松开试试...',
+    showTime: true
+  }, function(ret, err){
     fInitInfo();
   });
   
@@ -193,16 +205,16 @@ function fInitInfo() {
   } else{
     fShowTask(oPageConfig.aTaskDefault);
     // 登陆
-    // api.openWin({
-    //   name:'landing',
-    //   url:'landing.html',
-    //   bgColor:'#FFF',
-    //   animation: {
-    //     type: 'movein',
-    //     subType: 'from_bottom',
-    //     duration: 300
-    //   }
-    // });
+    api.openWin({
+      name:'landing',
+      url:'landing.html',
+      bgColor:'#FFF',
+      animation: {
+        type: 'movein',
+        subType: 'from_bottom',
+        duration: 300
+      }
+    });
   }
 }
 function fChangeStatus() {
@@ -214,7 +226,6 @@ function fChangeStatus() {
     if(ret) {
       if(ret.code == 0) {
         var aTask = [];
-        // api.alert({msg: JSON.stringify(ret)});
         for(var i in ret.data) {
           if(ret.data.hasOwnProperty(i)) {
             aTask.push(ret['data'][i]);
@@ -230,6 +241,7 @@ function fChangeStatus() {
       });
     }
   });
+  api.refreshHeaderLoadDone();
 }
 // 任务的显示
 function fShowTask(aTaskShow) {
@@ -239,21 +251,19 @@ function fShowTask(aTaskShow) {
   for(var i = 0, l = aTaskShow.length; i < l; i++) {
     var one = aTaskShow[i];
     var oTask = $.extend({}, oPageConfig.oTask[ one.type ]);
-    if(!oTask.show){
-      return ;
-    }
-    oTask.coin = one.coin;
-    oTask.status = one.status;
-    if( 2 == one.status ){
-      if( 1 == oTask.show_status ){
-        // oTask.status = 0;
+    if(oTask.show){
+      oTask.coin = one.coin;
+      oTask.status = one.status;
+      if( 2 == one.status ){
+        if( 1 == oTask.show_status ){
+          aTask.push(oTask);
+        }
+      }else {
         aTask.push(oTask);
       }
-    }else {
-      aTask.push(oTask);
     }
   }
-   // 遍历可显示的任务，生成html，并显示
+  // 遍历可显示的任务，生成html，并显示
   var sHtml = ''
   for(var i = 0, l = aTask.length; i < l; i ++) {
     var one = aTask[i];
@@ -284,5 +294,7 @@ function fShowTask(aTaskShow) {
                 </div>\
               </li>';
   }
+        // api.alert({msg: sHtml});
+
   $('#taskList').empty().html(sHtml);
 }

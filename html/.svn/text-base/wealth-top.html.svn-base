@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/api.css">
+  <title>充值记录</title>
+  <style>
+    html, body{
+      background-color: transparent; 
+    }
+    .record{
+      background: #000;
+      opacity: 0;
+    }
+    .up-div {
+      width: 230px;
+      height: 90px;
+      line-height: 90px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid #ccc;
+      position: absolute;
+      left: 50%;
+      top: 110px;
+      margin-left: -115px;
+      border-radius: 5px;
+      font-size: 36px;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="up-div" id="btn-change">
+    
+  </div>
+  <div class="record" id="btn-hide">
+  </div>
+</div>
+</body>
+<script src="../script/api.js"></script>
+<script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script>
+  function fInitInfo() {
+    var oRecord = $api.getStorage('oRecord');
+    if(oRecord) {
+      for(var i in oRecord) {
+        if(!oRecord[i].status) {
+          $('#btn-change').html(oRecord[i].title);
+        }
+      }
+    }
+  }
+  function fGetOrder(){
+    api.execScript({
+      name: 'wealth',
+      script: 'fInitInfo();'
+    });
+    api.closeFrame({
+      name: 'wealth-top'
+    });
+  }
+  apiready = function() {
+    fInitInfo();
+
+    $('#btn-hide').on('click', function() {
+      api.closeFrame({
+        name: 'wealth-top'
+      });
+    });
+
+    $('#btn-change').on('click', function() {
+      var oRecord = $api.getStorage('oRecord');
+      if(oRecord) {
+        for(var i in oRecord) {
+          oRecord[i].status = !oRecord[i].status;
+        }
+        $api.setStorage('oRecord', oRecord)
+        fGetOrder();
+      }
+    });
+  };
+</script>
+</html>

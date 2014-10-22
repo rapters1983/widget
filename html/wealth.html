@@ -18,13 +18,10 @@
   <div class="record">
     <!-- top顶部 -->
     <div class="top-bar" id="header">
-      <!-- 下拉弹层 -->
-      <div class="up-div" id="btn-up" style="display:none"><span data-type="giftuse">送礼记录</span></div>
-      <!--- 下拉弹层 -->
       <div class="top-bar-bd">
         <p class="title">
           <i class="icon-m icon-left" onclick="api.closeWin()"></i>
-          <span id="btn-down"><span data-type="charge">充值记录</span></span><span class="arrow arrow-bottom"></span>
+          <span id="btn-title">充值记录</span><span class="arrow arrow-bottom"></span>
         </p>
       </div>
       <div class="top-bar-line"></div>
@@ -36,55 +33,102 @@
 <script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script>
-  function fGetOrder(type){
-    switch (type){
-      case 'charge':
-        api.execScript({
-          frameName: 'wealth-con',
-            script: 'fInitInfo("charge");'
-          });
-        break;
-      case 'giftuse':
-        api.execScript({
-          frameName: 'wealth-con',
-            script: 'fInitInfo("giftuse");'
-          });
-        break;
+  function fInitInfo() {
+    function isEmptyObject(o){
+      for(var n in o){
+        return false;
+      }
+      return true;
+    }
+    var user = $api.getStorage('user');
+    if(!isEmptyObject(user)) {
+      fChangeStatus();
+    } else{
+      // 登陆
+      api.openWin({
+        name:'landing',
+        url:'landing.html',
+        bgColor:'#FFF',
+        animation: {
+          type: 'movein',
+          subType: 'from_bottom',
+          duration: 300
+        }
+      });
     }
   }
+  function fChangeStatus() {
+    var oRecord = $api.getStorage('oRecord');
+    if(oRecord) {
+      for(var i in oRecord) {
+        if(oRecord[i].status) {
+          $('#btn-title').html(oRecord[i].title);
+        }
+      }
+    }
+    api.execScript({
+      frameName: 'wealth-con',
+      script: 'fInitInfo();'
+    });
+  }
   apiready = function(){
+    api.addEventListener({name:'viewappear'}, function(ret, err){
+      fInitInfo();
+    });
+
+    // 存储我的钱包类型
+    var oRecord = {
+      charge: {
+        title: '充值记录'
+      , status: true
+      }
+    , giftuse: {
+        title: '送礼记录'
+      , status: false
+      }
+    };
+    $api.setStorage('oRecord', oRecord);
+    fInitInfo();
+
+    // 将我的钱包分成3个frame:一个头部，一个列表区域，一个下拉框
     var width = api.winWidth;
-    var headBottom = $('#header').offset().top + $('#header').height();
-    var headPos = 64;
-    var height = (api.winHeight*2 - headBottom)/2;
+    var height = api.winHeight;
     if(api.systemType === 'android') {
       height = height - 25;
     }
+    var headPos = 64;
+    var conheight = height - headPos;
     api.openFrame({
-        name: 'wealth-con',
-        url: './wealth-con.html',
-        bounces: true,
-        opaque: true,
+      name: 'wealth-con',
+      url: './wealth-con.html',
+      bounces: true,
+      opaque: true,
+      vScrollBarEnabled: false,
+      rect: {
+        x: 0,
+        y: headPos,
+        w: width,
+        h: conheight
+      }
+    });
+
+    $('#btn-title').on('click', function() {
+      api.openFrame({
+        name: 'wealth-top',
+        url: './wealth-top.html',
+        opaque: false,
+        bounces: false,
         vScrollBarEnabled: false,
+        hScrollBarEnabled: false,
+        scaleEnabled: false,
+        bgColor: 'rgba(0, 0, 0, 0)',
         rect: {
           x: 0,
-          y: headPos,
+          y: 0,
           w: width,
           h: height
         }
-    });
-
-    $('#btn-down').on('click', function() {
-      $('#btn-up').toggle();
-    });
-    $('#btn-up').on('click', function() {
-      var $this = $(this)
-        , $span1 = $this.find('span')
-        , $span2 = $('#btn-down').find('span');
-      $('#btn-down').html($span1);
-      $this.hide();
-      $this.html($span2);
-      fGetOrder($span1.data('type'));
+      });
     });
   };
 </script>

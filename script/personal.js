@@ -51,27 +51,32 @@ apiready = function(){
           saveToPhotoAlbum: false
         }, function(ret, err){ 
           if (ret) {
-            var base64 = new Base64();
-            var encodeBase64 = base64.encode(ret.base64Data);
+            // var base64 = new Base64();
+            var encodeBase64 = ret.base64Data.replace('data:image/png;base64,','');
+            // alert(ret.base64Data)
+            // var encodeBase64 = base64.encode(ret.base64Data);
             $.ajax({
-              url: URLConfig('avatar')
+               url: URLConfig('avatar')
+              //url: 'http://www.zhanqi.tv/api/user/upload.avatar'
             , type: 'post'
-            , dataType: 'html'
-            , timeout: 10000
+            // , dataType: 'text/html'
+            // , timeout: 10000
             , data: {
                 'img_160_160': encodeBase64,
                 'img_160_100': encodeBase64,
                 'img_60_60': encodeBase64,
-                'img_30_30': encodeBase64
+                'img_30_30': encodeBase64,
+                'app' : 1
               }
             , beforeSend: function( xhr ) {
             }
-            , success: function(e) {
-                api.alert({msg: e});
-                api.alert({msg: 'ok'});
+            , success: function(ret) {
+                var redata = ret.substring(2,ret.length);
+                var data = eval('('+redata+')')
+                $('#avatar').attr('src',data[0]);
             }
             , error: function(e) {
-                api.alert({msg: 'error'});
+                api.alert({msg: e});
               }
             });
             // api.showProgress({

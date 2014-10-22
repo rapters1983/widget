@@ -17,23 +17,12 @@
 <div class="wrap">
   <!-- 每日任务 -->
   <div class="task">
-    <!-- top顶部 -->
-    <div class="top-bar">
-      <div class="top-bar-bd">
-        <p class="title">
-          <i class="icon-m icon-left" onclick="api.closeWin()"></i>
-          每日任务
-        </p>
-      </div>
-      <div class="top-bar-line"></div>
-    </div>
-    <!-- top顶部 -->
     
-    <!-- <div class="bd">
+    <div class="bd">
       <ul class="task-list" id="taskList">
         
       </ul>
-    </div> -->
+    </div>
 
   </div>
   <!-- 每日任务 end-->
@@ -41,29 +30,6 @@
 <script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script src="../script/common.js"></script>
-<script>
-apiready = function(){
-  var width = api.winWidth;
-  var height = api.winHeight;
-  if(api.systemType === 'android') {
-    height = height - 25;
-  }
-  var headPos = 64;
-  var conheight = height - headPos;
-  api.openFrame({
-    name: 'task-con',
-    url: './task-con.html',
-    bounces: true,
-    opaque: true,
-    vScrollBarEnabled: false,
-    rect: {
-      x: 0,
-      y: headPos,
-      w: width,
-      h: conheight
-    }
-  });
-}
-</script>
+<script type="text/javascript" src="../script/task.js"></script>
 </body>
 </html>

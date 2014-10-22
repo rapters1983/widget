@@ -86,7 +86,7 @@ apiready = function(){
         }else{
           giftCount = count;
         }
-      })
+      });
 
       //赠送按钮
       $('#sendGift').on('click',  function() {
@@ -152,7 +152,6 @@ apiready = function(){
           method: 'get',
           dataType: 'json'
       },function(ret,err){
-               alert(JSON.stringify(ret))
         if(ret['code'] == 0) {
           coin = ret['data']['coin']['count'];
           coinEnable = ret['data']['coin']['enable'];
@@ -187,7 +186,7 @@ apiready = function(){
         lastLi.addClass('active');
       if(giftConfig[lId]) {
         $('#giftName').text(giftConfig[lId]['name'])
-        $('#giftCount').text(giftConfig[lId]['exp'])
+        $('#giftCount').text(giftConfig[lId]['price'])
       }
       giftId = lId;
     }

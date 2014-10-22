@@ -41,7 +41,7 @@ yp.ready(function() {
       for(var i = 0; i<searchHistory.length; i++){
         historyHtml += '<li class="js-history"><div class="pull-right">'
                     +  '<i class="icon-m icon-close js-delete" id="'+i+'" style="padding:30px;"></i></div>'
-                    +  '<i class="icon-m icon-timepiece"></i><span class="js-keyword">'+searchHistory[i]+'</span></li>';
+                    +  '<i class="icon-m icon-timepiece"></i><span class="search-result">'+searchHistory[i]+'</span></li>';
       }
       ui.$historyList.prepend(historyHtml);
     }
@@ -75,7 +75,7 @@ yp.ready(function() {
       ui.$historyList.on('click', '.js-history',function(){
         var $self = $(this);
         ui.$keyword.blur();
-        var key = $self.find('.js-keyword').text();
+        var key = $self.find('.search-result').text();
         ui.$keyword.val(key);
         self.searching(key);
       }).on('click', '.js-delete',function(e){
@@ -250,7 +250,7 @@ yp.ready(function() {
         + '<div class="til">'+data[i]['title']+'</div>'
         + '<div class="detail clearfix">'
         + '<span class="audience"><i class="icon-m icon-spectator"></i>'+online+'</span>'
-        + '<p class="anchor"><i class="icon-m icon-boy"></i>'+nickname+'</p>'
+        + '<p class="anchor"><i class="icon-m icon-boy"></i><span>'+nickname+'</span></p>'
         + '</div></li>';
       }
       ui.$liveList.append(htmlStr);

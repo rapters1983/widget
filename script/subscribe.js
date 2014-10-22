@@ -55,6 +55,7 @@ yp.ready(function() {
         method : 'get',
         dataType : 'json'
       }, function(ret, err) {
+        alert(JSON.stringify(ret))
         if(ret) {
           if(ret['code'] == 0) {
             callback(ret['data']);

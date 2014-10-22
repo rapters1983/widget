@@ -18,7 +18,7 @@
   <!-- 我的 -->
   <div class="my-page">
     <!-- top顶部 -->
-    <div class="my-top">
+    <div class="my-top" id="header">
       <i class="icon-m icon-operate js-setting"></i>
       <!-- 登陆的时候显示该层-->
       <div class="user-detail clearfix" style="display:none" id="box-center">
@@ -28,15 +28,15 @@
         
         <div class="user-mes">
           <p class="name" id="personal"></p>
-          <p>
-            <span class="money">
-              <i class="money-icon gold-icon"></i><span id="gold"></span>
-            </span>
-            <span class="money">
-              <i class="money-icon silver-icon"></i><span id="coin"></span>
-            </span>
+          <div>
+            <p class="money">
+              <i class="money-icon gold-icon"></i><span id="gold">22</span>
+            </p>
+            <p class="money">
+              <i class="money-icon silver-icon"></i><span id="coin">2</span>
+            </p>
             <a href="javascript:;" class="add-btn" id="recharge">充值</a>
-          </p>
+          </div>
         </div>
       </div>
       <!-- 登陆的时候显示该层 end-->
@@ -54,64 +54,40 @@
       <!-- 未登录的时候显示该层 end-->
     </div>
     <!-- top顶部 -->
-    
-    <!-- 广告 -->
-    <div class="ad"><img src="../image/ad.jpg" alt=""></div>
-    <!-- 广告 -->
-
-    <div class="bd">
-      <ul class="task-list" id="box-list">
-        <li id="records">
-          <i class="icon-m icon-right"></i>
-          <div class="main">
-            <p class="til"><i class="icon-m icon-collect-line"></i>我的订阅</p>
-            <p class="tip" id="recordsInfo">3位主播正在直播中</p>
-          </div>
-        </li>
-        <li id="task">
-          <i class="icon-m icon-right"></i>
-          <div class="main">
-            <p class="til"><i class="icon-m icon-mission"></i>每日任务</p>
-            <p class="tip" id="taskInfo"></p>
-          </div>
-        </li>
-        <li id="history">
-          <i class="icon-m icon-right"></i>
-          <div class="main">
-            <p class="til"><i class="icon-m icon-timepiece"></i>观看历史</p>
-            <p class="tip" id="historyInfo">35分钟前观看"burning喝水揍起来"</p>
-          </div>
-        </li>
-        <li id="wealth">
-          <i class="icon-m icon-right"></i>
-          <div class="main">
-            <p class="til"><i class="icon-m icon-mywallet"></i>我的钱包</p>
-            <p class="tip">查看送礼充值记录</p>
-          </div>
-        </li>
-        <li id="feed-back">
-          <i class="icon-m icon-right"></i>
-          <div class="main">
-            <p class="til"><i class="icon-m icon-theproblemoffeedback"></i>问题反馈</p>
-            <p class="tip">反馈问题有机会获得大量战旗币</p>
-          </div>
-        </li>
-        <li class="js-setting">
-          <i class="icon-m icon-right"></i>
-          <div class="main">
-            <p class="til"><i class="icon-m icon-operate"></i>应用设置</p>
-            <p class="tip">战旗TV客户端设置</p>
-          </div>
-        </li>
-      </ul>
-    </div>
   </div>
   <!-- 我的 end-->
-
-  <script src="../script/api.js"></script>
-  <script src="../script/lib/jquery-2.1.1.min.js"></script>
-  <script src="../script/common.js"></script>
-  <script src="../script/home.js"></script>
 </div>
+<script src="../script/api.js"></script>
+<script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/common.js"></script>
+<script>
+  // function fInitInfo() {
+    
+  // }
+  apiready = function(){
+    var width = api.winWidth;
+    var height = api.winHeight;
+    if(api.systemType === 'android') {
+      height = height - 25;
+    }
+    var headerPos = ($('#header').offset().top + $('#header').height())/2;
+    var footerPos = 50;
+    var conheight = height - headerPos - footerPos;
+    api.openFrame({
+      name: 'home-con',
+      url: './home-con.html',
+      bounces: true,
+      opaque: true,
+      rect: {
+        x: 0,
+        y: headerPos,
+        w: width,
+        h: conheight
+      }
+    });
+
+    // fInitInfo();
+  };
+</script>
 </body>
 </html>

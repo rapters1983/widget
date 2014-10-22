@@ -28,11 +28,11 @@
         
         <div class="user-mes">
           <p class="name">百鬼烨行</p>
-          <p>
-            <span class="money"><i class="money-icon gold-icon"></i>8888</span>
-            <span class="money"><i class="money-icon silver-icon"></i>8888</span>
+          <div>
+            <p class="money"><i class="money-icon gold-icon"></i><span>8888</span></p>
+            <p class="money"><i class="money-icon silver-icon"></i><span>8888</span></p>
             <a href="javascript:;" class="add-btn">充值</a>
-          </p>
+          </div>
         </div>
       </div>
       <!-- 登陆的时候显示该层 end-->

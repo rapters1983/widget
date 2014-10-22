@@ -7,7 +7,7 @@ apiready = function() {
   
   var ui = {
   }
-
+  
 	var oPage = {
 		init: function() {
       this.view();
@@ -107,6 +107,7 @@ function fInitInfo() {
   }
   var user = $api.getStorage('user');
   if(!isEmptyObject(user)) {
+    api.alert({msg: JSON.stringify(user)});
     // 获取金币和战旗币
     api.ajax({
       url: URLConfig('sGetRichUrl')
@@ -130,7 +131,7 @@ function fInitInfo() {
     // 观看历史
     // 每日任务
     fGetTask();
-    $('#photo').attr('src', user.avatar);
+    $('#photo').attr('src', user.avatar+'-small');
     $('#personal').text(user.account);
     $('#box-uncenter').hide();
     $('#box-center').show();

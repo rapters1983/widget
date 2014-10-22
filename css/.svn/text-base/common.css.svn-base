@@ -1,7 +1,9 @@
-
 .f32{font-size: 32px;}
 .f26{font-size: 26px;}
 .c0{color: #000;}
+*{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
 /*========= 用到icon-font的时候统一添加icon-m 统一小图标的颜色，大小；针对不同的小图标，也统一颜色 =======*/
 .icon-m{
   font-size: 28px;
@@ -805,14 +807,24 @@ body{
   color: #333;
 }
 .search-history ul li{
-  padding: 28px 30px 30px 15px;
+  padding: 28px 0 30px 15px;
   border-bottom: 1px solid #ccc;
+}
+.search-history ul li .icon-timepiece{
+  margin-right: 15px;
+}
+.search-history ul li .search-result{
+  width: 70%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 .search-history .icon-m{
   color: #9d9d9d;
   font-size: 32px;
 }
 .search-history .icon-close{
+  padding: 30px;
   font-size: 24px;
 }
 .search-history .clear-history{
@@ -1157,7 +1169,7 @@ body{
 .settings ul li .preview-size .preview-word{
   display: inline-block;
   background: #333;
-  padding: 17px 55px;
+  padding: 17px 40px;
   border-radius: 5px;
 }
 .settings ul li .location-screen{
@@ -1536,11 +1548,11 @@ body{
   margin: 15px 0 12px 0;
 }
 .my-page .my-top .user-mes .money{
-  color: #fff;
   font-size: 24px;
   float: left;
   margin-right: 20px;
 }
+.my-page .my-top .user-mes .money span{color: #fff;}
 .my-page .my-top .user-mes .money .money-icon{
   display: inline-block;
   width: 22px;
@@ -1611,4 +1623,8 @@ body{
   font-size: 24px;
   color: #999;
   float: right;
+}
+/*======================= 分享 ========================*/
+.share-pop{
+  
 }

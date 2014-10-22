@@ -32,7 +32,7 @@
         <div class="pull-right">
           <i class="icon-m icon-right"></i>
         </div>
-        百鬼烨行
+        <span id="nickname">--</span>
       </li>
     </ul>
 
@@ -157,19 +157,19 @@
 
     <p id="zhanqiSuport" class="title-s hidden">支持战旗</p>
     <ul id="zhanqiSuportArea" class="hidden">
-      <li>
+      <li onclick="api.openWin({name:'about-us',url:'about-us.html',delay:100,bgColor:'#FFF'});">
         <div class="pull-right">
           <i class="icon-m icon-right"></i>
         </div>
         关于我们
       </li>
-      <li>
+      <li id="evaluation" class="hidden">
         <div class="pull-right">
           <i class="icon-m icon-right"></i>
         </div>
         给我评价
       </li>
-      <li>
+      <li onclick="api.openWin({name:'feed-back',url:'feed-back.html',delay:100,bgColor:'#FFF'});">
         <div class="pull-right">
           <i class="icon-m icon-right"></i>
         </div>

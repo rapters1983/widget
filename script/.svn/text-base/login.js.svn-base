@@ -40,18 +40,18 @@ apiready = function(){
       // qq登陆
       ui.$btn_qq.on('click', function() {
         var iaf = api.require('qq');
-        iaf.login({appId: '101049628'},function(ret,err){
+        iaf.login({appId: '1103382936'},function(ret,err){
           if(ret.status) {
             api.alert({
                      title: 'id和token',
                      msg: ret.openId+'*'+ret.accessToken,
-                     buttons: ['确定']
+                     buttons: ['确定1']
                      });
           } else{
             api.alert({
                        title: 'id和token',
                        msg: err.msg,
-                       buttons: ['确定']
+                       buttons: ['确定2']
                        });
           }
              
@@ -181,6 +181,7 @@ apiready = function(){
           if(ret.code == 0) {
             var key = 'user';
             var user = ret["data"];
+            
             $api.setStorage(key, user);
             // if(api.pageParam) {
               // api.execScript({

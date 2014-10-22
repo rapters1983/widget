@@ -15,8 +15,17 @@ var oPageConfig = {
 , start: 0
 };
 // 初始化
-function fInitInfo(type) {
-  oPageConfig.stype = type;
+function fInitInfo() {
+  var oRecord = $api.getStorage('oRecord');
+  var stype = '';
+  if(oRecord) {
+    for(var i in oRecord) {
+      if(oRecord[i].status) {
+        stype = i;
+      }
+    }
+  }
+  oPageConfig.stype = stype;
   objTime1 = getMonthArgs('curMonth');
   objTime2 = getMonthArgs('prevMonth');
   oPageConfig.etime = objTime1['etime'];
@@ -193,7 +202,8 @@ apiready = function() {
     fLoadData();
   });
 
-  fInitInfo('charge');
+  
+  fInitInfo();
 
   $(window).scroll(function(){  
     // 当滚动到最底部以上100像素时， 加载新内容  
