@@ -24,7 +24,7 @@
           <div id="slider" class="swipe" style="visibility:visible;">
             <ul class="swipe-wrap" id="banner-content">
               <li>
-                <img src="../image/default_pic.png" class="show-pic">
+                <img src="../image/default_bpic.png" class="show-pic">
                 <p class="title">加载中...</p>
               </li>
             </ul>
@@ -36,7 +36,7 @@
         <div class="video-list-wrap" id="main">
           <ul class="clearfix" id="indexLiveList">
             <li>
-              <img src="../image/default_pic.png" alt="" class="game-pic">
+              <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
                 <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -44,7 +44,7 @@
               </div>
             </li>
             <li>
-              <img src="../image/default_pic.png" alt="" class="game-pic">
+              <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
                 <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -52,7 +52,7 @@
               </div>
             </li>
             <li>
-              <img src="../image/default_pic.png" alt="" class="game-pic">
+              <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
                 <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -60,7 +60,7 @@
               </div>
             </li>
             <li>
-              <img src="../image/default_pic.png" alt="" class="game-pic">
+              <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
                 <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -68,7 +68,7 @@
               </div>
             </li>
             <li>
-              <img src="../image/default_pic.png" alt="" class="game-pic">
+              <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
                 <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -76,7 +76,7 @@
               </div>
             </li>
             <li>
-              <img src="../image/default_pic.png" alt="" class="game-pic">
+              <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
                 <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -94,7 +94,7 @@
           <div class="video-list-wrap">
             <ul class="clearfix" id="lolList">
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -102,7 +102,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -110,7 +110,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -118,7 +118,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -138,7 +138,7 @@
           <div class="video-list-wrap">
             <ul class="clearfix" id="dota2List">
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -146,7 +146,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -154,7 +154,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -162,7 +162,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -182,7 +182,7 @@
           <div class="video-list-wrap">
             <ul class="clearfix" id="sgsList">
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -190,7 +190,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -198,7 +198,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -206,7 +206,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -226,7 +226,7 @@
           <div class="video-list-wrap">
             <ul class="clearfix" id="otherList">
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -234,7 +234,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -242,7 +242,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>
@@ -250,7 +250,7 @@
                 </div>
               </li>
               <li>
-                <img data-original="../image/default_pic.png" alt="" class="game-pic lazy">
+                <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
                   <span class="audience"><i class="icon-m icon-spectator"></i><span class="js-online">8888</span></span>

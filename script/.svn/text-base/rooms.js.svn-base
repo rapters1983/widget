@@ -498,6 +498,17 @@ function changeGfitStatus() {
     zhanqi.closeGiftFrame({});
 }
 
+
+function reqNewTokenFromJS() {
+  silenceLoginFn('rooms', 'onTokenUpdated');  
+}
+
+function onTokenUpdated() {
+  $api.setStorage('user', ret['data']);
+  var newToken = $api.getStorage('user')['token'];
+  var zhanqi = api.require('zhanqiMD');
+  zhanqi.onTokenUpdated({'token' : newToken});
+}
 // rapters1983@hotmail.com
 
 // poacher1983

@@ -6,28 +6,15 @@ function isEmptyObject(o){
 }
 function openFollows(){
   var user = $api.getStorage('user');
-  if(!isEmptyObject(user)) {
+  if(isEmptyObject(user)) {
     api.confirm({
       msg: '您尚未登录，是否现在登录？',
-      buttons:[ '登录', '注册', '容我三思']
+      buttons:[ '取消', '登录']
     },function(ret,err){
-      if(ret.buttonIndex == 1){
+      if(ret.buttonIndex == 2){
         api.openWin({
           name:'landing',
           url:'./html/landing.html',
-          delay:100,
-          bgColor:'#FFF',
-          animation: {
-            type: 'movein',
-            subType: 'from_bottom',
-            duration: 300
-          },
-          pageParam: {name: 'home'}
-        });
-      }else if(ret.buttonIndex == 2){
-        api.openWin({
-          name:'register',
-          url:'./html/register.html',
           delay:100,
           bgColor:'#FFF',
           animation: {
@@ -42,24 +29,13 @@ function openFollows(){
   } else{
     api.openWin({
       name:'subscribe',
-      url:'subscribe.html',
+      url:'./html/subscribe.html',
       delay:100,
       bgColor:'#FFF'
     });
   }
 }
 function openSearch(){
-  // api.openWin({
-  //   name: 'search',
-  //   url: './html/search.html',
-  //   delay: 100,
-  //   bounces: false,
-  //   animation: {
-  //     type: 'none',
-  //     subType: 'from_top',
-  //     duration: 200
-  //   }
-  // });
   api.openWin({name:'search',url:'./html/search.html',delay:300,bgColor:'#FFF'});
 }
 
@@ -227,8 +203,6 @@ apiready = function() {
       //上一张页面
       window.prevPid = '';
 
-      // var head = $api.byId('head');
-      // $api.fixIos7Bar(head);
       //var obj = api.require('tabBar');
       // obj.open({
       //     bgImg:'widget://res/tabBar_bg.png',

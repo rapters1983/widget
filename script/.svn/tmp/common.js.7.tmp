@@ -90,7 +90,6 @@ function URLConfig(which, data) {
 };
 
 
-
 var scale = 1.0, ratio = 1;
   (function() {
       var text = '';
@@ -103,31 +102,7 @@ var scale = 1.0, ratio = 1;
       document.write(text);
   })();
 
-/* 静默登录 */
-function silenceLoginFn(pageName, fnName) {
-  var user = $api.getStorage('user');
-  var password = $api.getStorage('password');
-  if(!user || api) return;
-  api.ajax({
-    url : URLConfig('login'),
-    method : 'post',
-    dataType : 'json',
-    data: {
-      values: {'account' : user['account'], 'password' : password}
-    }
-  }, function(ret, err) {
-      if(!ret) return;
-      if(ret.code == 0) {
-        $api.setStorage('user', ret['data']);
-        api.execScript({
-          name: pageName,
-          script: fnName + '()';
-        });
-      } else{
-        api.alert({msg: ret.message});
-      }
-  });
-}
+
 
 /* 框架初始化 */
 +function(win, $) {

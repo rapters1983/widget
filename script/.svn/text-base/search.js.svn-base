@@ -176,7 +176,7 @@ yp.ready(function() {
           if(self.tabResult[idx]>0){
             self.ajaxing[idx]  = 1;
             api.toast({
-              msg: '已经到底了',
+              msg: '已经加载完啦',
               duration:2000,
               location: 'bottom'
             });

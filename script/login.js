@@ -183,6 +183,7 @@ apiready = function(){
             var user = ret["data"];
             
             $api.setStorage(key, user);
+            $api.setStorage('password', pwdCont);
             // if(api.pageParam) {
               // api.execScript({
               //   name: 'home',

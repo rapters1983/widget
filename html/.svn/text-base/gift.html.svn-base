@@ -18,7 +18,7 @@
   <div id="giftPop" class="live-pop" >
     <!-- 数量输入框 -->
     <div id="countPop" class="count-pop hidden">
-      <div class="arrow arrow-bottom">123</div>
+      <div class="arrow arrow-bottom"><input ></div>
       <ul id="countList"></ul>
     </div>
     <!-- 数量输入框 end-->
@@ -57,14 +57,14 @@
 
     <!-- 礼物价钱显示 -->
     <div class="gift-price">
-      <i id="giftName">--</i>：<i id="giftCount">--</i>金币
+      <i id="giftName">--</i>：<i id="giftCount">--</i><span id="coinType">--</span>
     </div>
     <!-- 礼物价钱显示 end-->
 
     <!-- 赠送详情 -->
     <div class="send-detail">
       <span id="sendGift" class="send-btn">赠送</span>
-      数量：<span id="inputCount" class="input-count">1</span>个
+      数量：<input class="input-count" id="inputCount" value="1">个
     </div>
     <!-- 赠送详情 end-->
   </div>

@@ -12,6 +12,7 @@ apiready = function() {
 		},
 		pageNow : 1,
 		ajaxing : 0,
+    refresh: 0,
 
 		view : function() {
       var self = this;
@@ -27,6 +28,7 @@ apiready = function() {
       }, function(ret, err){
         self.ajaxing = 0;
         self.pageNow = 1;
+        self.refresh = 1;
         self.loadData();
       });
       self.loadData();
@@ -36,10 +38,16 @@ apiready = function() {
       var self = this;
       $(window).scroll(function(){
 		    // 当滚动到最底部以上200像素时， 加载新内容
-		    if ($(document).height() - $(this).scrollTop() - $(this).height()<200){
+		    if ($(document).height() - $(this).scrollTop() - $(this).height()< 150){
 				  if(self.ajaxing == 1){
 		      	return;
 		      }
+          api.toast({
+            msg: '加载中',
+            duration: 500,
+            location: 'top'
+          });
+          self.refresh = 0;
 		    	self.loadData();
 		    }
 			});
@@ -63,15 +71,23 @@ apiready = function() {
       , 'page': self.pageNow
       }), function(data) {
       	if(self.pageNow == 1){
-			  	ui.$gameList.empty(); 									 	//第一页加载时先清空
-			  }
-        self.renderGameData(data['games']);
+          self.refleshGameList(data['games']);
+          if(self.refresh == 1){
+            api.toast({
+              msg: '刷新完成',
+              duration:2000,
+              location: 'top'
+            });
+          }
+			  }else{
+          self.renderGameData(data['games']);
+        }
         self.pageNow = self.pageNow +1;
         if(12 == data['games'].length){
         	self.ajaxing = 0;  												//返回不足12条则表示加载完毕
         }else{
           api.toast({
-            msg: '已经到底了',
+            msg: '已经加载完啦',
             duration:2000,
             location: 'top'
           })
@@ -94,11 +110,6 @@ apiready = function() {
           });
         }, nDelay);
       }
-      api.toast({
-        msg: '努力加载中...',
-        duration: 1000,
-        location: 'top'
-      });
       api.ajax({
         url : url,
         method : 'get',
@@ -123,13 +134,45 @@ apiready = function() {
 
     },
 
+    refleshGameList : function(data) {
+      var width = api.winWidth;
+      var htmlStr = '';
+      var loadedNum = ui.$gameList.find('li').length
+      var i = data.length;
+      if(i < loadedNum){
+        ui.$gameList.find('li').each(function(){
+          $self = $(this);
+          var idx = $self.index();
+          if(idx < i){
+            $self.find('.js-gamename').empty().text(data[idx]['name']);
+            $self.find('img').attr('src', data[idx]['spic']);
+          }else{
+            $self.remove();
+          }
+        })
+      }else{
+        ui.$gameList.find('li').each(function(){
+          $self = $(this);
+          $self.find('.js-gamename').empty().text(data[idx]['name']);
+          $self.find('img').attr('src', data[idx]['spic']);
+        })
+        for(var i= loadedNum; i<data.length; i++) {
+          htmlStr += '<li id="'+data[i]['id']+'">'
+          + '<div class="game-a"><img src="'+ data[i]['spic'] +'" width="'+ width +'">'
+          + '<span class="js-gamename">'+ data[i]['name'] + '</span><div></li>';
+        }
+        ui.$gameList.append(htmlStr);
+      }
+    },
+
     renderGameData : function(data) {
       var width = api.winWidth;
       var htmlStr = '';
+      var loadedNum = ui.$gameList.find('li').length
       for(var i=0; i<data.length; i++) {
         htmlStr += '<li id="'+data[i]['id']+'">'
-        + '<div class="game-a"><img src="'+ data[i]['spic'] +'" width="'+ width +'">'+ data[i]['name']
-        + '<div></li>';
+        + '<div class="game-a"><img src="'+ data[i]['spic'] +'" width="'+ width +'">'
+        + '<span class="js-gamename">'+ data[i]['name'] + '</span><div></li>';
       }
       ui.$gameList.append(htmlStr);
     }

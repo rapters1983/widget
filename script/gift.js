@@ -37,28 +37,31 @@ apiready = function(){
 
     listen : function()　{
       var self = this;
-
-
       //选择礼物
       $('#giftList').on('click',  'li', function() {
           if(giftConfig[this.id]) {
             $('#giftName').text(giftConfig[this.id]['name'])
-            $('#giftCount').text(giftConfig[this.id]['exp'])
+            $('#giftCount').text(giftConfig[this.id]['price'])
             $('#giftList').find('li.active').removeClass('active');
             $(this).addClass('active');
+            if(giftConfig[this.id]['coinType'] ==1) {
+              $('#coinType').text('战旗币');
+            }else{
+              $('#coinType').text('金币');
+            }
             giftId = this.id;
           }
           return false;
       });
 
       //数量选择
-      $('#inputCount').on('click',  function() {
+      /*$('#inputCount').on('click',  function() {
         $('#countPop').removeClass('hidden');
         return false;
-      });
+      });*/
 
       //数量值监听
-      $('#countList').on('click', 'li', function() {
+      /*$('#countList').on('click', 'li', function() {
         var count = $(this).text();
         if(count == '其他') {
           $('#inputCount').html('<input id="otherCount" type="number" />');
@@ -68,10 +71,11 @@ apiready = function(){
           $('#inputCount').text(giftCount);
         }
         $('#countPop').addClass('hidden');
-      });
+                         return false;
+      });*/
 
       //其他
-      $(document).on('blur', '#otherCount', function() {
+      /*$(document).on('blur', '#otherCount', function() {
         var count = $(this).val();
         if(count == '') {
           $('#inputCount').text(1);
@@ -85,11 +89,11 @@ apiready = function(){
         }else{
           giftCount = count;
         }
-      });
+      });*/
 
       //赠送按钮
       $('#sendGift').on('click',  function() {
-
+        giftCount = $('#inputCount').val();
         if(giftConfig[giftId]['coinType'] == 1) { //战旗币
           if(giftCount*giftConfig[giftId]['price'] > coin) {
             api.alert({
@@ -156,7 +160,6 @@ apiready = function(){
           coinEnable = ret['data']['coin']['enable'];
           gold = ret['data']['gold']['count'];
           goldEnable = ret['data']['gold']['enable'];
-        }else{
         }
       });
     },
@@ -174,12 +177,12 @@ apiready = function(){
        
 
       //初始化数值
-      var countArr = ['其他',520,233,10], htmlStr = '';
-      for(var i=0; i<countArr.length; i++) {
-        htmlStr += '<li>'+countArr[i]+'</li>'
-      }
+     // var countArr = ['其他',520,233,10], htmlStr = '';
+     // for(var i=0; i<countArr.length; i++) {
+      //  htmlStr += '<li>'+countArr[i]+'</li>'
+      //}
 
-      $('#countList').html(htmlStr);
+     // $('#countList').html(htmlStr);
         var lastLi = $('#giftList').find('li').last();
         var lId = lastLi.attr('id');
         lastLi.addClass('active');

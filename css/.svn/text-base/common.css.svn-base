@@ -325,31 +325,27 @@ body{
   font-size: 48px;
   vertical-align: -5px;
 }
-.live-pop .count-pop{
-  position: absolute;
-  left: 105px;
-  top: 250px;
-  width: 152px;
-  height: 319px;
+.share-list{
+  border-top: 1px solid #fff;
+  padding: 32px 30px;
+  font-size: 24px;
+  color: #666;
 }
-.live-pop .count-pop ul{
-  border:1px solid #4c4c4c;
-}
-.live-pop .count-pop ul li{
-  padding: 22px 0;
-  background:#222;
-  color: #fff;
+.share-list li{
+  width: 33.3%;
+  float: left;
   text-align: center;
-  font-size: 30px;
-  border-bottom: 1px solid #4c4c4c;
+  color: #666;
 }
-.live-pop .arrow-bottom{
-  border-top-color: #222;
-  border-width: 16px;
-  position: absolute;
-  right: 59px;
-  bottom: -13px;
+.share-list li i{
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  background: url(../image/sina-icon.png);
 }
+.share-list li i.icon-qq-pic{background: url(../image/qq-icon.png);}
+.share-list li i.icon-weixin-pic{background: url(../image/weixin-icon.png);}
+.share-list li p{margin-top: 20px;}
 /*=================================== 首页2014-10-16 ================================*/
 .home-page {
   height: 100%;
@@ -1626,5 +1622,9 @@ body{
 }
 /*======================= 分享 ========================*/
 .share-pop{
-  
+  height: 300px;
+  width: 100%;
+  padding: 20px 15px 0;
+  background: #eee;
+  border-top: 1px solid #ccc;
 }

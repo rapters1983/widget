@@ -16,6 +16,7 @@ apiready = function() {
       this.view();
       this.listen();
 		},
+    refresh: 0,
 
 		view : function() {
       var self = this;
@@ -30,13 +31,28 @@ apiready = function() {
         showTime: false
       }, function(ret, err){
         // alert(ret);
+        self.refresh = 1;
         self.loadData();
       });
-      
+
       self.loadData();
 
 		},
 		listen : function() {
+      
+      api.addEventListener({
+          name: 'online'
+      }, function(ret, err){
+          api.alert({msg: '已联网!'});
+      });
+
+      api.addEventListener({
+          name: 'offline'
+      }, function(ret, err){
+          api.alert({msg: '网络似乎出现了异常!'});
+      });
+
+
       //进入更多
       $('.js-toGameLive').on('click', function(e) {
         e.stopPropagation();
@@ -81,7 +97,7 @@ apiready = function() {
         // return;
         api.openWin({
             name:'rooms'
-          ,'slidBackEnabled' : false            
+          ,'slidBackEnabled' : false
           , url:'rooms.html?id=' + roomid + '&which=' + which + '&fansTitle=' + fansTitle
           // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , delay:300
@@ -90,9 +106,9 @@ apiready = function() {
 
       });
 
-      
+
 		},
-    
+
     loadData : function() {
       var self = this;
       //设置定时器
@@ -107,10 +123,10 @@ apiready = function() {
             text: '先喝杯茶...',
             modal: false
           });
-        }, nDelay);     
+        }, nDelay);
       }
       //slider
-      self.getDataIndex(URLConfig('liveIndex'), function(data) {
+      self.getDataIndex(URLConfig('bannerIndex'), function(data) {
       	self.renderSlider(data['lives']);
       });
       //6条热门直播 加载完毕后
@@ -132,8 +148,8 @@ apiready = function() {
       		api.hideProgress();
       		api.refreshHeaderLoadDone();
       	}
-	      
-      });  
+
+      });
       //英雄联盟
       self.getDataIndex(URLConfig('gameLiveIndex', {
       	'id' : 6
@@ -164,20 +180,20 @@ apiready = function() {
       	self.renderGameLiveData(data['data']['rooms'], ui.$otherList);
         api.hideProgress();
         api.refreshHeaderLoadDone();
-        api.toast({
-          msg: '刷新完成',
-          duration:2000,
-          location: 'top'
-        });
+        if(self.refresh == 1){
+          api.toast({
+            msg: '刷新完成',
+            duration:2000,
+            location: 'top'
+          });
+        }
       });
 
       //惰性加载
       $('img.lazy').lazyload({
-        threshold : 200
-      , effect : 'fadeIn'
-      , placeholder : '../image/default_pic.png'
+        threshold : 100
+      , placeholder : '../image/default_bpic.png'
       });
-
 
     },
 

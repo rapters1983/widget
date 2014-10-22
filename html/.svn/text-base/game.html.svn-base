@@ -20,7 +20,6 @@
     <div class="game-list-wrap">
       <ul class="clearfix" id="gameList">
       </ul>
-      
     </div>
     <!-- 游戏列表 end-->
 
