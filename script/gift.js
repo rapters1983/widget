@@ -70,7 +70,6 @@ apiready = function(){
         $('#countPop').addClass('hidden');
       });
 
-
       //其他
       $(document).on('blur', '#otherCount', function() {
         var count = $(this).val();
@@ -91,26 +90,26 @@ apiready = function(){
       //赠送按钮
       $('#sendGift').on('click',  function() {
 
-        if(goldEnable == 1) {
-          if(giftCount*giftConfig[giftId]['exp'] > coin) {
+        if(giftConfig[giftId]['coinType'] == 1) { //战旗币
+          if(giftCount*giftConfig[giftId]['price'] > coin) {
+            api.alert({
+              title: '提示',
+              msg: '战旗币不足！',
+              buttons:[ '确定']
+            });
+            return;
+          }
+        }else{ //金币
+          if(giftCount*giftConfig[giftId]['price'] > gold) {
             api.alert({
               title: '提示',
               msg: '金币不足！',
               buttons:[ '确定']
-              },function(ret,err){
             });
-             return;
-            }
-        }else{
-          api.alert({
-            title: '提示',
-            msg: '账号金币不可用！',
-            buttons:[ '确定']
-            },function(ret,err){
-          });
-
-          return;
+            return;
+          }
         }
+
         var sendGiftParam = {
            count : giftCount
           ,gift : giftId
@@ -155,9 +154,9 @@ apiready = function(){
         if(ret['code'] == 0) {
           coin = ret['data']['coin']['count'];
           coinEnable = ret['data']['coin']['enable'];
-        }else{
           gold = ret['data']['gold']['count'];
           goldEnable = ret['data']['gold']['enable'];
+        }else{
         }
       });
     },
@@ -190,10 +189,10 @@ apiready = function(){
 
           switch(giftConfig[lId]['coinType']) {
             case 1:
-              $('#coinType').text('金币');
+              $('#coinType').text('战旗币');
               break;
             case 2:
-              $('#coinType').text('战旗币');
+              $('#coinType').text('金币');
               break;
           }
         }
