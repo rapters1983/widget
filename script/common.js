@@ -121,12 +121,13 @@ function silenceLoginFn(pageName, fnName) {
         $api.setStorage('user', ret['data']);
         api.execScript({
           name: pageName,
-          script: fnName + '()';
+          script: fnName + '()'
         });
       } else{
         api.alert({msg: ret.message});
       }
   });
+  
 }
 
 /* 框架初始化 */
