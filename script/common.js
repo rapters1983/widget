@@ -91,11 +91,11 @@ function URLConfig(which, data) {
 var scale = 1.0, ratio = 1;
   (function() {
       var text = '';
-      if (window.devicePixelRatio != 2) {
-         text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
-          + '<link' + ' type="text/css" rel="styleSheet" href="./css/common-s.css"' + ' />';
-      }else{
+      if (window.devicePixelRatio == 2 &&  window.navigator.appVersion.match(/iphone/gi)) {
         text = '<link' + ' type="text/css" rel="styleSheet" href="./css/common.css"' + ' />';
+      }else{
+        text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
+          + '<link' + ' type="text/css" rel="styleSheet" href="./css/common-s.css"' + ' />';
       }
       document.write(text);
   })();
