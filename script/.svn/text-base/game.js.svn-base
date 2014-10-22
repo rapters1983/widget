@@ -153,6 +153,7 @@ apiready = function() {
       }else{
         ui.$gameList.find('li').each(function(){
           $self = $(this);
+          var idx = $self.index();
           $self.find('.js-gamename').empty().text(data[idx]['name']);
           $self.find('img').attr('src', data[idx]['spic']);
         })

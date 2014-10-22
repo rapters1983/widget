@@ -74,6 +74,12 @@ apiready = function(){
                 var redata = ret.substring(2,ret.length);
                 var data = eval('('+redata+')')
                 $('#avatar').attr('src',data[0]);
+                var user = $api.getStorage('user');
+                if(user) {
+                  var avatar = data[0].replace('-normal', '');
+                  user.avatar = avatar;
+                };
+                $api.setStorage('user', user);
             }
             , error: function(e) {
                 api.alert({msg: e});
@@ -216,7 +222,7 @@ apiready = function(){
 function fInitInfo() {
   var user = $api.getStorage('user');
   if(user) {
-    $('#personal-photo img').attr('src', user.avatar + '-small');
+    $('#personal-photo img').attr('src', user.avatar + '-normal');
     $('#personal-nickname span').text(user.nickname);
     var gender = '';
     if(user.gender == '2') {

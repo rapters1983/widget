@@ -152,12 +152,7 @@ apiready = function() {
         var $this = $(this)
           , type = $this.closest('li').data('type')
           , status = $this.closest('li').data('status');
-        if(status == 0 ) {
-          // api.openWin({
-          //   name: 'personal-phone'
-          // , url: '../html/personal-phone.html'
-          // });
-        } else if(status == 1) {
+        if(status == 1) {
           self.fReceive($this, type);
         }
       });
@@ -204,17 +199,6 @@ function fInitInfo() {
     fChangeStatus();
   } else{
     fShowTask(oPageConfig.aTaskDefault);
-    // 登陆
-    api.openWin({
-      name:'landing',
-      url:'landing.html',
-      bgColor:'#FFF',
-      animation: {
-        type: 'movein',
-        subType: 'from_bottom',
-        duration: 300
-      }
-    });
   }
 }
 function fChangeStatus() {
@@ -247,7 +231,6 @@ function fChangeStatus() {
 function fShowTask(aTaskShow) {
   var aTask = [];
   // 遍历data，生成可显示的任务
-  /// todo
   for(var i = 0, l = aTaskShow.length; i < l; i++) {
     var one = aTaskShow[i];
     var oTask = $.extend({}, oPageConfig.oTask[ one.type ]);
@@ -255,10 +238,10 @@ function fShowTask(aTaskShow) {
       oTask.coin = one.coin;
       oTask.status = one.status;
       if( 2 == one.status ){
-        if( 1 == oTask.show_status ){
+        if( 1 == oTask.show_status){
           aTask.push(oTask);
         }
-      }else {
+      } else{
         aTask.push(oTask);
       }
     }
@@ -270,31 +253,39 @@ function fShowTask(aTaskShow) {
     var txt = '';
     var btnTxt = '';
     var finishClass = '';
-    // show_status
     if(one.status == 1) {
       // 已绑定未领取
       txt = one.complete_txt;
       txt = txt.replace('XXX', one.coin);
-      btnTxt = one.btn_complete_txt;
+      // btnTxt = one.btn_complete_txt;
+      btnTxt = '<a href="javascript:;" class="btn-task" id="btn-'+ one.type +'">'+ one.btn_complete_txt +'</a>';
     } else if(one.status == 2){
       // 已绑定领取
       txt = one.complete_txt;
-      btnTxt = one.btn_finish_txt;
-      finishClass = 'btn-finish';
+      // btnTxt = one.btn_finish_txt;
+      // finishClass = 'btn-finish';
+      if(0 == one.show_area) {
+        btnTxt = '<a href="javascript:;" class="btn-task btn-finish" id="btn-'+ one.type +'">'+ one.btn_finish_txt +'</a>';
+      } else{
+        btnTxt = '';
+      }
     } else{
       // 未绑定
       txt = one.default_txt;
-      btnTxt = one.btn_default_txt;
+      // btnTxt = one.btn_default_txt;
+      if(0 == one.show_area) {
+        btnTxt = '<a href="javascript:;" class="btn-task" id="btn-'+ one.type +'">'+ one.btn_default_txt +'</a>';
+      } else{
+        btnTxt = '';
+      }
     }
     sHtml += '<li data-status="'+ one.status + '" data-type="'+ one.type + '">\
-                <a href="javascript:;" class="btn-task ' + finishClass + '" id="btn-'+ one.type +'">'+ btnTxt +'</a>\
+                ' + btnTxt + '\
                 <div class="main">\
                   <p class="til"><i class="icon-m ' + one.task_icon + '"></i>' + one.title + '</p>\
                   <p class="tip">' + txt + '</p>\
                 </div>\
               </li>';
   }
-        // api.alert({msg: sHtml});
-
   $('#taskList').empty().html(sHtml);
 }

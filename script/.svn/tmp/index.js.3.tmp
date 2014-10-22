@@ -200,10 +200,14 @@ apiready = function() {
   var ui = {
   }
 
+<<<<<<< .mine
   //版本更新  IOS  统计
-  var zhanqi = api.require('zhanqiMD');
-   zhanqi.onAppStarted({});   
+  // var zhanqi = api.require('zhanqiMD');
+  // zhanqi.onAppStarted({});   
   
+  
+=======
+>>>>>>> .r261
   var oPage = {
     init : function() {
       this.view();

@@ -22,7 +22,7 @@ function URLConfig(which, data) {
     case 'otherLiveIndex':
       return BASE_URL + 'api/static/live.others/4-1-10,13,6.json';
     case 'bannerIndex':
-      return BASE_URL + 'api/touch/apps.banner';
+      return BASE_URL + 'api/touch/apps.banner?rand='+data['id']+'';
     case 'liveIndex':
       return BASE_URL + 'api/static/live.index/index.json';
     case 'liveList':
@@ -89,8 +89,6 @@ function URLConfig(which, data) {
   }
 };
 
-
-
 var scale = 1.0, ratio = 1;
   (function() {
       var text = '';
@@ -104,10 +102,18 @@ var scale = 1.0, ratio = 1;
   })();
 
 /* 静默登录 */
-function silenceLoginFn(pageName, fnName) {
+function silenceLoginFn(pageName, fnName, isRoom, fn2Name) {
   var user = $api.getStorage('user');
   var password = $api.getStorage('password');
-  if(!user || api) return;
+  if(!user || !api || !password) {
+    if(isRoom) {
+      api.execScript({
+        name: pageName,
+        script: fn2Name + '()'
+      });
+    }
+    return;
+  };
   api.ajax({
     url : URLConfig('login'),
     method : 'post',
@@ -116,17 +122,31 @@ function silenceLoginFn(pageName, fnName) {
       values: {'account' : user['account'], 'password' : password}
     }
   }, function(ret, err) {
-      if(!ret) return;
+      if(!ret) {
+        if(isRoom) {
+          api.execScript({
+            name: pageName,
+            script: fn2Name + '()'
+          });
+        }
+        return;
+      };
       if(ret.code == 0) {
         $api.setStorage('user', ret['data']);
         api.execScript({
           name: pageName,
-          script: fnName + '()';
+          script: fnName + '()'
         });
       } else{
-        api.alert({msg: ret.message});
+        if(isRoom) {
+          api.execScript({
+            name: pageName,
+            script: fn2Name + '()'
+          });
+        }
       }
   });
+  
 }
 
 /* 框架初始化 */

@@ -72,9 +72,6 @@
     });
   }
   apiready = function(){
-    api.addEventListener({name:'viewappear'}, function(ret, err){
-      fInitInfo();
-    });
 
     // 存储我的钱包类型
     var oRecord = {
@@ -90,7 +87,6 @@
     $api.setStorage('oRecord', oRecord);
     fInitInfo();
 
-    // 将我的钱包分成3个frame:一个头部，一个列表区域，一个下拉框
     var width = api.winWidth;
     var height = api.winHeight;
     if(api.systemType === 'android') {

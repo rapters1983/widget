@@ -459,7 +459,12 @@ body{
 }
 .video-list-wrap li .game-pic{
   width: 100%;
-
+}
+.video-list-wrap li.active .game-pic{
+  width: 98%;
+  padding:1%;
+  text-align: center;
+  transition: all .3s ease;
 }
 .video-list-wrap .til{
   font-size: 26px;

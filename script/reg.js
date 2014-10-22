@@ -179,7 +179,7 @@ apiready = function(){
       }
 
       // 客官，您还未同意服务条款
-      if(!ui.$btn_agreement.hasClass('active')) {
+      if(!ui.$btn_agree.hasClass('active')) {
         self.fDealCheckResult(ui.$btn_agreement, '客官，您还未同意服务条款!', false);
         return false;
       }
@@ -210,6 +210,7 @@ apiready = function(){
             var key = 'user';
             var user = ret["data"];
             $api.setStorage(key, user);
+            $api.setStorage('password', params.password);
             // if(api.pageParam) {
             //   api.execScript({
             //     name: api.pageParam.name,

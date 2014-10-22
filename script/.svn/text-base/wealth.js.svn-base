@@ -12,6 +12,7 @@ var oPageConfig = {
 , stype: 'charge'
 , isEnding: false
 , isNull: false
+, isAjax: false
 , start: 0
 };
 // 初始化
@@ -33,13 +34,15 @@ function fInitInfo() {
   oPageConfig.start = 0;
   oPageConfig.isEnding = false;
   oPageConfig.isNull = false;
+  oPageConfig.isAjax = false;
   fLoadData();
 }
 // 加载数据
 function fLoadData() {
-  if(oPageConfig.isEnding){
+  if(oPageConfig.isEnding || oPageConfig.isAjax){
     return;
   }
+  oPageConfig.isAjax = true;
   fGetDataIndex(URLConfig(oPageConfig.stype, {
       stime: oPageConfig.stime
     , etime: oPageConfig.etime
@@ -48,6 +51,9 @@ function fLoadData() {
   }), function(data) {
       if(data['cnt'] == 0) {
         oPageConfig.isNull = true;
+      }
+      if(oPageConfig.start == 0) {
+        $('#content').empty();
       }
       fRenderGameData(data['logs']);
       oPageConfig.start += data['logs'].length;
@@ -76,6 +82,7 @@ function fGetDataIndex(url, callback) {
     method : 'get',
     dataType : 'json'
   }, function(ret, err) {
+      oPageConfig.isAjax = false;
       clearTimeout(timer);
       timer = null;
       api.hideProgress();
@@ -138,9 +145,6 @@ function fRenderGameData(data) {
       htmlStr += '</ul></div>';
     }
   }
-  if(oPageConfig.start == 0) {
-    $('#content').empty();
-  }
   $('#content').append(htmlStr);
 }
 // hash
@@ -202,12 +206,11 @@ apiready = function() {
     fLoadData();
   });
 
-  
   fInitInfo();
 
   $(window).scroll(function(){  
     // 当滚动到最底部以上100像素时， 加载新内容  
-    if ($(document).height() - $(this).scrollTop() - $(this).height() < 200){
+    if ($(document).height() - $(this).scrollTop() - $(this).height()<100){
       fLoadData();
     }
   });

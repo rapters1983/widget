@@ -19,7 +19,7 @@
   <div class="my-page">
     <!-- top顶部 -->
     <div class="my-top" id="header">
-      <i class="icon-m icon-operate js-setting"></i>
+      <i class="icon-m icon-operate js-setting" style="display:none"></i>
       <!-- 登陆的时候显示该层-->
       <div class="user-detail clearfix" style="display:none" id="box-center">
         <div class="user-photo">
@@ -30,10 +30,10 @@
           <p class="name" id="personal"></p>
           <div>
             <p class="money">
-              <i class="money-icon gold-icon"></i><span id="gold">22</span>
+              <i class="money-icon gold-icon"></i><span id="gold"></span>
             </p>
             <p class="money">
-              <i class="money-icon silver-icon"></i><span id="coin">2</span>
+              <i class="money-icon silver-icon"></i><span id="coin"></span>
             </p>
             <a href="javascript:;" class="add-btn" id="recharge">充值</a>
           </div>
@@ -54,39 +54,190 @@
       <!-- 未登录的时候显示该层 end-->
     </div>
     <!-- top顶部 -->
+
+    <!-- 广告 -->
+    <div class="ad" id="advertisement"><img src="../image/ad.jpg" alt=""></div>
+    <!-- 广告 -->
+
+    <!-- <div class="bd">
+      <ul class="task-list" id="box-list">
+        <li id="records">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-collect-line"></i>我的订阅</p>
+            <p class="tip" id="recordsInfo"></p>
+          </div>
+        </li>
+        <li id="task">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-mission"></i>每日任务</p>
+            <p class="tip" id="taskInfo"></p>
+          </div>
+        </li>
+        <li id="history">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-timepiece"></i>观看历史</p>
+            <p class="tip" id="historyInfo"></p>
+          </div>
+        </li>
+        <li id="wealth">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-mywallet"></i>我的钱包</p>
+            <p class="tip" id="wealthInfo"></p>
+          </div>
+        </li>
+        <li id="feed-back">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-theproblemoffeedback"></i>问题反馈</p>
+            <p class="tip">反馈问题有机会获得大量战旗币</p>
+          </div>
+        </li>
+        <li class="js-setting">
+          <i class="icon-m icon-right"></i>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-operate"></i>应用设置</p>
+            <p class="tip">战旗TV客户端设置</p>
+          </div>
+        </li>
+      </ul>
+    </div> -->
   </div>
   <!-- 我的 end-->
 </div>
 <script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script src="../script/common.js"></script>
+<script src="../script/lib/Base64.js"></script>
+<script src="../script/home.js"></script>
 <script>
-  // function fInitInfo() {
-    
-  // }
+  function fInitInfo() {
+    function isEmptyObject(o){
+      for(var n in o){
+        return false;
+      }
+      return true;
+    }
+    var user = $api.getStorage('user');
+    if(!isEmptyObject(user)) {
+      // 头像，昵称，设置初始化
+      fGetWealth();
+      $('#photo').attr('src', user.avatar + '-normal');
+      $('#personal').text(user.account);
+      $('#header .js-setting').show();
+      $('#box-uncenter').hide();
+      $('#box-center').show();
+    } else{
+      $('#header .js-setting').hide();
+      $('#box-uncenter').show();
+      $('#box-center').hide();
+    }
+  }
+  function fGetWealth() {
+    api.ajax({
+      url: URLConfig('sGetRichUrl')
+    , method: 'get'
+    , dataType: 'json'
+    }, function(ret, err) {
+      if(ret) {
+        if(ret['code'] == 0) {
+          $('#gold').text(ret.data.gold.count);
+          $('#coin').text(ret.data.coin.count);
+        } else{
+          api.alert({msg : ret['message']});
+        }
+      } else{
+        api.alert({
+          msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+        });
+      }
+    });
+  }
   apiready = function(){
+    api.addEventListener({name:'viewappear'}, function(ret, err){
+      fInitInfo();
+    });
+
     var width = api.winWidth;
     var height = api.winHeight;
     if(api.systemType === 'android') {
       height = height - 25;
     }
     var headerPos = ($('#header').offset().top + $('#header').height())/2;
+    var advertisementPos = $('#advertisement').outerHeight()/2;
     var footerPos = 50;
-    var conheight = height - headerPos - footerPos;
+    var conheight = height - headerPos - footerPos - advertisementPos;
     api.openFrame({
       name: 'home-con',
-      url: './home-con.html',
+      url: './html/home-con.html',
       bounces: true,
       opaque: true,
+      vScrollBarEnabled: true,
+      hScrollBarEnabled: true,
       rect: {
         x: 0,
-        y: headerPos,
+        y: headerPos + advertisementPos,
         w: width,
         h: conheight
       }
     });
 
-    // fInitInfo();
+    api.bringFrameToFront({
+      from:'root',
+      to:'home-con'
+    });
+
+    fInitInfo();
+
+    // 个人资料
+    $('#personal').on('click', function() {
+      api.openWin({name:'personal',url:'personal.html',delay:100,bgColor:'#FFF'});
+    });
+
+    // 头像
+    $('#photo').on('click', function() {
+      api.openWin({name:'personal',url:'personal.html',delay:100,bgColor:'#FFF'});
+    });
+
+    // 充值
+    $('#recharge').on('click', function() {
+      var name = '';
+      var url = '';
+      if((api.systemType.toLowerCase()).indexOf('ios') > -1) {
+        // 打开ios充值页面
+        name = "recharge-ios";
+        url = 'recharge-ios.html';
+      } else{
+        // 打开安卓充值页面
+        name = "recharge-android";
+        url = 'recharge-android.html';
+      }
+      api.openWin({name: name,url: url,delay:100,bgColor:'#FFF'});
+    });
+
+    // 应用设置
+    $('.js-setting').on('click', function() {
+      api.openWin({name:'setting',url:'settings.html?user=true',delay:100,bgColor:'#FFF'});
+    });
+
+    // 登陆
+    $('#btn-login').on('click', function() {
+      api.openWin({
+        name:'landing',
+        url:'landing.html',
+        delay:100,
+        bgColor:'#FFF',
+        animation: {
+          type: 'movein',
+          subType: 'from_bottom',
+          duration: 300
+        },
+        pageParam: {name: 'home'}
+      });
+    });
   };
 </script>
 </body>

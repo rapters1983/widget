@@ -34,14 +34,14 @@
       <!-- Group -->
       <div class="form-group form-group-first">
         <label for="" class="control-label">账号：</label>
-        <input class="form-control" id="txt-account" name="account" type="text" placeholder="请输入您的账号" autocapitalize="off" value="zxj2015"/>
+        <input class="form-control" id="txt-account" name="account" type="text" placeholder="请输入您的账号" autocapitalize="off"/>
       </div>            
       <!-- // Group END -->
 
       <!-- Group -->
       <div class="form-group form-group-last">
         <label for="" class="control-label">密码：</label>
-        <input class="form-control" id="txt-pwd" name="password" type="password" placeholder="请输入您的密码" autocapitalize="off" value="222222"/>
+        <input class="form-control" id="txt-pwd" name="password" type="password" placeholder="请输入您的密码" autocapitalize="off"/>
       </div>            
       <!-- // Group END -->
     </div>
@@ -74,6 +74,7 @@
 <script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script src="../script/common.js"></script>
+<script src="../script/lib/Base64.js"></script>
 <script type="text/javascript" src="../script/login.js"></script>
 </body>
 </html>

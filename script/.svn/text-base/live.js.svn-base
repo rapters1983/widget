@@ -55,17 +55,19 @@ apiready = function() {
       //进入直播间
       $('#wrap').on('click', 'li[name=enterRooms]', function() {
         var roomid = this.id
-        , which = $(this).attr('which')
-        , fansTitle = $(this).attr('fansTitle')
 
         api.openWin({
             name:'rooms'
           ,'slidBackEnabled' : false
-          , url:'rooms.html?id=' + roomid + '&which=' + which + '&fansTitle=' + fansTitle
+          , url:'rooms.html?id=' + roomid
           // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , delay:300
           , bgColor:'#FFF'
         });
+      }).on('touchstart', 'li[name=enterRooms]', function() {
+        $(this).addClass('active');
+      }).on('touchend', 'li[name=enterRooms]', function() {
+        $(this).removeClass('active');
       });
 
 		},
@@ -177,6 +179,7 @@ apiready = function() {
       }else{
         ui.$liveList.find('li').each(function(){
           $self = $(this);
+          var idx = $self.index();
           var id = data[idx]['id'];
           var bpic = data[idx]['bpic'];
           var nickname = data[idx]['nickname'];
@@ -193,11 +196,8 @@ apiready = function() {
           $self.find('.js-nickname').empty().text(nickname);
         })
         for(var i= loadedNum; i<data.length; i++) {
-          var which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO';
-          var fansTitle = data[i]['fansTitle'];
-          // alert([which,fansTitle])
           var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
-          htmlStr += '<li id="'+data[i]['id']+'" name="enterRooms" which="'+which+'" fansTitle="'+fansTitle+'">'
+          htmlStr += '<li id="'+data[i]['id']+'" name="enterRooms">'
           + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
           + '<div class="til">'+data[i]['title']+'</div>'
           + '<div class="detail clearfix">'
@@ -214,11 +214,8 @@ apiready = function() {
       var width = api.winWidth;
       var htmlStr = '';
       for(var i=0; i<data.length; i++) {
-        var which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO';
-        var fansTitle = data[i]['fansTitle'];
-        // alert([which,fansTitle])
         var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
-        htmlStr += '<li id="'+data[i]['id']+'" name="enterRooms" which="'+which+'" fansTitle="'+fansTitle+'">'
+        htmlStr += '<li id="'+data[i]['id']+'" name="enterRooms">'
         + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
         + '<div class="til">'+data[i]['title']+'</div>'
         + '<div class="detail clearfix">'

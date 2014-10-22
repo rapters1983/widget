@@ -41,7 +41,7 @@ yp.ready(function() {
         $self = $(this);
         api.confirm({
           msg: '是否放弃本次编辑？',
-          buttons:[ '是', '我再想想']
+          buttons:[ '我再想想', '是']
         },function(ret,err){
           if(ret.buttonIndex == 1){
             api.closeWin();
@@ -52,7 +52,7 @@ yp.ready(function() {
         $self = $(this);
         api.confirm({
           msg: '保存本次编辑？',
-          buttons:[ '保存', '我再想想']
+          buttons:[ '我再想想', '保存']
         },function(ret,err){
           if(ret.buttonIndex == 1){
             self.unfollow();

@@ -24,13 +24,11 @@ apiready = function() {
        //进入直播间
       $('#wrap').on('click', 'li[name=enterRooms]', function() {
         var roomid = this.id
-        , which = $(this).attr('which')
-        , fansTitle = $(this).attr('fansTitle')
         
         api.openWin({
             name:'rooms'
           ,'slidBackEnabled' : false
-          , url:'rooms.html?id=' + roomid + '&which=' + which + '&fansTitle=' + fansTitle
+          , url:'rooms.html?id=' + roomid
           // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , delay:300
           , bgColor:'#FFF'

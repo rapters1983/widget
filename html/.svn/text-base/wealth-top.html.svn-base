@@ -71,7 +71,7 @@
   apiready = function() {
     fInitInfo();
 
-    $('#btn-hide').on('click', function() {
+    $('#btn-hide').on('touchstart', function() {
       api.closeFrame({
         name: 'wealth-top'
       });

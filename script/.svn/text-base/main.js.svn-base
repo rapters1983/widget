@@ -11,14 +11,14 @@ apiready = function() {
   , $otherList : $('#otherList')
   }
 
-	var oPage = {
-		init : function() {
+  var oPage = {
+    init : function() {
       this.view();
       this.listen();
-		},
+    },
     refresh: 0,
 
-		view : function() {
+    view : function() {
       var self = this;
 
       api.setRefreshHeaderInfo({
@@ -37,8 +37,8 @@ apiready = function() {
 
       self.loadData();
 
-		},
-		listen : function() {
+    },
+    listen : function() {
       
       api.addEventListener({
           name: 'online'
@@ -75,26 +75,6 @@ apiready = function() {
       //进入直播间
       $('#wrap').on('click', 'li[name=enterRooms]', function() {
         var roomid = this.id
-        , which = $(this).attr('which')
-        , fansTitle = $(this).attr('fansTitle')
-
-        // alert(342432)
-        // api.openFrame({
-        //     name: 'test',
-        //     url: './test.html',
-        //     rect:{
-        //         x:0,
-        //         y:300,
-        //         w:api.frameWidth,
-        //         h:100
-        //     },
-        //     bounces: true,
-        //     opaque: true,
-        //     vScrollBarEnabled:true,
-        //     hScrollBarEnabled:true
-        // });
-
-        // return;
         api.openWin({
             name:'rooms'
           ,'slidBackEnabled' : false
@@ -103,11 +83,14 @@ apiready = function() {
           , delay:300
           , bgColor:'#FFF'
         });
-
+      }).on('touchstart', 'li[name=enterRooms]', function() {
+        $(this).addClass('active');
+      }).on('touchend', 'li[name=enterRooms]', function() {
+        $(this).removeClass('active');
       });
 
 
-		},
+    },
 
     loadData : function() {
       var self = this;
@@ -126,58 +109,61 @@ apiready = function() {
         }, nDelay);
       }
       //slider
-      self.getDataIndex(URLConfig('bannerIndex'), function(data) {
-      	self.renderSlider(data['lives']);
+      self.getDataIndex(URLConfig('bannerIndex', {
+        'id' : +new Date()
+      }), function(data) {
+        if(data['data'] instanceof Array && data['data'].length < 1 || $.isEmptyObject(data['data'])) return;
+        self.renderSlider(data['data']);
       });
       //6条热门直播 加载完毕后
       self.getDataIndex(URLConfig('liveIndex'), function(data) {
-      	self.renderLiveData(data['lives']);
-      	livedata = data['lives'];
-      	idx = livedata.length -1;
-      	var lastImg = new Image();
-      	if(livedata.length>-1){
-      		lastImg.src =  livedata[idx]['bpic'];
-		      lastImg.onload = function ()
-		      {
-		        api.hideProgress();
-		        api.refreshHeaderLoadDone();
-		        clearTimeout(timer);
-		        timer = null;
-		      }
-      	}else{
-      		api.hideProgress();
-      		api.refreshHeaderLoadDone();
-      	}
+        self.renderLiveData(data['lives']);
+        livedata = data['lives'];
+        idx = livedata.length -1;
+        var lastImg = new Image();
+        if(livedata.length>-1){
+          lastImg.src =  livedata[idx]['bpic'];
+          lastImg.onload = function ()
+          {
+            api.hideProgress();
+            api.refreshHeaderLoadDone();
+            clearTimeout(timer);
+            timer = null;
+          }
+        }else{
+          api.hideProgress();
+          api.refreshHeaderLoadDone();
+        }
 
       });
       //英雄联盟
       self.getDataIndex(URLConfig('gameLiveIndex', {
-      	'id' : 6
+        'id' : 6
       , 'num' : 4
       , 'page' : 1
       }), function(data) {
-      	self.renderGameLiveData(data['data']['rooms'], ui.$lolList);
+        self.renderGameLiveData(data['data']['rooms'], ui.$lolList);
       });
       //dota2
       self.getDataIndex(URLConfig('gameLiveIndex', {
-      	'id' : 10
+        'id' : 10
       , 'num' : 4
       , 'page' : 1
       }), function(data) {
-      	self.renderGameLiveData(data['data']['rooms'], ui.$dota2List);
+        self.renderGameLiveData(data['data']['rooms'], ui.$dota2List);
       });
       //三国杀
       self.getDataIndex(URLConfig('gameLiveIndex', {
-      	'id' : 13
+        'id' : 13
       , 'num' : 4
       , 'page' : 1
       }), function(data) {
-      	self.renderGameLiveData(data['data']['rooms'], ui.$sgsList);
+        self.renderGameLiveData(data['data']['rooms'], ui.$sgsList);
       });
       //其它
       self.getDataIndex(URLConfig('otherLiveIndex'), function(data) {
-      	$('body').append(data['data']['rooms']);
-      	self.renderGameLiveData(data['data']['rooms'], ui.$otherList);
+        $('body').append(data['data']['rooms']);
+        self.renderGameLiveData(data['data']['rooms'], ui.$otherList);
         api.hideProgress();
         api.refreshHeaderLoadDone();
         if(self.refresh == 1){
@@ -222,14 +208,10 @@ apiready = function() {
     renderGameLiveData : function(data, $dom) {
       $dom.find('li').each(function(){
         $self = $(this);
-        var i = $self.index()
-        , which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO'
-        , fansTitle = data[i]['fansTitle'];
+        var i = $self.index();
 
         $self.attr({
            'id' : data[i]['id']
-          ,'which' : which
-          ,'fansTitle' : fansTitle
           ,'name' : 'enterRooms'
         });
         var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
@@ -243,14 +225,9 @@ apiready = function() {
     renderLiveData : function(data) {
       $('#indexLiveList>li').each(function(){
         $self = $(this);
-        var i = $self.index()
-        , which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO'
-        , fansTitle = data[i]['fansTitle'];
-
+        var i = $self.index();
         $self.attr({
            'id' : data[i]['id']
-          ,'which' : which
-          ,'fansTitle' : fansTitle
           ,'name' : 'enterRooms'
         });
         var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
@@ -263,48 +240,88 @@ apiready = function() {
     //渲染首页swipe插件
     renderSlider : function(data) {
       var self = this;
-      //已经启动时只修改地址
       if(window.isSlided){
+        var loadedNum = $('#banner-content>li').length;
+        var i = data.length;
+        if(i < loadedNum){
+          $('#banner-content>li').each(function(){
+            $self = $(this);
+            var i = $self.index()
+            if(idx < i){
+              $self.attr({
+                 'id' : data[i]['room']['id']
+                ,'name' : 'enterRooms'
+              });
+              $self.find('.title').empty().text(data[i]['room']['title']);
+              $self.find('img').attr('src', data[i]['room']['bpic']);
+            }else{
+              $self.remove();
+              $('.dot').eq(i).remove();
+            }
+          })
+        }else{
+          for(var i= loadedNum; i<data.length; i++) {
+            htmlStr += '<li name="enterLive" id="'+data[i]['room']['id']+'">'
+                +  '<img src="'+data[i]['room']['bpic']+'" class="show-pic" />'
+                +  '<p class="title">'+data[i]['room']['title']+'</p>'
+                +  '</li>';
+          }
+          var pointerStr = '';
+          for(var i= loadedNum; i<data.length; i++) {
+            pointerStr += '<span class="dot"></span>';
+          }
+          $('#dotBox').append(pointerStr);
+          $('#banner-content').append(htmlStr);
+          $('#banner-content>li').each(function(){
+            $self = $(this);
+            var i = $self.index();
+            $self.attr({
+               'id' : data[i]['room']['id']
+              ,'name' : 'enterRooms'
+            });
+            $self.find('.title').empty().text(data[i]['room']['title']);
+            $self.find('img').attr('src', data[i]['room']['bpic']);
+          })
+        }
         $('#banner-content>li').each(function(){
           $self = $(this);
           var i = $self.index()
           , which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO'
-        	, fansTitle = data[i]['fansTitle'];
-        	$self.attr({
-	           'id' : data[i]['id']
-	          ,'which' : which
-	          ,'fansTitle' : fansTitle
-	          ,'name' : 'enterRooms'
-	        });
+          , fansTitle = data[i]['fansTitle'];
+          $self.attr({
+             'id' : data[i]['id']
+            ,'which' : which
+            ,'fansTitle' : fansTitle
+            ,'name' : 'enterRooms'
+          });
           $self.find('.title').empty().text(data[i]['title']);
           $self.find('img').attr('src', data[i]['bpic']);
         })
         return;
       }
+      //初始化
       var width = api.winWidth;
       var htmlStr = '';
       for(var i=0; i<data.length; i++) {
-        htmlStr += '<li name="enterLive" id="'+data[i]['id']+'">'
-                +  '<img src="'+data[i]['bpic']+'" class="show-pic" />'
-                +  '<p class="title">'+data[i]['title']+'</p>'
+        htmlStr += '<li name="enterLive" id="'+data[i]['room']['id']+'">'
+                +  '<img src="'+data[i]['room']['bpic']+'" class="show-pic" />'
+                +  '<p class="title">'+data[i]['room']['title']+'</p>'
                 +  '</li>';
       }
       var pointerStr = '<span class="dot active"></span>';
       for(var i=1; i<data.length; i++) {
         pointerStr += '<span class="dot"></span>';
       }
-
       $('#dotBox').empty().html(pointerStr);
       $('#banner-content').empty().html(htmlStr);
       $('#banner-content>li').each(function(){
         $self = $(this);
         var i = $self.index()
-        , which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO'
-      	, fansTitle = data[i]['fansTitle'];
       	$self.attr({
-           'id' : data[i]['id']
-          ,'which' : which
-          ,'fansTitle' : fansTitle
+          which = data[i]['room']['flashvars']? data[i]['room']['flashvars']['VideoType'] : 'VIDEO'
+        , fansTitle = data[i]['room']['fansTitle'];
+        $self.attr({
+           'id' : data[i]['room']['id']
           ,'name' : 'enterRooms'
         });
       })
@@ -317,15 +334,22 @@ apiready = function() {
         disableScroll: false,
         stopPropagation: false,
         callback: function(index, elem) {
-          $('#dotBox span.active').removeClass('active');
-          $('#dotBox span:eq('+index+')').addClass('active');
+          var num = $('#dotBox span').length -1;
+          if(num < index){
+            index = index - 2;
+            $('#dotBox span.active').removeClass('active');
+            $('#dotBox span:eq('+index+')').addClass('active');
+          }else{
+            $('#dotBox span.active').removeClass('active');
+            $('#dotBox span:eq('+index+')').addClass('active');
+          }
         },
         transitionEnd: function(index, elem) {}
       });
       window.isSlided = true;
     }
 
-	}
-	oPage.init();
+  }
+  oPage.init();
 
 }

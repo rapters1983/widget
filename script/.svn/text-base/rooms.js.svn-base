@@ -6,7 +6,7 @@
  * 直播间代码
  * ============================================= */
 
-var selfGid = '';
+var selfGid = '', fansTitle = '';
 
 apiready = function(){
   var ui = {
@@ -56,7 +56,7 @@ apiready = function(){
     '撇嘴': '35'
   }
 
-  var fansTitle = yp.query('fansTitle');
+  // var fansTitle = yp.query('fansTitle');
 
   var giftConfig = {}, giftCount = 1, giftId = '';  //礼物配置
 
@@ -76,18 +76,45 @@ apiready = function(){
       $('body').height(api.frameHeight*2).css('padding-top',api.frameWidth*9/16*2 + 20*2);
       $('#liveRoom').height(api.frameHeight*2 - api.frameWidth*9/16*2 - 50*2 -20*2);
       
-      var gameId = yp.query('id');
+      var roomId = yp.query('id');
 
-      if(yp.query('which') === 'LIVE') {
-        curWhich = 'live';
-        this.getInitData(URLConfig('liveRoomInfo',{'roomid' : gameId}));
-      }else{
-        curWhich = 'video';
-        this.getInitData(URLConfig('videoRoomInfo',{'roomid' : gameId}));
-      }
+      // if(yp.query('which') === 'LIVE') {
+      //   curWhich = 'live';
+      //   this.getInitData(URLConfig('liveRoomInfo',{'roomid' : gameId}));
+      // }else{
+      //   curWhich = 'video';
+      //   this.getInitData(URLConfig('videoRoomInfo',{'roomid' : gameId}));
+      // }
+
+      this.initNativeModel(roomId);
 
       this.initSettins();
-      this.getGiftList(gameId);
+      this.getGiftList(roomId);
+    },
+
+    initNativeModel : function(roomId) {
+
+        var param = {
+           'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
+          ,'x' : 0
+          ,'y' : 0
+          ,'w' : api.frameWidth
+          ,'h' : api.frameWidth*9/16
+          ,'roomId' : roomId
+        }
+
+        if(api.systemVersion.indexOf('7.') > -1 || api.systemVersion.indexOf('8.') > -1) {
+          param['y'] = 20;
+        }
+        
+        zhanqi.playVideo(param);
+        var param2 = {
+           'x' : 0
+          ,'y' : api.frameHeight - 50
+          ,'w' : api.frameWidth
+          ,'h' : 50
+        }
+        zhanqi.showInputView(param2);
     },
 
     initSettins : function() {
@@ -181,45 +208,48 @@ apiready = function(){
       });
     },
     // oPageConfig.oRoom.fansTitle
-    getInitData : function(url) {
-      api.ajax({
-          url: url,
-          method: 'get',
-          dataType: 'json'
-      },function(ret,err){
-          var param = {
-             'channelTitle' : ret['data']['title']
-            ,'roomId' : ret['data']['id']
-            ,'gameId' : ret['data']['gameId']
-            ,'avatar' : ret['data']['avatar']
-            ,'uid' : ret['data']['uid']
-            ,'nickname' : ret['data']['nickname']
-            ,'gameName' : ret['data']['gameName']
-            ,'online' : ret['data']['realOnline']
-            ,'liveStatus' : ret['data']['status']
-            ,'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
+    // getInitData : function(url) {
+    //   api.ajax({
+    //       url: url,
+    //       method: 'get',
+    //       dataType: 'json'
+    //   },function(ret,err){
+    //       var param = {
+    //          'channelTitle' : ret['data']['title']
+    //         ,'roomId' : ret['data']['id']
+    //         ,'gameId' : ret['data']['gameId']
+    //         ,'avatar' : ret['data']['avatar']
+    //         ,'uid' : ret['data']['uid']
+    //         ,'nickname' : ret['data']['nickname']
+    //         ,'gameName' : ret['data']['gameName']
+    //         ,'online' : ret['data']['realOnline']
+    //         ,'liveStatus' : ret['data']['status']
+    //         ,'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
 
-            ,'x' : 0
-            ,'y' : 0
-            ,'w' : api.frameWidth
-            ,'h' : api.frameWidth*9/16
-          }
-          ui.$anchorName.text(ret['data']['nickname']);
-          if(api.systemVersion.indexOf('7.') > -1 || api.systemVersion.indexOf('8.') > -1) {
-            param['y'] = 20;
-          }
+    //         ,'x' : 0
+    //         ,'y' : 0
+    //         ,'w' : api.frameWidth
+    //         ,'h' : api.frameWidth*9/16
+    //       }
+
+
+
+    //       ui.$anchorName.text(ret['data']['nickname']);
+    //       if(api.systemVersion.indexOf('7.') > -1 || api.systemVersion.indexOf('8.') > -1) {
+    //         param['y'] = 20;
+    //       }
           
-          zhanqi.playVideo(param);
-          var param2 = {
-             'x' : 0
-            ,'y' : api.frameHeight - 50
-            ,'w' : api.frameWidth
-            ,'h' : 50
-          }
-          zhanqi.showInputView(param2);
+    //       zhanqi.playVideo(param);
+    //       var param2 = {
+    //          'x' : 0
+    //         ,'y' : api.frameHeight - 50
+    //         ,'w' : api.frameWidth
+    //         ,'h' : 50
+    //       }
+    //       zhanqi.showInputView(param2);
 
-      });
-    },
+    //   });
+    // },
 
     getGiftList : function(id) {
       var self = this;
@@ -276,9 +306,12 @@ apiready = function(){
       var htmlStr = '';
       if(message['showmedal'] == 1) {  //显示勋章
         if(selfGid == message['gid']) {//是否自己
-          htmlStr += '<li class="myself">'
-          +'<span class="name"><i class="name-bg grade-'+ message['level'] +'">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'
-          + content +'</li>'
+          htmlStr += '<li class="myself">';
+          if(message['level']) {
+            htmlStr += '<span class="name"><i class="name-bg grade-'+ message['level'] +'">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'+content +'</li>'
+          }else{
+            htmlStr += '<span class="name">'+ message['fromname'] +'：</span>'+content +'</li>'
+          }
         }else{
           switch(message['permission']) {
             case 40:  //超管
@@ -316,7 +349,8 @@ apiready = function(){
       }else{
         if(selfGid == message['gid']) {   //是否自己
           htmlStr += '<li class="myself">'
-          +'<span class="name"><i class="name-bg grade-'+ message['level'] +'">'+fansTitle+'</i>'+ message['fromname'] +'：</span>' + content + '</li>'
+          +'<span class="name">'+ message['fromname'] +'：</span>' + content + '</li>'
+          
         }else{
           switch(message['permission']) {
             case 40:  //超管
@@ -410,7 +444,6 @@ apiready = function(){
   }
 
 
-
   oPage.init();
 
   window.onRecvChatMsg = function(data) {
@@ -427,7 +460,7 @@ apiready = function(){
   window.onBtnBack = function() {
     api.closeWin();
   }
-
+  
   window.onGiftBtnPressed = function() {
       api.openFrame({
         name: 'gift',
@@ -500,15 +533,25 @@ function changeGfitStatus() {
 
 
 function reqNewTokenFromJS() {
-  silenceLoginFn('rooms', 'onTokenUpdated');  
+  silenceLoginFn('rooms', 'onTokenUpdated', true, 'failBack');  
 }
 
 function onTokenUpdated() {
-  $api.setStorage('user', ret['data']);
   var newToken = $api.getStorage('user')['token'];
   var zhanqi = api.require('zhanqiMD');
   zhanqi.onTokenUpdated({'token' : newToken});
 }
+
+function failBack() {
+  var zhanqi = api.require('zhanqiMD');
+  zhanqi.onTokenUpdated({'token' : ''});
+}
+
+function getRoomInfo(data) {
+  fansTitle = data['fansTitle'];
+  $('#anchorName').text(data['nickname']);
+}
+
 // rapters1983@hotmail.com
 
 // poacher1983

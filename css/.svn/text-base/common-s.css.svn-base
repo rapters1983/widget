@@ -464,6 +464,12 @@ body{
 .video-list-wrap li:nth-child(2n){
   margin-right: 0;
 }
+.video-list-wrap li.active .game-pic{
+  width: 98%;
+  padding:1%;
+  text-align: center;
+  transition: all .3s ease;
+}
 .video-list-wrap li .game-pic{
   width: 100%;
 }

@@ -68,7 +68,7 @@ function openTab(type, pageParam){
   // var navPos = $('#footer').offset().top;
   var headBottom = $('#head').offset().top + $('#head').height();
   var headPos = 64;
-  var height = (api.winHeight*2 - headBottom - $('#footer').height())/2 - 4;
+  var height = (api.winHeight*2 - headBottom - $('#footer').height())/2 - 1;
   if(api.systemType === 'android') {
     height = height - 25;
   }
@@ -79,6 +79,12 @@ function openTab(type, pageParam){
   //默认把live关掉
   api.closeFrame({
     name: 'gameLive'
+  });
+
+  //默认把home-con放到后面
+  api.setFrameAttr({
+    name: 'home-con',
+    hidden: true
   });
 
   //如果打开home页则不显示头部
@@ -98,6 +104,12 @@ function openTab(type, pageParam){
         name: type,
         hidden: false
       });
+      if(type == 'home'){
+        api.setFrameAttr({
+          name: 'home-con',
+          hidden: false
+        });
+      }
     }else{
       api.openFrame({
         name: type,
@@ -188,6 +200,10 @@ apiready = function() {
   var ui = {
   }
 
+  //版本更新  IOS  统计
+  var zhanqi = api.require('zhanqiMD');
+   zhanqi.onAppStarted({});   
+  
   var oPage = {
     init : function() {
       this.view();

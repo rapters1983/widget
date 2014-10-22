@@ -2,7 +2,7 @@
   2014.10.15
   登陆
   魏露霞
-  未完成：qq登陆缺少appid
+  未完成：qq登陆
  */
 apiready = function(){
 
@@ -181,7 +181,6 @@ apiready = function(){
           if(ret.code == 0) {
             var key = 'user';
             var user = ret["data"];
-            
             $api.setStorage(key, user);
             $api.setStorage('password', pwdCont);
             // if(api.pageParam) {
@@ -197,16 +196,16 @@ apiready = function(){
             //   });
             // }
             if(yp.query('isRoom')) {
-             var userParam = {
-               'userName' : user['nickname'],
-               'userAvatar' : user['avatar'],
-               'token' : user['token']
-             }
-             $api.setStorage('userParam',userParam);
-             api.execScript({
+              var userParam = {
+                'userName' : user['nickname'],
+                'userAvatar' : user['avatar'],
+                'token' : user['token']
+              }
+              $api.setStorage('userParam',userParam);
+              api.execScript({
                 name : 'rooms',
                 script : 'loginBackScript();'
-              })
+              });
            }
             api.closeWin({
               name: 'register',

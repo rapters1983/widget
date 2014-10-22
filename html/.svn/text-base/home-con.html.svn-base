@@ -14,11 +14,11 @@
   <title>我的</title>
 </head>
 <body>
-<div class="wrap" style="border:2px solid red">
+<div class="wrap">
   <!-- 我的 -->
   <div class="my-page">
     <!-- 广告 -->
-    <div class="ad"><img src="../image/ad.jpg" alt=""></div>
+    <!-- <div class="ad"><img src="../image/ad.jpg" alt=""></div> -->
     <!-- 广告 -->
 
     <div class="bd">
@@ -70,10 +70,10 @@
   </div>
   <!-- 我的 end-->
 
-  <!-- <script src="../script/api.js"></script>
+  <script src="../script/api.js"></script>
   <script src="../script/lib/jquery-2.1.1.min.js"></script>
-  <script src="../script/common.js"></script> -->
-  <!-- <script src="../script/home.js"></script> -->
+  <script src="../script/common.js"></script>
+  <script src="../script/home.js"></script>
 </div>
 </body>
 </html>

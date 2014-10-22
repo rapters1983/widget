@@ -241,6 +241,7 @@ apiready = function() {
     renderSlider : function(data) {
       var self = this;
       if(window.isSlided){
+<<<<<<< .mine
         var loadedNum = $('#banner-content>li').length;
         var i = data.length;
         if(i < loadedNum){
@@ -283,6 +284,7 @@ apiready = function() {
             $self.find('img').attr('src', data[i]['room']['bpic']);
           })
         }
+=======
         $('#banner-content>li').each(function(){
           $self = $(this);
           var i = $self.index()
@@ -297,6 +299,7 @@ apiready = function() {
           $self.find('.title').empty().text(data[i]['title']);
           $self.find('img').attr('src', data[i]['bpic']);
         })
+>>>>>>> .r261
         return;
       }
       //初始化
@@ -317,10 +320,13 @@ apiready = function() {
       $('#banner-content>li').each(function(){
         $self = $(this);
         var i = $self.index()
+<<<<<<< .mine
       	$self.attr({
-          which = data[i]['room']['flashvars']? data[i]['room']['flashvars']['VideoType'] : 'VIDEO'
+=======
+        , which = data[i]['room']['flashvars']? data[i]['room']['flashvars']['VideoType'] : 'VIDEO'
         , fansTitle = data[i]['room']['fansTitle'];
         $self.attr({
+>>>>>>> .r261
            'id' : data[i]['room']['id']
           ,'name' : 'enterRooms'
         });
