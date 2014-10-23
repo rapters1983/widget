@@ -107,11 +107,11 @@ yp.ready(function() {
           return;
         }
         if(idx == 1){
-          ui.$hostList.closest('.js-result').removeClass('hidden');
-          ui.$liveList.closest('.js-result').addClass('hidden');
+          ui.$hostList.find('.js-result').removeClass('hidden');
+          ui.$liveList.find('.js-result').addClass('hidden');
         }else{
-          ui.$hostList.closest('.js-result').addClass('hidden');
-          ui.$liveList.closest('.js-result').removeClass('hidden');
+          ui.$hostList.find('.js-result').addClass('hidden');
+          ui.$liveList.find('.js-result').removeClass('hidden');
         }
       })
       //滚动到底部刷新

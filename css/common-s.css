@@ -1,9 +1,7 @@
 .f32{font-size: 16px;}
 .f26{font-size: 13px;}
 .c0{color: #000;}
-*{
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
-}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0);}
 /*========= 用到icon-font的时候统一添加icon-m 统一小图标的颜色，大小；针对不同的小图标，也统一颜色 =======*/
 .icon-m{
   font-size: 14px;
@@ -82,9 +80,7 @@
   border-radius: 4px;
   background: #1398e2;
 }
-.btn-block{
-  display: block;
-}
+.btn-block{display: block;}
 
 /*================ 主体页面样式2014-10-16 ==============================*/
 body{
@@ -102,6 +98,11 @@ body{
 .top-bar{
   height: 64px;
   background: #f6f7f8;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 .top-bar-bd{
   height: 62px;
@@ -1246,7 +1247,6 @@ body{
   top: -10px;
   margin-left: -10px;
 }
-
 /*============================ 反馈20141019 ==============================*/
 .feedback {
   height: 100%;
@@ -1553,4 +1553,31 @@ body{
   font-size: 12px;
   color: #999;
   float: right;
+}
+/*======================= 分享20141022top ========================*/
+.share-pop{
+  height: 300px;
+  width: 100%;
+  padding: 10px 8px 0;
+  background: #eee;
+  border-top: 1px solid #ccc;
+}
+/*========== 部分页面头部固定样式20141023 ===========*/
+.settings,.subscribe,.record,.search-page,.register,.day-box{
+  height: 700px;
+  padding-top: 64px;
+  overflow: auto;
+  -webkit-overflow-scrolling:touch;
+}
+.settings .top-bar,
+.subscribe .top-bar,
+.record .top-bar,
+.search-page .top-bar,
+.register .top-bar,
+.day-box .top-bar{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }

@@ -78,7 +78,7 @@ apiready = function() {
         api.openWin({
             name:'rooms'
           ,'slidBackEnabled' : false
-          , url:'rooms.html?id=' + roomid 
+          , url:'rooms.html?id=' + roomid
           // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , delay:300
           , bgColor:'#FFF'
@@ -112,6 +112,9 @@ apiready = function() {
       self.getDataIndex(URLConfig('bannerIndex', {
         'id' : +new Date()
       }), function(data) {
+
+
+
         if(data['data'] instanceof Array && data['data'].length < 1 || $.isEmptyObject(data['data'])) return;
         self.renderSlider(data['data']);
       });
@@ -241,67 +244,15 @@ apiready = function() {
     renderSlider : function(data) {
       var self = this;
       if(window.isSlided){
-        var loadedNum = $('#banner-content>li').length;
-        var i = data.length;
-        if(i < loadedNum){
-          $('#banner-content>li').each(function(){
-            $self = $(this);
-            var i = $self.index()
-            if(idx < i){
-              $self.attr({
-                 'id' : data[i]['room']['id']
-                ,'name' : 'enterRooms'
-              });
-              $self.find('.title').empty().text(data[i]['room']['title']);
-              $self.find('img').attr('src', data[i]['room']['bpic']);
-            }else{
-              $self.remove();
-              $('.dot').eq(i).remove();
-            }
-          })
-        }else{
-          for(var i= loadedNum; i<data.length; i++) {
-            htmlStr += '<li name="enterLive" id="'+data[i]['room']['id']+'">'
-                +  '<img src="'+data[i]['room']['bpic']+'" class="show-pic" />'
-                +  '<p class="title">'+data[i]['room']['title']+'</p>'
-                +  '</li>';
-          }
-          var pointerStr = '';
-          for(var i= loadedNum; i<data.length; i++) {
-            pointerStr += '<span class="dot"></span>';
-          }
-          $('#dotBox').append(pointerStr);
-          $('#banner-content').append(htmlStr);
-          $('#banner-content>li').each(function(){
-            $self = $(this);
-            var i = $self.index();
-            $self.attr({
-               'id' : data[i]['room']['id']
-              ,'name' : 'enterRooms'
-            });
-            $self.find('.title').empty().text(data[i]['room']['title']);
-            $self.find('img').attr('src', data[i]['room']['bpic']);
-          })
-        }
-        $('#banner-content>li').each(function(){
-          $self = $(this);
-          var i = $self.index()
-          $self.attr({
-             'id' : data[i]['id']
-            ,'name' : 'enterRooms'
-          });
-          $self.find('.title').empty().text(data[i]['title']);
-          $self.find('img').attr('src', data[i]['bpic']);
-        })
-        return;
+        window.mySwipe.kill();
       }
       //初始化
       var width = api.winWidth;
       var htmlStr = '';
       for(var i=0; i<data.length; i++) {
-        htmlStr += '<li name="enterLive" id="'+data[i]['room']['id']+'">'
-                +  '<img src="'+data[i]['room']['bpic']+'" class="show-pic" />'
-                +  '<p class="title">'+data[i]['room']['title']+'</p>'
+        htmlStr += '<li name="enterLive" class="swiper-slide" id="'+data[i]['room']['id']+'">'
+                +  '<img src="'+data[i]['spic']+'" class="show-pic" />'
+                +  '<p class="title">'+data[i]['title']+'</p>'
                 +  '</li>';
       }
       var pointerStr = '<span class="dot active"></span>';

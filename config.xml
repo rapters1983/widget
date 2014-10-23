@@ -30,7 +30,7 @@
   <permission name="contact"/>
   <access origin="*"/>
   <feature name="qq">
-    <param name="urlScheme" value="tencent1103382936"/>
-    <param name="apiKey" value="1103382936"/>
+    <param name="urlScheme" value="tencent101049628"/>
+    <param name="apiKey" value="101049628"/>
   </feature>
 </widget>

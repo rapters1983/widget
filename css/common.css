@@ -1130,6 +1130,9 @@ body{
 .settings {
   padding-bottom: 73px;
   font-size: 32px;
+  height: 650px;
+  padding-top: 128px;
+  overflow: auto;
 }
 .settings .title-s{
   font-size: 26px;
@@ -1237,117 +1240,7 @@ body{
   top: -19px;
   margin-left: -19px;
 }
-/* ========================================== 弹窗 ================================================= */
-.pop-box{
-  width: 520px;
-  margin-top: -100px;
-  margin-left: -260px;
-  padding: 40px;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  background: #fff;
-  border: 1px solid #00c057;
-  border-radius: 10px;
-}
-.pop-box .close-btn{
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  color: #999;
-}
-.pop-box .btn-box{
-  margin-top: 40px;
-}
-.pop-box .btn-box li{
-  float: left;
-  margin-left:30px;
-}
-/*============================================= 绑定账号 ===========================================*/
-.bind-account{
-  background: #eee;
-  height: 100%;
-  padding-top: 72px;
-}
-.bind-account ul{
-  background: #fff;
-  padding-left: 80px;
-}
-.bind-account ul li{
-  padding-right: 20px;
-  position: relative;
-  background: #fff;
-  border-bottom: 1px solid #e5e5e5;
-}
-.bind-account ul li:last-child{
-  border-bottom: none;
-}
-.bind-account ul li a{
-  display: block;
-  padding: 30px 0;
-}
-.bind-account .icon-m{
-  color: #2a97fe;
-  margin-right: 6px;
-  vertical-align: -2px;
-}
-.bind-account li span{
-  color: #878f92;
-}
-.logo-qq{
-  background: url(./logo-qq.jpg) no-repeat;
-}
-.logo-sina{
-  background: url(./logo-sina.jpg) no-repeat;
-}
-.logo-dou{
-  background: url(./logo-dou.jpg) no-repeat;
-}
-.logo-ren{
-  background: url(./logo-ren.jpg) no-repeat;
-}
-.logo-qqkj{
-  background: url(./logo-qqkj.jpg) no-repeat;
-}
-.logo-qqwb{
-  background: url(./logo-qqwb.jpg) no-repeat;
-}
-.logo-icon{
-  width: 40px;
-  height: 40px;
-  vertical-align: -10px;
-  position: absolute;
-  left: -56px;
-  z-index: 2;
-  -webkit-background-size:100% 100%;
-}
-/*============================ 反馈20141019 ==============================*/
-.feedback {
-  height: 100%;
-  background: #f6f7f8;
-}
-.feedback .bd{
-  padding: 0 15px;
-  font-size: 32px;
-}
-.feedback .bd .group{
-  margin-top: 35px;
-}
-.feedback .bd .group .til{
-  padding-left: 20px;
-  margin-bottom: 10px;
-}
-.feedback .footer-btn{
-  margin-top: 60px;
-}
-.feedback .textarea-wrap{
-  height: 260px;
-}
-.feedback .textarea-box{
-  width: 100%;
-  height: 260px;
-  padding: 30px 15px;
-}
+
 /* ==================== 每日任务20141019 ========================== */
 .task{
   height: 100%;
@@ -1625,11 +1518,57 @@ body{
   color: #999;
   float: right;
 }
-/*======================= 分享 ========================*/
+/*============================ 反馈20141019 ==============================*/
+.feedback {
+  height: 100%;
+  background: #f6f7f8;
+}
+.feedback .bd{
+  padding: 0 15px;
+  font-size: 32px;
+}
+.feedback .bd .group{
+  margin-top: 35px;
+}
+.feedback .bd .group .til{
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+.feedback .footer-btn{
+  margin-top: 60px;
+}
+.feedback .textarea-wrap{
+  height: 260px;
+}
+.feedback .textarea-box{
+  width: 100%;
+  height: 260px;
+  padding: 30px 15px;
+}
+/*======================= 分享20141022 ========================*/
 .share-pop{
   height: 300px;
   width: 100%;
   padding: 20px 15px 0;
   background: #eee;
   border-top: 1px solid #ccc;
+}
+/*========== 部分页面头部固定样式20141023 ===========*/
+.settings,.subscribe,.record,.search-page,.register,.day-box{
+  height: 700px;
+  padding-top: 128px;
+  overflow: auto;
+  -webkit-overflow-scrolling:touch;
+}
+.settings .top-bar,
+.subscribe .top-bar,
+.record .top-bar,
+.search-page .top-bar,
+.register .top-bar,
+.day-box .top-bar{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }

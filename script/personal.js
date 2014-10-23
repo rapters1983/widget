@@ -2,20 +2,8 @@
   2014.10.15
   渲染数据、修改头像
   魏露霞
-  未完成：
-  头像上传
  */
-apiready = function(){
-
-  // 页面显示时触发
-  // api.addEventListener({name:'viewappear'}, function(ret, err){
-  //   fInitInfo();
-  // });
-  // 页面消失时触发
-  // api.addEventListener({name:'viewdisappear'}, function(ret, err){
-  //   fInitInfo();
-  // });
-  
+apiready = function(){  
   var ui = {
     $btn_quit: $('#btn-quit')
   , $btn_close: $('#btn-close')
@@ -51,16 +39,10 @@ apiready = function(){
           saveToPhotoAlbum: false
         }, function(ret, err){ 
           if (ret) {
-            // var base64 = new Base64();
             var encodeBase64 = ret.base64Data.replace('data:image/png;base64,','');
-            // alert(ret.base64Data)
-            // var encodeBase64 = base64.encode(ret.base64Data);
             $.ajax({
                url: URLConfig('avatar')
-              //url: 'http://www.zhanqi.tv/api/user/upload.avatar'
             , type: 'post'
-            // , dataType: 'text/html'
-            // , timeout: 10000
             , data: {
                 'img_160_160': encodeBase64,
                 'img_160_100': encodeBase64,
@@ -85,43 +67,6 @@ apiready = function(){
                 api.alert({msg: e});
               }
             });
-            // api.showProgress({
-            //   style: 'default',
-            //   animationType: 'fade',
-            //   title: '正在上传中...',
-            //   text: '先喝杯茶...',
-            //   modal: false
-            // });
-            // api.ajax({
-            //   url: URLConfig('avatar'),
-            //   method: 'post',
-            //   dataType: 'json',
-            //   data: {
-            //     values: {
-            //       'img_160_160': encodeBase64,
-            //       'img_160_100': encodeBase64,
-            //       'img_60_60': encodeBase64,
-            //       'img_30_30': encodeBase64
-            //     }
-            //   }
-            // }, function(ret, err){
-            //   api.alert({msg: 'pic'});
-              // api.hideProgress();
-              // var urlJson = JSON.stringify(ret);
-              // api.alert({msg: urlJson});
-              // api.alert({msg: ret.code});
-              // if(ret) {
-              //   if(ret.code == 0) {
-              //     api.alert({msg: ret.message});
-              //   } else{
-              //     api.alert({msg: ret.message});
-              //   }
-              // } else{
-              //   api.alert({
-              //     msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-              //   });
-              // }
-            // });
           } else{
             api.alert({msg:err.msg});
           };
@@ -200,18 +145,15 @@ apiready = function(){
             var key = 'user';
             var user = {};
             $api.setStorage(key, user);
-            // api.execScript({
-            //   name: 'home',
-            //   script: 'fInitInfo();'
-            // });
             api.closeWin({delay:100});
           } else{
             api.alert({msg: ret.message});
           }
         } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+          api.alert({msg: '网络似乎出现了异常'});
+          // api.alert({
+          //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+          // });
         }
       });
     }

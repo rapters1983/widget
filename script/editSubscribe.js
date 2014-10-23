@@ -43,7 +43,7 @@ yp.ready(function() {
           msg: '是否放弃本次编辑？',
           buttons:[ '我再想想', '是']
         },function(ret,err){
-          if(ret.buttonIndex == 1){
+          if(ret.buttonIndex == 2){
             api.closeWin();
           }
         });
@@ -54,7 +54,7 @@ yp.ready(function() {
           msg: '保存本次编辑？',
           buttons:[ '我再想想', '保存']
         },function(ret,err){
-          if(ret.buttonIndex == 1){
+          if(ret.buttonIndex == 2){
             self.unfollow();
           }
         });
@@ -88,9 +88,10 @@ yp.ready(function() {
             api.alert({msg : ret['message']});
           }
         } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+          api.alert({msg: '网络似乎出现了异常'});
+          // api.alert({
+          //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+          // });
         }
       });
     }
@@ -123,9 +124,10 @@ yp.ready(function() {
             api.alert({msg : ret['message']});
           }
         } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+          api.alert({msg: '网络似乎出现了异常'});
+          // api.alert({
+          //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+          // });
         }
       });
     }
@@ -144,7 +146,7 @@ yp.ready(function() {
           + '<p class="order-count">'+follows+'人订阅</p></div></li>';
       }
       ui.$anchorList.empty().html(anchorHtml);
-      ui.$anchorList.append(JSON.stringify(data));
+      // ui.$anchorList.append(JSON.stringify(data));
     }
 
   };

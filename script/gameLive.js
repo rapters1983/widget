@@ -100,42 +100,58 @@ apiready = function() {
 
     getDataIndex : function(url,callback) {
       var self = this;
-      var timer = null;
-      var nDelay = 500;
-      if (!timer) {
-        timer = setTimeout(function(){
-          api.showProgress({
-            style: 'default',
-            animationType: 'fade',
-            title: '努力加载中...',
-            text: '先喝杯茶...',
-            modal: false
-          });
-        }, nDelay);
-      }
-      $.ajax({
+      // var timer = null;
+      // var nDelay = 500;
+      // if (!timer) {
+      //   timer = setTimeout(function(){
+      //     api.showProgress({
+      //       style: 'default',
+      //       animationType: 'fade',
+      //       title: '努力加载中...',
+      //       text: '先喝杯茶...',
+      //       modal: false
+      //     });
+      //   }, nDelay);
+      // }
+      // $.ajax({
+      //   url : url,
+      //   method : 'get',
+      //   dataType : 'json',
+      //   success: function(ret) {
+      //     clearTimeout(timer);
+      //     timer = null;
+      //     api.hideProgress();
+      //     if(ret) {
+      //       if(ret['code'] == 0) {
+      //         callback(ret['data']);
+      //       } else{
+      //         api.alert({msg : ret['message']});
+      //       }
+      //     } else{
+      //       api.alert({
+      //         msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+      //       });
+      //     }
+      //   }
+      // });
+      // api.refreshHeaderLoadDone();
+      yp.ajax({
         url : url,
         method : 'get',
-        dataType : 'json',
-        success: function(ret) {
-          clearTimeout(timer);
-          timer = null;
-          api.hideProgress();
-          if(ret) {
-            if(ret['code'] == 0) {
-              callback(ret['data']);
-            } else{
-              api.alert({msg : ret['message']});
-            }
+        dataType : 'json'
+      }, function(ret, err) {
+        if(ret) {
+          if(ret['code'] == 0) {
+            callback(ret['data']);
           } else{
-            api.alert({
-              msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-            });
+            api.alert({msg : ret['message']});
           }
+        } else{
+          api.alert({
+            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+          });
         }
       });
-      api.refreshHeaderLoadDone();
-
     },
 
     refleshLiveList : function(data) {

@@ -194,15 +194,33 @@ function openGameLive(){
   $('#footer-nav>li').eq(2).find('i').removeClass('icon-more-line').addClass('icon-more');
 }
 
+//点击logo返回首页并刷新
+function openMain(){
+  var i = 0;
+  var len = window.frameArr.length;
+  var newarr = [];
+  for(i; i<len; i++){
+    if(window.frameArr[i] != 'main'){
+      newarr.push(window.frameArr[i]);
+    }
+  }
+  window.frameArr = newarr;
+  //默认把live关掉
+  api.closeFrame({
+    name: 'main'
+  });
+  openTab('main');
+  changeTabBar(0);
+}
+
 
 apiready = function() {
 
   var ui = {
   }
 
-  //版本更新  IOS  统计
-  var zhanqi = api.require('zhanqiMD');
-  zhanqi.onAppStarted({});   
+  // var zhanqi = api.require('zhanqiMD'); 
+  // zhanqi.onAppStarted({});
   
   var oPage = {
     init : function() {

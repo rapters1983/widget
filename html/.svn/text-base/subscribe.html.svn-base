@@ -20,7 +20,7 @@
         <div class="top-bar">
           <div class="top-bar-bd">
             <p class="title">
-              <i class="icon-m icon-left" tapmode="active" onclick="api.closeWin()"></i>
+              <i class="icon-m icon-left" onclick="api.closeWin();"></i>
               我的订阅
             </p>
           </div>

@@ -25,7 +25,7 @@ yp.ready(function() {
   , ajaxing : 0
   , view: function() {
       var self = this;
-      self.getFollowsData();
+      // self.getFollowsData();
     }
   , listen: function() {
       var self = this;
@@ -47,7 +47,6 @@ yp.ready(function() {
         self.renderFollow(data);
       });
     }
-
   , getDataAjax: function(url,callback) {
       var self = this;
       yp.ajax({
@@ -62,9 +61,10 @@ yp.ready(function() {
             api.alert({msg : ret['message']});
           }
         } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+          api.alert({msg: '网络似乎出现了异常'});
+          // api.alert({
+          //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+          // });
         }
       });
     }

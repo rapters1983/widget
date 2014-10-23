@@ -38,6 +38,9 @@
       },
 
       view : function() {
+        //初始化内容高度
+        $('#conWrap, .settings').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height())
+
         try{
           this.setData(settings);
           if(yp.query('user')) {  //应用设置

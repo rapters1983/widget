@@ -26,162 +26,166 @@
       <div class="top-bar-line"></div>
     </div>
     <!-- top顶部 -->
-    <p id="titleName" class="title-s hidden">个人资料</p>
-    <ul id="titleArea" class="hidden">
-      <li>
-        <div class="pull-right">
-          <i class="icon-m icon-right"></i>
-        </div>
-        <span id="nickname">--</span>
-      </li>
-    </ul>
+    <div id="conWrap" style="overflow:auto;">
+      <p id="titleName" class="title-s hidden">个人资料</p>
+      <ul id="titleArea" class="hidden">
+        <li>
+          <div class="pull-right">
+            <i class="icon-m icon-right"></i>
+          </div>
+          <span id="nickname">--</span>
+        </li>
+      </ul>
 
-    <!-- 弹幕设置 -->
-    <p class="title-s">弹幕设置</p>
-    <ul>
-      <li>
-        <div id="barrageCon" class="pull-right">
-          <div class="toggle active" id="barrageSwitch">
-            <div id="napster" class="toggle-handle"></div>
-          </div>
-        </div>
-        弹幕开关
-      </li>
-      <li>
-        <div class="pull-right">
-          <div class="proportion-bg">
-            <div class="proportion-dot"></div>
-            <div class="proportion-in"></div>
-          </div>
-        </div>
-        弹幕透明度
-      </li>
-      <li>
-        <div class="clearfix">
-          <div id="size" class="pull-right screen-size">
-            <a name="big" href="javascript:;">大</a>
-            <a name="normal" href="javascript:;">中</a>
-            <a name="small" href="javascript:;">小</a>
-          </div>
-          弹幕大小
-        </div>
-        <div class="preview-size clearfix">
-          <div id="preView" class="preview-word">
-            弹幕预览，这效果怎么样？
-          </div>
-        </div>
-      </li>
-      <li class="clearfix">
-        <div id="pos" class="pull-right">
-          <div class="location-screen all-screen" name="full">
-            <div class="pic">
-              <p class="line-pic line-1"></p>
-              <p class="line-pic line-2"></p>
-              <p class="line-pic line-3"></p>
+      <!-- 弹幕设置 -->
+      <p class="title-s">弹幕设置</p>
+      <ul>
+        <li>
+          <div id="barrageCon" class="pull-right">
+            <div class="toggle active" id="barrageSwitch">
+              <div id="napster" class="toggle-handle"></div>
             </div>
-            <span name="full" class="active">全屏</span>
           </div>
-          <div class="location-screen top-screen" name="up">
-            <div class="pic">
-              <p class="line-pic line-4"></p>
+          弹幕开关
+        </li>
+        <li>
+          <div class="pull-right">
+            <div class="proportion-bg">
+              <div class="proportion-dot"></div>
+              <div class="proportion-in"></div>
             </div>
-            <span name="up">上方</span>
           </div>
-          <div class="location-screen bottom-screen" name="down">
-            <div class="pic">
-              <p class="line-pic line-5"></p>
+          弹幕透明度
+        </li>
+        <li>
+          <div class="clearfix">
+            <div id="size" class="pull-right screen-size">
+              <a name="big" href="javascript:;">大</a>
+              <a name="normal" href="javascript:;">中</a>
+              <a name="small" href="javascript:;">小</a>
             </div>
-            <span name="down">下方</span>
+            弹幕大小
           </div>
-        </div>
-        弹幕位置
-      </li>
-    </ul>
-    <!-- 弹幕设置 -->
-
-    <!-- 清晰度选择 -->
-    <p class="title-s">清晰度选择</p>
-    <ul id="definition">
-      <li name="super">
-        <div class="pull-right">
-          <i name="super" class="icon-m icon-checkmark-circle icon-radio-unchecked active"></i>
-        </div>
-        超清
-      </li>
-      <li name="hd">
-        <div class="pull-right">
-          <i name="hd" class="icon-m icon-radio-unchecked icon-checkmark-circle"></i>
-        </div>
-        高清
-      </li>
-      <li name="sd">
-        <div class="pull-right">
-          <i name="sd" class="icon-m icon-radio-unchecked icon-checkmark-circle"></i>
-        </div>
-        标清
-      </li>
-    </ul>
-    <!-- 清晰度选择 end-->
-
-    <!-- 回看功能 -->
-    <p class="title-s">回看功能</p>
-    <ul>
-      <li>
-        <div id="lookBackCon" class="pull-right">
-          <div id="lookBackSwitch" class="toggle" lookBack="true">
-            <div class="toggle-handle"></div>
+          <div class="preview-size clearfix">
+            <div id="preView" class="preview-word">
+              弹幕预览，这效果怎么样？
+            </div>
           </div>
-        </div>
-        回看开关
-      </li>
-    </ul>
-    <!-- 回看功能 end-->
+        </li>
+        <li class="clearfix">
+          <div id="pos" class="pull-right">
+            <div class="location-screen all-screen" name="full">
+              <div class="pic">
+                <p class="line-pic line-1"></p>
+                <p class="line-pic line-2"></p>
+                <p class="line-pic line-3"></p>
+              </div>
+              <span name="full" class="active">全屏</span>
+            </div>
+            <div class="location-screen top-screen" name="up">
+              <div class="pic">
+                <p class="line-pic line-4"></p>
+              </div>
+              <span name="up">上方</span>
+            </div>
+            <div class="location-screen bottom-screen" name="down">
+              <div class="pic">
+                <p class="line-pic line-5"></p>
+              </div>
+              <span name="down">下方</span>
+            </div>
+          </div>
+          弹幕位置
+        </li>
+      </ul>
+      <!-- 弹幕设置 -->
 
-    <!-- 模式选择 -->
-    <p class="title-s">模式选择</p>
-    <ul id="model">
-      <li name="video">
-        <div class="pull-right">
-          <i name="video" class="icon-m icon-checkmark-circle icon-radio-unchecked active"></i>
-        </div>
-        视频模式
-      </li>
-      <li name="text">
-        <div class="pull-right">
-          <i name="text" class="icon-m icon-checkmark-circle icon-radio-unchecked"></i>
-        </div>
-        文本模式<span class="annotation">(不接受视频和音频)</span>
-      </li>
-    </ul>
-    <!-- 模式选择 end-->
+      <!-- 清晰度选择 -->
+      <p class="title-s">清晰度选择</p>
+      <ul id="definition">
+        <li name="super">
+          <div class="pull-right">
+            <i name="super" class="icon-m icon-checkmark-circle icon-radio-unchecked active"></i>
+          </div>
+          超清
+        </li>
+        <li name="hd">
+          <div class="pull-right">
+            <i name="hd" class="icon-m icon-radio-unchecked icon-checkmark-circle"></i>
+          </div>
+          高清
+        </li>
+        <li name="sd">
+          <div class="pull-right">
+            <i name="sd" class="icon-m icon-radio-unchecked icon-checkmark-circle"></i>
+          </div>
+          标清
+        </li>
+      </ul>
+      <!-- 清晰度选择 end-->
 
-    <p id="zhanqiSuport" class="title-s hidden">支持战旗</p>
-    <ul id="zhanqiSuportArea" class="hidden">
-      <li onclick="api.openWin({name:'about-us',url:'about-us.html',delay:100,bgColor:'#FFF'});">
-        <div class="pull-right">
-          <i class="icon-m icon-right"></i>
-        </div>
-        关于我们
-      </li>
-      <li id="evaluation" class="hidden">
-        <div class="pull-right">
-          <i class="icon-m icon-right"></i>
-        </div>
-        给我评价
-      </li>
-      <li onclick="api.openWin({name:'feed-back',url:'feed-back.html',delay:100,bgColor:'#FFF'});">
-        <div class="pull-right">
-          <i class="icon-m icon-right"></i>
-        </div>
-        问题反馈
-      </li>
-    </ul>
+      <!-- 回看功能 -->
+      <p class="title-s">回看功能</p>
+      <ul>
+        <li>
+          <div id="lookBackCon" class="pull-right">
+            <div id="lookBackSwitch" class="toggle" lookBack="true">
+              <div class="toggle-handle"></div>
+            </div>
+          </div>
+          回看开关
+        </li>
+      </ul>
+      <!-- 回看功能 end-->
 
-    <div class="sub-btn">
-      <div id="subBtn" class="btn-group btn-blcok">
-        提交
+      <!-- 模式选择 -->
+      <p class="title-s">模式选择</p>
+      <ul id="model">
+        <li name="video">
+          <div class="pull-right">
+            <i name="video" class="icon-m icon-checkmark-circle icon-radio-unchecked active"></i>
+          </div>
+          视频模式
+        </li>
+        <li name="text">
+          <div class="pull-right">
+            <i name="text" class="icon-m icon-checkmark-circle icon-radio-unchecked"></i>
+          </div>
+          文本模式<span class="annotation">(不接受视频和音频)</span>
+        </li>
+      </ul>
+      <!-- 模式选择 end-->
+
+      <p id="zhanqiSuport" class="title-s hidden">支持战旗</p>
+      <ul id="zhanqiSuportArea" class="hidden">
+        <li onclick="api.openWin({name:'about-us',url:'about-us.html',delay:100,bgColor:'#FFF'});">
+          <div class="pull-right">
+            <i class="icon-m icon-right"></i>
+          </div>
+          关于我们
+        </li>
+        <li id="evaluation" class="hidden">
+          <div class="pull-right">
+            <i class="icon-m icon-right"></i>
+          </div>
+          给我评价
+        </li>
+        <li onclick="api.openWin({name:'feed-back',url:'feed-back.html',delay:100,bgColor:'#FFF'});">
+          <div class="pull-right">
+            <i class="icon-m icon-right"></i>
+          </div>
+          问题反馈
+        </li>
+      </ul>
+
+      <div class="sub-btn">
+        <div id="subBtn" class="btn-group btn-blcok">
+          提交
+        </div>
       </div>
+      
     </div>
+    
   </div>
   <!-- 设置 end-->
 </div>

@@ -20,7 +20,7 @@
         <div class="top-bar">
           <div class="top-bar-bd">
             <p class="title">
-              <i class="icon-m icon-left" tapmode="active" onclick="api.closeWin()"></i>
+              <i class="icon-m icon-left" onclick="api.closeWin()"></i>
               我的订阅
             </p>
           </div>
@@ -39,10 +39,10 @@
           <div class="module-bd">
             <div class="anchor-list">
               <ul id="anchorList">
-                '<li class="clearfix"><i class="icon-m icon-close js-unfollow" id="'+uid+'" style="padding:20px"></i>'
+               <!--  '<li class="clearfix"><i class="icon-m icon-close js-unfollow" id="'+uid+'" style="padding:20px"></i>'
               + '<img src="'+avatar+'" alt="" class="user-photo">'
               + '<div class="pull-left"><p class="user-name">'+nickname+'</p>'
-              + '<p class="order-count">'+follows+'人订阅</p></div></li>';
+              + '<p class="order-count">'+follows+'人订阅</p></div></li>'; -->
               </ul>
             </div>
           </div>

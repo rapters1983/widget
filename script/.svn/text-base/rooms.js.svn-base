@@ -315,22 +315,41 @@ apiready = function(){
             htmlStr += '<span class="name">'+ message['fromname'] +'：</span>'+content +'</li>'
           }
         }else{
-          alert([message['permission'], message['fromname']])
           switch(message['permission']) {
             case 40:  //超管
-              htmlStr += '<li class="super-dmin">'
+              if(message['level']) {
+                htmlStr += '<li class="super-dmin">'
+                      +'<span class="name"><i class="name-bg admin">超管</i><i class="name-bg grade-'+ message['level'] +'"">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'
+                      + content +'</li>'
+              }else{
+                htmlStr += '<li class="super-dmin">'
                       +'<span class="name"><i class="name-bg admin">超管</i>'+ message['fromname'] +'：</span>'
                       + content +'</li>'
+              }
+              
               break;
             case 30: //主播
-              htmlStr += '<li class="super-dmin">'
+              if(message['level']) {
+                htmlStr += '<li class="super-dmin">'
+                      +'<span class="name"><i class="name-bg anchor">主播</i><i class="name-bg grade-'+ message['level'] +'"">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'
+                      + content +'</li>'
+              }else{
+                htmlStr += '<li class="super-dmin">'
                       +'<span class="name"><i class="name-bg anchor">主播</i>'+ message['fromname'] +'：</span>'
                       + content +'</li>'
+              }
+              
               break;
             case 20:  //正式  房管
-              htmlStr += '<li class="super-dmin">'
+              if(message['level']) {
+                htmlStr += '<li class="super-dmin">'
+                      +'<span class="name"><i class="name-bg admin">房管</i><i class="name-bg grade-'+ message['level'] +'"">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'
+                      + content +'</li>'
+              }else{
+                htmlStr += '<li class="super-dmin">'
                       +'<span class="name"><i class="name-bg admin">房管</i>'+ message['fromname'] +'：</span>'
                       + content +'</li>'
+              }
               break;
             case 10:  //临时  房管
               htmlStr += '<li class="super-dmin">'
@@ -338,9 +357,15 @@ apiready = function(){
                       + content +'</li>'
               break;
             case 1:  //用户
-              htmlStr += '<li>'
-                      +'<span class="name"><i class="name-bg grade-'+ message['level'] +'"">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'
-                      + content +'</li>'
+              if(message['level']) {
+                htmlStr += '<li>'
+                  +'<span class="name"><i class="name-bg grade-'+ message['level'] +'"">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'
+                  + content +'</li>'
+              }else{
+                htmlStr += '<li>'
+                  +'<span class="name">'+ message['fromname'] +'：</span>'
+                  + content +'</li>'
+              }
               break;
             case 0:  //游客
               htmlStr += '<li>'
