@@ -113,7 +113,7 @@
               break
             case 'big':
               settings['size'] = 2;
-              $('#preView').css('font-size','30px');  //字体预览
+              $('#preView').css('font-size','28px');  //字体预览
               break;
           }
         });

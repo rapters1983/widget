@@ -78,7 +78,7 @@ apiready = function() {
         api.openWin({
             name:'rooms'
           ,'slidBackEnabled' : false
-          , url:'rooms.html?id=' + roomid + '&which=' + which + '&fansTitle=' + fansTitle
+          , url:'rooms.html?id=' + roomid 
           // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , delay:300
           , bgColor:'#FFF'
@@ -286,12 +286,8 @@ apiready = function() {
         $('#banner-content>li').each(function(){
           $self = $(this);
           var i = $self.index()
-          , which = data[i]['flashvars']? data[i]['flashvars']['VideoType'] : 'VIDEO'
-          , fansTitle = data[i]['fansTitle'];
           $self.attr({
              'id' : data[i]['id']
-            ,'which' : which
-            ,'fansTitle' : fansTitle
             ,'name' : 'enterRooms'
           });
           $self.find('.title').empty().text(data[i]['title']);
@@ -317,9 +313,6 @@ apiready = function() {
       $('#banner-content>li').each(function(){
         $self = $(this);
         var i = $self.index()
-      	$self.attr({
-          which = data[i]['room']['flashvars']? data[i]['room']['flashvars']['VideoType'] : 'VIDEO'
-        , fansTitle = data[i]['room']['fansTitle'];
         $self.attr({
            'id' : data[i]['room']['id']
           ,'name' : 'enterRooms'

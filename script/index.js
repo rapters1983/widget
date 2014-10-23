@@ -202,7 +202,7 @@ apiready = function() {
 
   //版本更新  IOS  统计
   var zhanqi = api.require('zhanqiMD');
-   zhanqi.onAppStarted({});   
+  zhanqi.onAppStarted({});   
   
   var oPage = {
     init : function() {

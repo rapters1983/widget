@@ -101,6 +101,7 @@ apiready = function(){
           ,'w' : api.frameWidth
           ,'h' : api.frameWidth*9/16
           ,'roomId' : roomId
+          ,'fixedOn' : 'rooms'
         }
 
         if(api.systemVersion.indexOf('7.') > -1 || api.systemVersion.indexOf('8.') > -1) {
@@ -113,6 +114,7 @@ apiready = function(){
           ,'y' : api.frameHeight - 50
           ,'w' : api.frameWidth
           ,'h' : 50
+          ,'fixedOn' : 'rooms'
         }
         zhanqi.showInputView(param2);
     },
@@ -313,6 +315,7 @@ apiready = function(){
             htmlStr += '<span class="name">'+ message['fromname'] +'：</span>'+content +'</li>'
           }
         }else{
+          alert([message['permission'], message['fromname']])
           switch(message['permission']) {
             case 40:  //超管
               htmlStr += '<li class="super-dmin">'
@@ -375,7 +378,7 @@ apiready = function(){
               break;
             case 1:  //用户
               htmlStr += '<li>'
-                      +'<span class="name"><i class="name-bg grade-'+ message['rank'] +'"">'+fansTitle+'</i>'+ message['fromname'] +'：</span>'
+                      +'<span class="name">'+ message['fromname'] +'：</span>'
                       + content +'</li>'
               break;
             case 0:  //游客
