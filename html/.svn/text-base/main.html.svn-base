@@ -222,7 +222,7 @@
           <div class="game-name"><i class="icon-m icon-right js-toGameLive" tapmode="active" id="0"></i>其它</div>
           <!-- 视频列表 -->
           <div class="video-list-wrap">
-            <ul class="clearfix" id="otherList">
+            <ul class="clearfix no-border" id="otherList">
               <li>
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>

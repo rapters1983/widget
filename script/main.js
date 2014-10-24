@@ -17,17 +17,10 @@ apiready = function() {
       this.listen();
     },
     refresh: 0,
+    failCount: 0,
 
     view : function() {
       var self = this;
-
-
-      // var obj = api.require('qq');
-      //   obj.shareText({
-      //       text:'testtext'
-      // });
-
-
       api.setRefreshHeaderInfo({
         visible: true,
         loadingImgae: 'widget://image/refresh-white.png',
@@ -102,10 +95,10 @@ apiready = function() {
     loadData : function() {
       var self = this;
       //设置定时器
-      var timer = null;
-      var nDelay = 500;
-      if (!timer) {
-        timer = setTimeout(function(){
+      window.timer = null;
+      window.nDelay = 500;
+      if (!window.timer) {
+        window.timer = setTimeout(function(){
           api.showProgress({
             style: 'default',
             animationType: 'fade',
@@ -114,6 +107,19 @@ apiready = function() {
             modal: false
           });
         }, nDelay);
+      }
+      window.ajaxTimer = null;
+      window.ajaxDelay = 5000;
+      if (!window.ajaxTimer) {
+        window.ajaxTimer = setTimeout(function(){
+          api.hideProgress();
+          api.refreshHeaderLoadDone();
+          api.toast({
+            msg: '连接超时',
+            duration: 2000,
+            location: 'top'
+          });
+        }, ajaxDelay);
       }
       //slider
       self.getDataIndex(URLConfig('bannerIndex', {
@@ -137,8 +143,10 @@ apiready = function() {
           {
             api.hideProgress();
             api.refreshHeaderLoadDone();
-            clearTimeout(timer);
-            timer = null;
+            clearTimeout(window.timer);
+            window.timer = null;
+            clearTimeout(window.ajaxTimer);
+            window.ajaxTimer = null;
           }
         }else{
           api.hideProgress();
@@ -198,17 +206,41 @@ apiready = function() {
         url : url,
         type : 'get',
         dataType : 'json',
+        timeout : 1000,
         success : function(data) {
           if(data) {
             if(data['code'] == 0) {
               callback(data);
             } else{
-              api.alert({msg : data['message']});
+              api.toast({
+                msg: '出错了，请重试！',
+                duration:2000,
+                location: 'top'
+              });
             }
           } else{
-            api.alert({
-              msg:'网络似乎出现了异常'
+            api.toast({
+              msg: '数据异常，请重试！',
+              duration:2000,
+              location: 'top'
             });
+          }
+        },
+        error: function() {
+          self.failCount++;
+          self.loadData();
+          if(self.failCount == 3){
+            clearTimeout(window.timer);
+            window.timer = null;
+            clearTimeout(window.ajaxTimer);
+            window.ajaxTimer = null;
+            api.hideProgress();
+            api.toast({
+              msg: '网络连接失败',
+              duration:2000,
+              location: 'top'
+            });
+            self.failCount = 0;
           }
         }
       });
@@ -265,7 +297,7 @@ apiready = function() {
           spic = data[i]['room']['bpic'];
           title = data[i]['room']['title'];
         }
-        htmlStr += '<li name="enterLive" id="'+ id +'">'
+        htmlStr += '<li name="enterRooms" id="'+ id +'">'
                 +  '<img src="'+ spic +'" class="show-pic" />'
                 +  '<p class="title">'+ title +'</p>'
                 +  '</li>';

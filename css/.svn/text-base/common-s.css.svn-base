@@ -1,6 +1,7 @@
 .f32{font-size: 16px;}
 .f26{font-size: 13px;}
 .c0{color: #000;}
+.no-border{border: none !important;}
 *{-webkit-tap-highlight-color:rgba(0,0,0,0);}
 /*========= 用到icon-font的时候统一添加icon-m 统一小图标的颜色，大小；针对不同的小图标，也统一颜色 =======*/
 .icon-m{
@@ -806,6 +807,7 @@ body{
   color: #ccc;
 }
 .search-page .search-bg .input-search{
+  width: 90%;
   line-height: 15px;
   font-size: 14px;
   color: #999;

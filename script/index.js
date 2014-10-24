@@ -22,7 +22,7 @@ function openFollows(){
             subType: 'from_bottom',
             duration: 300
           },
-          pageParam: {name: 'home'}
+          pageParam: {name: 'subscribe'}
         });
       }
     });
@@ -35,13 +35,42 @@ function openFollows(){
     });
   }
 }
+
 function openSearch(){
   api.openWin({name:'search',url:'./html/search.html',delay:0,bgColor:'#FFF'});
 }
 
 //打开历史记录
 function openHistory(){
-  api.openWin({name:'history',url:'./html/history.html',delay:0,bgColor:'#FFF'});
+  var user = $api.getStorage('user');
+  if(isEmptyObject(user)) {
+    api.confirm({
+      msg: '您尚未登录，是否现在登录？',
+      buttons:[ '取消', '登录']
+    },function(ret,err){
+      if(ret.buttonIndex == 2){
+        api.openWin({
+          name:'landing',
+          url:'./html/landing.html',
+          delay:100,
+          bgColor:'#FFF',
+          animation: {
+            type: 'movein',
+            subType: 'from_bottom',
+            duration: 300
+          },
+          pageParam: {name: 'home'}
+        });
+      }
+    });
+  } else{
+    api.openWin({
+      name: 'history',
+      url: './html/history.html',
+      delay: 300,
+      bgColor: '#FFF'
+    });
+  }
 }
 
 
@@ -73,7 +102,9 @@ function openTab(type, pageParam){
   // if(api.systemType === 'android') {
   //   height = height - 25;
   // }
-  var height = (api.winHeight*window.devicePixelRatio - $('#head').height() - $('#footer').height())/window.devicePixelRatio;
+  var height = (api.winHeight*window.devicePixelRatio - $('#head').height() - $('#footer').height())/window.devicePixelRatio - 1;
+  //1 是底部线框
+
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';
@@ -251,8 +282,8 @@ apiready = function() {
   var ui = {
   }
 
-  // var zhanqi = api.require('zhanqiMD'); 
-  // zhanqi.onAppStarted({});
+  var zhanqi = api.require('zhanqiMD'); 
+  zhanqi.onAppStarted({});
   var oPage = {
     init : function() {
       this.view();

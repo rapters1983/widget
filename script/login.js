@@ -44,11 +44,6 @@ apiready = function(){
         var iaf = api.require('qq');
         iaf.login(function(ret,err){
           if(ret.status) {
-            // api.alert({
-            //          title: 'id和token',
-            //          msg: ret.openId+'*'+ret.accessToken,
-            //          buttons: ['确定1']
-            //          });
             yp.ajax({
               url: URLConfig('qqLoginUrl')
             , method: 'post'
@@ -61,58 +56,13 @@ apiready = function(){
               }
             }, function(ret, error) {
               if(ret) {
-                api.alert({msg: JSON.stringify(ret)});
                 if(ret.code == 0) {
-                  var key = 'user';
-                  var user = ret["data"];
-                  $api.setStorage(key, user);
-                  // if(api.pageParam) {
-                    // api.execScript({
-                    //   name: 'home',
-                    //   script: 'fInitInfo();'
-                    // });
-                  // }
-                  // if(api.pageParam) {
-                  //   api.execScript({
-                  //     name: api.pageParam.name,
-                  //     script: 'fInitInfo();'
-                  //   });
-                  // }
-                  if(yp.query('isRoom')) {
-                    var userParam = {
-                      'userName' : user['nickname'],
-                      'userAvatar' : user['avatar'],
-                      'token' : user['token']
-                    }
-                    $api.setStorage('userParam',userParam);
-                    api.execScript({
-                      name : 'rooms',
-                      script : 'loginBackScript();'
-                    });
-                    var zhanqi = api.require('zhanqiMD');
-                    zhanqi.onBackToLiveScene({});
-                  }
-                  api.closeWin({
-                    name: 'register',
-                    animation: {
-                      type: 'none'
-                    }
-                  });
-                  api.closeWin({
-                    animation: {
-                      type: 'reveal',
-                      subType: 'from_top',
-                      duration: 300
-                    }
-                  });
+                  self.fLoginCallback(ret['data']);
                 } else{
                   api.alert({msg: ret.message});
                 }
               } else {
                 api.alert({msg: '网络似乎出现了异常'});
-                // api.alert({
-                //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-                // });
               }
             });
           } else{
@@ -230,73 +180,58 @@ apiready = function(){
         return;
       }
 
-      api.showProgress({
-        style: 'default',
-        animationType: 'fade',
-        title: '正在登陆中...',
-        text: '先喝杯茶...',
-        modal: false
-      });
-      api.ajax({
-        url : URLConfig('login'),
-        method : 'post',
-        dataType : 'json',
-        data: {
+      yp.ajax({
+        url : URLConfig('login')
+      , method : 'post'
+      , dataType : 'json'
+      , data: {
           values: {'account' : accountCont, 'password' : pwdCont}
         }
-      }, function(ret, err) {
-        api.hideProgress();
+      }, function(ret, error) {
         if(ret) {
           if(ret.code == 0) {
-            var key = 'user';
-            var user = ret["data"];
-            $api.setStorage(key, user);
-            $api.setStorage('password', pwdCont);
-            // if(api.pageParam) {
-              // api.execScript({
-              //   name: 'home',
-              //   script: 'fInitInfo();'
-              // });
-            // }
-            // if(api.pageParam) {
-            //   api.execScript({
-            //     name: api.pageParam.name,
-            //     script: 'fInitInfo();'
-            //   });
-            // }
-            if(yp.query('isRoom')) {
-              var userParam = {
-                'userName' : user['nickname'],
-                'userAvatar' : user['avatar'],
-                'token' : user['token']
-              }
-              $api.setStorage('userParam',userParam);
-              api.execScript({
-                name : 'rooms',
-                script : 'loginBackScript();'
-              });
-            }
-            api.closeWin({
-              name: 'register',
-              animation: {
-                type: 'none'
-              }
-            });
-            api.closeWin({
-              animation: {
-                type: 'reveal',
-                subType: 'from_top',
-                duration: 300
-              }
-            });
+            self.fLoginCallback(ret['data'], pwdCont);
           } else{
             api.alert({msg: ret.message});
           }
-        } else{
+        } else {
           api.alert({msg: '网络似乎出现了异常'});
-          // api.alert({
-          //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          // });
+        }
+      });
+    },
+    // 登陆回调
+    fLoginCallback: function(data, pwdCont) {
+      var self = this;
+      var user = data;
+      if(!!user) {
+        $api.setStorage('user', user);
+      }
+      if(!!pwdCont) {
+        $api.setStorage('password', pwdCont);
+      }
+      if(yp.query('isRoom')) {
+        var userParam = {
+          'userName' : user['nickname'],
+          'userAvatar' : user['avatar'],
+          'token' : user['token']
+        }
+        $api.setStorage('userParam',userParam);
+        api.execScript({
+          name : 'rooms',
+          script : 'loginBackScript();'
+        });
+      }
+      api.closeWin({
+        name: 'landing',
+        animation: {
+          type: 'none'
+        }
+      });
+      api.closeWin({
+        animation: {
+          type: 'reveal',
+          subType: 'from_top',
+          duration: 300
         }
       });
     }

@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
   <meta content="telephone=no" name="format-detection" />
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/font-icon.css">
   <link rel="stylesheet" href="../css/api.css">
   <title>分享</title>
@@ -18,16 +16,16 @@
   <!-- 分享弹层 -->
   <div class="live-pop">
     <div class="title">分享至</div>
-    <ul class="share-list clearfix">
-      <li>
+    <ul id="shareList" class="share-list clearfix">
+      <li name="sina" class="hidden">
         <i class="icon-sina-pic"></i>
         <p>新浪微博</p>
       </li>
-      <li>
+      <li name="qq">
         <i class="icon-qq-pic"></i>
         <p>QQ</p>
       </li>
-      <li>
+      <li name="weixin" class="hidden">
         <i class="icon-weixin-pic"></i>
         <p>微信</p>
       </li>
@@ -36,6 +34,11 @@
   <!-- 分享弹层 end-->
 </div>
 </body>
+<script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/api.js"></script>
+<script src="../script/common.js"></script>
+<script src="../script/share.js"></script>
+</html>
 </html>
 
 

@@ -7,7 +7,6 @@ apiready = function(){
 
   // 页面显示时触发
   // api.addEventListener({name:'viewappear'}, function(ret, err){
-    
   // });
   // 页面消失时触发
   api.addEventListener({name:'viewdisappear'}, function(ret, err){
@@ -195,64 +194,22 @@ apiready = function(){
         params[paramArray[i]['name']] = paramArray[i]['value'];
       }
 
-      api.showProgress({
-        style: 'default',
-        animationType: 'fade',
-        title: '正在注册中...',
-        text: '先喝杯茶...',
-        modal: false
-      });
-      api.ajax({
-        url: url,
-        method: 'post',
-        dataType: 'json',
-        data: {
+      yp.ajax({
+        url : url
+      , method : 'post'
+      , dataType : 'json'
+      , data: {
           values: params
         }
-      }, function(ret, err){
-        api.hideProgress();
+      }, function(ret, error) {
         if(ret) {
           if(ret.code == 0) {
-            var key = 'user';
-            var user = ret["data"];
-            $api.setStorage(key, user);
-            $api.setStorage('password', params.password);
-            // if(api.pageParam) {
-            //   api.execScript({
-            //     name: api.pageParam.name,
-            //     script: 'fInitInfo();'
-            //   });
-            // }
-            if(yp.query('isRoom')) { //直播间
-              var zhanqi = api.require('zhanqiMD');
-              zhanqi.onLoginSuccess({
-                 'userName': user['nickname']
-                ,'userAvatar':user['avatar']
-                ,'token':user['token']
-              });
-
-              zhanqi.onBackToLiveScene({});
-            }
-            api.closeWin({
-              name: 'landing',
-              animation: {
-                type: 'none'
-              }
-            });
-            api.closeWin({
-              animation: {
-                type: 'reveal',
-                subType: 'from_top',
-                duration: 300
-              }
-            });
+            self.fLoginCallback(ret['data'], params.password);
           } else{
             api.alert({msg: ret.message});
           }
-        } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+        } else {
+          api.alert({msg: '网络似乎出现了异常'});
         }
       });
     }
@@ -338,6 +295,38 @@ apiready = function(){
       }
 
       return oResult;
+    }
+    // 登陆回调
+  , fLoginCallback: function(data, pwdCont) {
+      var self = this;
+      var user = data;
+      if(!!user) {
+        $api.setStorage('user', user);
+      }
+      if(!!pwdCont) {
+        $api.setStorage('password', pwdCont);
+      }
+      if(yp.query('isRoom')) { //直播间
+        var zhanqi = api.require('zhanqiMD');
+        zhanqi.onLoginSuccess({
+           'userName': user['nickname']
+          ,'userAvatar':user['avatar']
+          ,'token':user['token']
+        });
+      }
+      api.closeWin({
+        name: 'landing',
+        animation: {
+          type: 'none'
+        }
+      });
+      api.closeWin({
+        animation: {
+          type: 'reveal',
+          subType: 'from_top',
+          duration: 300
+        }
+      });
     }
   };
   oPage.init();

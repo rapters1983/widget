@@ -70,7 +70,8 @@ apiready = function(){
               }
             });
           } else{
-            api.alert({msg:err.msg});
+            // 取消相册时不需要提示
+            // api.alert({msg:err.msg});
           };
         });
       });

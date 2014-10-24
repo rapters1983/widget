@@ -27,11 +27,6 @@ apiready = function() {
         $(this).addClass('active').siblings('li.active').removeClass('active');
       });
 
-      // 个人资料
-      // $('#personal').on('click', function() {
-      //   api.openWin({name:'personal',url:'personal.html',delay:100,bgColor:'#FFF'});
-      // });
-
       // 我的订阅
       $('#records').on('click', function() {
         function isEmptyObject(o){
@@ -80,22 +75,6 @@ apiready = function() {
         }
       });
 
-      // 充值
-      // $('#recharge').on('click', function() {
-      //   var name = '';
-      //   var url = '';
-      //   if((api.systemType.toLowerCase()).indexOf('ios') > -1) {
-      //     // 打开ios充值页面
-      //     name = "recharge-ios";
-      //     url = 'recharge-ios.html';
-      //   } else{
-      //     // 打开安卓充值页面
-      //     name = "recharge-android";
-      //     url = 'recharge-android.html';
-      //   }
-      //   api.openWin({name: name,url: url,delay:100,bgColor:'#FFF'});
-      // });
-
       // 每日任务
       $('#task').on('click', function() {
         function isEmptyObject(o){
@@ -121,22 +100,6 @@ apiready = function() {
       $('#feed-back').on('click', function() {
         api.openWin({name:'feed-back',url:'feed-back.html',delay:100,bgColor:'#FFF'});
       });
-
-      // 登陆
-      // $('#btn-login').on('click', function() {
-      //   api.openWin({
-      //     name:'landing',
-      //     url:'landing.html',
-      //     delay:100,
-      //     bgColor:'#FFF',
-      //     animation: {
-      //       type: 'movein',
-      //       subType: 'from_bottom',
-      //       duration: 300
-      //     },
-      //     pageParam: {name: 'home'}
-      //   });
-      // });
 		}
 	}
 	oPage.init();
@@ -162,16 +125,7 @@ function fInitInfo() {
     fGetTask();
     // 我的钱包
     $('#wealthInfo').html('查看送礼充值记录');
-    // 头像，昵称，设置初始化
-    // $('#photo').attr('src', user.avatar + '-normal');
-    // $('#personal').text(user.account);
-    // $('#header .js-setting').show();
-    // $('#box-uncenter').hide();
-    // $('#box-center').show();
   } else{
-    // $('#header .js-setting').hide();
-    // $('#box-uncenter').show();
-    // $('#box-center').hide();
     $('#recordsInfo').html('登录后可查看您订阅的主播');
     $('#taskInfo').html('登录后可通过任务获得战旗币');
     $('#historyInfo').html('登录后可查看您观看历史');

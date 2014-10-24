@@ -12,6 +12,7 @@ apiready = function() {
     pageNow : 1,
     ajaxing : 0,
     refresh: 0,
+    failCount: 0,
 
     view : function() {
       var self = this;
@@ -40,11 +41,6 @@ apiready = function() {
           if(self.ajaxing == 1){
             return;
           }
-          api.toast({
-            msg: '加载中',
-            duration: 500,
-            location: 'top'
-          });
           self.refresh = 0;
           self.loadData();
         }
@@ -56,7 +52,7 @@ apiready = function() {
         api.openWin({
             name:'rooms'
           ,'slidBackEnabled' : false
-          , url:'rooms.html?id=' + roomid 
+          , url:'rooms.html?id=' + roomid
           // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , delay:300
           , bgColor:'#FFF'
@@ -73,7 +69,7 @@ apiready = function() {
         return;
       }
       self.ajaxing = 1;
-      var id = $api.getStorage('gameId') || 6;
+      var id = $api.getStorage('gameId') || 10;
 
       self.getDataIndex(URLConfig('gameLive', {
       	'id': id
@@ -89,69 +85,113 @@ apiready = function() {
               location: 'top'
             });
           }
-			  }
-        self.renderLiveData(data['rooms']);
+			  }else{
+          self.renderLiveData(data['rooms']);
+        }
         self.pageNow = self.pageNow +1;
         if(20 == data['rooms'].length){
         	self.ajaxing = 0;  												//返回不足20条则表示加载完毕
+        }else{
+          api.toast({
+            msg: '已经加载完啦',
+            duration:2000,
+            location: 'top'
+          });
         }
       });
     },
 
     getDataIndex : function(url,callback) {
       var self = this;
-      // var timer = null;
-      // var nDelay = 500;
-      // if (!timer) {
-      //   timer = setTimeout(function(){
-      //     api.showProgress({
-      //       style: 'default',
-      //       animationType: 'fade',
-      //       title: '努力加载中...',
-      //       text: '先喝杯茶...',
-      //       modal: false
-      //     });
-      //   }, nDelay);
-      // }
-      // $.ajax({
-      //   url : url,
-      //   method : 'get',
-      //   dataType : 'json',
-      //   success: function(ret) {
-      //     clearTimeout(timer);
-      //     timer = null;
-      //     api.hideProgress();
-      //     if(ret) {
-      //       if(ret['code'] == 0) {
-      //         callback(ret['data']);
-      //       } else{
-      //         api.alert({msg : ret['message']});
-      //       }
-      //     } else{
-      //       api.alert({
-      //         msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-      //       });
-      //     }
-      //   }
-      // });
-      // api.refreshHeaderLoadDone();
-      yp.ajax({
+      var timer = null;
+      var nDelay = 500;
+      if (!timer) {
+        timer = setTimeout(function(){
+          api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+          });
+        }, nDelay);
+      }
+      var ajaxTimer = null;
+      var ajaxDelay = 5000;
+      if (!ajaxTimer) {
+        ajaxTimer = setTimeout(function(){
+          api.hideProgress();
+          api.toast({
+            msg: '连接超时',
+            duration:2000,
+            location: 'top'
+          });
+        }, ajaxDelay);
+      }
+      $.ajax({
         url : url,
         method : 'get',
-        dataType : 'json'
-      }, function(ret, err) {
-        if(ret) {
-          if(ret['code'] == 0) {
-            callback(ret['data']);
+        dataType : 'json',
+        success: function(ret) {
+          clearTimeout(timer);
+          timer = null;
+          clearTimeout(ajaxTimer);
+          ajaxTimer = null;
+          api.hideProgress();
+          if(ret) {
+            if(ret['code'] == 0) {
+              callback(ret['data']);
+            } else{
+              api.toast({
+                msg: '出错了，请重试！',
+                duration:2000,
+                location: 'top'
+              });
+            }
           } else{
-            api.alert({msg : ret['message']});
+            api.toast({
+              msg: '数据异常，请重试！',
+              duration:2000,
+              location: 'top'
+            });
           }
-        } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+        },
+        error: function() {
+          self.failCount++;
+          self.loadData();
+          if(self.failCount == 3){
+            clearTimeout(timer);
+            timer = null;
+            clearTimeout(ajaxTimer);
+            ajaxTimer = null;
+            api.hideProgress();
+            api.toast({
+              msg: '网络连接失败',
+              duration:2000,
+              location: 'top'
+            });
+            self.failCount = 0;
+          }
         }
       });
+      api.refreshHeaderLoadDone();
+      // yp.ajax({
+      //   url : url,
+      //   method : 'get',
+      //   dataType : 'json'
+      // }, function(ret, err) {
+      //   if(ret) {
+      //     if(ret['code'] == 0) {
+      //       callback(ret['data']);
+      //     } else{
+      //       api.alert({msg : ret['message']});
+      //     }
+      //   } else{
+      //     api.alert({
+      //       msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+      //     });
+      //   }
+      // });
     },
 
     refleshLiveList : function(data) {

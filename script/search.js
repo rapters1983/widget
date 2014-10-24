@@ -267,7 +267,7 @@ yp.ready(function() {
       var hostHtml = '';
       for(var i=0; i<data.length; i++) {
         var spic = data[i]['spic'];
-        var id = data[i]['id'];
+        var id = data[i]['id'].split('room-')[1];
         var avatar = data[i]['avatar'] + '-normal';
         var title = data[i]['title'];
         var nickname = data[i]['nickname'];
@@ -292,8 +292,8 @@ yp.ready(function() {
       var hostHtml = '';
       for(var i=0; i<data.length; i++) {
         var spic = data[i]['spic'];
-        var id = data[i]['id'];
-        var avatar = data[i]['avatar'] + '-normal';
+        var id = data[i]['id'].split('room-')[1];
+        var avatar = data[i]['avatar'] + '-big';
         var title = data[i]['title'];
         var nickname = data[i]['nickname'];
         var online = data[i]['docTag']['online'];

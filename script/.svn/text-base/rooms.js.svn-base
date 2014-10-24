@@ -497,7 +497,7 @@ apiready = function(){
   window.onBtnBack = function() {
     api.closeWin();
   }
-  
+  //打开礼物界面  
   window.onGiftBtnPressed = function() {
       api.openFrame({
         name: 'gift',
@@ -509,6 +509,29 @@ apiready = function(){
             h:330
         },
         pageParam: {name: 'test'},
+        bounces: true,
+        opaque: false,
+        bgColor: 'rgba(0,0,0,0)',
+        vScrollBarEnabled:true,
+        hScrollBarEnabled:true
+    });
+  }
+
+
+  //打开分享界面
+  window.onShareBtnPressed = function(data) {
+    if(typeof data == 'string')
+      data = eval('('+data+')');
+      api.openFrame({
+        name: 'share',
+        url: '../html/share.html?id='+yp.query('id'),
+        rect:{
+            x:0,
+            y:api.frameHeight - 330 - 50,
+            w:api.frameWidth,
+            h:330
+        },
+        pageParam: {'domain' : data['domain'], 'title' : data['title'], 'imgUrl' : data['bpic']},
         bounces: true,
         opaque: false,
         bgColor: 'rgba(0,0,0,0)',
@@ -560,6 +583,10 @@ function sendGiftBack(){
 function closeGiftFrame() {
     api.closeFrame({
      name: 'gift'
+     });
+
+    api.closeFrame({
+     name: 'share'
      });
 }
 

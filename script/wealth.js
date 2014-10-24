@@ -6,7 +6,7 @@
 
 // 参数配置
 var oPageConfig = {
-  pageSize: 10
+  pageSize: 30
 , stime: ''
 , etime: ''
 , stype: 'charge'
@@ -35,6 +35,8 @@ function fInitInfo() {
   oPageConfig.isEnding = false;
   oPageConfig.isNull = false;
   oPageConfig.isAjax = false;
+  $(window).scrollTop(0);
+  $('#content').empty();
   fLoadData();
 }
 // 加载数据
@@ -104,62 +106,117 @@ function fGetDataIndex(url, callback) {
 // 渲染数据
 function fRenderGameData(data) {
   var htmlStr = '';
+  var scontinuehtml = '';
   if(oPageConfig.isNull) {
     htmlStr = '<div class="record-no">暂无记录</div>';
   } else{
     var odata = fHashData(data);
     for(var d in odata) {
-      htmlStr += '<div class="group"><div class="til">' + d + '</div><ul class="record-list">';
-      for(var i = 0, l = odata[d].length; i < l; i++) {
-        var order = odata[d][i];
-        if(oPageConfig.stype == 'charge') {
-          var status = '';
-          switch(order['status']){
-            case -1:
-              status = '<p class="error">查询失败</p>'
-              break;
-            case 0:
-              status = '<p class="error">充值失败</p>';
-              break;
-            case 1:
-              status = '<p class="error">发货失败</p>'
-              break;
-            case 2:
-              status = '<p>充值成功</p>'
-              break;
+      if(odata[d].bcontinue) {
+        for(var i = 0, l = odata[d]['list'].length; i < l; i++) {
+          var order = odata[d]['list'][i];
+          if(oPageConfig.stype == 'charge') {
+            var status = '';
+            switch(order['status']){
+              case -1:
+                status = '<p class="error">查询失败</p>'
+                break;
+              case 0:
+                status = '<p class="error">充值失败</p>';
+                break;
+              case 1:
+                status = '<p class="error">发货失败</p>'
+                break;
+              case 2:
+                status = '<p>充值成功</p>'
+                break;
+            }
+            scontinuehtml += '<li>'+
+                          '<div class="state">'+
+                            '<p class="error">' + status + '</p>'+
+                            '<p>' + fGetTimeFormat(order['dateline']) + '</p>'+
+                          '</div>'+
+                          '<p class="count">充值<span class="money">' + order['totalFee'] + '</span>元--'+ order['insitDesc'] +'</p>'+
+                          '<p class="mark">' + order['orderId'] + '</p>'+
+                        '</li>';
+          } else{
+            scontinuehtml += '<li>'+
+              '<p class="count">'+ oPageConfig.username +'*<span class="money">' + order['count'] + '</span></p>'+
+              '<p class="mark"><span class="time">' + fGetTimeFormat(order['dateline']) + '</span>送给' + order['nickname'] + '</p>'+
+            '</li>';
           }
-          htmlStr += '<li>'+
-                        '<div class="state">'+
-                          '<p class="error">' + status + '</p>'+
-                          '<p>' + fGetTimeFormat(order['dateline']) + '</p>'+
-                        '</div>'+
-                        '<p class="count">充值<span class="money">' + order['totalFee'] + '</span>元--'+ order['insitDesc'] +'</p>'+
-                        '<p class="mark">' + order['orderId'] + '</p>'+
-                      '</li>';
-        } else{
-          htmlStr += '<li>'+
-            '<p class="count">'+ oPageConfig.username +'*<span class="money">' + order['count'] + '</span></p>'+
-            '<p class="mark"><span class="time">' + fGetTimeFormat(order['dateline']) + '</span>送给' + order['nickname'] + '</p>'+
-          '</li>';
         }
+      } else{
+        htmlStr += '<div class="group"><div class="til">' + d + '</div><ul class="record-list">';
+        for(var i = 0, l = odata[d]['list'].length; i < l; i++) {
+          var order = odata[d]['list'][i];
+          if(oPageConfig.stype == 'charge') {
+            var status = '';
+            switch(order['status']){
+              case -1:
+                status = '<p class="error">查询失败</p>'
+                break;
+              case 0:
+                status = '<p class="error">充值失败</p>';
+                break;
+              case 1:
+                status = '<p class="error">发货失败</p>'
+                break;
+              case 2:
+                status = '<p>充值成功</p>'
+                break;
+            }
+            htmlStr += '<li>'+
+                          '<div class="state">'+
+                            '<p class="error">' + status + '</p>'+
+                            '<p>' + fGetTimeFormat(order['dateline']) + '</p>'+
+                          '</div>'+
+                          '<p class="count">充值<span class="money">' + order['totalFee'] + '</span>元--'+ order['insitDesc'] +'</p>'+
+                          '<p class="mark">' + order['orderId'] + '</p>'+
+                        '</li>';
+          } else{
+            htmlStr += '<li>'+
+              '<p class="count">'+ oPageConfig.username +'*<span class="money">' + order['count'] + '</span></p>'+
+              '<p class="mark"><span class="time">' + fGetTimeFormat(order['dateline']) + '</span>送给' + order['nickname'] + '</p>'+
+            '</li>';
+          }
+        }
+        htmlStr += '</ul></div>';
       }
-      htmlStr += '</ul></div>';
     }
   }
+  $('#content .group:last-child').find('ul').append(scontinuehtml);
   $('#content').append(htmlStr);
 }
 // hash
 function fHashData(data) {
   var odata = {};
+  var $lastGroup = $('#content .group:last-child').find('.til');
   for(var i = 0, l = data.length; i < l; i++) {
-    var s = fGetYMDFormat(data[i]['dateline']);
+    var one = data[i];
+    var s = fGetYMDFormat(one['dateline']);
     if(odata[s]) {
-      odata[s].push(data[i]);
+      odata[s]['list'].push(one);
     } else{
-      odata[s] = [data[i]];
+      odata[s] = {
+        list: [one]
+      };
+    }
+    if(fTrimStr(s) == fTrimStr($lastGroup.text())) {
+      // 跟页面列表的最后一个时间相同
+      odata[s]['bcontinue'] = true;
+    } else{
+      odata[s]['bcontinue'] = false;
     }
   }
   return odata;
+}
+// 去除空格
+function fTrimStr(cont){
+  if (cont == null) {
+    return cont;
+  }
+  return cont = cont.replace(/^\s+|\s+$/g,"");
 }
 // 获取时间，格式：小时:分钟
 function fGetTimeFormat(time) {

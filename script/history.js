@@ -31,21 +31,27 @@ apiready = function() {
             name:'rooms'
           ,'slidBackEnabled' : false
           , url:'rooms.html?id=' + roomid
-          // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , delay:300
           , bgColor:'#FFF'
         });
 
       });
     },
-
     getDataHistory : function() {
       var self = this;
+      api.showProgress({
+        style: 'default',
+        animationType: 'fade',
+        title: '正在登陆中...',
+        text: '先喝杯茶...',
+        modal: false
+      });
       $.ajax({
         url : URLConfig('history'),
         type : 'get',
         dataType : 'json',
         success : function(data) {
+          api.hideProgress();
           if(data) {
             if(data['code'] == 0) {
               self.renderData(data['data']);
@@ -59,37 +65,36 @@ apiready = function() {
           }
         },
         error: function() {
+          api.hideProgress();
           alert('error')
         }
       });
 
     },
-
-
     renderData : function(data) {
       var dataArr = [];
       $.each(data,  function(key, val) {
         dataArr.push(val);
       });
 
-      var htmlStr = '', i= 0;
-      while(dataArr[i]) {
-        htmlStr += '<li id="'+dataArr[i]['id']+'" name="enterRooms">'
-        +'<img src="'+dataArr[i]['spic']+'" alt="" class="game-pic">'
-        +'<div class="til">'+dataArr[i]['title']+'</div>'
-        +'<div class="detail clearfix">'
-        +'<span class="audience"><i class="icon-m icon-spectator"></i>'+ (dataArr[i]['online']?dataArr[i]['online'] : 0)+'</span>'
-        +'<p class="anchor"><i class="icon-m icon-boy"></i>'+dataArr[i]['nickname']+'</p>'
-        +'</div>'
-        +'</li>';
-        ++i;
+      var htmlStr = '', i = 0;
+      if(!dataArr.length) {
+        htmlStr = '暂时无记录';
+      } else{
+        while(dataArr[i]) {
+          htmlStr += '<li id="'+dataArr[i]['id']+'" name="enterRooms">'
+          +'<img src="'+dataArr[i]['spic']+'" alt="" class="game-pic">'
+          +'<div class="til">'+dataArr[i]['title']+'</div>'
+          +'<div class="detail clearfix">'
+          +'<span class="audience"><i class="icon-m icon-spectator"></i>'+ (dataArr[i]['online']?dataArr[i]['online'] : 0)+'</span>'
+          +'<p class="anchor"><i class="icon-m icon-boy"></i>'+dataArr[i]['nickname']+'</p>'
+          +'</div>'
+          +'</li>';
+          ++i;
+        }
       }
-
       ui.$historyList.html(htmlStr);
-
     }
-
-
 	}
 	oPage.init();
 }
