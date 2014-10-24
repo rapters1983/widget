@@ -81,7 +81,7 @@ apiready = function(){
         api.openWin({
           name:'editNickname',
           url:'editNickname.html',
-          delay:100,
+          delay:0,
           bgColor:'#FFF',
           animation: {
             type: 'movein',
@@ -96,7 +96,7 @@ apiready = function(){
         api.openWin({
           name:'editSex',
           url:'editSex.html',
-          delay:100,
+          delay:0,
           bgColor:'#FFF',
           animation: {
             type: 'movein',
@@ -112,7 +112,7 @@ apiready = function(){
           api.openWin({
             name:'editPhone',
             url:'editPhone.html',
-            delay:100,
+            delay:0,
             bgColor:'#FFF',
             animation: {
               type: 'movein',
@@ -148,7 +148,7 @@ apiready = function(){
             var key = 'user';
             var user = {};
             $api.setStorage(key, user);
-            api.closeWin({delay:100});
+            api.closeWin({delay:0});
           } else{
             api.alert({msg: ret.message});
           }

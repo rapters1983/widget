@@ -145,12 +145,12 @@
 
     // 个人资料
     $('#personal').on('click', function() {
-      api.openWin({name:'personal',url:'personal.html',delay:100,bgColor:'#FFF'});
+      api.openWin({name:'personal',url:'personal.html',delay:0,bgColor:'#FFF'});
     });
 
     // 头像
     $('#photo').on('click', function() {
-      api.openWin({name:'personal',url:'personal.html',delay:100,bgColor:'#FFF'});
+      api.openWin({name:'personal',url:'personal.html',delay:0,bgColor:'#FFF'});
     });
 
     // 充值
@@ -166,12 +166,12 @@
         name = "recharge-android";
         url = 'recharge-android.html';
       }
-      api.openWin({name: name,url: url,delay:100,bgColor:'#FFF'});
+      api.openWin({name: name,url: url,delay:0,bgColor:'#FFF'});
     });
 
     // 应用设置
     $('.js-setting').on('click', function() {
-      api.openWin({name:'setting',url:'settings.html?user=true',delay:100,bgColor:'#FFF'});
+      api.openWin({name:'setting',url:'settings.html?user=true',delay:0,bgColor:'#FFF'});
     });
 
     // 登陆
@@ -179,7 +179,7 @@
       api.openWin({
         name:'landing',
         url:'landing.html',
-        delay:100,
+        delay:0,
         bgColor:'#FFF',
         animation: {
           type: 'movein',

@@ -12,7 +12,7 @@
   <title>充值记录</title>
   <style>
     html, body{
-      background-color: transparent; 
+      background-color: transparent !important; 
     }
     .record{
       background: #000;
@@ -46,6 +46,7 @@
 </body>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script src="../script/api.js"></script>
+<script src="../script/common.js"></script>
 <script>
   function fInitInfo() {
     var oRecord = $api.getStorage('oRecord');

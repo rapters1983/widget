@@ -95,16 +95,13 @@ function openTab(type, pageParam){
   // var navPos = $('#footer').offset().top;
   var headBottom = $('#head').offset().top + $('#head').height();
   var headPos = 64;
-  // // var height = (api.winHeight*2 - headBottom - $('#footer').height())/2 - 1;
-  // var height = api.winHeight*window.devicePixelRatio - headBottom - $('#footer').height() - 1;
 
-  // height = 500;
   // if(api.systemType === 'android') {
   //   height = height - 25;
   // }
   var height = (api.winHeight*window.devicePixelRatio - $('#head').height() - $('#footer').height())/window.devicePixelRatio - 1;
   //1 是底部线框
-
+  alert(height)
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';

@@ -39,7 +39,7 @@ apiready = function() {
         if(isEmptyObject(user)) {
           api.alert({msg: '登录后可查看您订阅的主播'});
         } else{
-          api.openWin({name:'subscribe',url:'subscribe.html',delay:100,bgColor:'#FFF'});
+          api.openWin({name:'subscribe',url:'subscribe.html',delay:0,bgColor:'#FFF'});
         }
       });
 
@@ -55,7 +55,7 @@ apiready = function() {
         if(isEmptyObject(user)) {
           api.alert({msg: '登录后可查看您的观看历史'});
         } else{
-          api.openWin({name:'history',url:'history.html',delay:100,bgColor:'#FFF'});
+          api.openWin({name:'history',url:'history.html',delay:0,bgColor:'#FFF'});
         }
       });
 
@@ -71,7 +71,7 @@ apiready = function() {
         if(isEmptyObject(user)) {
           api.alert({msg: '登录后可查看我的资金信息'});
         } else{
-          api.openWin({name:'wealth',url:'wealth.html',delay:100,bgColor:'#FFF'});
+          api.openWin({name:'wealth',url:'wealth.html',delay:0,bgColor:'#FFF'});
         }
       });
 
@@ -87,18 +87,18 @@ apiready = function() {
         if(isEmptyObject(user)) {
           api.alert({msg: '登录后可通过任务获得战旗币'});
         } else{
-          api.openWin({name:'task',url:'task.html',delay:100,bgColor:'#FFF'});
+          api.openWin({name:'task',url:'task.html',delay:0,bgColor:'#FFF'});
         }
       });
 
       // 应用设置
       $('.js-setting').on('click', function() {
-        api.openWin({name:'setting',url:'settings.html?user=true',delay:100,bgColor:'#FFF'});
+        api.openWin({name:'setting',url:'settings.html?user=true',delay:0,bgColor:'#FFF'});
       });
 
       // 问题反馈
       $('#feed-back').on('click', function() {
-        api.openWin({name:'feed-back',url:'feed-back.html',delay:100,bgColor:'#FFF'});
+        api.openWin({name:'feed-back',url:'feed-back.html',delay:0,bgColor:'#FFF'});
       });
 		}
 	}

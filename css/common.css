@@ -1573,3 +1573,9 @@ body{
   left: 0;
   z-index: 10;
 }
+/*============== 针对iphone6等高像素手机，顶部，头部变大20141024 ================*/
+@media (min-device-width : 375px) and (max-device-width : 667px){
+.footer-bar{height: 140px; font-size: 32px;}
+.footer-bar ul li{padding-top: 25px;}
+.footer-bar .icon-m{font-size: 48px;}
+}
