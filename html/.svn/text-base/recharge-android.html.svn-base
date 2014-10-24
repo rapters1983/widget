@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
   <meta content="telephone=no" name="format-detection" />
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/font-icon.css">
   <title>充值方式</title>
 </head>
@@ -28,20 +26,22 @@
     </div>
     <!-- top顶部 -->
     
-    <!-- 金币余额 -->
-    <div class="remain-balance">
-      <span class="pull-right f26">充值就送等量战旗币！</span>
-      <p class="org f32">金币余额：<span id="num-usermoney"></span></p>
-    </div>
-    <!-- 金币余额 end -->
+    <div id="conWrap" style="overflow:auto;">
+      <!-- 金币余额 -->
+      <div class="remain-balance">
+        <span class="pull-right f26">充值就送等量战旗币！</span>
+        <p class="org f32">金币余额：<span id="num-usermoney"></span></p>
+      </div>
+      <!-- 金币余额 end -->
 
-    <!-- 选择充值方式 -->
-    <div class="til">请选择充值方式</div>
-    <div class="recharge-manner sub-btn">
-      <div class="btn-group btn-block" id="btn-zfb">支付宝充值</div>
-      <!-- <div class="btn-group btn-block" id="btn-wy">网银充值</div> -->
+      <!-- 选择充值方式 -->
+      <div class="til">请选择充值方式</div>
+      <div class="recharge-manner sub-btn">
+        <div class="btn-group btn-block" id="btn-zfb">支付宝充值</div>
+        <!-- <div class="btn-group btn-block" id="btn-wy">网银充值</div> -->
+      </div>
+      <!-- 选择充值方式 end-->
     </div>
-    <!-- 选择充值方式 end-->
   </div>
   <!-- 充值方式 end-->
 </div>

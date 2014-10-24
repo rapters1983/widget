@@ -1,20 +1,6 @@
   apiready = function() {
-    // api.toast({
-    //     msg: '设置页面',
-    //     duration:2000,
-    //     location: 'bottom'
-    // });
-    
-    // $api.getStorage('settings')
-    // var settings = {
-    //   barrage : true //弹幕开关
-    //   ,opacity : 1 //弹幕透明度
-    //   ,size : 1 //弹幕大小
-    //   ,pos : 1 //弹幕位置
-    //   ,definition : 1 //清晰度选择
-    //   ,lookBack : false //回看功能
-    //   ,model : 0 //模式选择
-    // }
+
+
   try{
     var settings = $api.getStorage('settings') || {
         barrage : true //弹幕开关
@@ -26,6 +12,9 @@
        ,model : 0 //模式选择
     }
     var zhanqi = api.require('zhanqiMD');
+
+// onBackToLiveScene 进入直播页（参数{}）
+
   }catch(e) {
     
   }
@@ -56,6 +45,12 @@
       },
 
       listen : function() {
+        //关闭设置
+        $('#closeSettting').on('click', function() {
+           zhanqi.onBackToLiveScene({});
+           api.closeWin();
+        });
+
         //弹幕开关
         $('#barrageSwitch').on('touchend', function() {
           $(this).data('barrage',!$(this).data('barrage'));
@@ -183,15 +178,24 @@
           }
         });
 
-
         //提交
         $('#subBtn').on('click',  function() {
-          // alert(JSON.stringify(settings))
-          $api.setStorage('settings',settings);
-          
-          settings['submit'] = true;
-          zhanqi.onGetSettingDataFromWeb(settings);
-          api.closeWin();
+          try{
+            $api.setStorage('settings',settings);
+        
+            api.toast({
+              msg: '设置成功',
+              duration:2000,
+              location: 'bottom'
+            });
+            
+            settings['submit'] = true;
+            zhanqi.onGetSettingDataFromWeb(settings);
+            zhanqi.onBackToLiveScene({});
+            api.closeWin();
+          }catch(e){
+            alert(e)
+          }
         });
 
       },

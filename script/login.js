@@ -33,6 +33,8 @@ apiready = function(){
       this.listen();
     },
     view : function() {
+      //初始化内容高度
+      // $('#conWrap, .landing').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
     },
     listen : function()　{
       var self = this;
@@ -42,19 +44,81 @@ apiready = function(){
         var iaf = api.require('qq');
         iaf.login(function(ret,err){
           if(ret.status) {
-            api.alert({
-                     title: 'id和token',
-                     msg: ret.openId+'*'+ret.accessToken,
-                     buttons: ['确定1']
-                     });
+            // api.alert({
+            //          title: 'id和token',
+            //          msg: ret.openId+'*'+ret.accessToken,
+            //          buttons: ['确定1']
+            //          });
+            yp.ajax({
+              url: URLConfig('qqLoginUrl')
+            , method: 'post'
+            , dataType: 'json'
+            , data: {
+                values: {
+                  openId: ret.openId
+                , accessToken: ret.accessToken
+                }
+              }
+            }, function(ret, error) {
+              if(ret) {
+                api.alert({msg: JSON.stringify(ret)});
+                if(ret.code == 0) {
+                  var key = 'user';
+                  var user = ret["data"];
+                  $api.setStorage(key, user);
+                  // if(api.pageParam) {
+                    // api.execScript({
+                    //   name: 'home',
+                    //   script: 'fInitInfo();'
+                    // });
+                  // }
+                  // if(api.pageParam) {
+                  //   api.execScript({
+                  //     name: api.pageParam.name,
+                  //     script: 'fInitInfo();'
+                  //   });
+                  // }
+                  if(yp.query('isRoom')) {
+                    var userParam = {
+                      'userName' : user['nickname'],
+                      'userAvatar' : user['avatar'],
+                      'token' : user['token']
+                    }
+                    $api.setStorage('userParam',userParam);
+                    api.execScript({
+                      name : 'rooms',
+                      script : 'loginBackScript();'
+                    });
+                    var zhanqi = api.require('zhanqiMD');
+                    zhanqi.onBackToLiveScene({});
+                  }
+                  api.closeWin({
+                    name: 'register',
+                    animation: {
+                      type: 'none'
+                    }
+                  });
+                  api.closeWin({
+                    animation: {
+                      type: 'reveal',
+                      subType: 'from_top',
+                      duration: 300
+                    }
+                  });
+                } else{
+                  api.alert({msg: ret.message});
+                }
+              } else {
+                api.alert({msg: '网络似乎出现了异常'});
+                // api.alert({
+                //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
+                // });
+              }
+            });
           } else{
-            api.alert({
-                       title: 'id和token',
-                       msg: err.msg,
-                       buttons: ['确定2']
-                       });
+            api.alert({msg: 'qq登陆失败!'});
           }
-       });
+        });
       });
 
       // 注册
@@ -73,6 +137,12 @@ apiready = function(){
 
       // 关闭
       ui.$btn_close.on('click', function() {
+
+        if(yp.query('isRoom')) {
+          var zhanqi = api.require('zhanqiMD');
+          zhanqi.onBackToLiveScene({});
+        }
+
         api.closeWin({
           name:'register',
           animation: {
@@ -205,7 +275,7 @@ apiready = function(){
                 name : 'rooms',
                 script : 'loginBackScript();'
               });
-           }
+            }
             api.closeWin({
               name: 'register',
               animation: {

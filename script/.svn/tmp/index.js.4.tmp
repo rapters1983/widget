@@ -15,7 +15,7 @@ function openFollows(){
         api.openWin({
           name:'landing',
           url:'./html/landing.html',
-          delay:0,
+          delay:100,
           bgColor:'#FFF',
           animation: {
             type: 'movein',
@@ -30,19 +30,21 @@ function openFollows(){
     api.openWin({
       name:'subscribe',
       url:'./html/subscribe.html',
-      delay:0,
+      delay:100,
       bgColor:'#FFF'
     });
   }
 }
 function openSearch(){
-  api.openWin({name:'search',url:'./html/search.html',delay:0,bgColor:'#FFF'});
+  api.openWin({name:'search',url:'./html/search.html',delay:300,bgColor:'#FFF'});
 }
 
 //打开历史记录
 function openHistory(){
-  api.openWin({name:'history',url:'./html/history.html',delay:0,bgColor:'#FFF'});
+  api.openWin({name:'history',url:'./html/history.html',delay:300,bgColor:'#FFF'});
 }
+
+
 
 
 
@@ -66,14 +68,14 @@ function openTab(type, pageParam){
   // var navPos = $('#footer').offset().top;
   var headBottom = $('#head').offset().top + $('#head').height();
   var headPos = 64;
-  // // var height = (api.winHeight*2 - headBottom - $('#footer').height())/2 - 1;
-  // var height = api.winHeight*window.devicePixelRatio - headBottom - $('#footer').height() - 1;
+  // var height = (api.winHeight*2 - headBottom - $('#footer').height())/2 - 1;
+  var height = api.winHeight*window.devicePixelRatio - headBottom - $('#footer').height() - 1;
 
-  // height = 500;
-  // if(api.systemType === 'android') {
-  //   height = height - 25;
-  // }
-  var height = (api.winHeight*window.devicePixelRatio - $('#head').height() - $('#footer').height())/window.devicePixelRatio;
+  height = 500;
+  if(api.systemType === 'android') {
+    height = height - 25;
+  }
+  alert(height)
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';
@@ -142,8 +144,8 @@ function openTab(type, pageParam){
     }
   }
 }
-var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
 function changeTabBar(idx){
+  var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
   var activeClass = ['icon-home-line','icon-directseeding-line','icon-more-line','icon-my-line'];
   $('#footer-nav>li').removeClass('active');
   $('#footer-nav>li').eq(idx).addClass('active');
@@ -152,10 +154,13 @@ function changeTabBar(idx){
   }
   $('#footer-nav>li').eq(idx).find('i').addClass(navClass[idx]).removeClass(activeClass[idx]);
 }
-
+function openMain(){
+  openTab('main');
+  changeTabBar(0);
+}
 function openGameList(){
   openTab('game');
-  // var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
+  var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
   changeTabBar(2);
 }
 function openGameLive(){
@@ -208,9 +213,6 @@ function openMain(){
   api.closeFrame({
     name: 'main'
   });
-  if(window.curPid == 'main'){
-    window.curPid = '';
-  }
   openTab('main');
   changeTabBar(0);
 }
@@ -233,7 +235,6 @@ function fCheckLogin() {
       }
   });
 }
-
 
 apiready = function() {
 
@@ -294,7 +295,7 @@ apiready = function() {
     },
     listen : function()　{
       var self = this;
-      // var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
+      var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
       $('#footer-nav').on('click', 'li',function(){
         $self = $(this);
         var idx = $self.index();

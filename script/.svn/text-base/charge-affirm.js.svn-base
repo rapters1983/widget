@@ -33,6 +33,8 @@ apiready = function(){
     gRatio: 100, // 兑换比例 人民币:金币
     cRatio: 100, // 兑换比例 人民币:战旗币
     view : function() {
+      //初始化内容高度
+      $('#conWrap, .recharge').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
       fInitInfo();
     },
     listen : function()　{

@@ -1554,7 +1554,7 @@ body{
   border-top: 1px solid #ccc;
 }
 /*========== 部分页面头部固定样式20141023 ===========*/
-.settings,.subscribe,.record,.search-page,.register,.day-box{
+.settings,.subscribe,.search-page,.register,.day-box{
   height: 700px;
   padding-top: 128px;
   overflow: auto;
@@ -1562,7 +1562,6 @@ body{
 }
 .settings .top-bar,
 .subscribe .top-bar,
-.record .top-bar,
 .search-page .top-bar,
 .register .top-bar,
 .day-box .top-bar{

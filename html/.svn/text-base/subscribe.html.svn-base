@@ -2,7 +2,6 @@
 <html lang='zh-CN'>
   <head>
     <meta charset='utf-8'>
-    <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
@@ -10,7 +9,6 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/font-icon.css">
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
-    <link rel="stylesheet" type="text/css" href="../css/common.css" />
   </head>
   <body>
     <div class="wrap" id="wrap">
@@ -27,40 +25,41 @@
           <div class="top-bar-line"></div>
         </div>
         <!-- top顶部 -->
-
-        <!-- 直播中模块 -->
-        <div class="module">
-          <div class="title clearfix">
-            <a href="javascript:;" class="edit-btn" onclick="api.openWin({name:'editSubscribe',url:'editSubscribe.html',delay:100,bgColor:'#FFF'});">编辑订阅</a>
-            <span class="title-name">直播中</span>
-          </div>
-          <div class="module-bd">
-            <div class="video-list-wrap">
-              <ul class="clearfix" id="liveList">
-              </ul>
+        
+        <div id="conWrap" style="overflow:auto;">
+          <!-- 直播中模块 -->
+          <div class="module">
+            <div class="title clearfix">
+              <a href="javascript:;" class="edit-btn" onclick="api.openWin({name:'editSubscribe',url:'editSubscribe.html',delay:100,bgColor:'#FFF'});">编辑订阅</a>
+              <span class="title-name">直播中</span>
+            </div>
+            <div class="module-bd">
+              <div class="video-list-wrap">
+                <ul class="clearfix" id="liveList">
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- 直播中模块 end-->
+          <!-- 直播中模块 end-->
 
-        <!-- 休息中模块 -->
-        <div class="module">
-          <div class="title">
-            <span class="title-name">休息中</span>
-          </div>
-          <div class="module-bd">
-            <div class="anchor-list">
-              <ul  id="anchorList">
-              </ul>
+          <!-- 休息中模块 -->
+          <div class="module">
+            <div class="title">
+              <span class="title-name">休息中</span>
+            </div>
+            <div class="module-bd">
+              <div class="anchor-list">
+                <ul  id="anchorList">
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- 休息中模块 end-->
+          <!-- 休息中模块 end-->
 
-        <div class="record-no hidden" id="noResult">
-          暂无订阅
+          <div class="record-no hidden" id="noResult">
+            暂无订阅
+          </div>
         </div>
-
       </div>
       <!-- 订阅 end-->
     </div>

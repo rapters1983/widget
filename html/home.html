@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
   <meta content="telephone=no" name="format-detection" />
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/font-icon.css">
-  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/api.css">
   <title>我的</title>
 </head>
@@ -108,8 +106,8 @@
   </div>
   <!-- 我的 end-->
 </div>
-<script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/api.js"></script>
 <script src="../script/common.js"></script>
 <script src="../script/lib/Base64.js"></script>
 <script src="../script/home.js"></script>
@@ -126,7 +124,7 @@
       // 头像，昵称，设置初始化
       fGetWealth();
       $('#photo').attr('src', user.avatar + '-normal');
-      $('#personal').text(user.account);
+      $('#personal').text(user.nickname);
       $('#header .js-setting').show();
       $('#box-uncenter').hide();
       $('#box-center').show();

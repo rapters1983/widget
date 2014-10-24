@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<!--   <meta content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=1;" name="viewport"/> -->
-  <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
   <meta content="telephone=no" name="format-detection" />
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/font-icon.css">
   <link rel="stylesheet" type="text/css" href="../script/lib/ratchet/ratchet.css">
   <title>设置</title>
@@ -21,7 +18,7 @@
     <!-- top顶部 -->
     <div class="top-bar">
       <div class="top-bar-bd">
-        <p class="title"><i class="icon-m icon-close" onclick="api.closeWin();"></i><span id="pageName">设置</span></p>
+        <p class="title"><i id="closeSettting" class="icon-m icon-close"></i><span id="pageName">设置</span></p>
       </div>
       <div class="top-bar-line"></div>
     </div>
@@ -190,8 +187,8 @@
   <!-- 设置 end-->
 </div>
 </body>
-<script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/api.js"></script>
 <script src="../script/common.js"></script>
 <script src="../script/rooms.js"></script>
 <script src="../script/lib/ratchet/ratchet.js"></script>

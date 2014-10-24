@@ -31,6 +31,8 @@ apiready = function(){
       this.listen();
     },
     view : function() {
+      //初始化内容高度
+      $('#conWrap, .recharge').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
       fInitInfo();
     },
     listen : function()　{

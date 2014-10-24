@@ -2,7 +2,6 @@
 <html lang='zh-CN'>
   <head>
     <meta charset='utf-8'>
-    <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
@@ -28,8 +27,8 @@
 
     </div>
   </body>
-  <script src="../script/api.js"></script>
   <script src="../script/lib/jquery-2.1.1.min.js"></script>
+  <script src="../script/api.js"></script>
   <script src="../script/common.js"></script>
   <script src="../script/gameLive.js"></script>
 </html>

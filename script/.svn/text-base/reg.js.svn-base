@@ -38,6 +38,8 @@ apiready = function(){
     }
   , view : function() {
       var self = this;
+      //初始化内容高度
+      $('#conWrap, .register').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
     }
   , listen : function()　{
       var self = this;
@@ -58,6 +60,10 @@ apiready = function(){
 
       // 关闭
       ui.$btn_close.on('click', function() {
+        if(yp.query('isRoom')) {
+          var zhanqi = api.require('zhanqiMD');
+          zhanqi.onBackToLiveScene({});
+        }
         api.closeWin({
           name:'landing',
           animation: {
@@ -224,6 +230,8 @@ apiready = function(){
                 ,'userAvatar':user['avatar']
                 ,'token':user['token']
               });
+
+              zhanqi.onBackToLiveScene({});
             }
             api.closeWin({
               name: 'landing',

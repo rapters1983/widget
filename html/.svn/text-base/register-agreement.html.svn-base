@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
   <meta content="telephone=no" name="format-detection" />
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/font-icon.css">
   <title>注册协议</title>
 </head>
@@ -28,36 +26,45 @@
     </div>
     <!-- top顶部 -->
     
-    <!-- 主内容区域 -->
-    <div class="hd register-agreement">
-      <ul>
-        <li>
-          <p class="title">1.优酷使用协议的接受</p>
-          <div class="detail">
-            通过访问和/或使用本网站，您表示同意接受本协议的所有条件和条款。合一信息技术（北京）有限公司（以下简称“合一”）作为优酷(Youku.com)的运营者依据本协议为您提供服务。如果您不愿接受本协议的全部条件和条款，请您不要访问或使用本网站。
-          </div>
-        </li>
-        <li>
-          <p class="title">2.本协议的变更和修改</p>
-          <div class="detail">
-            合一有权随时对本协议进行修改，并且一旦发生协议条款的变动，合一将在相关页面上提示修改的内容；用户如果不同意本协议的修改，可以放弃使用或访问本网站或取消已经获得的服务；如果用户选择在本协议变更后继续访问或使用本网站，则视为用户已经接受本协议的修改。
-          </div>
-        </li>
-        <li>
-          <p class="title">3.服务说明</p>
-          <div class="detail">
-            <p>(1)优酷网是一个向广大用户提供上传空间和技术的服务平台，本身不直接上传内容。</p>
-            <p>(2)合一公司运用自己的系统通过互联网向用户提供服务，除非另有明确规定，增强或强化目前服务的任何新功能，包括新产品以及新增加的服务，均无条件地适用本协议。</p>
-            <p>(3)合一公司对网站服务不承担任何责任，公司不保证服务一定会满足用户的使用要求，也不保证服务不会被中断，对服务的及时性、安全性、准确性也不作担保。</p>
-          </div>
-        </li>
-      </ul>
+    <div id="conWrap" style="overflow:auto;">
+      <!-- 主内容区域 -->
+      <div class="hd register-agreement">
+        <ul>
+          <li>
+            <p class="title">1.优酷使用协议的接受</p>
+            <div class="detail">
+              通过访问和/或使用本网站，您表示同意接受本协议的所有条件和条款。合一信息技术（北京）有限公司（以下简称“合一”）作为优酷(Youku.com)的运营者依据本协议为您提供服务。如果您不愿接受本协议的全部条件和条款，请您不要访问或使用本网站。
+            </div>
+          </li>
+          <li>
+            <p class="title">2.本协议的变更和修改</p>
+            <div class="detail">
+              合一有权随时对本协议进行修改，并且一旦发生协议条款的变动，合一将在相关页面上提示修改的内容；用户如果不同意本协议的修改，可以放弃使用或访问本网站或取消已经获得的服务；如果用户选择在本协议变更后继续访问或使用本网站，则视为用户已经接受本协议的修改。
+            </div>
+          </li>
+          <li>
+            <p class="title">3.服务说明</p>
+            <div class="detail">
+              <p>(1)优酷网是一个向广大用户提供上传空间和技术的服务平台，本身不直接上传内容。</p>
+              <p>(2)合一公司运用自己的系统通过互联网向用户提供服务，除非另有明确规定，增强或强化目前服务的任何新功能，包括新产品以及新增加的服务，均无条件地适用本协议。</p>
+              <p>(3)合一公司对网站服务不承担任何责任，公司不保证服务一定会满足用户的使用要求，也不保证服务不会被中断，对服务的及时性、安全性、准确性也不作担保。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- 主内容区域 end -->
     </div>
-    <!-- 主内容区域 end -->
   </div>
   <!-- 注册 end-->
 </div>
 
+<script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script src="../script/api.js"></script>
+<script>
+apiready = function() {
+  //初始化内容高度
+  $('#conWrap, .register').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+}
+</script>
 </body>
 </html>

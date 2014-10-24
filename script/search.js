@@ -36,6 +36,8 @@ yp.ready(function() {
   , tabResult: [-1, -1]
   , view: function() {
       var self = this;
+      //初始化内容高度
+      $('#conWrap, .search-page').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
       self.renderSearchHistory();
     }
   , listen: function() {
@@ -106,29 +108,33 @@ yp.ready(function() {
           ui.$noTabResult.removeClass('hidden');
           return;
         }
+        ui.$noTabResult.addClass('hidden');
         if(idx == 1){
-          ui.$hostList.find('.js-result').removeClass('hidden');
-          ui.$liveList.find('.js-result').addClass('hidden');
+          ui.$hostList.closest('.js-result').removeClass('hidden');
+          ui.$liveList.closest('.js-result').addClass('hidden');
         }else{
-          ui.$hostList.find('.js-result').addClass('hidden');
-          ui.$liveList.find('.js-result').removeClass('hidden');
+          ui.$hostList.closest('.js-result').addClass('hidden');
+          ui.$liveList.closest('.js-result').removeClass('hidden');
         }
       })
       //滚动到底部刷新
-      api.addEventListener({name:'scrolltobottom'}, function(ret, err){
-        var keyword = ui.$keyword.val();
+      $('#conWrap').scroll(function(){
+        // 当滚动到最底部以上200像素时， 加载新内容
         var i = self.tabNow;
-        self.pageNow[i] = +self.pageNow[i] + 1;
-        if(self.ajaxing[i] == 1){
-          return;
+        if (self.pageNow[i]*200 - $(this).scrollTop() < 0){
+          var keyword = ui.$keyword.val();
+          self.pageNow[i] = +self.pageNow[i] + 1;
+          if(self.ajaxing[i] == 1){
+            return;
+          }
+          api.toast({
+            msg: '加载中',
+            duration:2000,
+            location: 'bottom'
+          });
+          self.searchData(keyword, i);
         }
-        api.toast({
-          msg: '加载中',
-          duration:2000,
-          location: 'bottom'
-        });
-        self.searchData(keyword, i);
-      });
+      })
 
       //进入直播间
       $('#wrap').on('click', 'li[name=enterRooms]', function() {

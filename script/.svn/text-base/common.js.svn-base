@@ -83,23 +83,37 @@ function URLConfig(which, data) {
     // 获取签到
       return BASE_URL + 'api/actives/signin/seven.sign';
     case 'history':
-      return BASE_URL + 'api/user/record.watch_list';
+      return BASE_URL + 'api/user/record.watch_list?nums=10';
     case 'getRich':  //获取财富
       return BASE_URL + 'api/user/rich.get';
+    case 'qqLoginUrl':
+      // qq登陆
+      return BASE_URL + 'api/auth/openid.qq_login_by_token';
+    case 'recordWatch':  //进入直播记录
+      return BASE_URL + 'api/user/record.watch?type=1&id='+data['roomid'];  //type 1 直播 写死
   }
 };
 
-var scale = 1.0, ratio = 1;
-  (function() {
-      var text = '';
-      if (window.devicePixelRatio == 2 &&  window.navigator.appVersion.match(/iphone/gi)) {
-        text = '<link' + ' type="text/css" rel="styleSheet" href="./css/common.css"' + ' />';
-      }else{
-        text = '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
-          + '<link' + ' type="text/css" rel="styleSheet" href="./css/common-s.css"' + ' />';
-      }
-      document.write(text);
-  })();
+
+$(function() {
+  var scale = 1.0, ratio = 1, htmlStr = '', cssSrc = '';
+
+  if(window.location.href.indexOf('index.html') > -1) { //启动页
+    cssSrc = './css/'
+  }else{ //普通页  在html文件夹里
+    cssSrc = '../css/'
+  }
+
+  if(window.devicePixelRatio != 2 &&  !window.navigator.appVersion.match(/iphone/gi)) {
+    htmlStr += '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
+    +'<link type="text/css" rel="styleSheet" href="'+cssSrc+'common-s.css" />'
+  }else{
+    scale = 0.5;
+    htmlStr += '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
+    +'<link type="text/css" rel="styleSheet" href="'+cssSrc+'common.css" />'
+  }
+  $('head').append(htmlStr)
+});
 
 /* 静默登录 */
 function silenceLoginFn(pageName, fnName, isRoom, fn2Name) {

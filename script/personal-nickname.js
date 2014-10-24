@@ -16,6 +16,8 @@ apiready = function(){
       this.listen();
     },
     view : function() {
+      //初始化内容高度
+      $('#conWrap, .personal-change-name').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
       fInitInfo();
     },
     listen : function()　{

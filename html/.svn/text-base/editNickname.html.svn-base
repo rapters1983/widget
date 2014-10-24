@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-   <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
   <meta content="telephone=no" name="format-detection" />
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/font-icon.css">
-  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/api.css">
   <title>修改昵称</title>
 </head>
@@ -27,24 +25,26 @@
       <div class="top-bar-line"></div>
     </div>
     <!-- top顶部 -->
+    
+    <div id="conWrap" style="overflow:auto;">
+      <div class="bd">
+        <!-- 修改昵称信息 -->
+        <div class="change-name">
+          <input type="text"  id="txt-nickname" name="nickname" data-type="nickname" data-required="看官老爷，请留下您的昵称" data-invalide="仅限6~24位的中英文，每个中文字算3位字符" placeholder="昵称" autocapitalize="off" />
+        </div>
+        <!-- 修改昵称信息 end -->
 
-    <div class="bd">
-      <!-- 修改昵称信息 -->
-      <div class="change-name">
-        <input type="text"  id="txt-nickname" name="nickname" data-type="nickname" data-required="看官老爷，请留下您的昵称" data-invalide="仅限6~24位的中英文，每个中文字算3位字符" placeholder="昵称" autocapitalize="off" />
+        <!-- 底部提交按钮 -->
+        <div class="footer-btn">
+          <div class="btn-group btn-block" id="btn-editNickname-save">提交</div>
+        </div>
+        <!-- 底部提交按钮 -->
       </div>
-      <!-- 修改昵称信息 end -->
-
-      <!-- 底部提交按钮 -->
-      <div class="footer-btn">
-        <div class="btn-group btn-block" id="btn-editNickname-save">提交</div>
-      </div>
-      <!-- 底部提交按钮 -->
     </div>
   </div>
 </div>
-<script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/api.js"></script>
 <script src="../script/common.js"></script>
 <script type="text/javascript" src="../script/personal-nickname.js"></script>
 </body>

@@ -19,6 +19,8 @@ apiready = function() {
     },
     view: function() {
       var self = this;
+      //初始化内容高度
+      $('#conWrap, .sign-in').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
       fInitInfo();
     },
     listen: function()　{

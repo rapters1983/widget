@@ -21,6 +21,13 @@ apiready = function() {
     view : function() {
       var self = this;
 
+
+      // var obj = api.require('qq');
+      //   obj.shareText({
+      //       text:'testtext'
+      // });
+
+
       api.setRefreshHeaderInfo({
         visible: true,
         loadingImgae: 'widget://image/refresh-white.png',
@@ -250,9 +257,17 @@ apiready = function() {
       var width = api.winWidth;
       var htmlStr = '';
       for(var i=0; i<data.length; i++) {
-        htmlStr += '<li name="enterLive" class="swiper-slide" id="'+data[i]['room']['id']+'">'
-                +  '<img src="'+data[i]['spic']+'" class="show-pic" />'
-                +  '<p class="title">'+data[i]['title']+'</p>'
+        var id = data[i]['roomId'];
+        var spic = data[i]['spic'];
+        var title = data[i]['title'];
+        if(data[i]['roomId'] != data[i]['room']['id']){
+          id = data[i]['room']['id'];
+          spic = data[i]['room']['bpic'];
+          title = data[i]['room']['title'];
+        }
+        htmlStr += '<li name="enterLive" id="'+ id +'">'
+                +  '<img src="'+ spic +'" class="show-pic" />'
+                +  '<p class="title">'+ title +'</p>'
                 +  '</li>';
       }
       var pointerStr = '<span class="dot active"></span>';
@@ -261,14 +276,6 @@ apiready = function() {
       }
       $('#dotBox').empty().html(pointerStr);
       $('#banner-content').empty().html(htmlStr);
-      $('#banner-content>li').each(function(){
-        $self = $(this);
-        var i = $self.index()
-        $self.attr({
-           'id' : data[i]['room']['id']
-          ,'name' : 'enterRooms'
-        });
-      })
       var slide = $api.byId('slider');
       window.mySwipe = Swipe(slide, {
         // startSlide: 2,

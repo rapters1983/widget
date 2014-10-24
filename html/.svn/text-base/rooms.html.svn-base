@@ -3,14 +3,11 @@
 <head>
 <title>直播页面</title>
 <meta charset="utf-8">
-<meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5,user-scalable=1,width=device-width,initial-scale=0.5"/>
 <meta name="copyright" content="www.apicloud.com" />
 <link rel="stylesheet" type="text/css" href="../css/api.css" />
-<link rel="stylesheet" type="text/css" href="../css/common.css" />
 
 <link rel="stylesheet" href="../css/reset.css">
 <link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/common.css">
 <link rel="stylesheet" href="../css/font-icon.css">
 
 </head>
@@ -22,7 +19,7 @@
   <div id="liveRoom" class="live-room" style="overflow:auto;">
     <!-- 聊天对话部分 -->
     <div id="chatList" class="bd">
-      <div class="title">欢迎来到<i id="anchorName">burning</i>的直播间，喜欢就点击右上角订阅吧。</div>
+      <div class="title">欢迎来到<i id="anchorName"></i>的直播间，喜欢就点击右上角订阅吧。</div>
       <ul class="chat-list">
         <!-- <li class="myself">
           <span class="name"><i class="name-bg grade-1">荷蛋</i>名字你爸妈知道吗？：</span>艾玛，圣剑快出旋风斩啊！！！
@@ -66,8 +63,8 @@
 </div>
 
 </body>
-<script src="../script/api.js"></script>
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
+<script src="../script/api.js"></script>
 <script src="../script/common.js"></script>
 <script src="../script/rooms.js"></script>
 </html>

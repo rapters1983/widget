@@ -90,6 +90,7 @@ apiready = function(){
 
       this.initSettins();
       this.getGiftList(roomId);
+      this.setRecord(roomId);  //写入历史记录
     },
 
     initNativeModel : function(roomId) {
@@ -262,6 +263,14 @@ apiready = function(){
       },function(ret,err){
         self.renderGiftList(ret['data']);
       });
+    },
+
+    setRecord : function(roomId) {
+      api.ajax({
+          url: URLConfig('recordWatch',{'roomid':roomId}),
+          method: 'get',
+          dataType: 'json'
+      },$.noop);
     },
 
     renderGiftList : function(data) {

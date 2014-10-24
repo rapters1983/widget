@@ -18,6 +18,8 @@ apiready = function() {
 		},
 		view : function() {
       var self = this;
+      //初始化内容高度
+      $('#conWrap, .subscribe').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
       this.getDataHistory();
 		},
 		listen : function()　{
