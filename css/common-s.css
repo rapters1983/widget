@@ -99,11 +99,6 @@ body{
 .top-bar{
   height: 64px;
   background: #f6f7f8;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
 }
 .top-bar-bd{
   height: 62px;
@@ -117,15 +112,17 @@ body{
 }
 .top-bar-bd .title .icon-close{
   position: absolute;
-  right: 8px; 
-  bottom: 0;
+  right: -2px; 
+  bottom: -10px;
   color: #999;
+  padding: 10px;
 }
 .top-bar-bd .title .icon-left{
   position: absolute;
-  left: 8px; 
-  bottom: 0;
+  left: -2px; 
+  bottom: -10px;
   color: #333;
+  padding: 10px;
 }
 .top-bar-bd img{height: 30px;}
 .top-bar-line{
@@ -366,11 +363,11 @@ body{
 }
 .home-page .top-bar .operation-list li{
   float: left;
-  margin-left: 25px;
 }
 .home-page .top-bar .icon-m{
-  font-size: 18x;
+  font-size: 20px;
   color: #999;
+  padding: 15px;
 }
 .home-page .top-bar-bd{
   padding: 26px 0 0 7px;
@@ -414,6 +411,9 @@ body{
   color: #dcf5fd;
   z-index: 3;
   font-size: 16px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 
 .home-page .dot-box{
@@ -488,6 +488,9 @@ body{
   font-size: 10px;
   color: #999;
   position: relative;
+}
+.video-list-wrap .detail p,.video-list-wrap .detail span{
+  color: #999;
 }
 .video-list-wrap .detail .icon-m{
   font-size: 10px;
@@ -693,7 +696,6 @@ body{
 .landing .hd,.register .hd{
   padding: 20px;
   background:#eee;
-  margin-top: 64px;
 }
 .landing .hd li .indent,.register .hd li .indent{
   padding-left: 20px;
@@ -1460,8 +1462,9 @@ body{
 }
 .subscribe .anchor-list .icon-close{
   float: right;
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 12px;
+  padding: 10px;
 }
 /* ====================== 我的20141020 ====================== */
 .my-page{
@@ -1597,19 +1600,34 @@ body{
   border-top: 1px solid #ccc;
 }
 /*========== 部分页面头部固定样式20141023 ===========*/
-.settings,.subscribe,.search-page,.day-box{
+.settings,.search-page,.register,.landing,.day-box,.personal-center{
   height: 700px;
   padding-top: 64px;
   overflow: auto;
   -webkit-overflow-scrolling:touch;
 }
+.subscribe{padding-top: 64px;}
 .settings .top-bar,
 .subscribe .top-bar,
 .search-page .top-bar,
-.day-box .top-bar{
+.register .top-bar,
+.landing .top-bar,
+.day-box .top-bar,
+.personal-center .top-bar{
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
 }
+/*============== 针对iphone6等高像素手机，顶部，头部变大20141024 ================*/
+@media (min-device-width : 375px) and (max-device-width : 667px){
+.footer-bar{height: 140px; font-size: 32px;}
+.footer-bar ul li{padding-top: 25px;}
+.footer-bar .icon-m{font-size: 48px;}
+}
+
+
+/*================= 安卓手机解决头部状态栏问题 ==========================*/
+.top-bar{height: 50px;}
+.top-bar-bd{height:48px; padding-top: 12px !important;}

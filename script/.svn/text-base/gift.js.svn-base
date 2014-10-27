@@ -124,7 +124,11 @@ apiready = function(){
          name : 'rooms',
          script : 'sendGiftBack();'
         })
-        api.closeFrame();
+        // api.closeFrame();
+        api.setFrameAttr({
+          name: 'gift',
+          hidden: true
+        });
 
         api.execScript({
          name : 'rooms',

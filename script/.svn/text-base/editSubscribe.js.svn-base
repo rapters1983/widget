@@ -141,7 +141,7 @@ yp.ready(function() {
       var self = this;
       var anchorHtml = '';
       for(var i = 0; i<data.length; i++){
-        var avatar = data[i]['avatar'] +'-normal';
+        var avatar = data[i]['avatar'] +'-big';
         var nickname = data[i]['nickname'];
         var uid = data[i]['uid'];
         var follows = data[i]['follows'];

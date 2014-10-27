@@ -94,38 +94,18 @@ function openTab(type, pageParam){
     height = api.winHeight - $('#head').outerHeight()/window.devicePixelRatio - $('#footer').outerHeight()/window.devicePixelRatio;
   } else {
     height =  api.winHeight - $('#head').outerHeight() - $('#footer').outerHeight();
-    height = parseInt(height - 50/window.devicePixelRatio);
   }
-  //1 是底部线框
-
-
   
   if(api.systemType === 'ios') {  //IOS
     if(!(api.systemVersion.indexOf('7.') > -1) && !(api.systemVersion.indexOf('8.') > -1)) {
       height = height - window.devicePixelRatio*25
     }
-  }else{  //Android
-    // switch(window.devicePixelRatio) {
-    //   case 1:
-    //     break;
-    //   case 1.5:
-    //     height = height - 1.5*26 + 2;
-    //     break;
-    //   case 2:
-    //     height = height - 30;
-    //     break;
-    //   case 2.5:
-    //     break;
-    //   case 3:
-    //     break;
-    // }
   }
-
-
+  
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';
-
+  
   //默认把live关掉
   api.closeFrame({
     name: 'gameLive'
@@ -192,9 +172,6 @@ function openTab(type, pageParam){
             height = api.frameHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 65 - 105 - 50/window.devicePixelRatio;
           }
         }
-        // alert(api.frameHeight)  615
-        // alert(api.winHeight)    640
-        // alert($('#footer').outerHeight())
 
         var headPos = 105 + 65  //物理像素
 
@@ -209,7 +186,7 @@ function openTab(type, pageParam){
             x: 0,
             y: headPos,   //65 广告条 130+
             w: width,
-            h: parseInt(height)
+            h: height
           }
         });
       }
@@ -348,8 +325,8 @@ apiready = function() {
   var ui = {
   }
 
-  var zhanqi = api.require('zhanqiMD'); 
-  zhanqi.onAppStarted({});
+  // var zhanqi = api.require('zhanqiMD'); 
+  // zhanqi.onAppStarted({});
   var oPage = {
     init : function() {
       this.view();

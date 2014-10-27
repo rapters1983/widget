@@ -116,15 +116,17 @@ body{
 }
 .top-bar-bd .title .icon-close{
   position: absolute;
-  right: 15px; 
-  bottom: 0;
+  right: -5px; 
+  bottom: -20px;
   color: #999;
+  padding: 20px;
 }
 .top-bar-bd .title .icon-left{
   position: absolute;
-  left: 15px; 
-  bottom: 0;
+  left: -5px; 
+  bottom: -20px;
   color: #333;
+  padding: 20px;
 }
 .top-bar-line{
   width: 100%;
@@ -358,11 +360,11 @@ body{
 }
 .home-page .top-bar .operation-list li{
   float: left;
-  margin-left: 50px;
 }
 .home-page .top-bar .icon-m{
   font-size: 36px;
   color: #999;
+  padding: 30px;
 }
 .home-page .top-bar-bd{
   padding: 52px 0 0 15px;
@@ -483,6 +485,9 @@ body{
   font-size: 21px;
   color: #999;
   position: relative;
+}
+.video-list-wrap .detail p,.video-list-wrap .detail span{
+  color: #999;
 }
 .video-list-wrap .detail .icon-m{
   font-size: 20px;
@@ -1422,8 +1427,9 @@ body{
 }
 .subscribe .anchor-list .icon-close{
   float: right;
-  margin-top: 40px;
+  margin-top: 20px;
   font-size: 24px;
+  padding: 20px;
 }
 /* ====================== 我的20141020 ====================== */
 .my-page{
@@ -1584,17 +1590,20 @@ body{
   border-top: 1px solid #ccc;
 }
 /*========== 部分页面头部固定样式20141023 ===========*/
-.settings,.subscribe,.search-page,.register,.day-box{
+.settings,.search-page,.register,.landing,.day-box,.personal-center{
   height: 700px;
   padding-top: 128px;
   overflow: auto;
   -webkit-overflow-scrolling:touch;
 }
+.subscribe{padding-top: 128px;}
 .settings .top-bar,
 .subscribe .top-bar,
 .search-page .top-bar,
 .register .top-bar,
-.day-box .top-bar{
+.landing .top-bar,
+.day-box .top-bar,
+.personal-center .top-bar{
   width: 100%;
   position: fixed;
   top: 0;

@@ -96,8 +96,8 @@ apiready = function(){
     view : function() {
       //初始化
       if(api.systemType === 'ios') {
-        $('body').height(api.frameHeight*2).css('padding-top',api.frameWidth*9/16*2 + 20*2);
-        $('#liveRoom').height(api.frameHeight*2 - api.frameWidth*9/16*2 - 50*2 -20*2);
+        $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio + 20*window.devicePixelRatio);
+        $('#liveRoom').height(api.frameHeight*window.devicePixelRatio - api.frameWidth*9/16*window.devicePixelRatio - 50*window.devicePixelRatio -20*window.devicePixelRatio);
       }else{
         $('body').height(api.frameHeight).css('padding-top',api.frameWidth*9/16 + 20);
         $('#liveRoom').height(api.frameHeight - api.frameWidth*9/16 - 50 -20);

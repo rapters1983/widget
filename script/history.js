@@ -114,8 +114,7 @@ apiready = function() {
           }
         }
       }
-      dataArr.splice(oLen-1,oLen);
-      
+      dataArr.splice(0,oLen);
       var htmlStr = '', i = 0;
       while(dataArr[i]) {
         htmlStr += '<li id="'+dataArr[i]['id']+'" name="enterRooms">'
