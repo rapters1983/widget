@@ -32,7 +32,11 @@ apiready = function(){
     },
     view : function() {
       //初始化内容高度
-      $('#conWrap, .feedback').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      if(api.systemType === 'ios') {
+        $('#conWrap, .feedback').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      }else{
+        $('#conWrap, .feedback').height(api.winHeight - $('.top-bar').height());
+      }
     },
     listen : function()　{
       var self = this;

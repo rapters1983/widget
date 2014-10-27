@@ -26,7 +26,7 @@
     </div>
     <!-- top顶部 -->
 
-    <div id="conWrap" style="overflow:auto;">
+    <div id="conWrap" style="overflow:hidden;overflow-y:auto;">
       <!-- 修改性别信息 -->
       <div class="bind-phone">
         <form id="box-editPhone">

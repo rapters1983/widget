@@ -32,7 +32,11 @@ apiready = function(){
     },
     view : function() {
       //初始化内容高度
-      $('#conWrap, .recharge').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      if(api.systemType === 'ios') {
+        $('#conWrap, .recharge').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      }else{
+        $('#conWrap, .recharge').height(api.winHeight - $('.top-bar').height());
+      }
       fInitInfo();
     },
     listen : function()　{
@@ -54,8 +58,8 @@ apiready = function(){
           return;
         }
         // ajax
-        api.alert({msg: 'gold: ' + $li.data('gold')});
-        api.alert({msg: 'rmb: ' + $li.data('rmb')});
+        // api.alert({msg: 'gold: ' + $li.data('gold')});
+        // api.alert({msg: 'rmb: ' + $li.data('rmb')});
         self.fSubmit();
       });
     },

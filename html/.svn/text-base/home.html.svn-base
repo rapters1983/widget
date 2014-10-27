@@ -16,7 +16,7 @@
   <!-- 我的 -->
   <div class="my-page">
     <!-- top顶部 -->
-    <div class="my-top" id="header">
+    <div class="my-top" id="head">
       <i class="icon-m icon-operate js-setting" style="display:none"></i>
       <!-- 登陆的时候显示该层-->
       <div class="user-detail clearfix" style="display:none" id="box-center">
@@ -42,7 +42,7 @@
       <!-- 未登录的时候显示该层 -->
       <div class="user-detail clearfix" style="display:none" id="box-uncenter">
         <div class="user-photo">
-          <img src="../image/avatar.gif" alt="">
+          <img id="avatar" src="../image/avatar.gif" alt="">
         </div>
         
         <div class="user-mes">
@@ -62,134 +62,6 @@
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script src="../script/api.js"></script>
 <script src="../script/common.js"></script>
-<script src="../script/lib/Base64.js"></script>
 <script src="../script/home.js"></script>
-<script>
-  function fInitInfo() {
-    function isEmptyObject(o){
-      for(var n in o){
-        return false;
-      }
-      return true;
-    }
-    var user = $api.getStorage('user');
-    if(!isEmptyObject(user)) {
-      // 头像，昵称，设置初始化
-      fGetWealth();
-      $('#photo').attr('src', user.avatar + '-normal');
-      $('#personal').text(user.nickname);
-      $('#header .js-setting').show();
-      $('#box-uncenter').hide();
-      $('#box-center').show();
-    } else{
-      $('#header .js-setting').hide();
-      $('#box-uncenter').show();
-      $('#box-center').hide();
-    }
-  }
-  function fGetWealth() {
-    api.ajax({
-      url: URLConfig('sGetRichUrl')
-    , method: 'get'
-    , dataType: 'json'
-    }, function(ret, err) {
-      if(ret) {
-        if(ret['code'] == 0) {
-          $('#gold').text(ret.data.gold.count);
-          $('#coin').text(ret.data.coin.count);
-        } else{
-          api.alert({msg : ret['message']});
-        }
-      } else{
-        api.alert({
-          msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-        });
-      }
-    });
-  }
-  apiready = function(){
-    api.addEventListener({name:'viewappear'}, function(ret, err){
-      fInitInfo();
-    });
-
-    var width = api.winWidth;
-    var height = api.winHeight;
-    if(api.systemType === 'android') {
-      height = height - 25;
-    }
-    var headerPos = ($('#header').offset().top + $('#header').height())/2;
-    var advertisementPos = $('#advertisement').outerHeight()/2;
-    var footerPos = 50;
-    var conheight = height - headerPos - footerPos - advertisementPos;
-    api.openFrame({
-      name: 'home-con',
-      url: './html/home-con.html',
-      bounces: true,
-      opaque: true,
-      vScrollBarEnabled: true,
-      hScrollBarEnabled: true,
-      rect: {
-        x: 0,
-        y: headerPos + advertisementPos,
-        w: width,
-        h: conheight
-      }
-    });
-
-    api.bringFrameToFront({
-      from:'root',
-      to:'home-con'
-    });
-
-    fInitInfo();
-
-    // 个人资料
-    $('#personal').on('click', function() {
-      api.openWin({name:'personal',url:'personal.html',delay:0,bgColor:'#FFF'});
-    });
-
-    // 头像
-    $('#photo').on('click', function() {
-      api.openWin({name:'personal',url:'personal.html',delay:0,bgColor:'#FFF'});
-    });
-
-    // 充值
-    $('#recharge').on('click', function() {
-      var name = '';
-      var url = '';
-      if((api.systemType.toLowerCase()).indexOf('ios') > -1) {
-        // 打开ios充值页面
-        name = "recharge-ios";
-        url = 'recharge-ios.html';
-      } else{
-        // 打开安卓充值页面
-        name = "recharge-android";
-        url = 'recharge-android.html';
-      }
-      api.openWin({name: name,url: url,delay:0,bgColor:'#FFF'});
-    });
-
-    // 应用设置
-    $('.js-setting').on('click', function() {
-      api.openWin({name:'setting',url:'settings.html?user=true',delay:0,bgColor:'#FFF'});
-    });
-
-    // 登陆
-    $('#btn-login').on('click', function() {
-      api.openWin({
-        name:'landing',
-        url:'landing.html',
-        delay:0,
-        bgColor:'#FFF',
-        animation: {
-          type: 'movein',
-          subType: 'from_bottom',
-          duration: 300
-        },
-        pageParam: {name: 'home'}
-      });
-    });
-  };
-</script>
 </body>
 </html>

@@ -1,12 +1,6 @@
-function isEmptyObject(o){
-  for(var n in o){
-    return false;
-  }
-  return true;
-}
 function openFollows(){
   var user = $api.getStorage('user');
-  if(isEmptyObject(user)) {
+  if($.isEmptyObject(user)) {
     api.confirm({
       msg: '您尚未登录，是否现在登录？',
       buttons:[ '取消', '登录']
@@ -43,7 +37,7 @@ function openSearch(){
 //打开历史记录
 function openHistory(){
   var user = $api.getStorage('user');
-  if(isEmptyObject(user)) {
+  if($.isEmptyObject(user)) {
     api.confirm({
       msg: '您尚未登录，是否现在登录？',
       buttons:[ '取消', '登录']
@@ -52,7 +46,7 @@ function openHistory(){
         api.openWin({
           name:'landing',
           url:'./html/landing.html',
-          delay:100,
+          delay:0,
           bgColor:'#FFF',
           animation: {
             type: 'movein',
@@ -90,18 +84,44 @@ function isOpened(frmName){
 }
 
 function openTab(type, pageParam){
+  
   var self = this;
   var width = api.winWidth;
-  // var navPos = $('#footer').offset().top;
-  var headBottom = $('#head').offset().top + $('#head').height();
-  var headPos = 64;
-
-  // if(api.systemType === 'android') {
-  //   height = height - 25;
-  // }
-  var height = (api.winHeight*window.devicePixelRatio - $('#head').height() - $('#footer').height())/window.devicePixelRatio - 1;
+  var headPos = $('#head').outerHeight();
+  var height = 0;
+  if(api.systemType === 'ios') {
+    headPos = $('#head').outerHeight()/window.devicePixelRatio;
+    height = api.winHeight - $('#head').outerHeight()/window.devicePixelRatio - $('#footer').outerHeight()/window.devicePixelRatio;
+  } else {
+    height =  api.winHeight - $('#head').outerHeight() - $('#footer').outerHeight();
+    height = parseInt(height - 50/window.devicePixelRatio);
+  }
   //1 是底部线框
-  alert(height)
+
+
+  
+  if(api.systemType === 'ios') {  //IOS
+    if(!(api.systemVersion.indexOf('7.') > -1) && !(api.systemVersion.indexOf('8.') > -1)) {
+      height = height - window.devicePixelRatio*25
+    }
+  }else{  //Android
+    // switch(window.devicePixelRatio) {
+    //   case 1:
+    //     break;
+    //   case 1.5:
+    //     height = height - 1.5*26 + 2;
+    //     break;
+    //   case 2:
+    //     height = height - 30;
+    //     break;
+    //   case 2.5:
+    //     break;
+    //   case 3:
+    //     break;
+    // }
+  }
+
+
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';
@@ -112,10 +132,12 @@ function openTab(type, pageParam){
   });
 
   //默认把home-con放到后面
-  api.setFrameAttr({
-    name: 'home-con',
-    hidden: true
-  });
+  if(type != 'home'){
+    api.setFrameAttr({
+      name: 'home-con',
+      hidden: true
+    });
+  }
 
   //如果打开home页则不显示头部
   if(type == 'home'){
@@ -123,7 +145,7 @@ function openTab(type, pageParam){
     height = height + 64;
     bounces = false;
   }
-
+  
   //record page id
   window.prevPid = window.curPid;
   window.curPid = type;
@@ -154,7 +176,43 @@ function openTab(type, pageParam){
           w: width,
           h: height
         }
-    });
+      });
+      if(type == 'home'){
+        var headPos = 170/2 , height = api.winHeight;
+        if(api.systemType === 'ios') {
+          // height = (api.frameHeight*window.devicePixelRatio - headPos - $('#footer').outerHeight())/window.devicePixelRatio
+          // height = api.winHeight - 220;
+          height = api.winHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 130/window.devicePixelRatio - 210/window.devicePixelRatio;
+        } else {
+          // height = api.frameHeight - headPos - $('#footer').outerHeight();
+          // height = api.frameHeight - 220; 
+          if(window.devicePixelRatio == 3) {
+            height = api.frameHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 65 - 105 - 50/window.devicePixelRatio - 20;
+          }else{
+            height = api.frameHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 65 - 105 - 50/window.devicePixelRatio;
+          }
+        }
+        // alert(api.frameHeight)  615
+        // alert(api.winHeight)    640
+        // alert($('#footer').outerHeight())
+
+        var headPos = 105 + 65  //物理像素
+
+        api.openFrame({
+          name: 'home-con',
+          url: './html/home-con.html',
+          bounces: true,
+          opaque: true,
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true,
+          rect: {
+            x: 0,
+            y: headPos,   //65 广告条 130+
+            w: width,
+            h: parseInt(height)
+          }
+        });
+      }
 
 
     }
@@ -180,18 +238,34 @@ function changeTabBar(idx){
   }
   $('#footer-nav>li').eq(idx).find('i').addClass(navClass[idx]).removeClass(activeClass[idx]);
 }
-
+function openLiveList(){
+  openTab('live');
+  changeTabBar(1);
+}
 function openGameList(){
   openTab('game');
-  // var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
   changeTabBar(2);
 }
 function openGameLive(){
+  var self = this;
   var width = api.winWidth;
-  var navPos = $('#footer').offset().top;
-  var headPos = 64;
-  var headBottom = $('#head').offset().top + $('#head').height();
-  var height = (navPos - headBottom)*0.5;
+  var headPos = $('#head').outerHeight();
+  var height = 0;
+  if(api.systemType === 'ios') {
+    headPos = $('#head').outerHeight()/window.devicePixelRatio;
+    height = api.winHeight - $('#head').outerHeight()/window.devicePixelRatio - $('#footer').outerHeight()/window.devicePixelRatio;
+  } else {
+    height =  api.winHeight - $('#head').outerHeight() - $('#footer').outerHeight();
+    height = parseInt(height - 50/window.devicePixelRatio);
+  }
+  //1 是底部线框
+
+  if(api.systemType === 'ios') {  //IOS
+    if(!(api.systemVersion.indexOf('7.') > -1) && !(api.systemVersion.indexOf('8.') > -1)) {
+      height = height - window.devicePixelRatio*25
+    }
+  }else{  //Android
+  }
   api.openFrame({
     name: 'gameLive',
     url: './html/gameLive.html',
@@ -213,12 +287,7 @@ function openGameLive(){
     });
     window.curPid = 'gameLive';
   }
-  $('#footer-nav>li').removeClass('active');
-  $('#footer-nav>li').eq(2).addClass('active');
-  for(var i=0; i<navClass.length; i++){
-    $('#footer-nav').find('i').eq(i).addClass(navClass[i]+'-line').removeClass(navClass[i]);
-  }
-  $('#footer-nav>li').eq(2).find('i').removeClass('icon-more-line').addClass('icon-more');
+  changeTabBar(2);
 }
 
 //点击logo返回首页并刷新

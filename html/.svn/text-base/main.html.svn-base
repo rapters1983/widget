@@ -87,7 +87,7 @@
 
         <!-- 游戏分类 -->
         <div class="game-box">
-          <div class="game-name"><i class="icon-m icon-right js-toGameLive" tapmode="active" id="6"></i>英雄联盟</div>
+          <div class="game-name"><i class="icon-m icon-right js-toGameLive" id="6"></i>英雄联盟</div>
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix" id="lolList">
@@ -131,7 +131,7 @@
 
         <!-- 游戏分类 -->
         <div class="game-box">
-          <div class="game-name"><i class="icon-m icon-right js-toGameLive" tapmode="active" id="10"></i>Dota2</div>
+          <div class="game-name"><i class="icon-m icon-right js-toGameLive" id="10"></i>Dota2</div>
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix" id="dota2List">
@@ -175,7 +175,7 @@
 
         <!-- 游戏分类 -->
         <div class="game-box">
-          <div class="game-name"><i class="icon-m icon-right js-toGameLive" tapmode="active" id="13"></i>三国杀</div>
+          <div class="game-name"><i class="icon-m icon-right js-toGameLive" id="13"></i>三国杀</div>
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix" id="sgsList">
@@ -219,7 +219,7 @@
 
         <!-- 游戏分类 -->
         <div class="game-box">
-          <div class="game-name"><i class="icon-m icon-right js-toGameLive" tapmode="active" id="0"></i>其它</div>
+          <div class="game-name"><i class="icon-m icon-right js-toGameLive" id="0"></i>其它</div>
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix no-border" id="otherList">

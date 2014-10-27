@@ -4,10 +4,6 @@
   魏露霞
  */
 apiready = function(){
-
-  // 页面显示时触发
-  // api.addEventListener({name:'viewappear'}, function(ret, err){
-  // });
   // 页面消失时触发
   api.addEventListener({name:'viewdisappear'}, function(ret, err){
     initInfo();
@@ -16,7 +12,8 @@ apiready = function(){
   function initInfo() {
     $('input').val('');
   }
-
+  var zhanqi = api.require('zhanqiMD');
+  
   var ui = {
     $box_reg: $('#box-reg')
   , $btn_reg: $('#btn-reg')
@@ -38,7 +35,11 @@ apiready = function(){
   , view : function() {
       var self = this;
       //初始化内容高度
-      $('#conWrap, .register').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      if(api.systemType === 'ios') {
+        $('#conWrap, .register').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      }else{
+        $('#conWrap, .register').height(api.winHeight - $('.top-bar').height());
+      }
     }
   , listen : function()　{
       var self = this;
@@ -60,7 +61,7 @@ apiready = function(){
       // 关闭
       ui.$btn_close.on('click', function() {
         if(yp.query('isRoom')) {
-          var zhanqi = api.require('zhanqiMD');
+          
           zhanqi.onBackToLiveScene({});
         }
         api.closeWin({
@@ -307,12 +308,12 @@ apiready = function(){
         $api.setStorage('password', pwdCont);
       }
       if(yp.query('isRoom')) { //直播间
-        var zhanqi = api.require('zhanqiMD');
         zhanqi.onLoginSuccess({
            'userName': user['nickname']
           ,'userAvatar':user['avatar']
           ,'token':user['token']
         });
+        zhanqi.onBackToLiveScene({});
       }
       api.closeWin({
         name: 'landing',

@@ -5,11 +5,6 @@
   未完成：qq登陆
  */
 apiready = function(){
-
-  // 页面显示时触发
-  // api.addEventListener({name:'viewappear'}, function(ret, err){
-  //   api.alert({msg: 3});
-  // });
   // 页面消失时触发
   api.addEventListener({name:'viewdisappear'}, function(ret, err){
     fInitInfo();
@@ -27,18 +22,17 @@ apiready = function(){
     , $btn_qq: $('#btn-qq')
   };
 
+  var zhanqi = api.require('zhanqiMD');
+
   var oPage = {
-    init : function() {
+    init : function() {      
       this.view();
       this.listen();
     },
     view : function() {
-      //初始化内容高度
-      // $('#conWrap, .landing').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
     },
     listen : function()　{
       var self = this;
-
       // qq登陆
       ui.$btn_qq.on('click', function() {
         var iaf = api.require('qq');
@@ -89,7 +83,6 @@ apiready = function(){
       ui.$btn_close.on('click', function() {
 
         if(yp.query('isRoom')) {
-          var zhanqi = api.require('zhanqiMD');
           zhanqi.onBackToLiveScene({});
         }
 
@@ -98,7 +91,7 @@ apiready = function(){
           animation: {
             type: 'none',
             subType: 'from_top',
-            duration: 300
+            duration: 0
           }
         });
         api.closeWin({
@@ -179,7 +172,6 @@ apiready = function(){
         api.toast({msg: '密码格式不对！', duration: 1000, location: 'middle'});
         return;
       }
-
       yp.ajax({
         url : URLConfig('login')
       , method : 'post'
@@ -188,6 +180,7 @@ apiready = function(){
           values: {'account' : accountCont, 'password' : pwdCont}
         }
       }, function(ret, error) {
+        // alert(JSON.stringify(ret))
         if(ret) {
           if(ret.code == 0) {
             self.fLoginCallback(ret['data'], pwdCont);
@@ -220,9 +213,10 @@ apiready = function(){
           name : 'rooms',
           script : 'loginBackScript();'
         });
+        zhanqi.onBackToLiveScene({});
       }
       api.closeWin({
-        name: 'landing',
+        name: 'register',
         animation: {
           type: 'none'
         }

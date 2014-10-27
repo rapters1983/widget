@@ -1,5 +1,18 @@
+  $(function() {
+    var htmlStr = '';
+    if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
+      htmlStr = '<link rel="stylesheet" type="text/css" href="../script/lib/ratchet/ratchet.css">'
+    }else{
+      htmlStr = '<link rel="stylesheet" type="text/css" href="../script/lib/ratchet/ratchet-s.css">'
+    }
+    $('head').append(htmlStr)
+  });
+
+
+
   apiready = function() {
 
+    var zhanqi;
 
   try{
     var settings = $api.getStorage('settings') || {
@@ -11,7 +24,7 @@
        ,lookBack : false //回看功能
        ,model : 0 //模式选择
     }
-    var zhanqi = api.require('zhanqiMD');
+    zhanqi = api.require('zhanqiMD');
 
 // onBackToLiveScene 进入直播页（参数{}）
 
@@ -28,7 +41,11 @@
 
       view : function() {
         //初始化内容高度
-        $('#conWrap, .settings').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height())
+        if(api.systemType === 'ios') {
+          $('#conWrap, .settings').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+        }else{
+          $('#conWrap, .settings').height(api.winHeight - $('.top-bar').height());
+        }
 
         try{
           this.setData(settings);
@@ -47,7 +64,9 @@
       listen : function() {
         //关闭设置
         $('#closeSettting').on('click', function() {
-           zhanqi.onBackToLiveScene({});
+           if(yp.query('isRoom')) {
+            zhanqi.onBackToLiveScene({});
+           }
            api.closeWin();
         });
 
@@ -157,26 +176,26 @@
         });
 
         //回看功能
-        $('#lookBackSwitch').on('touchend', function() {
-          $(this).data('lookBack',!$(this).data('lookBack'));
-          settings['lookBack'] = $(this).data('lookBack');
-        });
+        // $('#lookBackSwitch').on('touchend', function() {
+        //   $(this).data('lookBack',!$(this).data('lookBack'));
+        //   settings['lookBack'] = $(this).data('lookBack');
+        // });
 
         //模式选择
-        $('#model').on('click',  'li', function() {
-          var name = $(this).attr('name');
-          if($('#model').find('i.active')[0])
-            $('#model').find('i.active').removeClass('icon-checked').addClass('icon-unchecked').removeClass('active');
-          $(this).find('i').removeClass('icon-unchecked').addClass('icon-checked').addClass('active');
-          switch(name) {
-            case 'video':
-              settings['model'] = 0;
-              break;
-            case 'text':
-              settings['model'] = 1;
-              break;
-          }
-        });
+        // $('#model').on('click',  'li', function() {
+        //   var name = $(this).attr('name');
+        //   if($('#model').find('i.active')[0])
+        //     $('#model').find('i.active').removeClass('icon-checked').addClass('icon-unchecked').removeClass('active');
+        //   $(this).find('i').removeClass('icon-unchecked').addClass('icon-checked').addClass('active');
+        //   switch(name) {
+        //     case 'video':
+        //       settings['model'] = 0;
+        //       break;
+        //     case 'text':
+        //       settings['model'] = 1;
+        //       break;
+        //   }
+        // });
 
         //提交
         $('#subBtn').on('click',  function() {
@@ -191,7 +210,10 @@
             
             settings['submit'] = true;
             zhanqi.onGetSettingDataFromWeb(settings);
-            zhanqi.onBackToLiveScene({});
+            if(yp.query('isRoom')) {
+              alert('leval')
+              zhanqi.onBackToLiveScene({});
+            }
             api.closeWin();
           }catch(e){
             alert(e)

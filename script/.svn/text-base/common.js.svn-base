@@ -104,13 +104,13 @@ $(function() {
     cssSrc = '../css/'
   }
 
-  if(window.devicePixelRatio != 2 &&  !window.navigator.appVersion.match(/iphone/gi)) {
-    htmlStr += '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
-    +'<link type="text/css" rel="styleSheet" href="'+cssSrc+'common-s.css" />'
-  }else{
+  if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
     scale = 0.5;
     htmlStr += '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
     +'<link type="text/css" rel="styleSheet" href="'+cssSrc+'common.css" />'
+  }else{
+    htmlStr += '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
+    +'<link type="text/css" rel="styleSheet" href="'+cssSrc+'common-s.css" />'
   }
   $('head').append(htmlStr)
 });

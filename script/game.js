@@ -1,4 +1,10 @@
-
+/* =============================================
+ * v20141026
+ * =============================================
+ * Copyright shihua
+ *
+ * 游戏列表
+ * ============================================= */
 apiready = function() {
 
   var ui = {
@@ -30,6 +36,7 @@ apiready = function() {
         self.ajaxing = 0;
         self.pageNow = 1;
         self.refresh = 1;
+        self.failCount = 0;
         self.loadData();
       });
       self.loadData();
@@ -56,6 +63,21 @@ apiready = function() {
         });
       });
 		},
+    overTime: function(){
+      var self = this;
+      if(self.failCount == 1){
+        clearTimeout(window.timer);
+        window.timer = null;
+        api.refreshHeaderLoadDone();
+        api.hideProgress();
+        api.toast({
+          msg: '网络连接失败',
+          duration:2000,
+          location: 'top'
+        });
+        return;
+      }
+    },
     loadData : function() {
       var self = this;
       if(self.ajaxing == 1){
@@ -106,27 +128,14 @@ apiready = function() {
           });
         }, nDelay);
       }
-      var ajaxTimer = null;
-      var ajaxDelay = 5000;
-      if (!ajaxTimer) {
-        ajaxTimer = setTimeout(function(){
-          api.hideProgress();
-          api.toast({
-            msg: '连接超时',
-            duration:2000,
-            location: 'top'
-          });
-        }, ajaxDelay);
-      }
       $.ajax({
         url : url,
         method : 'get',
         dataType : 'json',
+        timeout: 3000,
         success: function(ret) {
           clearTimeout(timer);
           timer = null;
-          clearTimeout(ajaxTimer);
-          ajaxTimer = null;
           api.hideProgress();
           if(ret) {
             if(ret['code'] == 0) {
@@ -147,21 +156,11 @@ apiready = function() {
           }
         },
         error: function() {
+          clearTimeout(timer);
+          timer = null;
+          api.hideProgress();
           self.failCount++;
-          self.loadData();
-          if(self.failCount == 3){
-            clearTimeout(timer);
-            timer = null;
-            clearTimeout(ajaxTimer);
-            ajaxTimer = null;
-            api.hideProgress();
-            api.toast({
-              msg: '网络连接失败',
-              duration:2000,
-              location: 'top'
-            });
-            self.failCount = 0;
-          }
+          self.overTime();
         }
       });
       api.refreshHeaderLoadDone();

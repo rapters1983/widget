@@ -26,7 +26,7 @@
     </div>
     <!-- top顶部 -->
     
-    <div id="conWrap" style="overflow:auto;">
+    <div id="conWrap" style="overflow:hidden;overflow-y:auto;">
       <!-- 充值成功 -->
       <div class="recharge-ok">
         <div class="title"><i class="icon-m icon-success"></i>充值成功</div>

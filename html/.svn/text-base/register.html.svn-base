@@ -27,7 +27,7 @@
     </div>
     <!-- top顶部 -->
     
-    <div id="conWrap" style="overflow:auto;">
+    <div id="conWrap" style="overflow:hidden;overflow-y:auto;">
       <!-- 主内容区域 -->
       <form class="hd" id="box-reg">
         <!-- Group -->

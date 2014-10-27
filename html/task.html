@@ -33,29 +33,6 @@
 <script src="../script/lib/jquery-2.1.1.min.js"></script>
 <script src="../script/api.js"></script>
 <script src="../script/common.js"></script>
-<script>
-apiready = function(){
-  var width = api.winWidth;
-  var height = api.winHeight;
-  if(api.systemType === 'android') {
-    height = height - 25;
-  }
-  var headPos = 64;
-  var conheight = height - headPos;
-  api.openFrame({
-    name: 'task-con',
-    url: './task-con.html',
-    bounces: true,
-    opaque: true,
-    vScrollBarEnabled: false,
-    rect: {
-      x: 0,
-      y: headPos,
-      w: width,
-      h: conheight
-    }
-  });
-}
-</script>
+<script src="../script/task.js"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     </div>
     <!-- top顶部 -->
     
-    <div id="conWrap" style="overflow:auto;">
+    <div id="conWrap" style="overflow:hidden;overflow-y:auto;">
     <!-- 问题反馈 -->
       <div class="bd">
         

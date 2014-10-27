@@ -27,7 +27,11 @@ apiready = function(){
     },
     view : function() {
       //初始化内容高度
-      $('#conWrap, .recharge').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      if(api.systemType === 'ios') {
+        $('#conWrap, .recharge').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      }else{
+        $('#conWrap, .recharge').height(api.winHeight - $('.top-bar').height());
+      }
       fInitInfo();
     },
     listen : function()　{

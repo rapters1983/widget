@@ -16,9 +16,14 @@ apiready = function(){
     },
     view : function() {
       //初始化内容高度
-      $('#conWrap, .personal-change-name').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      if(api.systemType === 'ios') {
+        $('#conWrap, .personal-center').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      }else{
+        $('#conWrap, .personal-center').height(api.winHeight - $('.top-bar').height());
+      }
+      
       // 渲染数据
-      fInitInfo();    
+      fInitInfo();
     },
     listen : function()　{
       var self = this;
@@ -49,8 +54,7 @@ apiready = function(){
                 'img_160_160': encodeBase64,
                 'img_160_100': encodeBase64,
                 'img_60_60': encodeBase64,
-                'img_30_30': encodeBase64,
-                'app' : 1
+                'img_30_30': encodeBase64
               }
             , beforeSend: function( xhr ) {
             }
@@ -69,10 +73,7 @@ apiready = function(){
                 api.alert({msg: e});
               }
             });
-          } else{
-            // 取消相册时不需要提示
-            // api.alert({msg:err.msg});
-          };
+          }
         });
       });
 
@@ -168,18 +169,18 @@ function fInitInfo() {
   var user = $api.getStorage('user');
   if(user) {
     $('#personal-photo img').attr('src', user.avatar + '-normal');
-    $('#personal-nickname span').text(user.nickname);
+    $('#personal-nickname .js-txt').text(user.nickname);
     var gender = '';
     if(user.gender == '2') {
       gender = '女';
     } else if(user.gender == '1') {
       gender = '男';
     }
-    $('#personal-gender span').text(gender);
+    $('#personal-gender .js-txt').text(gender);
     if(user.mobile.length) {
-      $('#personal-phone').data('isClick', false).html(user.mobile);
+      $('#personal-phone').data('isClick', false).find('.js-txt').html(user.mobile);
     } else{
-      $('#personal-phone').data('isClick', true).html('<span>未绑定</span><i class="icon-m icon-right"></i>');
+      $('#personal-phone').data('isClick', true).find('.js-txt').html('<span>未绑定</span><i class="icon-m icon-right"></i>');
     }
   }
 }

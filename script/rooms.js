@@ -69,12 +69,39 @@ apiready = function(){
     init : function() {
       this.view();
       this.listen();
+
+      api.openFrame({
+          name: 'gift',
+          url: '../html/gift.html?id='+yp.query('id'),
+          rect:{
+              x:0,
+              y:api.frameHeight - 330 - 50,
+              w:api.frameWidth,
+              h:330
+          },
+          pageParam: {name: 'test'},
+          bounces: true,
+          opaque: false,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled:true,
+          hScrollBarEnabled:true
+      });
+
+      api.setFrameAttr({
+        name: 'gift',
+        hidden: true
+      });
     },
 
     view : function() {
       //初始化
-      $('body').height(api.frameHeight*2).css('padding-top',api.frameWidth*9/16*2 + 20*2);
-      $('#liveRoom').height(api.frameHeight*2 - api.frameWidth*9/16*2 - 50*2 -20*2);
+      if(api.systemType === 'ios') {
+        $('body').height(api.frameHeight*2).css('padding-top',api.frameWidth*9/16*2 + 20*2);
+        $('#liveRoom').height(api.frameHeight*2 - api.frameWidth*9/16*2 - 50*2 -20*2);
+      }else{
+        $('body').height(api.frameHeight).css('padding-top',api.frameWidth*9/16 + 20);
+        $('#liveRoom').height(api.frameHeight - api.frameWidth*9/16 - 50 -20);
+      }
       
       var roomId = yp.query('id');
 
@@ -496,26 +523,24 @@ apiready = function(){
 
   window.onBtnBack = function() {
     api.closeWin();
+
+    api.setFrameAttr({
+      name: 'gift',
+      hidden: true
+    });
   }
   //打开礼物界面  
   window.onGiftBtnPressed = function() {
-      api.openFrame({
-        name: 'gift',
-        url: '../html/gift.html?id='+yp.query('id'),
-        rect:{
-            x:0,
-            y:api.frameHeight - 330 - 50,
-            w:api.frameWidth,
-            h:330
-        },
-        pageParam: {name: 'test'},
-        bounces: true,
-        opaque: false,
-        bgColor: 'rgba(0,0,0,0)',
-        vScrollBarEnabled:true,
-        hScrollBarEnabled:true
+    api.setFrameAttr({
+      name: 'gift',
+      hidden: false
     });
+    // api.bringFrameToFront({
+    //   from:'gift'
+    // });
   }
+
+
 
 
   //打开分享界面
@@ -581,9 +606,13 @@ function sendGiftBack(){
 }
 
 function closeGiftFrame() {
-    api.closeFrame({
-     name: 'gift'
-     });
+    // api.closeFrame({
+    //  name: 'gift'
+    //  });
+    api.setFrameAttr({
+      name: 'gift',
+      hidden: true
+    });
 
     api.closeFrame({
      name: 'share'

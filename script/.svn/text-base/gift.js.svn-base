@@ -5,7 +5,6 @@
  *
  * 送礼代码
  * ============================================= */
-
 apiready = function(){
   var ui = {
      $gameName : $('#gameName')

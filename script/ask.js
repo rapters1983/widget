@@ -19,8 +19,12 @@ apiready = function() {
     },
     view: function() {
       var self = this;
-      //初始化内容高度
-      $('#conWrap, .ask-page').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+     //初始化内容高度
+      if(api.systemType === 'ios') {
+        $('#conWrap, .ask-page').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      }else{
+        $('#conWrap, .ask-page').height(api.winHeight - $('.top-bar').height());
+      }
       fInitInfo();
     },
     listen: function()　{

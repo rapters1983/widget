@@ -26,6 +26,12 @@ yp.ready(function() {
   , unfollowNum: 0
   , view: function() {
       var self = this;
+      if(api.systemType === 'ios') {
+        $('#conWrap, .subscribe').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height()/window.devicePixelRatio - 60);
+      }else{
+        $('#conWrap').height(api.winHeight - $('.top-bar').height());
+      }
+      
       self.getFollowsData();
     }
   , listen: function() {

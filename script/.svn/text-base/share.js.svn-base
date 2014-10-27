@@ -27,7 +27,7 @@ apiready = function() {
 		listen : function() {
 			var self = this;
 			ui.$shareList.on('click', 'li', function() {
-				var name = $(this).attr('name');
+        var name = $(this).attr('name');
         self.shareIt(name);
 			});
 		},
@@ -38,33 +38,38 @@ apiready = function() {
         , title =  api.pageParam['title']
         , imgUrl =  api.pageParam['imgUrl']
       var url = 'http://www.zhanqi.tv/' + domain;
-
       switch(name) {
         case 'qq':
           qqObj.shareNews({
                url:url
               ,title:title
-              // ,description:yp.query('desc')
+              // ,description:'xxxx'
               ,imgUrl:imgUrl
+          }, function(ret, err) {
+            if(ret.status) {
+              api.alert({'msg' : '分享成功'});
+            }else{
+              api.alert({'msg' : err.msg});
+            }
           });
           break;
         case 'sina':
-
+          break;
         case 'weixin':
-          weiXin.sendRequest({
-              scene:'timeline',
-              contentType:'web_page',
-              title:'测试用标题',
-              description:'测试用内容',
-              thumbUrl:'fs://a.png',
-              contentUrl: 'http://www.baidu.com/'
-          },function(ret,err){
-              if(ret.status){
-                  api.alert({title: '发表微信',msg: '发表成功', buttons: ['确定']});
-              } else{
-                  api.alert({title: '发表失败',msg: err.msg,buttons: ['确定']});
-              };
-          });
+          // weiXin.sendRequest({
+          //     scene:'timeline',
+          //     contentType:'web_page',
+          //     title:'测试用标题',
+          //     description:'测试用内容',
+          //     thumbUrl:'fs://a.png',
+          //     contentUrl: 'http://www.baidu.com/'
+          // },function(ret,err){
+          //     if(ret.status){
+          //         api.alert({title: '发表微信',msg: '发表成功', buttons: ['确定']});
+          //     } else{
+          //         api.alert({title: '发表失败',msg: err.msg,buttons: ['确定']});
+          //     };
+          // });
           break;
 
       }

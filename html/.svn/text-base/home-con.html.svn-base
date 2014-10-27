@@ -67,7 +67,7 @@
   <script src="../script/api.js"></script>
   <script src="../script/lib/jquery-2.1.1.min.js"></script>
   <script src="../script/common.js"></script>
-  <script src="../script/home.js"></script>
+  <script src="../script/home-con.js"></script>
 </div>
 </body>
 </html>

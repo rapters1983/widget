@@ -27,32 +27,32 @@
     </div>
     <!-- top顶部 -->
 
-    <div id="conWrap" style="overflow:auto;">
+    <div id="conWrap" style="overflow:hidden;overflow-y:auto;">
     
       <!-- 个人资料信息 -->
       <div class="bd">
         <ul class="personal-message">
-          <li class="clearfix">
+          <li class="clearfix" id="personal-photo">
             <span class="til">头像</span>
-            <div class="mes-right" id="personal-photo">
+            <div class="mes-right">
               <img id="avatar" src="../image/user.jpg" alt=""><i class="icon-m icon-right"></i>
             </div>
           </li>
-          <li class="clearfix">
+          <li class="clearfix" id="personal-nickname">
             <span class="til">昵称</span>
-            <div class="mes-right" id="personal-nickname">
-              <span></span><i class="icon-m icon-right"></i>
+            <div class="mes-right">
+              <span class="js-txt"></span><i class="icon-m icon-right"></i>
             </div>
           </li>
-          <li class="clearfix">
+          <li class="clearfix" id="personal-gender">
             <span class="til">性别</span>
-            <div class="mes-right" id="personal-gender">
-              <span></span><i class="icon-m icon-right"></i>
+            <div class="mes-right">
+              <span class="js-txt"></span><i class="icon-m icon-right"></i>
             </div>
           </li>
-          <li class="clearfix">
+          <li class="clearfix" id="personal-phone">
             <span class="til">手机</span>
-            <div class="mes-right" id="personal-phone">
+            <div class="mes-right js-txt" >
               
             </div>
           </li>
@@ -75,5 +75,4 @@
 <script src="../script/common.js"></script>
 <script src="../script/personal.js"></script>
 </body>
-
 </html>

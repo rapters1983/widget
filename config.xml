@@ -33,13 +33,4 @@
     <param name="urlScheme" value="tencent101049628"/>
     <param name="apiKey" value="101049628"/>
   </feature>
-  <feature name="weiXin">
-    <param name="urlScheme" value="wx7779c7c063a9d4d9" />
-    <param name="apiKey" value="wx7779c7c063a9d4d9" />
-  </feature>
-  <feature name=" sinaWeiBo">
-      <param name="urlScheme" value=" wb1464272715" />
-      <param name="apiKey" value=" 1464272715" />
-      <param name="rgistUrl" value="http://www.api.com" />
-  </feature>
 </widget>

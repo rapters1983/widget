@@ -19,9 +19,15 @@
         <div class="top-bar" id="head">
           <div class="top-bar-bd">
             <ul class="operation-list">
-              <li onclick="openFollows()"><i class="icon-m icon-collect-line"></i></li>
-              <li><i class="icon-m icon-timepiece" onclick="openHistory()"></i></li>
-              <li id="btnSearch" onclick="openSearch()"><i class="icon-m icon-search"></i></li>
+              <li tapmode="active" onclick="openFollows()">
+                <i class="icon-m icon-collect-line"></i>
+              </li>
+              <li tapmode="active" onclick="openHistory()">
+                <i class="icon-m icon-timepiece"></i>
+              </li>
+              <li tapmode="active" onclick="openSearch()" id="btnSearch">
+                <i class="icon-m icon-search"></i>
+              </li>
             </ul>
             <img src="./image/logo.png" alt="" tapmode="active" onclick="openMain()">
           </div>

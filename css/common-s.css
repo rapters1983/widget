@@ -5,7 +5,7 @@
 *{-webkit-tap-highlight-color:rgba(0,0,0,0);}
 /*========= 用到icon-font的时候统一添加icon-m 统一小图标的颜色，大小；针对不同的小图标，也统一颜色 =======*/
 .icon-m{
-  font-size: 14px;
+  font-size: 18px;
   vertical-align: -1px;
   color: #999;
 }
@@ -361,7 +361,7 @@ body{
 }
 .home-page .top-bar .operation-list{
   float: right;
-  padding-right: 8px;
+  padding-right: 20px;
   margin-top: 5px;
 }
 .home-page .top-bar .operation-list li{
@@ -642,6 +642,31 @@ body{
   font-size: 18px;
   z-index: 2;
 }
+.recordUpBox{
+  width: 100%;
+  height: 100%;
+}
+/* lulu */
+.recordUpBox .up-div{
+  width: 115px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  background: #fff;
+  border:1px solid #ccc;
+  position: absolute;
+  left: 50%;
+  top: 55px;
+  margin-left: -57px;
+  border-radius: 5px;
+  font-size: 18px;
+  z-index: 2;
+}
+.recordUpBox .recordBg{
+  background: #000;
+  opacity: 0;
+}
+/* lulu */
 .record-no{
   text-align: center;
   font-size: 12px;
@@ -668,6 +693,7 @@ body{
 .landing .hd,.register .hd{
   padding: 20px;
   background:#eee;
+  margin-top: 64px;
 }
 .landing .hd li .indent,.register .hd li .indent{
   padding-left: 20px;
@@ -912,6 +938,7 @@ body{
   line-height: 40px;
   padding: 0 15px;
   border-bottom: 1px solid #cbcbcb;
+  margin-top: 64px;
 }
 .recharge .org{
   color: #f14500;
@@ -1000,6 +1027,7 @@ body{
 .recharge-count .btn-group{margin-top:12px;}
 .recharge-ok{
   padding: 15px;
+  margin-top: 64px;
 }
 .recharge-ok .title{
   text-align: center;
@@ -1032,6 +1060,7 @@ body{
 .personal-center .bd{
   margin-top: 34px;
   font-size: 16px;
+  margin-top: 64px;
 }
 .personal-center .bd .personal-message{
   border-top: 1px solid #ccc;
@@ -1073,6 +1102,7 @@ body{
 }
 .personal-change-name .bd{
   padding: 38px 7px;
+  margin-top: 64px;
 }
 .personal-change-name .change-name{
   width: 100%;
@@ -1090,6 +1120,7 @@ body{
 .personal-center .change-sex,
 .personal-center .bind-phone{
   padding: 34px 7px 7px;
+  margin-top: 64px;
 }
 .personal-center .change-sex ul li{
   height: 45px;
@@ -1257,6 +1288,7 @@ body{
 .feedback .bd{
   padding: 0 7px;
   font-size: 16px;
+  margin-top: 80px;
 }
 .feedback .bd .group{
   margin-top: 17px;
@@ -1452,7 +1484,7 @@ body{
   color: #fff;
 }
 .my-page .my-top .user-detail{
-  padding: 34px 0 0 7px;
+  padding: 34px 0 0 15px;
 }
 .my-page .my-top .user-photo{
   float: left;
@@ -1565,7 +1597,7 @@ body{
   border-top: 1px solid #ccc;
 }
 /*========== 部分页面头部固定样式20141023 ===========*/
-.settings,.subscribe,.record,.search-page,.register,.day-box{
+.settings,.subscribe,.search-page,.day-box{
   height: 700px;
   padding-top: 64px;
   overflow: auto;
@@ -1573,9 +1605,7 @@ body{
 }
 .settings .top-bar,
 .subscribe .top-bar,
-.record .top-bar,
 .search-page .top-bar,
-.register .top-bar,
 .day-box .top-bar{
   width: 100%;
   position: fixed;

@@ -26,7 +26,11 @@ yp.ready(function() {
   , view: function() {
       var self = this;
       //初始化内容高度
-      $('#conWrap, .subscribe').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      if(api.systemType === 'ios') {
+        $('#conWrap, .subscribe').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+      }else{
+        $('#conWrap, .subscribe').height(api.winHeight - $('.top-bar').height());
+      }
       // self.getFollowsData();
     }
   , listen: function() {
@@ -104,7 +108,7 @@ yp.ready(function() {
         var follows = data[i]['follows'];
         follows = follows>10000? Math.round(follows/1000)/10+'万' : follows;
         if(status == 0){
-          anchorHtml += '<li class="clearfix"><img src="'+avatar+'" alt="" class="user-photo">'
+          anchorHtml += '<li name="enterRooms" id="'+id+'" class="clearfix"><img src="'+avatar+'" alt="" class="user-photo">'
           + '<div class="pull-left"><p class="user-name">'+nickname+'</p>'
           + '<p class="order-count">'+follows+'</p></div></li>'
         }
