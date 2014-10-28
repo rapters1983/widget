@@ -816,8 +816,8 @@ body{
 }
 /*================================= 搜索页 20141017=========================*/
 .search-page .search-wrap{
-  height: 62px;
-  padding: 29px 15px 0 7px;
+  height: 50px;
+  padding: 15px 15px 0 7px;
 }
 .search-page .cancel-btn{
   float: right;
@@ -878,13 +878,13 @@ body{
   color: #999;
   padding-top: 3px;
 }
-.search-ok .tab-c{
+.tab-c{
   padding: 10px 7px;
   font-size: 12px;
   background: #eee;
   border-bottom: 1px solid #ccc;
 }
-.search-ok .tab-c ul li{
+.tab-c ul li{
   float: left;
   width: 50%;
   height: 30px;
@@ -894,14 +894,14 @@ body{
   background: #fff;
   color: #666;
 }
-.search-ok .tab-c ul li:first-child{
+.tab-c ul li:first-child{
   border-radius: 5px 0 0 5px;
 }
-.search-ok .tab-c ul li:last-child{
+.tab-c ul li:last-child{
   border-radius: 0 5px 5px 0;
   margin-left: -1px;
 }
-.search-ok .tab-c ul li.active{
+.tab-c ul li.active{
   background: #1398e2;
   border-color: #1398e2;
   color: #fff;
@@ -1604,7 +1604,7 @@ body{
 /*========== 部分页面头部固定样式20141023 ===========*/
 .scroll-wrap{
   height: 600px;
-  padding-top: 64px;
+  padding-top: 52px;
   overflow: auto;
   -webkit-overflow-scrolling:touch;
 }
@@ -1622,6 +1622,9 @@ body{
   top: 0;
   left: 0;
   z-index: 10;
+}
+.search-page .scroll-wrap{
+  padding-top: 103px;
 }
 /*============== 针对iphone6等高像素手机，顶部，头部变大20141024 ================*/
 @media (min-device-width : 375px) and (max-device-width : 667px){

@@ -31,6 +31,12 @@ apiready = function(){
       this.listen();
     },
     view : function() {
+      //初始化内容高度
+      if(api.systemType === 'ios') {
+        $('#conWrap, .landing').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height()) ;
+      }else{
+        $('#conWrap, .landing').height(api.winHeight - $('.top-bar').height());
+      }
     },
     listen : function()　{
       var self = this;
@@ -184,7 +190,6 @@ apiready = function(){
           values: {'account' : accountCont, 'password' : pwdCont}
         }
       }, function(ret, error) {
-        alert(JSON.stringify(ret))
         if(ret) {
           if(ret.code == 0) {
             self.fLoginCallback(ret['data'], pwdCont);

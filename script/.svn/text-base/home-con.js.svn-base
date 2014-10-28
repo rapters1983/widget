@@ -81,12 +81,12 @@ apiready = function() {
 	oPage.init();
 }
 
+var netWorkError = false;
+
 function fInitInfo() {
   $('#box-list').find('li.active').removeClass('active');
   var user = $api.getStorage('user');
   if(!$.isEmptyObject(user)) {
-    // 获取金币和战旗币
-    fGetWealth();
     // 我的订阅
     fGetSubscribe();
     // 观看历史
@@ -107,6 +107,7 @@ function fGetSubscribe() {
     url: URLConfig('followList')
   , method: 'get'
   , dataType: 'json'
+  , notLoad: true
   }, function(ret, err) {
     if(ret) {
       if(ret['code'] == 0) {
@@ -122,7 +123,10 @@ function fGetSubscribe() {
         api.alert({msg : ret['message']});
       }
     } else{
-      api.alert({msg: '网络似乎出现了异常'});
+      if(!netWorkError) {
+        api.alert({msg: '网络似乎出现了异常'});
+        netWorkError = true;
+      }
       // api.alert({
       //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
       // });
@@ -130,68 +134,44 @@ function fGetSubscribe() {
   });
 }
 function fGetHistory() {
-  $.ajax({
-    url : URLConfig('history'),
-    type : 'get',
-    dataType : 'json',
-    headers: {
-      'User-Agent': 'Zhanqi.tv Api Client'
-    },
-    success : function(data) {
-      if(data) {
-        if(data['code'] == 0) {
-          var dataArr = [];
-          var shtml = '';
-          $.each(data['data'],  function(key, val) {
-            dataArr.push(val);
-          });
-          var one = dataArr[0];
-          if(one) {
-            shtml = '最近观看“' + one.title + '”';
-          } else{ 
-            shtml = '暂时没有记录';
-          }
-          $('#historyInfo').html(shtml);
-        } else{
-          api.alert({msg : data['message']});
-        }
-      } else{
-        api.alert({
-          msg:'网络似乎出现了异常'
-        });
-      }
-    },
-    error: function() {
-      // alert('error')
-    }
-  });
-}
-function fGetWealth() {
   yp.ajax({
-    url: URLConfig('sGetRichUrl')
+    url: URLConfig('history')
   , method: 'get'
   , dataType: 'json'
-  }, function(ret, err) {
-    if(ret) {
-      if(ret['code'] == 0) {
-        $('#gold').text(ret.data.gold.count);
-        $('#coin').text(ret.data.coin.count);
+  , notLoad: true
+  }, function(data, err) {
+    if(data) {
+      if(data['code'] == 0) {
+        var dataArr = [];
+        var shtml = '';
+        $.each(data['data'],  function(key, val) {
+          dataArr.push(val);
+        });
+        var one = dataArr[0];
+        if(one) {
+          shtml = '最近观看“' + one.title + '”';
+        } else{ 
+          shtml = '暂时没有记录';
+        }
+        $('#historyInfo').html(shtml);
       } else{
-        api.alert({msg : ret['message']});
+        api.alert({msg : data['message']});
       }
     } else{
-      api.alert({msg: '网络似乎出现了异常'});
-      // api.alert({
-      //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-      // });
+      if(!netWorkError) {
+        api.alert({msg: '网络似乎出现了异常'});
+        netWorkError = true;
+      }
     }
   });
 }
+
 function fGetTask() {
   yp.ajax({
     url: URLConfig('sTaskCompleteStatusUrl')
   , method: 'post'
   , dataType: 'json'
+  , notLoad: true
   }, function(ret, err) {
     if(ret) {
       if(ret.code == 0) {
@@ -213,10 +193,10 @@ function fGetTask() {
         api.alert({msg: ret.message});
       }
     } else{
-      api.alert({msg: '网络似乎出现了异常'});
-      // api.alert({
-      //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-      // });
+      if(!netWorkError) {
+        api.alert({msg: '网络似乎出现了异常'});
+        netWorkError = true;
+      }
     }
   });
 }

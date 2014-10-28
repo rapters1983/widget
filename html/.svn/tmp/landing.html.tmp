@@ -11,7 +11,7 @@
   <title>登录</title>
 </head>
 <body>
-<div class="wrap" style="background: #eee">
+<div class="wrap">
   <!-- 登录 -->
   <div class="landing">
     <!-- top顶部 -->

@@ -11,7 +11,7 @@
   <title>登录</title>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" style="background: #eee">
   <!-- 登录 -->
   <div class="landing">
     <!-- top顶部 -->
@@ -27,7 +27,7 @@
     </div>
     <!-- top顶部 -->
 
-    <!-- <div id="conWrap" style="overflow:auto;"> -->
+    <div id="conWrap" class="scroll-wrap">
       <!-- 主内容区域 -->
       <div class="hd">
         <!-- Group -->
@@ -66,7 +66,7 @@
         </div>
       </div>
       <!-- 使用qq登录 -->
-    <!-- </div> -->
+    </div>
   </div>
   <!-- 登录 end-->
 </div>

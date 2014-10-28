@@ -873,13 +873,13 @@ body{
   color: #999;
   padding-top: 60px;
 }
-.search-ok .tab-c{
+.tab-c{
   padding: 20px 15px;
   font-size: 24px;
   background: #eee;
   border-bottom: 1px solid #ccc;
 }
-.search-ok .tab-c ul li{
+.tab-c ul li{
   float: left;
   width: 50%;
   height: 60px;
@@ -889,14 +889,14 @@ body{
   background: #fff;
   color: #666;
 }
-.search-ok .tab-c ul li:first-child{
+.tab-c ul li:first-child{
   border-radius: 5px 0 0 5px;
 }
-.search-ok .tab-c ul li:last-child{
+.tab-c ul li:last-child{
   border-radius: 0 5px 5px 0;
   margin-left: -1px;
 }
-.search-ok .tab-c ul li.active{
+.tab-c ul li.active{
   background: #1398e2;
   border-color: #1398e2;
   color: #fff;
@@ -1165,9 +1165,6 @@ body{
 .settings {
   padding-bottom: 73px;
   font-size: 32px;
-  height: 650px;
-  padding-top: 128px;
-  overflow: auto;
 }
 .settings .title-s{
   font-size: 26px;
@@ -1596,6 +1593,7 @@ body{
   overflow: auto;
   -webkit-overflow-scrolling:touch;
 }
+.landing .top-bar,
 .search-page .top-bar,
 .recharge .top-bar,
 .feedback .top-bar,
@@ -1610,6 +1608,10 @@ body{
   top: 0;
   left: 0;
   z-index: 10;
+}
+.search-page .top-bar{height: 229px;}
+.search-page .scroll-wrap{
+  padding-top: 229px;
 }
 /*============== 针对iphone6等高像素手机，顶部，头部变大20141024 ================*/
 @media (min-device-width : 375px) and (max-device-width : 667px){
