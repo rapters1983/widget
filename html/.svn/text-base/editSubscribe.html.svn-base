@@ -25,7 +25,7 @@
           <div class="top-bar-line"></div>
         </div>
         <!-- top顶部 -->
-        <div id="conWrap" style="overflow:auto;">
+        <div id="conWrap" class="scroll-wrap">
           <!-- 休息中模块 -->
           <div class="module">
             <div class="title">

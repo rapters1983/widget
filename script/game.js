@@ -132,6 +132,9 @@ apiready = function() {
         url : url,
         method : 'get',
         dataType : 'json',
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         timeout: 3000,
         success: function(ret) {
           clearTimeout(timer);

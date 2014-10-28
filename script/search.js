@@ -235,9 +235,7 @@ yp.ready(function() {
             api.alert({msg : ret['message']});
           }
         } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+          api.alert({msg: '网络似乎出现了异常'});
         }
       });
     }
@@ -275,12 +273,12 @@ yp.ready(function() {
         online = online>10000? Math.round(online/1000)/10+'万' : online;
         var follows = data[i]['docTag']['follows'];
         follows = follows>10000? Math.round(follows/1000)/10+'万' : follows;
-
+        var gender = data[i]['docTag']['gender']==2? 'icon-boy' : 'icon-girl';
         htmlStr += '<li name="enterRooms" id="'+id+'"><img src="'+spic+'" alt="" class="game-pic">'
         + '<div class="til">'+data[i]['title']+'</div>'
         + '<div class="detail clearfix">'
         + '<span class="audience"><i class="icon-m icon-spectator"></i>'+online+'</span>'
-        + '<p class="anchor"><i class="icon-m icon-boy"></i><span>'+nickname+'</span></p>'
+        + '<p class="anchor"><i class="icon-m '+gender+'"></i><span>'+nickname+'</span></p>'
         + '</div></li>';
       }
       ui.$liveList.append(htmlStr);

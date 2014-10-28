@@ -125,14 +125,16 @@ apiready = function(){
          script : 'sendGiftBack();'
         })
         // api.closeFrame();
-        api.setFrameAttr({
-          name: 'gift',
-          hidden: true
-        });
+        
 
         api.execScript({
          name : 'rooms',
-         script : 'changeGfitStatus();'
+         script : 'changeGiftStatus();'
+        });
+
+        api.setFrameAttr({
+          name: 'gift',
+          hidden: true
         });
 
 
@@ -142,7 +144,7 @@ apiready = function(){
 
     getGiftList : function(id) {
       var self = this;
-      api.ajax({
+      yp.ajax({
           url: URLConfig('getGiftList',{'roomid':id}),
           method: 'get',
           dataType: 'json'
@@ -153,7 +155,7 @@ apiready = function(){
 
     getRich : function() {
       var self = this;
-      api.ajax({
+      yp.ajax({
           url: URLConfig('getRich'),
           method: 'get',
           dataType: 'json'

@@ -82,6 +82,9 @@ apiready = function(){
         url : URLConfig('gameList',{'id' : id, 'start' : 1,'count' : 100}),
         type : 'get',
         dataType : 'JSON',
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         success : function(data) {
           if(data['code'] == 0) {
             self.renderGameData(data['data']);

@@ -12,8 +12,8 @@ apiready = function(){
   function initInfo() {
     $('input').val('');
   }
-  var zhanqi = api.require('zhanqiMD');
-  
+//var zhanqi = api.require('zhanqiMD');
+
   var ui = {
     $box_reg: $('#box-reg')
   , $btn_reg: $('#btn-reg')
@@ -36,7 +36,7 @@ apiready = function(){
       var self = this;
       //初始化内容高度
       if(api.systemType === 'ios') {
-        $('#conWrap, .register').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height());
+        $('#conWrap, .register').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height()) ;
       }else{
         $('#conWrap, .register').height(api.winHeight - $('.top-bar').height());
       }

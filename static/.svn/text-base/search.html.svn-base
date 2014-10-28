@@ -30,7 +30,7 @@
     </div>
     <!-- top顶部 -->
 
-    <!-- 搜索历史记录 -->
+    <!-- 搜索观看历史 -->
     <div class="search-history hidden">
       <ul>
         <li>
@@ -58,7 +58,7 @@
         </li>
       </ul>
     </div>
-    <!-- 搜索历史记录 end-->
+    <!-- 搜索观看历史 end-->
 
     <!-- 搜索无记录 -->
     <div class="search-no hidden">暂无搜索记录</div>

@@ -147,6 +147,9 @@ apiready = function() {
         method : 'get',
         dataType : 'json',
         timeout: 3000,
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         success: function(ret) {
           clearTimeout(timer);
           timer = null;
@@ -214,6 +217,7 @@ apiready = function() {
             var which = data[idx]['flashvars']? data[idx]['flashvars']['VideoType'] : 'VIDEO';
             var fansTitle = data[idx]['fansTitle'];
             var online = data[idx]['online']>10000? Math.round(data[idx]['online']/1000)/10+'万' : data[idx]['online'];
+            var gender = data[idx]['gender']==2? 'icon-boy' : 'icon-girl';
             $self.attr('id', id);
             $self.attr('which', which);
             $self.attr('fansTitle', fansTitle);
@@ -221,6 +225,7 @@ apiready = function() {
             $self.find('.til').empty().text(title);
             $self.find('.js-online').empty().text(online);
             $self.find('.js-nickname').empty().text(nickname);
+            $self.find('.anchor').find('i').removeClass('icon-boy icon-girl').addClass(gender);
           }else{
             $self.remove();
           }
@@ -236,6 +241,7 @@ apiready = function() {
           var which = data[idx]['flashvars']? data[idx]['flashvars']['VideoType'] : 'VIDEO';
           var fansTitle = data[idx]['fansTitle'];
           var online = data[idx]['online']>10000? Math.round(data[idx]['online']/1000)/10+'万' : data[idx]['online'];
+          var gender = data[idx]['gender']==2? 'icon-boy' : 'icon-girl';
           $self.attr('id', id);
           $self.attr('which', which);
           $self.attr('fansTitle', fansTitle);
@@ -243,8 +249,10 @@ apiready = function() {
           $self.find('.til').empty().text(title);
           $self.find('.js-online').empty().text(online);
           $self.find('.js-nickname').empty().text(nickname);
+          $self.find('.anchor').find('i').removeClass('icon-boy icon-girl').addClass(gender);
         })
         for(var i= loadedNum; i<data.length; i++) {
+          var gender = data[i]['gender']==2? 'icon-boy' : 'icon-girl';
           var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
           htmlStr += '<li id="'+data[i]['id']+'" name="enterRooms">'
           + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
@@ -252,7 +260,7 @@ apiready = function() {
           + '<div class="detail clearfix">'
           + '<span class="audience"><i class="icon-m icon-spectator"></i>'
           + '<span class="js-online">'+online+'</span></span>'
-          + '<p class="anchor"><i class="icon-m icon-boy"></i>'
+          + '<p class="anchor"><i class="icon-m '+gender+'"></i>'
           + '<span class="js-nickname">'+ data[i]['nickname'] +'</span></p></div></li>';
         }
         ui.$liveList.append(htmlStr);
@@ -263,13 +271,14 @@ apiready = function() {
       var width = api.winWidth;
       var htmlStr = '';
       for(var i=0; i<data.length; i++) {
+        var gender = data[i]['gender']==2? 'icon-boy' : 'icon-girl';
         var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
         htmlStr += '<li id="'+data[i]['id']+'" name="enterRooms">'
         + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
         + '<div class="til">'+data[i]['title']+'</div>'
         + '<div class="detail clearfix">'
         + '<span class="audience"><i class="icon-m icon-spectator"></i>'+online+'</span>'
-        + '<p class="anchor"><i class="icon-m icon-boy"></i>'
+        + '<p class="anchor"><i class="icon-m '+gender+'"></i>'
         + '<span class="js-nickname">'+ data[i]['nickname'] +'</span></p></div></li>';
       }
       ui.$liveList.append(htmlStr);

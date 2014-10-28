@@ -34,7 +34,7 @@ function openSearch(){
   api.openWin({name:'search',url:'./html/search.html',delay:0,bgColor:'#FFF'});
 }
 
-//打开历史记录
+//打开观看历史
 function openHistory(){
   var user = $api.getStorage('user');
   if($.isEmptyObject(user)) {
@@ -293,7 +293,7 @@ function fCheckLogin() {
   var user = $api.getStorage('user');
   var password = $api.getStorage('password');
   if(!user || !password) return;
-  api.ajax({
+  yp.ajax({
     url : URLConfig('login'),
     method : 'post',
     dataType : 'json',

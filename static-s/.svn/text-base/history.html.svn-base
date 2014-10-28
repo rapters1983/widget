@@ -11,18 +11,18 @@
   <link rel="stylesheet" href="../css/common-s.css">
   <link rel="stylesheet" href="../css/font-icon.css">
   <link rel="stylesheet" href="../css/api.css">
-  <title>历史记录</title>
+  <title>观看历史</title>
 </head>
 <body>
 <div class="wrap">
-  <!-- 历史记录 -->
+  <!-- 观看历史 -->
   <div class="subscribe">
     <!-- top顶部 -->
     <div class="top-bar">
       <div class="top-bar-bd">
         <p class="title">
           <i class="icon-m icon-left"></i>
-          历史记录
+          观看历史
         </p>
       </div>
       <div class="top-bar-line"></div>
@@ -95,7 +95,7 @@
     </div>
 
   </div>
-  <!-- 历史记录 end-->
+  <!-- 观看历史 end-->
 </div>
 </body>
 </html>

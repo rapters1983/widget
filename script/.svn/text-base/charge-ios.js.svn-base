@@ -104,7 +104,7 @@ apiready = function(){
 
 // 初始化页面数据
 function fInitInfo() {
-  api.ajax({
+  yp.ajax({
     url: URLConfig('sGetRichUrl')
   , method: 'get'
   , dataType: 'json'

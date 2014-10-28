@@ -198,6 +198,9 @@ apiready = function() {
         type : 'get',
         dataType : 'json',
         timeout : 2000,
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         success : function(data) {
           if(data) {
             if(data['code'] == 0) {
@@ -236,6 +239,8 @@ apiready = function() {
           ,'tapmode' : 'active'
         });
         var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
+        var gender = data[i]['gender']==2? 'icon-boy' : 'icon-girl';
+        $self.find('.anchor').find('i').removeClass('icon-boy icon-girl').addClass(gender);
         $self.find('.til').empty().text(data[i]['title']);
         $self.find('.js-online').empty().text(online);
         $self.find('.js-nickname').empty().text(data[i]['nickname']);
@@ -253,6 +258,8 @@ apiready = function() {
           ,'tapmode' : 'active'
         });
         var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
+        var gender = data[i]['gender']==2? 'icon-boy' : 'icon-girl';
+        $self.find('.anchor').find('i').removeClass('icon-boy icon-girl').addClass(gender);
         $self.find('.til').empty().text(data[i]['title']);
         $self.find('.js-online').empty().text(online);
         $self.find('.js-nickname').empty().text(data[i]['nickname']);

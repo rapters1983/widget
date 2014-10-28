@@ -18,10 +18,11 @@
     }
   }
   function fGetWealth() {
-    api.ajax({
+    yp.ajax({
       url: URLConfig('sGetRichUrl')
     , method: 'get'
     , dataType: 'json'
+    , notLoad: true
     }, function(ret, err) {
       if(ret) {
         if(ret['code'] == 0) {
@@ -31,9 +32,7 @@
           api.alert({msg : ret['message']});
         }
       } else{
-        api.alert({
-          msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-        });
+        api.alert({msg: '网络似乎出现了异常'});
       }
     });
   }
@@ -41,78 +40,6 @@
     api.addEventListener({name:'viewappear'}, function(ret, err){
       fInitInfo();
     });
-
-    // var width = api.winWidth;
-    // var height = api.winHeight;
-    // // if(api.systemType === 'android') {
-    // //   height = height - 25;
-    // // }
-    // var headPos = $('#head').outerHeight() + $('#advertisement').outerHeight();
-    // var footerPos = 50;
-    // var conheight = height - headPos - footerPos;
-
-    // conheight = api.winHeight*window.devicePixelRatio - headPos - footerPos - 1;
-    // conheight = parseInt(conheight/2);
-
-    // if(api.systemType === 'ios') {
-    //   headPos = parseInt(headPos/window.devicePixelRatio);
-    // }
-
-
-    var advertisement = $('#advertisement').outerHeight();
-    var width = api.winWidth;
-    var headPos = $('#head').height() + advertisement;
-    if(api.systemType === 'ios') {
-      headPos = headPos/window.devicePixelRatio;
-    }
-    var height = api.winHeight - headPos - 50;
-    //1 是底部线框
-
-    height = parseInt(height);
-    if(api.systemType === 'ios') {  //IOS
-      if(!(api.systemVersion.indexOf('7.') > -1) && !(api.systemVersion.indexOf('8.') > -1)) {
-        height = height - window.devicePixelRatio*25
-      }
-    }else{  //Android
-      switch(window.devicePixelRatio) {
-        case 1:
-          break;
-        case 1.5:
-          height = height - 1.5*26 + 2;
-          break;
-        case 2:
-          height = height - 20  - 5;
-          break;
-        case 2.5:
-          break;
-        case 3:
-          break;
-      }
-    }
-
-
-
-
-
-    // api.openFrame({
-    //   name: 'home-con',
-    //   url: '../html/home-con.html',
-    //   bounces: true,
-    //   opaque: true,
-    //   vScrollBarEnabled: true,
-    //   hScrollBarEnabled: true,
-    //   rect: {
-    //     x: 0,
-    //     y: headPos,
-    //     w: width,
-    //     h: height
-    //   }
-    // });
-
-    // api.bringFrameToFront({
-    //   from:'root',
-    //   to:'home-con'
-    // });
 
     fInitInfo();
 

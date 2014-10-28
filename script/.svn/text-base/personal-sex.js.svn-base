@@ -79,6 +79,9 @@ apiready = function(){
         url: url,
         method: 'post',
         dataType: 'json',
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         data: {
           values: {gender: ui.$box_editSex.find('li.active').data('type')}
         }

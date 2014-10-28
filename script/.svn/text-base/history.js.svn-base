@@ -57,6 +57,9 @@ apiready = function() {
         url : URLConfig('history'),
         type : 'get',
         dataType : 'json',
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         success : function(data) {
           api.hideProgress();
           if(data) {
@@ -97,6 +100,11 @@ apiready = function() {
             curLi.find('.til').text(dataArr[i]['title']);
             curLi.find('.js-online').text(dataArr[i]['online']?dataArr[i]['online'] : 0);
             curLi.find('.js-nickname').text(dataArr[i]['nickname']);
+            if(dataArr[i]['gender'] == 2) {
+              curLi.find('i[name=gender]').removeClass('icon-girl').addClass('icon-boy');
+            }else{
+              curLi.find('i[name=gender]').removeClass('icon-boy').addClass('icon-girl');
+            }
           }else{
             curLi.remove();
           }
@@ -111,6 +119,11 @@ apiready = function() {
             curLi.find('.til').text(dataArr[i]['title']);
             curLi.find('.js-online').text(dataArr[i]['online']?dataArr[i]['online'] : 0);
             curLi.find('.js-nickname').text(dataArr[i]['nickname']);
+            if(dataArr[i]['gender'] == 2) {
+              curLi.find('i[name=gender]').removeClass('icon-girl').addClass('icon-boy');
+            }else{
+              curLi.find('i[name=gender]').removeClass('icon-boy').addClass('icon-girl');
+            }
           }
         }
       }
@@ -122,7 +135,14 @@ apiready = function() {
         +'<div class="til">'+dataArr[i]['title']+'</div>'
         +'<div class="detail clearfix">'
         +'<span class="audience"><i class="icon-m icon-spectator"></i>'+ (dataArr[i]['online']?dataArr[i]['online'] : 0)+'</span>'
-        +'<p class="anchor"><i class="icon-m icon-boy"></i>'+dataArr[i]['nickname']+'</p>'
+        +'<p class="anchor">'
+        if(dataArr[i]['gender'] == 2) {
+          htmlStr += '<i class="icon-m icon-boy"></i>'
+        }else{
+          htmlStr += '<i class="icon-m icon-girl"></i>'
+        }
+
+        htmlStr += dataArr[i]['nickname']+'</p>'
         +'</div>'
         +'</li>';
         ++i;

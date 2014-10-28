@@ -46,19 +46,19 @@ apiready = function() {
     },
     getDataHistory : function() {
       var self = this;
-      api.showProgress({
-        style: 'default',
-        animationType: 'fade',
-        title: '正在登陆中...',
-        text: '先喝杯茶...',
-        modal: false
-      });
-      $.ajax({
-        url : URLConfig('history'),
-        type : 'get',
-        dataType : 'json',
-        success : function(data) {
-          api.hideProgress();
+      // api.showProgress({
+      //   style: 'default',
+      //   animationType: 'fade',
+      //   title: '正在登陆中...',
+      //   text: '先喝杯茶...',
+      //   modal: false
+      // });
+
+      yp.ajax({
+          url: URLConfig('history')
+        , method: 'get'
+        , dataType: 'json'
+        }, function(data, err) {
           if(data) {
             if(data['code'] == 0) {
               self.renderData(data['data']);
@@ -70,12 +70,38 @@ apiready = function() {
               msg:'网络似乎出现了异常'
             });
           }
-        },
-        error: function() {
-          api.hideProgress();
-          alert('error')
-        }
-      });
+        });
+
+
+      // yp.ajax({
+      //   url : URLConfig('history'),
+      //   method : 'get',
+      //   dataType : 'json',
+      //   // headers: {
+      //   //   'User-Agent': 'Zhanqi.tv Api Client'
+      //   // },
+      //   // beforeSend: function(xhr) {
+      //   //     xhr.setRequestHeader("User-Agent", "Zhanqi.tv Api Client");
+      //   // },
+      //   success : function(data) {
+      //     api.hideProgress();
+      //     if(data) {
+      //       if(data['code'] == 0) {
+      //         self.renderData(data['data']);
+      //       } else{
+      //         api.alert({msg : data['message']});
+      //       }
+      //     } else{
+      //       api.alert({
+      //         msg:'网络似乎出现了异常'
+      //       });
+      //     }
+      //   },
+      //   error: function() {
+      //     api.hideProgress();
+      //     alert('error')
+      //   }
+      // });
 
     },
     renderData : function(data) {
@@ -84,7 +110,7 @@ apiready = function() {
         dataArr.push(val);
       });
       if(!dataArr.length) {
-        ui.$historyList.empty().html('暂时无记录');
+        ui.$historyList.empty().html('<div style="text-align:center;  color:#999; padding:20px;">暂时无记录</div>');
         return;
       }
       var lis = ui.$historyList.find('li');
@@ -97,6 +123,11 @@ apiready = function() {
             curLi.find('.til').text(dataArr[i]['title']);
             curLi.find('.js-online').text(dataArr[i]['online']?dataArr[i]['online'] : 0);
             curLi.find('.js-nickname').text(dataArr[i]['nickname']);
+            if(dataArr[i]['gender'] == 2) {
+              curLi.find('i[name=gender]').removeClass('icon-girl').addClass('icon-boy');
+            }else{
+              curLi.find('i[name=gender]').removeClass('icon-boy').addClass('icon-girl');
+            }
           }else{
             curLi.remove();
           }
@@ -111,6 +142,11 @@ apiready = function() {
             curLi.find('.til').text(dataArr[i]['title']);
             curLi.find('.js-online').text(dataArr[i]['online']?dataArr[i]['online'] : 0);
             curLi.find('.js-nickname').text(dataArr[i]['nickname']);
+            if(dataArr[i]['gender'] == 2) {
+              curLi.find('i[name=gender]').removeClass('icon-girl').addClass('icon-boy');
+            }else{
+              curLi.find('i[name=gender]').removeClass('icon-boy').addClass('icon-girl');
+            }
           }
         }
       }
@@ -122,7 +158,14 @@ apiready = function() {
         +'<div class="til">'+dataArr[i]['title']+'</div>'
         +'<div class="detail clearfix">'
         +'<span class="audience"><i class="icon-m icon-spectator"></i>'+ (dataArr[i]['online']?dataArr[i]['online'] : 0)+'</span>'
-        +'<p class="anchor"><i class="icon-m icon-boy"></i>'+dataArr[i]['nickname']+'</p>'
+        +'<p class="anchor">'
+        if(dataArr[i]['gender'] == 2) {
+          htmlStr += '<i class="icon-m icon-boy"></i>'
+        }else{
+          htmlStr += '<i class="icon-m icon-girl"></i>'
+        }
+
+        htmlStr += dataArr[i]['nickname']+'</p>'
         +'</div>'
         +'</li>';
         ++i;

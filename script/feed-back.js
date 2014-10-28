@@ -108,6 +108,9 @@ apiready = function(){
         url : URLConfig('suggest'),
         method : 'post',
         dataType : 'json',
+        headers: {
+         'User-Agent': 'Zhanqi.tv Api Client'
+        },
         data: {
           values: {'content' : descCont, 'contact' : contactCont}
         }
@@ -120,9 +123,7 @@ apiready = function(){
             api.alert({msg: ret.message});
           }
         } else{
-          api.alert({
-            msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          });
+          api.alert({msg: '网络似乎出现了异常'});
         }
       });
     }

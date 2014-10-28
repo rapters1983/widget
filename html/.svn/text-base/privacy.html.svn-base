@@ -27,7 +27,7 @@
     </div>
     <!-- top顶部 -->
     
-    <div id="conWrap" style="overflow:hidden;overflow-y:auto;">
+    <div id="conWrap" class="scroll-wrap">
       <!-- 主内容区域 -->
       <div class="hd register-agreement">
         <ul>

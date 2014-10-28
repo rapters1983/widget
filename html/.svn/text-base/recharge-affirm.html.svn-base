@@ -26,7 +26,7 @@
     </div>
     <!-- top顶部 -->
     
-    <div id="conWrap" style="overflow:hidden;overflow-y:auto;">
+    <div id="conWrap" class="scroll-wrap">
       <div class="til" style="margin-top: 64px;">
         <span class="pull-right f26 org">充值就送等量战旗币！</span>
         支付宝充值

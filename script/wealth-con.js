@@ -82,6 +82,9 @@ function fGetDataIndex(url, callback) {
   api.ajax({
     url : url,
     method : 'get',
+    headers: {
+      'User-Agent': 'Zhanqi.tv Api Client'
+    },
     dataType : 'json'
   }, function(ret, err) {
       oPageConfig.isAjax = false;

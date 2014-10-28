@@ -103,7 +103,7 @@ function fInitInfo() {
   }
 }
 function fGetSubscribe() {
-  api.ajax({
+  yp.ajax({
     url: URLConfig('followList')
   , method: 'get'
   , dataType: 'json'
@@ -134,6 +134,9 @@ function fGetHistory() {
     url : URLConfig('history'),
     type : 'get',
     dataType : 'json',
+    headers: {
+      'User-Agent': 'Zhanqi.tv Api Client'
+    },
     success : function(data) {
       if(data) {
         if(data['code'] == 0) {
@@ -159,12 +162,12 @@ function fGetHistory() {
       }
     },
     error: function() {
-      alert('error')
+      // alert('error')
     }
   });
 }
 function fGetWealth() {
-  api.ajax({
+  yp.ajax({
     url: URLConfig('sGetRichUrl')
   , method: 'get'
   , dataType: 'json'

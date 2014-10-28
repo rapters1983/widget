@@ -22,7 +22,8 @@ apiready = function(){
     , $btn_qq: $('#btn-qq')
   };
 
-  var zhanqi = api.require('zhanqiMD');
+
+//var zhanqi = api.require('zhanqiMD');
 
   var oPage = {
     init : function() {      
@@ -30,6 +31,12 @@ apiready = function(){
       this.listen();
     },
     view : function() {
+      //初始化内容高度
+      if(api.systemType === 'ios') {
+        $('#conWrap, .landing').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height()) ;
+      }else{
+        $('#conWrap, .landing').height(api.winHeight - $('.top-bar').height());
+      }
     },
     listen : function()　{
       var self = this;
@@ -176,6 +183,9 @@ apiready = function(){
         url : URLConfig('login')
       , method : 'post'
       , dataType : 'json'
+      , headers: {
+         'User-Agent': 'Zhanqi.tv Api Client'
+        }
       , data: {
           values: {'account' : accountCont, 'password' : pwdCont}
         }

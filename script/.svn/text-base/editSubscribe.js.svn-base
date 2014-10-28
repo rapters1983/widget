@@ -27,9 +27,9 @@ yp.ready(function() {
   , view: function() {
       var self = this;
       if(api.systemType === 'ios') {
-        $('#conWrap, .subscribe').height(api.winHeight*window.devicePixelRatio - $('.top-bar').height()/window.devicePixelRatio - 60);
+        $('#conWrap').height(api.winHeight*window.devicePixelRatio - $('.top-bar').outerHeight());
       }else{
-        $('#conWrap').height(api.winHeight - $('.top-bar').height());
+        $('#conWrap').height(api.winHeight - $('.top-bar').outerHeight());
       }
       
       self.getFollowsData();

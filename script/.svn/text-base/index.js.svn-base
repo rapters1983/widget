@@ -34,7 +34,7 @@ function openSearch(){
   api.openWin({name:'search',url:'./html/search.html',delay:0,bgColor:'#FFF'});
 }
 
-//打开历史记录
+//打开观看历史
 function openHistory(){
   var user = $api.getStorage('user');
   if($.isEmptyObject(user)) {
@@ -101,11 +101,11 @@ function openTab(type, pageParam){
       height = height - window.devicePixelRatio*25
     }
   }
-
+  
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';
-
+  
   //默认把live关掉
   api.closeFrame({
     name: 'gameLive'
@@ -172,9 +172,6 @@ function openTab(type, pageParam){
             height = api.frameHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 65 - 105 - 50/window.devicePixelRatio;
           }
         }
-        // alert(api.frameHeight)  615
-        // alert(api.winHeight)    640
-        // alert($('#footer').outerHeight())
 
         var headPos = 105 + 65  //物理像素
 
@@ -296,7 +293,7 @@ function fCheckLogin() {
   var user = $api.getStorage('user');
   var password = $api.getStorage('password');
   if(!user || !password) return;
-  api.ajax({
+  yp.ajax({
     url : URLConfig('login'),
     method : 'post',
     dataType : 'json',
@@ -328,8 +325,8 @@ apiready = function() {
   var ui = {
   }
 
-  var zhanqi = api.require('zhanqiMD'); 
-  zhanqi.onAppStarted({});
+  // var zhanqi = api.require('zhanqiMD'); 
+  // zhanqi.onAppStarted({});
   var oPage = {
     init : function() {
       this.view();

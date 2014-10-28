@@ -124,6 +124,9 @@ apiready = function(){
           url: URLConfig('bindPhone'),
           method: 'post',
           dataType: 'json',
+          headers: {
+            'User-Agent': 'Zhanqi.tv Api Client'
+          },
           data: {
             values: {mobile: ui.$txt_phone.val()}
           }

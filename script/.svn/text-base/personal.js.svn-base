@@ -50,6 +50,9 @@ apiready = function(){
             $.ajax({
                url: URLConfig('avatar')
             , type: 'post'
+            , headers: {
+              'User-Agent': 'Zhanqi.tv Api Client'
+            }
             , data: {
                 'img_160_160': encodeBase64,
                 'img_160_100': encodeBase64,
@@ -141,6 +144,9 @@ apiready = function(){
       api.ajax({
         url: URLConfig('logout'),
         method: 'post',
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         dataType: 'json'
       }, function(ret, err){
         api.hideProgress();

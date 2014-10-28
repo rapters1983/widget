@@ -117,7 +117,7 @@ apiready = function(){
 
       this.initSettins();
       this.getGiftList(roomId);
-      this.setRecord(roomId);  //写入历史记录
+      this.setRecord(roomId);  //写入观看历史
     },
 
     initNativeModel : function(roomId) {
@@ -283,7 +283,7 @@ apiready = function(){
 
     getGiftList : function(id) {
       var self = this;
-      api.ajax({
+      yp.ajax({
           url: URLConfig('getGiftList',{'roomid':id}),
           method: 'get',
           dataType: 'json'
@@ -293,7 +293,7 @@ apiready = function(){
     },
 
     setRecord : function(roomId) {
-      api.ajax({
+      yp.ajax({
           url: URLConfig('recordWatch',{'roomid':roomId}),
           method: 'get',
           dataType: 'json'
@@ -619,7 +619,7 @@ function closeGiftFrame() {
      });
 }
 
-function changeGfitStatus() {
+function changeGiftStatus() {
     var zhanqi = api.require('zhanqiMD');
     zhanqi.closeGiftFrame({});
 }

@@ -108,6 +108,9 @@ apiready = function(){
         url : URLConfig('suggest'),
         method : 'post',
         dataType : 'json',
+        headers: {
+         'User-Agent': 'Zhanqi.tv Api Client'
+        },
         data: {
           values: {'content' : descCont, 'contact' : contactCont}
         }

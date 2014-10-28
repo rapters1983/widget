@@ -6,7 +6,7 @@
  * 框架方法和配置
  * ============================================= */
 
-var BASE_URL = 'http://m.zhanqi.tv/';
+var BASE_URL = 'http://www.zhanqi.tv/';
 // ajax地址配置
 // var URLConfig = {
 //   'gameIndex': BASE_URL + 'api/static/game.index/index.json'
@@ -132,6 +132,9 @@ function silenceLoginFn(pageName, fnName, isRoom, fn2Name) {
     url : URLConfig('login'),
     method : 'post',
     dataType : 'json',
+    headers: {
+     'User-Agent': 'Zhanqi.tv Api Client'
+    },
     data: {
       values: {'account' : user['account'], 'password' : password}
     }
@@ -265,9 +268,13 @@ var
     options = yp.mix({
       method: 'post'
     , dataType: 'json'
+    , headers: {
+       'User-Agent': 'Zhanqi.tv Api Client'
+      }
     }, options);
-
-    $.pub('loader/ajax/start', options);
+    if(!options['notLoad']) {
+      $.pub('loader/ajax/start', options);
+    }
     system.ajax(options, function(ret, err) {
       $.pub('loader/ajax/always', [ret, err]);
       if (ret) {
@@ -362,9 +369,14 @@ var
       }
     , loadBegin: function() {
         ++nCount;
+        // var isLoad = arguments[0];
         if (!timer) {
           timer = setTimeout(function() {
-            oLoading.toggle(true);
+            // if(isLoad) {
+            //   oLoading.toggle(false);
+            // }else{
+              oLoading.toggle(true);
+            // }
           }, nDelay);
         }
       }

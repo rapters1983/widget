@@ -110,6 +110,9 @@ apiready = function(){
         url: url,
         method: 'post',
         dataType: 'json',
+        headers: {
+          'User-Agent': 'Zhanqi.tv Api Client'
+        },
         data: {
           values: {'nickname': ui.$txt_nickname.val()}
         }

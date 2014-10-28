@@ -6,7 +6,7 @@
  * 框架方法和配置
  * ============================================= */
 
-var BASE_URL = 'http://m.zhanqi.tv/';
+var BASE_URL = 'http://www.zhanqi.tv/';
 // ajax地址配置
 // var URLConfig = {
 //   'gameIndex': BASE_URL + 'api/static/game.index/index.json'
@@ -132,6 +132,9 @@ function silenceLoginFn(pageName, fnName, isRoom, fn2Name) {
     url : URLConfig('login'),
     method : 'post',
     dataType : 'json',
+    headers: {
+     'User-Agent': 'Zhanqi.tv Api Client'
+    },
     data: {
       values: {'account' : user['account'], 'password' : password}
     }
