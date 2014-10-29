@@ -46,63 +46,23 @@ apiready = function() {
     },
     getDataHistory : function() {
       var self = this;
-      // api.showProgress({
-      //   style: 'default',
-      //   animationType: 'fade',
-      //   title: '正在登陆中...',
-      //   text: '先喝杯茶...',
-      //   modal: false
-      // });
-
       yp.ajax({
           url: URLConfig('history')
         , method: 'get'
         , dataType: 'json'
-        }, function(data, err) {
-          if(data) {
-            if(data['code'] == 0) {
-              self.renderData(data['data']);
-            } else{
-              api.alert({msg : data['message']});
-            }
+      }, function(data, err) {
+        if(data) {
+          if(data['code'] == 0) {
+            self.renderData(data['data']);
           } else{
-            api.alert({
-              msg:'网络似乎出现了异常'
-            });
+            api.alert({msg : data['message']});
           }
-        });
-
-
-      // yp.ajax({
-      //   url : URLConfig('history'),
-      //   method : 'get',
-      //   dataType : 'json',
-      //   // headers: {
-      //   //   'User-Agent': 'Zhanqi.tv Api Client'
-      //   // },
-      //   // beforeSend: function(xhr) {
-      //   //     xhr.setRequestHeader("User-Agent", "Zhanqi.tv Api Client");
-      //   // },
-      //   success : function(data) {
-      //     api.hideProgress();
-      //     if(data) {
-      //       if(data['code'] == 0) {
-      //         self.renderData(data['data']);
-      //       } else{
-      //         api.alert({msg : data['message']});
-      //       }
-      //     } else{
-      //       api.alert({
-      //         msg:'网络似乎出现了异常'
-      //       });
-      //     }
-      //   },
-      //   error: function() {
-      //     api.hideProgress();
-      //     alert('error')
-      //   }
-      // });
-
+        } else{
+          api.alert({
+            msg:'网络似乎出现了异常'
+          });
+        }
+      });
     },
     renderData : function(data) {
       var dataArr = [], oLen = ui.$historyList.find('li').length;

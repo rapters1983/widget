@@ -74,8 +74,6 @@ apiready = function() {
     overTime: function(){
       var self = this;
       if(self.failCount == 1){
-        clearTimeout(window.timer);
-        window.timer = null;
         api.refreshHeaderLoadDone();
         api.hideProgress();
         api.toast({
@@ -102,6 +100,7 @@ apiready = function() {
       	if(self.pageNow == 1){
 			  	self.refleshLiveList(data['rooms']);
           if(self.refresh == 1){
+            api.refreshHeaderLoadDone();
             api.toast({
               msg: '刷新完成',
               duration:2000,
@@ -126,76 +125,23 @@ apiready = function() {
 
     getDataIndex : function(url,callback) {
       var self = this;
-      var timer = null;
-      var nDelay = 500;
-      if (!timer) {
-        timer = setTimeout(function(){
-          api.showProgress({
-            style: 'default',
-            animationType: 'fade',
-            title: '努力加载中...',
-            text: '先喝杯茶...',
-            modal: false
-          });
-        }, nDelay);
-      }
-      $.ajax({
+      yp.ajax({
         url : url,
         method : 'get',
-        dataType : 'json',
-        headers: {
-          'User-Agent': 'Zhanqi.tv Api Client'
-        },
         timeout: 3000,
-        success: function(ret) {
-          clearTimeout(timer);
-          timer = null;
-          api.hideProgress();
-          if(ret) {
-            if(ret['code'] == 0) {
-              callback(ret['data']);
-
-            } else{
-              api.toast({
-                msg: '出错了，请重试！',
-                duration:2000,
-                location: 'top'
-              });
-            }
+        dataType : 'json'
+      }, function(ret, err) {
+        if(ret) {
+          if(ret['code'] == 0) {
+            callback(ret['data']);
           } else{
-            api.toast({
-              msg: '数据异常，请重试！',
-              duration:2000,
-              location: 'top'
-            });
+            api.alert({msg : ret['message']});
           }
-        },
-        error: function() {
-          clearTimeout(timer);
-          timer = null;
-          api.hideProgress();
+        } else{
           self.failCount++;
           self.overTime();
         }
       });
-      api.refreshHeaderLoadDone();
-      // yp.ajax({
-      //   url : url,
-      //   method : 'get',
-      //   dataType : 'json'
-      // }, function(ret, err) {
-      //   if(ret) {
-      //     if(ret['code'] == 0) {
-      //       callback(ret['data']);
-      //     } else{
-      //       api.alert({msg : ret['message']});
-      //     }
-      //   } else{
-      //     api.alert({
-      //       msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-      //     });
-      //   }
-      // });
     },
 
     refleshLiveList : function(data) {

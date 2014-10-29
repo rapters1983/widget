@@ -174,45 +174,23 @@ apiready = function() {
 
     getDataIndex : function(url,callback) {
       var self = this;
-      $.ajax({
+      yp.ajax({
         url : url,
-        type : 'get',
-        dataType : 'json',
-        headers: {
-         'User-Agent': 'Zhanqi.tv Api Client'
-        },
-        success : function(ret) {
-          if(ret) {
-            if(ret['code'] == 0) {
-              callback(ret);
-            } else {
-              api.alert({msg : ret['message']});
-            }
+        method : 'get',
+        timeout : 2000,
+        dataType : 'json'
+      }, function(ret, err) {
+        if(ret) {
+          if(ret['code'] == 0) {
+            callback(ret);
           } else{
-            self.failCount++;
-            self.overTime();
+            api.alert({msg : ret['message']});
           }
+        } else{
+          self.failCount++;
+          self.overTime();
         }
       });
-      // return;
-      // yp.ajax({
-      //   url : url,
-      //   method : 'get',
-      //   timeout : 2000,
-      //   dataType : 'json'
-      // }, function(ret, err) {
-      //   alert('success back')
-      //   if(ret) {
-      //     if(ret['code'] == 0) {
-      //       callback(ret);
-      //     } else {
-      //       api.alert({msg : ret['message']});
-      //     }
-      //   } else{
-      //     self.failCount++;
-      //     self.overTime();
-      //   }
-      // });
       // $.ajax({
       //   url : url,
       //   type : 'get',
@@ -295,11 +273,6 @@ apiready = function() {
       //初始化
       var width = api.winWidth;
       var htmlStr = '';
-      if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
-        $('.hd').height(width*9/16*window.devicePixelRatio);
-      }else{
-        $('.hd').height(parseInt(width*9/16));       
-      }
       for(var i=0; i<data.length; i++) {
         var id = data[i]['roomId'];
         var spic = data[i]['spic'];
@@ -309,15 +282,10 @@ apiready = function() {
           spic = data[i]['room']['bpic'];
           title = data[i]['room']['title'];
         }
-
         htmlStr += '<li name="enterRooms" tapmode="active" id="'+ id +'">'
-        if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
-          htmlStr += '<img src="'+ spic +'" style="height:'+width*9/16*window.devicePixelRatio+'px" class="show-pic" />'
-        }else{
-          htmlStr += '<img src="'+ spic +'" style="height:'+width*9/16+'px" class="show-pic" />'
-        }
-          htmlStr +=  '<p class="title">'+ title +'</p>'
-                  +  '</li>';
+                +  '<img src="'+ spic +'" height="'+api.winWidth*9/16+'" class="show-pic" />'
+                +  '<p class="title">'+ title +'</p>'
+                +  '</li>';
       }
       var pointerStr = '<span class="dot active"></span>';
       for(var i=1; i<data.length; i++) {

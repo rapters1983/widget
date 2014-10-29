@@ -12,7 +12,8 @@ apiready = function(){
   function initInfo() {
     $('input').val('');
   }
-//var zhanqi = api.require('zhanqiMD');
+  
+  var zhanqi = api.require('zhanqiMD');
 
   var ui = {
     $box_reg: $('#box-reg')

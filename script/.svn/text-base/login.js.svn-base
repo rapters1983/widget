@@ -23,7 +23,7 @@ apiready = function(){
   };
 
 
-//var zhanqi = api.require('zhanqiMD');
+  var zhanqi = api.require('zhanqiMD');
 
   var oPage = {
     init : function() {      

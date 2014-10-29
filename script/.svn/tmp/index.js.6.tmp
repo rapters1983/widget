@@ -95,6 +95,13 @@ function openTab(type, pageParam){
   } else {
     height =  api.winHeight - $('#head').outerHeight() - $('#footer').outerHeight();
   }
+  
+  if(api.systemType === 'ios') {  //IOS
+    if(!(api.systemVersion.indexOf('7.') > -1) && !(api.systemVersion.indexOf('8.') > -1)) {
+      height = height - window.devicePixelRatio*25
+    }
+  }
+  
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';
@@ -118,6 +125,7 @@ function openTab(type, pageParam){
     height = height + 64;
     bounces = false;
   }
+  
   //record page id
   window.prevPid = window.curPid;
   window.curPid = type;
@@ -198,29 +206,9 @@ function openTab(type, pageParam){
   }
 }
 var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
-var curLi = 0;
 function changeTabBar(idx){
-  var which = 0;
-  switch(window.curPid) {
-    case 'main':
-      which = 0;
-      break;
-    case 'live':
-      which = 1;
-      break;
-    case 'game':
-      which = 2;
-      break;
-    case 'home':
-      which = 3;
-      break;
-  }
-  alert(window.curPid +'  ' + idx)
-  if( idx == which ) return;
-  alert('go')
-
   var activeClass = ['icon-home-line','icon-directseeding-line','icon-more-line','icon-my-line'];
-  $('#footer-nav>li.active').removeClass('active');
+  $('#footer-nav>li').removeClass('active');
   $('#footer-nav>li').eq(idx).addClass('active');
   for(var i=0; i<navClass.length; i++){
     $('#footer-nav').find('i').eq(i).addClass(activeClass[i]).removeClass(navClass[i]);
@@ -337,8 +325,8 @@ apiready = function() {
   var ui = {
   }
 
-  var zhanqi = api.require('zhanqiMD'); 
-  zhanqi.onAppStarted({});
+  // var zhanqi = api.require('zhanqiMD'); 
+  // zhanqi.onAppStarted({});
   var oPage = {
     init : function() {
       this.view();
@@ -390,8 +378,8 @@ apiready = function() {
         , 'game'
         , 'home'
         ];
-        changeTabBar(idx);
         openTab(frame[idx]);
+        changeTabBar(idx);
       });
     }
 

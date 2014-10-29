@@ -114,24 +114,14 @@ apiready = function(){
       if( !oCheck.isok ){
         self.fDealCheckResult(ui.$txt_phone, oCheck.message, oCheck.isok);
       } else{
-        api.showProgress({
-          style: 'default',
-          animationType: 'fade',
-          title: '正在发送',
-          modal: true
-        });
-        api.ajax({
+        yp.ajax({
           url: URLConfig('bindPhone'),
           method: 'post',
           dataType: 'json',
-          headers: {
-            'User-Agent': 'Zhanqi.tv Api Client'
-          },
           data: {
             values: {mobile: ui.$txt_phone.val()}
           }
         }, function(ret, err){
-          api.hideProgress();
           if(ret) {
             if(ret.code == 0) {
               self.fSetTime();
@@ -140,9 +130,6 @@ apiready = function(){
             }
           } else{
             api.alert({msg: '网络似乎出现了异常'});
-            // api.alert({
-            //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-            // });
           }
         });
       }
@@ -197,15 +184,8 @@ apiready = function(){
           params[paramArray[i]['name']] = paramArray[i]['value'];
         }
       }
-
-      api.showProgress({
-        style: 'default',
-        animationType: 'fade',
-        title: '正在绑定中...',
-        text: '先喝杯茶...',
-        modal: false
-      });
-      api.ajax({
+      alert(JSON.stringify(params));
+      yp.ajax({
         url: URLConfig('bindPhone'),
         method: 'post',
         dataType: 'json',
@@ -213,14 +193,12 @@ apiready = function(){
           values: params
         }
       }, function(ret, err){
-        api.hideProgress();
         if(ret) {
           if(ret.code == 0) {
             var user = $api.getStorage('user');
-            for(var p in params) {
-              user[p] = params[p];
-            }
+            user.mobile = params.mobile;
             $api.setStorage('user', user);
+            alert(JSON.stringify(user));
             api.execScript({
               name: 'personal',
               script: 'fInitInfo();'
@@ -237,9 +215,6 @@ apiready = function(){
           }
         } else{
           api.alert({msg: '网络似乎出现了异常'});
-          // api.alert({
-          //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          // });
         }
       });
     }

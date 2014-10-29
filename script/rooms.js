@@ -641,6 +641,9 @@ function failBack() {
 }
 
 function getRoomInfo(data) {
+  if(typeof data == 'string') {
+    data = eval('('+data+')');
+  }
   fansTitle = data['fansTitle'];
   $('#anchorName').text(data['nickname']);
 }

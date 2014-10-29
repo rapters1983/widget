@@ -28,7 +28,9 @@
       <div class="top-bar-line"></div>
     </div>
     <!-- top顶部 -->
-    <!-- 休息中模块 -->
+
+    <div class="scroll-wrap">
+      <!-- 休息中模块 -->
     <div class="module">
       <div class="title">
         <ul class="subscribe-edit-btn clearfix">
@@ -85,6 +87,8 @@
       </div>
     </div>
     <!-- 休息中模块 end-->
+    </div>
+    
 
   </div>
   <!-- 编辑订阅 end-->

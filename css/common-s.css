@@ -555,7 +555,6 @@ body{
 .game-list-wrap ul li .game-a{
   display: inline-block;
   width: 100%;
-  height: 150px;
   background: #fff;
   border:1px solid #c5c6c6;
   padding: 3px;
@@ -1604,12 +1603,16 @@ body{
 /*========== 部分页面头部固定样式20141023 ===========*/
 .scroll-wrap{
   height: 600px;
-  padding-top: 52px;
+  padding-top: 50px;
   overflow: auto;
   -webkit-overflow-scrolling:touch;
 }
-.search-page .top-bar,
+.record .top-bar,
+.task .top-bar,
 .recharge .top-bar,
+.game-list .top-bar,
+.landing .top-bar,
+.search-page .top-bar,
 .feedback .top-bar,
 .subscribe .top-bar,
 .personal-center .top-bar,
@@ -1623,6 +1626,7 @@ body{
   left: 0;
   z-index: 10;
 }
+.search-page .top-bar{height: 103px;}
 .search-page .scroll-wrap{
   padding-top: 103px;
 }
@@ -1632,7 +1636,16 @@ body{
 .footer-bar ul li{padding-top: 25px;}
 .footer-bar .icon-m{font-size: 48px;}
 }
-
+@media (min-device-width : 768px) and (max-device-width : 1024px){
+  .footer-bar{height: 140px; font-size: 32px;}
+  .footer-bar ul li{padding-top: 25px;}
+  .footer-bar .icon-m{font-size: 48px;}
+  .top-bar{height: 150px;}
+  .top-bar-bd{height: 146px;}
+  .home-page .top-bar .icon-m{font-size: 48px;}
+  .home-page .top-bar img{width: 126px; height: 72px;}
+  .scroll-wrap{padding-top: 150px;}
+}
 
 /*================= 安卓手机解决头部状态栏问题 ==========================*/
 .top-bar{height: 50px;}

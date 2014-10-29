@@ -67,26 +67,14 @@ apiready = function(){
         self.fDealCheckResult(ui.$box_editSex, '请选择性别！', false);
         return;
       }
-
-      api.showProgress({
-        style: 'default',
-        animationType: 'fade',
-        title: '正在保存中...',
-        text: '先喝杯茶...',
-        modal: false
-      });
-      api.ajax({
+      yp.ajax({
         url: url,
         method: 'post',
         dataType: 'json',
-        headers: {
-          'User-Agent': 'Zhanqi.tv Api Client'
-        },
         data: {
           values: {gender: ui.$box_editSex.find('li.active').data('type')}
         }
       }, function(ret, err){
-        api.hideProgress();
         if(ret) {
           if(ret.code == 0) {
             $api.setStorage('user', ret.data);
@@ -106,9 +94,6 @@ apiready = function(){
           }
         } else{
           api.alert({msg: '网络似乎出现了异常'});
-          // api.alert({
-          //   msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-          // });
         }
       });
     }

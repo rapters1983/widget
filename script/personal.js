@@ -47,21 +47,20 @@ apiready = function(){
         }, function(ret, err){ 
           if (ret) {
             var encodeBase64 = ret.base64Data.replace('data:image/png;base64,','');
-            $.ajax({
-               url: URLConfig('avatar')
-            , type: 'post'
-            , headers: {
-              'User-Agent': 'Zhanqi.tv Api Client'
-            }
+            var url = URLConfig('avatar') + '?sid=' + $api.getStorage('user')['token'];
+            yp.ajax({
+              url: url
+            , method: 'post'
+            , dataType: 'json'
             , data: {
-                'img_160_160': encodeBase64,
-                'img_160_100': encodeBase64,
-                'img_60_60': encodeBase64,
-                'img_30_30': encodeBase64
+                values: {
+                  'img_160_160': encodeBase64,
+                  'img_160_100': encodeBase64,
+                  'img_60_60': encodeBase64,
+                  'img_30_30': encodeBase64
+                }
               }
-            , beforeSend: function( xhr ) {
-            }
-            , success: function(ret) {
+            }, function(ret, error) {
                 var redata = ret.substring(2,ret.length);
                 var data = eval('('+redata+')')
                 $('#avatar').attr('src',data[0]);
@@ -71,10 +70,6 @@ apiready = function(){
                   user.avatar = avatar;
                 };
                 $api.setStorage('user', user);
-            }
-            , error: function(e) {
-                api.alert({msg: e});
-              }
             });
           }
         });

@@ -95,13 +95,6 @@ function openTab(type, pageParam){
   } else {
     height =  api.winHeight - $('#head').outerHeight() - $('#footer').outerHeight();
   }
-  
-  if(api.systemType === 'ios') {  //IOS
-    if(!(api.systemVersion.indexOf('7.') > -1) && !(api.systemVersion.indexOf('8.') > -1)) {
-      height = height - window.devicePixelRatio*25
-    }
-  }
-  
   var bounces = true;
   var vScrollBarEnabled = false;
   type = type || 'main';
@@ -125,7 +118,6 @@ function openTab(type, pageParam){
     height = height + 64;
     bounces = false;
   }
-  
   //record page id
   window.prevPid = window.curPid;
   window.curPid = type;
@@ -158,22 +150,14 @@ function openTab(type, pageParam){
         }
       });
       if(type == 'home'){
-        var headPos = 170/2 , height = api.winHeight;
+        var height = api.winHeight;
         if(api.systemType === 'ios') {
-          // height = (api.frameHeight*window.devicePixelRatio - headPos - $('#footer').outerHeight())/window.devicePixelRatio
-          // height = api.winHeight - 220;
-          height = api.winHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 130/window.devicePixelRatio - 210/window.devicePixelRatio;
+          height = api.winHeight -  $('#footer').outerHeight()/window.devicePixelRatio  - 105;
         } else {
-          // height = api.frameHeight - headPos - $('#footer').outerHeight();
-          // height = api.frameHeight - 220; 
-          if(window.devicePixelRatio == 3) {
-            height = api.frameHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 65 - 105 - 50/window.devicePixelRatio - 20;
-          }else{
-            height = api.frameHeight -  $('#footer').outerHeight()/window.devicePixelRatio - 65 - 105 - 50/window.devicePixelRatio;
-          }
+          height = api.frameHeight -  $('#footer').outerHeight() - 105;
         }
-
-        var headPos = 105 + 65  //物理像素
+        
+        var headPos = 105;   //物理像素 头部
 
         api.openFrame({
           name: 'home-con',
@@ -206,9 +190,27 @@ function openTab(type, pageParam){
   }
 }
 var navClass = ['icon-home','icon-directseeding','icon-more','icon-my'];
+var curLi = 0;
 function changeTabBar(idx){
+  // var which = 0;
+  // switch(window.curPid) {
+  //   case 'main':
+  //     which = 0;
+  //     break;
+  //   case 'live':
+  //     which = 1;
+  //     break;
+  //   case 'game':
+  //     which = 2;
+  //     break;
+  //   case 'home':
+  //     which = 3;
+  //     break;
+  // }
+  // if( idx == which ) return;
+  
   var activeClass = ['icon-home-line','icon-directseeding-line','icon-more-line','icon-my-line'];
-  $('#footer-nav>li').removeClass('active');
+  $('#footer-nav>li.active').removeClass('active');
   $('#footer-nav>li').eq(idx).addClass('active');
   for(var i=0; i<navClass.length; i++){
     $('#footer-nav').find('i').eq(i).addClass(activeClass[i]).removeClass(navClass[i]);
@@ -325,8 +327,8 @@ apiready = function() {
   var ui = {
   }
 
-  // var zhanqi = api.require('zhanqiMD'); 
-  // zhanqi.onAppStarted({});
+  var zhanqi = api.require('zhanqiMD'); 
+  zhanqi.onAppStarted({});
   var oPage = {
     init : function() {
       this.view();
@@ -378,8 +380,8 @@ apiready = function() {
         , 'game'
         , 'home'
         ];
-        openTab(frame[idx]);
         changeTabBar(idx);
+        openTab(frame[idx]);
       });
     }
 

@@ -101,8 +101,6 @@ apiready = function() {
     overTime: function(){
       var self = this;
       if(self.failCount == 1){
-        clearTimeout(window.timer);
-        window.timer = null;
         api.refreshHeaderLoadDone();
         api.hideProgress();
         api.toast({
@@ -116,21 +114,6 @@ apiready = function() {
 
     loadData : function() {
       var self = this;
-      //设置定时器
-      window.timer = null;
-      window.nDelay = 500;
-      if (!window.timer) {
-        window.timer = setTimeout(function(){
-          api.showProgress({
-            style: 'default',
-            animationType: 'fade',
-            title: '努力加载中...',
-            text: '先喝杯茶...',
-            modal: false
-          });
-        }, nDelay);
-      }
-
       //slider
       self.getDataIndex(URLConfig('bannerIndex', {
         'id' : +new Date()
@@ -172,8 +155,6 @@ apiready = function() {
         self.renderGameLiveData(data['data']['rooms'], ui.$otherList);
         api.hideProgress();
         api.refreshHeaderLoadDone();
-        clearTimeout(window.timer);
-        window.timer = null;
         if(self.refresh == 1){
           api.toast({
             msg: '刷新完成',
@@ -197,34 +178,73 @@ apiready = function() {
         url : url,
         type : 'get',
         dataType : 'json',
-        timeout : 2000,
         headers: {
-          'User-Agent': 'Zhanqi.tv Api Client'
+         'User-Agent': 'Zhanqi.tv Api Client'
         },
-        success : function(data) {
-          if(data) {
-            if(data['code'] == 0) {
-              callback(data);
-            } else{
-              api.toast({
-                msg: '出错了，请重试！',
-                duration: 2000,
-                location: 'top'
-              });
+        success : function(ret) {
+          if(ret) {
+            if(ret['code'] == 0) {
+              callback(ret);
+            } else {
+              api.alert({msg : ret['message']});
             }
           } else{
-            api.toast({
-              msg: '数据异常，请重试！',
-              duration: 2000,
-              location: 'top'
-            });
+            self.failCount++;
+            self.overTime();
           }
-        },
-        error: function(err) {
-          self.failCount++;
-          self.overTime();
         }
       });
+      // return;
+      // yp.ajax({
+      //   url : url,
+      //   method : 'get',
+      //   timeout : 2000,
+      //   dataType : 'json'
+      // }, function(ret, err) {
+      //   alert('success back')
+      //   if(ret) {
+      //     if(ret['code'] == 0) {
+      //       callback(ret);
+      //     } else {
+      //       api.alert({msg : ret['message']});
+      //     }
+      //   } else{
+      //     self.failCount++;
+      //     self.overTime();
+      //   }
+      // });
+      // $.ajax({
+      //   url : url,
+      //   type : 'get',
+      //   dataType : 'json',
+      //   timeout : 2000,
+      //   headers: {
+      //     'User-Agent': 'Zhanqi.tv Api Client'
+      //   },
+      //   success : function(data) {
+      //     if(data) {
+      //       if(data['code'] == 0) {
+      //         callback(data);
+      //       } else{
+      //         api.toast({
+      //           msg: '出错了，请重试！',
+      //           duration: 2000,
+      //           location: 'top'
+      //         });
+      //       }
+      //     } else{
+      //       api.toast({
+      //         msg: '数据异常，请重试！',
+      //         duration: 2000,
+      //         location: 'top'
+      //       });
+      //     }
+      //   },
+      //   error: function(err) {
+      //     self.failCount++;
+      //     self.overTime();
+      //   }
+      // });
 
     },
     //游戏的四个直播
@@ -275,6 +295,11 @@ apiready = function() {
       //初始化
       var width = api.winWidth;
       var htmlStr = '';
+      if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
+        $('.hd').height(width*9/16*window.devicePixelRatio);
+      }else{
+        $('.hd').height(parseInt(width*9/16));       
+      }
       for(var i=0; i<data.length; i++) {
         var id = data[i]['roomId'];
         var spic = data[i]['spic'];
@@ -284,10 +309,15 @@ apiready = function() {
           spic = data[i]['room']['bpic'];
           title = data[i]['room']['title'];
         }
+
         htmlStr += '<li name="enterRooms" tapmode="active" id="'+ id +'">'
-                +  '<img src="'+ spic +'" class="show-pic" />'
-                +  '<p class="title">'+ title +'</p>'
-                +  '</li>';
+        if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
+          htmlStr += '<img src="'+ spic +'" style="height:'+width*9/16*window.devicePixelRatio+'px" class="show-pic" />'
+        }else{
+          htmlStr += '<img src="'+ spic +'" style="height:'+width*9/16+'px" class="show-pic" />'
+        }
+          htmlStr +=  '<p class="title">'+ title +'</p>'
+                  +  '</li>';
       }
       var pointerStr = '<span class="dot active"></span>';
       for(var i=1; i<data.length; i++) {

@@ -6,7 +6,7 @@
  * 框架方法和配置
  * ============================================= */
 
-var BASE_URL = 'http://www.zhanqi.tv/';
+var BASE_URL = 'http://m.zhanqi.tv/';
 // ajax地址配置
 // var URLConfig = {
 //   'gameIndex': BASE_URL + 'api/static/game.index/index.json'
@@ -369,14 +369,9 @@ var
       }
     , loadBegin: function() {
         ++nCount;
-        // var isLoad = arguments[0];
         if (!timer) {
           timer = setTimeout(function() {
-            // if(isLoad) {
-            //   oLoading.toggle(false);
-            // }else{
-              oLoading.toggle(true);
-            // }
+            oLoading.toggle(true);
           }, nDelay);
         }
       }
