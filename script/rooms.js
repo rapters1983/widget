@@ -170,16 +170,6 @@ apiready = function(){
     listen : function()　{
       var self = this;
 
-      // $('#liveRoom').on('click',  function() {
-      //   alert(67676)
-        
-      //   $('#giftPop').removeClass('hidden');
-      //   return false;
-      // });
-
-      // $('html, body').on('click', function() {
-      //   $('#giftPop').addClass('hidden')
-      // })
 
       //选择礼物
       $('#giftList').on('click',  'li', function() {
@@ -189,43 +179,6 @@ apiready = function(){
           }
           return false;
       });
-
-      //数量选择
-      $('#inputCount').on('click',  function() {
-        $('#countPop').removeClass('hidden');
-        return false;
-      });
-
-      //数量值监听
-      $('#countList').on('click', 'li', function() {
-        var count = $(this).text();
-        if(count == '其他') {
-          $('#inputCount').html('<input id="otherCount" type="number" />');
-          $('#inputCount').find('input').focus();
-        }else{
-          giftCount = $(this).text();
-          $('#inputCount').text(giftCount);
-        }
-        $('#countPop').addClass('hidden');
-      });
-
-
-      //其他
-      $(document).on('blur', '#otherCount', function() {
-        var count = $(this).val();
-        if(count == '') {
-          $('#inputCount').text(1);
-          giftCount = 1;
-          return false;
-        }
-        if(+count > 9999) {
-          alert('最多送9999个');
-          $(this).val('').focus();
-          return false;
-        }else{
-          giftCount = count;
-        }
-      })
 
       //赠送按钮
       $('#sendGift').on('click',  function() {
@@ -237,50 +190,7 @@ apiready = function(){
         $('#giftPop').addClass('hidden');
       });
     },
-    // oPageConfig.oRoom.fansTitle
-    // getInitData : function(url) {
-    //   api.ajax({
-    //       url: url,
-    //       method: 'get',
-    //       dataType: 'json'
-    //   },function(ret,err){
-    //       var param = {
-    //          'channelTitle' : ret['data']['title']
-    //         ,'roomId' : ret['data']['id']
-    //         ,'gameId' : ret['data']['gameId']
-    //         ,'avatar' : ret['data']['avatar']
-    //         ,'uid' : ret['data']['uid']
-    //         ,'nickname' : ret['data']['nickname']
-    //         ,'gameName' : ret['data']['gameName']
-    //         ,'online' : ret['data']['realOnline']
-    //         ,'liveStatus' : ret['data']['status']
-    //         ,'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
-
-    //         ,'x' : 0
-    //         ,'y' : 0
-    //         ,'w' : api.frameWidth
-    //         ,'h' : api.frameWidth*9/16
-    //       }
-
-
-
-    //       ui.$anchorName.text(ret['data']['nickname']);
-    //       if(api.systemVersion.indexOf('7.') > -1 || api.systemVersion.indexOf('8.') > -1) {
-    //         param['y'] = 20;
-    //       }
-          
-    //       zhanqi.playVideo(param);
-    //       var param2 = {
-    //          'x' : 0
-    //         ,'y' : api.frameHeight - 50
-    //         ,'w' : api.frameWidth
-    //         ,'h' : 50
-    //       }
-    //       zhanqi.showInputView(param2);
-
-    //   });
-    // },
-
+    
     getGiftList : function(id) {
       var self = this;
       yp.ajax({
@@ -313,12 +223,12 @@ apiready = function(){
       ui.$giftList.html(htmlStr);
 
       //初始化数值
-      var countArr = ['其他',520,233,10], htmlStr = '';
-      for(var i=0; i<countArr.length; i++) {
-        htmlStr += '<li>'+countArr[i]+'</li>'
-      }
+      // var countArr = ['其他',520,233,10], htmlStr = '';
+      // for(var i=0; i<countArr.length; i++) {
+      //   htmlStr += '<li>'+countArr[i]+'</li>'
+      // }
 
-      $('#countList').html(htmlStr);
+      // $('#countList').html(htmlStr);
 
       var lId = $('#giftList').find('li').last().attr('id');
       if(giftConfig[lId]) {

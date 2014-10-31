@@ -305,8 +305,8 @@ apiready = function() {
   var ui = {
   }
 
-  var zhanqi = api.require('zhanqiMD'); 
-  zhanqi.onAppStarted({});
+  // var zhanqi = api.require('zhanqiMD'); 
+  // zhanqi.onAppStarted({});
   var oPage = {
     init : function() {
       this.view();
