@@ -1192,7 +1192,7 @@ body{
 .settings ul li{
   background: #fff;
   border-bottom: 1px solid #e5e5e5;
-  padding: 14px 7px 14px 15px;
+  padding: 14px 15px;
 }
 .settings ul li.disable{
   cursor: default;
@@ -1642,22 +1642,6 @@ body{
 .search-page .top-bar{height: 103px;}
 .search-page .scroll-wrap{
   padding-top: 103px;
-}
-/*============== 针对iphone6等高像素手机，顶部，头部变大20141024 ================*/
-@media (min-device-width : 375px) and (max-device-width : 667px){
-.footer-bar{height: 140px; font-size: 32px;}
-.footer-bar ul li{padding-top: 25px;}
-.footer-bar .icon-m{font-size: 48px;}
-}
-@media (min-device-width : 768px) and (max-device-width : 1024px){
-  .footer-bar{height: 140px; font-size: 32px;}
-  .footer-bar ul li{padding-top: 25px;}
-  .footer-bar .icon-m{font-size: 48px;}
-  .top-bar{height: 150px;}
-  .top-bar-bd{height: 146px;}
-  .home-page .top-bar .icon-m{font-size: 48px;}
-  .home-page .top-bar img{width: 126px; height: 72px;}
-  .scroll-wrap{padding-top: 150px;}
 }
 
 /*================= 安卓手机解决头部状态栏问题 ==========================*/

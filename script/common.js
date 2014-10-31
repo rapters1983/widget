@@ -91,6 +91,8 @@ function URLConfig(which, data) {
       return BASE_URL + 'api/auth/openid.qq_login_by_token';
     case 'recordWatch':  //进入直播记录
       return BASE_URL + 'api/user/record.watch?type=1&id='+data['roomid'];  //type 1 直播 写死
+    case 'switch':
+      return BASE_URL + 'api/touch/apps.currency_switch';
   }
 };
 

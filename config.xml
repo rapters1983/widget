@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<widget id="A6967380295343" version="0.0.1">
+<widget id="A6969291810056" version="0.0.1">
   <name>zhanqi</name>
   <description>Example For APICloud.</description>
   <author email="developer@apicloud.com" href="http://www.apicloud.com">Developer</author>
@@ -34,12 +34,12 @@
     <param name="apiKey" value="101049628"/>
   </feature>
   <feature name="weiXin">
-    <param name="urlScheme" value="wx192fb7e6245e4897" />
-    <param name="apiKey" value="wx192fb7e6245e4897" />
+    <param name="urlScheme" value="wx192fb7e6245e4897"/>
+    <param name="apiKey" value="wx192fb7e6245e4897"/>
   </feature>
   <feature name=" sinaWeiBo">
-    <param name="urlScheme" value="wb638703876" />
-    <param name="apiKey" value="638703876" />
-    <param name="rgistUrl" value="http://www.zhanqi.tv" />
+    <param name="urlScheme" value="wb638703876"/>
+    <param name="apiKey" value="638703876"/>
+    <param name="rgistUrl" value="http://www.zhanqi.tv"/>
   </feature>
 </widget>

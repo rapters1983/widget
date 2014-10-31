@@ -96,22 +96,14 @@ apiready = function(){
     view : function() {
       //初始化
       if(api.systemType === 'ios') {
-        $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio + 20*window.devicePixelRatio);
-        $('#liveRoom').height(api.frameHeight*window.devicePixelRatio - api.frameWidth*9/16*window.devicePixelRatio - 50*window.devicePixelRatio -20*window.devicePixelRatio);
+        $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio + 20);
+        $('#liveRoom').height(api.frameHeight*window.devicePixelRatio - api.frameWidth*9/16*window.devicePixelRatio - 50*window.devicePixelRatio);
       }else{
         $('body').height(api.frameHeight).css('padding-top',api.frameWidth*9/16 + 20);
-        $('#liveRoom').height(api.frameHeight - api.frameWidth*9/16 - 50 -20);
+        $('#liveRoom').height(api.frameHeight - api.frameWidth*9/16 - 50);
       }
       
       var roomId = yp.query('id');
-
-      // if(yp.query('which') === 'LIVE') {
-      //   curWhich = 'live';
-      //   this.getInitData(URLConfig('liveRoomInfo',{'roomid' : gameId}));
-      // }else{
-      //   curWhich = 'video';
-      //   this.getInitData(URLConfig('videoRoomInfo',{'roomid' : gameId}));
-      // }
 
       this.initNativeModel(roomId);
 
@@ -121,7 +113,6 @@ apiready = function(){
     },
 
     initNativeModel : function(roomId) {
-
         var param = {
            'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
           ,'x' : 0
@@ -131,20 +122,33 @@ apiready = function(){
           ,'roomId' : roomId
           ,'fixedOn' : 'rooms'
         }
-
-        if(api.systemVersion.indexOf('7.') > -1 || api.systemVersion.indexOf('8.') > -1) {
-          param['y'] = 20;
-        }
         
         zhanqi.playVideo(param);
-        var param2 = {
-           'x' : 0
-          ,'y' : api.frameHeight - 50
-          ,'w' : api.frameWidth
-          ,'h' : 50
-          ,'fixedOn' : 'rooms'
-        }
-        zhanqi.showInputView(param2);
+
+        yp.ajax({
+            url: URLConfig('switch'),
+            method: 'get',
+            dataType: 'json'
+        },function(ret,err){
+          alert(JSON.stringify(ret));
+          if(ret['code'] == 0) {
+            var param2 = {
+               'x' : 0
+              ,'y' : api.frameHeight - 50
+              ,'w' : api.frameWidth
+              ,'h' : 50
+              ,'fixedOn' : 'rooms'
+            }
+            if(ret['data']['switch'] == 0) {
+              param2['hideGift'] = true;
+            }else{
+              param2['hideGift'] = true;
+            }
+            zhanqi.showInputView(param2);
+          }
+        });
+
+        
     },
 
     initSettins : function() {
@@ -190,7 +194,7 @@ apiready = function(){
         $('#giftPop').addClass('hidden');
       });
     },
-    
+
     getGiftList : function(id) {
       var self = this;
       yp.ajax({
