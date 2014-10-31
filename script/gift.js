@@ -29,9 +29,7 @@ apiready = function(){
     },
 
     view : function() {
-        
       this.getGiftList(yp.query('id'));
-      this.getRich();
     },
 
     listen : function()　{
@@ -53,91 +51,65 @@ apiready = function(){
           return false;
       });
 
-      //数量选择
-      /*$('#inputCount').on('click',  function() {
-        $('#countPop').removeClass('hidden');
-        return false;
-      });*/
-
-      //数量值监听
-      /*$('#countList').on('click', 'li', function() {
-        var count = $(this).text();
-        if(count == '其他') {
-          $('#inputCount').html('<input id="otherCount" type="number" />');
-          $('#inputCount').find('input').focus();
-        }else{
-          giftCount = $(this).text();
-          $('#inputCount').text(giftCount);
-        }
-        $('#countPop').addClass('hidden');
-                         return false;
-      });*/
-
-      //其他
-      /*$(document).on('blur', '#otherCount', function() {
-        var count = $(this).val();
-        if(count == '') {
-          $('#inputCount').text(1);
-          giftCount = 1;
-          return false;
-        }
-        if(+count > 9999) {
-          alert('最多送9999个');
-          $(this).val('').focus();
-          return false;
-        }else{
-          giftCount = count;
-        }
-      });*/
-
       //赠送按钮
       $('#sendGift').on('click',  function() {
-        giftCount = $('#inputCount').val();
-        if(giftConfig[giftId]['coinType'] == 1) { //战旗币
-          if(giftCount*giftConfig[giftId]['price'] > coin) {
-            api.alert({
-              title: '提示',
-              msg: '战旗币不足！',
-              buttons:[ '确定']
+        yp.ajax({
+            url: URLConfig('getRich'),
+            method: 'get',
+            dataType: 'json'
+        },function(ret,err){
+          if(ret['code'] == 0) {
+            coin = ret['data']['coin']['count'];
+            coinEnable = ret['data']['coin']['enable'];
+            gold = ret['data']['gold']['count'];
+            goldEnable = ret['data']['gold']['enable'];
+
+            giftCount = $('#inputCount').val();
+            if(giftConfig[giftId]['coinType'] == 1) { //战旗币
+              if(giftCount*giftConfig[giftId]['price'] > coin) {
+                api.alert({
+                  title: '提示',
+                  msg: '战旗币不足！',
+                  buttons:[ '确定']
+                });
+                return;
+              }
+            }else{ //金币
+              if(giftCount*giftConfig[giftId]['price'] > gold) {
+                api.alert({
+                  title: '提示',
+                  msg: '金币不足！',
+                  buttons:[ '确定']
+                });
+                return;
+              }
+            }
+
+            var sendGiftParam = {
+               count : giftCount
+              ,gift : giftId
+            }
+
+            $api.setStorage('sendGiftParam',sendGiftParam);
+            
+            api.execScript({
+             name : 'rooms',
+             script : 'sendGiftBack();'
+            })
+            // api.closeFrame();
+            
+
+            api.execScript({
+             name : 'rooms',
+             script : 'changeGiftStatus();'
             });
-            return;
-          }
-        }else{ //金币
-          if(giftCount*giftConfig[giftId]['price'] > gold) {
-            api.alert({
-              title: '提示',
-              msg: '金币不足！',
-              buttons:[ '确定']
+
+            api.setFrameAttr({
+              name: 'gift',
+              hidden: true
             });
-            return;
           }
-        }
-
-        var sendGiftParam = {
-           count : giftCount
-          ,gift : giftId
-        }
-
-        $api.setStorage('sendGiftParam',sendGiftParam);
-        
-        api.execScript({
-         name : 'rooms',
-         script : 'sendGiftBack();'
-        })
-        // api.closeFrame();
-        
-
-        api.execScript({
-         name : 'rooms',
-         script : 'changeGiftStatus();'
         });
-
-        api.setFrameAttr({
-          name: 'gift',
-          hidden: true
-        });
-
-
       });
 
     },
@@ -153,22 +125,6 @@ apiready = function(){
       });
     },
 
-    getRich : function() {
-      var self = this;
-      yp.ajax({
-          url: URLConfig('getRich'),
-          method: 'get',
-          dataType: 'json'
-      },function(ret,err){
-        if(ret['code'] == 0) {
-          coin = ret['data']['coin']['count'];
-          coinEnable = ret['data']['coin']['enable'];
-          gold = ret['data']['gold']['count'];
-          goldEnable = ret['data']['gold']['enable'];
-        }
-      });
-    },
-
     renderGiftList : function(data) {
       var htmlStr = '';
       for(var i=0; i<data.length; i++) {
@@ -180,33 +136,25 @@ apiready = function(){
       }
       ui.$giftList.html(htmlStr);
        
+      var lastLi = $('#giftList').find('li').last();
+      var lId = lastLi.attr('id');
+      lastLi.addClass('active');
+      if(giftConfig[lId]) {
+        $('#giftName').text(giftConfig[lId]['name'])
+        $('#giftCount').text(giftConfig[lId]['price'])
 
-      //初始化数值
-     // var countArr = ['其他',520,233,10], htmlStr = '';
-     // for(var i=0; i<countArr.length; i++) {
-      //  htmlStr += '<li>'+countArr[i]+'</li>'
-      //}
-
-     // $('#countList').html(htmlStr);
-        var lastLi = $('#giftList').find('li').last();
-        var lId = lastLi.attr('id');
-        lastLi.addClass('active');
-        if(giftConfig[lId]) {
-          $('#giftName').text(giftConfig[lId]['name'])
-          $('#giftCount').text(giftConfig[lId]['price'])
-
-          switch(giftConfig[lId]['coinType']) {
-            case 1:
-              $('#coinType').text('战旗币');
-              break;
-            case 2:
-              $('#coinType').text('金币');
-              break;
-          }
+        switch(giftConfig[lId]['coinType']) {
+          case 1:
+            $('#coinType').text('战旗币');
+            break;
+          case 2:
+            $('#coinType').text('金币');
+            break;
         }
-        giftId = lId;
-
       }
+      giftId = lId;
+
+    }
 
     
   }

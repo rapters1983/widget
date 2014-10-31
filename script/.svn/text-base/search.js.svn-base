@@ -191,11 +191,11 @@ yp.ready(function() {
         if(data.length == 0){
           if(self.tabResult[idx]>0){
             self.ajaxing[idx]  = 1;
-            api.toast({
-              msg: '已经加载完啦',
-              duration:2000,
-              location: 'bottom'
-            });
+            // api.toast({
+            //   msg: '已经加载完啦',
+            //   duration:2000,
+            //   location: 'bottom'
+            // });
             return;
           }
           self.tabResult[idx] = 0;

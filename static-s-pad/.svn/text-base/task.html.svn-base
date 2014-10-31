@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=1,minimum-scale=1,user-scalable=1,width=device-width,initial-scale=1"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <link rel="stylesheet" href="../css/common-s.css">
+  <link rel="stylesheet" href="../css/api.css">
+  <title>每日任务</title>
+</head>
+<body>
+<div class="wrap">
+  <!-- 每日任务 -->
+  <div class="task">
+    <!-- top顶部 -->
+    <div class="top-bar">
+      <div class="top-bar-bd">
+        <p class="title">
+          <i class="icon-m icon-left"></i>
+          每日任务
+        </p>
+      </div>
+      <div class="top-bar-line"></div>
+    </div>
+    <!-- top顶部 -->
+    
+    <div class="bd">
+      <ul class="task-list">
+        <li>
+          <a href="javascript:;" class="btn-task">领取</a>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-mission"></i>注册任务</p>
+            <p class="tip">恭喜您注册成功，您可领取500战旗币</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" class="btn-task btn-finish">已绑定</a>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-mission"></i>绑定手机</p>
+            <p class="tip">绑定安全手机，领取2000战旗币</p>
+          </div>
+        </li>
+        <li class="active">
+          <a href="javascript:;" class="btn-task">更换</a>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-headsculpture"></i>更换头像</p>
+            <p class="tip">更换头像，领取100战旗币</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" class="btn-task">签到</a>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-theproblemoffeedback"></i>每日签到</p>
+            <p class="tip">连续签到奖励加倍</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" class="btn-task">回答</a>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-Dailyask"></i>每日一问</p>
+            <p class="tip">回答问题轻松获得100战旗币奖励</p>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" class="btn-task">分享</a>
+          <div class="main">
+            <p class="til"><i class="icon-m icon-share"></i>分享直播</p>
+            <p class="tip">每成功邀请一个即可获得100战旗币</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <!-- 每日任务 end-->
+</div>
+</body>
+
+</html>

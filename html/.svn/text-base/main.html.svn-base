@@ -33,7 +33,7 @@
         <!-- 视频列表 -->
         <div class="video-list-wrap" id="main">
           <ul class="clearfix" id="indexLiveList">
-            <li>
+            <li tapmode="active">
               <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
@@ -41,7 +41,7 @@
                 <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
               </div>
             </li>
-            <li>
+            <li tapmode="active">
               <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
@@ -49,7 +49,7 @@
                 <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
               </div>
             </li>
-            <li>
+            <li tapmode="active">
               <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
@@ -57,7 +57,7 @@
                 <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
               </div>
             </li>
-            <li>
+            <li tapmode="active">
               <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
@@ -65,7 +65,7 @@
                 <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
               </div>
             </li>
-            <li>
+            <li tapmode="active">
               <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
@@ -73,7 +73,7 @@
                 <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
               </div>
             </li>
-            <li>
+            <li tapmode="active">
               <img src="../image/default_bpic.png" alt="" class="game-pic">
               <div class="til">加载中...</div>
               <div class="detail clearfix">
@@ -91,7 +91,7 @@
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix" id="lolList">
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -99,7 +99,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -107,7 +107,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -115,7 +115,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -135,7 +135,7 @@
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix" id="dota2List">
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -143,7 +143,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -151,7 +151,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -159,7 +159,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -179,7 +179,7 @@
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix" id="sgsList">
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -187,7 +187,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -195,7 +195,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -203,7 +203,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -223,7 +223,7 @@
           <!-- 视频列表 -->
           <div class="video-list-wrap">
             <ul class="clearfix no-border" id="otherList">
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -231,7 +231,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -239,7 +239,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">
@@ -247,7 +247,7 @@
                   <p class="anchor"><i class="icon-m icon-boy"></i><span class="js-nickname">加载中</span></p>
                 </div>
               </li>
-              <li>
+              <li tapmode="active">
                 <img data-original="../image/default_bpic.png" alt="" class="game-pic lazy">
                 <div class="til">加载中...</div>
                 <div class="detail clearfix">

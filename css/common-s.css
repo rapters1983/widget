@@ -247,7 +247,7 @@ body{
   vertical-align: -3px;
 }
 .live-pop{
-  height: 330px;
+  height: 200px;
   width: 100%;
   padding: 10px 8px 0;
   background: #eee;
@@ -498,7 +498,7 @@ body{
 .video-list-wrap .detail .icon-m{
   font-size: 10px;
   vertical-align: 0px;
-  margin-right: 2px;
+  margin-right: 5px;
 }
 .video-list-wrap .detail .audience{
   position: absolute;
@@ -518,12 +518,19 @@ body{
 .video-list-wrap .anchor .icon-girl{
   color: #ff5cdb;
 }
-.video-list-wrap .anchor span{display: inline; margin-left: 4px;}
+.video-list-wrap .anchor span{display: inline;}
 /*========================= 游戏列表20141017 ==================================*/
 .game-list .top-bar .operation-list{
   float: right;
   padding-right: 7px;
   margin-top: 5px;
+}
+.game-list-name{
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
 }
 .game-list .top-bar .operation-list li{
   float: left;
@@ -1253,7 +1260,7 @@ body{
   border-radius: 10px;
 }
 .settings .sub-btn{
-  padding: 25px 7px 0 7px;
+  padding: 25px 7px;
 }
 .settings ul li .annotation{
   font-size: 12px;
@@ -1325,7 +1332,6 @@ body{
   border-bottom:1px solid #d4d5d5;
 }
 .task-list li{
-  height: 60px;
   position: relative;
   font-size: 12px;
   background: #fff;
@@ -1425,7 +1431,7 @@ body{
   background: #eee;
 }
 .subscribe .module .title{
-  height: 40px;
+  min-height: 40px;
   position: relative;
   padding: 7px;
   border-bottom: 1px solid #cbcbcb;
@@ -1466,6 +1472,13 @@ body{
   margin-top: 10px;
   font-size: 12px;
   padding: 10px;
+}
+.loading{
+  text-align: center;
+  padding: 50px 0;
+}
+.loading img{
+  width: 62px;
 }
 /* ====================== 我的20141020 ====================== */
 .my-page{

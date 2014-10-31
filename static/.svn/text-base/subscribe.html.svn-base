@@ -30,91 +30,94 @@
     <!-- top顶部 -->
 
     <div class="scroll-wrap">
+      <div class="loading">
+        <img src="../image/logo.gif" alt="">
+      </div>
       <!-- 直播中模块 -->
-    <div class="module">
-      <div class="title clearfix">
-        <a href="javascript:;" class="edit-btn">编辑订阅</a>
-        <span class="title-name">直播中</span>
-      </div>
-      <div class="module-bd">
-        <div class="video-list-wrap">
-          <ul class="clearfix">
-            <li>
-              <img src="../image/pic01.jpg" alt="" class="game-pic">
-              <div class="til">微笑19:00准时开播</div>
-              <div class="detail clearfix">
-                <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
-                <p class="anchor">
-                  <i class="icon-m icon-boy"></i>
-                  <span>微笑</span>
-                </p>
-              </div>
-            </li>
-            <li>
-              <img src="../image/pic01.jpg" alt="" class="game-pic">
-              <div class="til">微笑19:00准时开播</div>
-              <div class="detail clearfix">
-                <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
-                <p class="anchor">
-                  <i class="icon-m icon-boy"></i>
-                  <span>微笑</span>
-                </p>
-              </div>
-            </li>
-          </ul>
+      <div class="module">
+        <div class="title clearfix">
+          <a href="javascript:;" class="edit-btn">编辑订阅</a>
+          <span class="title-name">直播中</span>
+        </div>
+        <div class="module-bd">
+          <div class="video-list-wrap">
+            <ul class="clearfix">
+              <li>
+                <img src="../image/pic01.jpg" alt="" class="game-pic">
+                <div class="til">微笑19:00准时开播</div>
+                <div class="detail clearfix">
+                  <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+                  <p class="anchor">
+                    <i class="icon-m icon-boy"></i>
+                    <span>微笑</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <img src="../image/pic01.jpg" alt="" class="game-pic">
+                <div class="til">微笑19:00准时开播</div>
+                <div class="detail clearfix">
+                  <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+                  <p class="anchor">
+                    <i class="icon-m icon-boy"></i>
+                    <span>微笑</span>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- 直播中模块 end-->
+      <!-- 直播中模块 end-->
     
-    <!-- 休息中模块 -->
-    <div class="module">
-      <div class="title">
-        <span class="title-name">休息中</span>
-      </div>
-      <div class="module-bd">
-        <div class="anchor-list">
-          <ul>
-            <li class="clearfix">
-              <img src="../image/user.jpg" alt="" class="user-photo">
-              <div class="pull-left">
-                <p class="user-name">weixiao</p>
-                <p class="order-count">25444人订阅</p>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img src="../image/user.jpg" alt="" class="user-photo">
-              <div class="pull-left">
-                <p class="user-name">weixiao</p>
-                <p class="order-count">25444人订阅</p>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img src="../image/user.jpg" alt="" class="user-photo">
-              <div class="pull-left">
-                <p class="user-name">weixiao</p>
-                <p class="order-count">25444人订阅</p>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img src="../image/user.jpg" alt="" class="user-photo">
-              <div class="pull-left">
-                <p class="user-name">weixiao</p>
-                <p class="order-count">25444人订阅</p>
-              </div>
-            </li>
-            <li class="clearfix">
-              <img src="../image/user.jpg" alt="" class="user-photo">
-              <div class="pull-left">
-                <p class="user-name">weixiao</p>
-                <p class="order-count">25444人订阅</p>
-              </div>
-            </li>
-          </ul>
+      <!-- 休息中模块 -->
+      <div class="module">
+        <div class="title">
+          <span class="title-name">休息中</span>
+        </div>
+        <div class="module-bd">
+          <div class="anchor-list">
+            <ul>
+              <li class="clearfix">
+                <img src="../image/user.jpg" alt="" class="user-photo">
+                <div class="pull-left">
+                  <p class="user-name">weixiao</p>
+                  <p class="order-count">25444人订阅</p>
+                </div>
+              </li>
+              <li class="clearfix">
+                <img src="../image/user.jpg" alt="" class="user-photo">
+                <div class="pull-left">
+                  <p class="user-name">weixiao</p>
+                  <p class="order-count">25444人订阅</p>
+                </div>
+              </li>
+              <li class="clearfix">
+                <img src="../image/user.jpg" alt="" class="user-photo">
+                <div class="pull-left">
+                  <p class="user-name">weixiao</p>
+                  <p class="order-count">25444人订阅</p>
+                </div>
+              </li>
+              <li class="clearfix">
+                <img src="../image/user.jpg" alt="" class="user-photo">
+                <div class="pull-left">
+                  <p class="user-name">weixiao</p>
+                  <p class="order-count">25444人订阅</p>
+                </div>
+              </li>
+              <li class="clearfix">
+                <img src="../image/user.jpg" alt="" class="user-photo">
+                <div class="pull-left">
+                  <p class="user-name">weixiao</p>
+                  <p class="order-count">25444人订阅</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- 休息中模块 end-->
+      <!-- 休息中模块 end-->
     </div>
     
 

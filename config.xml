@@ -33,4 +33,13 @@
     <param name="urlScheme" value="tencent101049628"/>
     <param name="apiKey" value="101049628"/>
   </feature>
+  <feature name="weiXin">
+    <param name="urlScheme" value="wx192fb7e6245e4897" />
+    <param name="apiKey" value="wx192fb7e6245e4897" />
+  </feature>
+  <feature name=" sinaWeiBo">
+    <param name="urlScheme" value="wb638703876" />
+    <param name="apiKey" value="638703876" />
+    <param name="rgistUrl" value="http://www.zhanqi.tv" />
+  </feature>
 </widget>

@@ -28,8 +28,8 @@
       <div class="top-bar-line"></div>
     </div>
     <!-- top顶部 -->
-    
-    <!-- 问题反馈 -->
+    <div class="scroll-wrap">
+      <!-- 问题反馈 -->
     <div class="bd">
       
       <!-- 问题描述 -->
@@ -55,6 +55,9 @@
       </div>
     </div>
     <!-- 问题反馈 end -->
+    </div>
+    
+    
 
   </div>
   <!-- 问题反馈 end-->

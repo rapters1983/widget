@@ -7,10 +7,6 @@
  * ============================================= */
 apiready = function() {
 
-  function napster() {
-    $('body').css('background','blue')
-  }
-
   var ui = {
     $lolList : $('#lolList')
   , $dota2List : $('#dota2List')
@@ -90,11 +86,12 @@ apiready = function() {
           // , pageParam: {id: roomid, which : which, fansTitle : fansTitle}
           , bgColor:'#FFF'
         });
-      }).on('touchstart', 'li[name=enterRooms]', function() {
-        $(this).addClass('active');
-      }).on('touchend', 'li[name=enterRooms]', function() {
-        $(this).removeClass('active');
       });
+      // .on('touchstart', 'li[name=enterRooms]', function() {
+      //   $(this).addClass('active');
+      // }).on('touchend', 'li[name=enterRooms]', function() {
+      //   $(this).removeClass('active');
+      // });
 
 
     },
@@ -155,13 +152,13 @@ apiready = function() {
         self.renderGameLiveData(data['data']['rooms'], ui.$otherList);
         api.hideProgress();
         api.refreshHeaderLoadDone();
-        if(self.refresh == 1){
-          api.toast({
-            msg: '刷新完成',
-            duration:2000,
-            location: 'top'
-          });
-        }
+        // if(self.refresh == 1){
+        //   api.toast({
+        //     msg: '刷新完成',
+        //     duration:2000,
+        //     location: 'top'
+        //   });
+        // }
       });
 
       //惰性加载

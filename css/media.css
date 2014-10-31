@@ -1,0 +1,49 @@
+/*============== 针对iphone6等高像素手机，顶部，头部变大20141024 ================*/
+/*@media (min-device-width : 375px) and (max-device-width : 667px){}*/
+  /*.footer-bar{height: 140px; font-size: 32px;}
+  .footer-bar ul li{padding-top: 25px;}
+  .footer-bar .icon-m{font-size: 48px;}
+  .top-bar{height: 150px;}
+  .top-bar-bd{height: 146px;}
+  .home-page .top-bar .icon-m{font-size: 54px;}
+  .home-page .top-bar img{width: 126px; height: 72px;}
+  .scroll-wrap{padding-top: 150px;}
+  .search-page .search-wrap{height: 146px;}
+  .icon-m{font-size: 42px;}
+  body{font-size: 42px;}
+  .feedback .bd{font-size: 48px;}
+  .about-me .mes-list li .tip{font-size: 36px;}
+  .home-page .title{font-size: 48px;}
+  .home-page .title{height: 60px; line-height: 60px; margin-top: -60px;}
+  .home-page .dot-box .dot{width: 15px; height: 15px; margin-left: 15px;}
+  .video-list-wrap .til{font-size: 39px;}
+  .video-list-wrap .detail{font-size: 31px;}
+  .video-list-wrap .detail .icon-m{font-size: 30px;}*/
+
+/*@media (min-device-width : 768px) and (max-device-width : 1024px){}*/
+  .footer-bar{height: 140px; font-size: 32px;}
+  .footer-bar ul li{padding-top: 25px;}
+  .footer-bar .icon-m{font-size: 54px;}
+  .top-bar{height: 150px;}
+  .top-bar-bd{height: 146px;}
+  .home-page .top-bar .icon-m{font-size: 54px;}
+  .home-page .top-bar img{width: 126px; height: 72px;}
+  .scroll-wrap{padding-top: 150px;}
+  .search-page .search-wrap{height: 146px;}
+  .search-page .search-bg{height: 65px; width: 92%;}
+  .search-page .search-bg .input-search{line-height: 1;}
+  .tab-c{font-size: 36px;}
+  .search-page .search-no{font-size: 36px;}
+  .search-history .icon-m{font-size: 48px;}
+  .icon-m{font-size: 42px;}
+  body{font-size: 42px;}
+  .feedback .bd{font-size: 48px;}
+  .about-me .mes-list li .tip{font-size: 36px;}
+  .home-page .title{font-size: 48px;}
+  .home-page .title{height: 60px; line-height: 60px; margin-top: -60px;}
+  .home-page .dot-box .dot{width: 15px; height: 15px; margin-left: 15px;}
+  .video-list-wrap .til{font-size: 39px;}
+  .video-list-wrap .detail{font-size: 31px;}
+  .video-list-wrap .detail .icon-m{font-size: 30px;}
+  .game-list-wrap ul li .game-a img{margin-bottom: 15px;}
+  .game-list-wrap ul li .game-a{padding-bottom: 15px;}

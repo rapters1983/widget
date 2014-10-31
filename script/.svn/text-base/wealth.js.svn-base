@@ -47,11 +47,18 @@
     fInitInfo();
 
     var width = api.winWidth;
-    var height = api.winHeight;
+    var height = api.winHeight, headPos=0;
     if(api.systemType === 'android') {
       height = height - 25;
     }
-    var headPos = 64;
+
+    if(api.systemType === 'ios') {
+      headPos = $('.top-bar').height()/window.devicePixelRatio;
+    }else{
+      headPos = $('.top-bar').height();
+    }
+
+
     var conheight = height - headPos;
     api.openFrame({
       name: 'wealth-con',

@@ -90,11 +90,11 @@ apiready = function() {
           self.refleshGameList(data['games']);
           if(self.refresh == 1){
             api.refreshHeaderLoadDone();
-            api.toast({
-              msg: '刷新完成',
-              duration:2000,
-              location: 'top'
-            });
+            // api.toast({
+            //   msg: '刷新完成',
+            //   duration:2000,
+            //   location: 'top'
+            // });
           }
 			  }else{
           self.renderGameData(data['games']);
@@ -103,11 +103,11 @@ apiready = function() {
         if(12 == data['games'].length){
         	self.ajaxing = 0;  												//返回不足12条则表示加载完毕
         }else{
-          api.toast({
-            msg: '已经加载完啦',
-            duration:2000,
-            location: 'top'
-          })
+          // api.toast({
+          //   msg: '已经加载完啦',
+          //   duration:2000,
+          //   location: 'top'
+          // })
         };
       });
     },
@@ -175,7 +175,7 @@ apiready = function() {
       for(var i=0; i<data.length; i++) {
         htmlStr += '<li id="'+data[i]['id']+'">'
         + '<div class="game-a"><img src="'+ data[i]['spic'] +'" width="'+ width +'">'
-        + '<span class="js-gamename">'+ data[i]['name'] + '</span><div></li>';
+        + '<span class="js-gamename game-list-name">'+ data[i]['name'] + '</span><div></li>';
       }
       ui.$gameList.append(htmlStr);
       var imgHeight = ui.$gameList.find('li img').eq(0).width()*1.4;

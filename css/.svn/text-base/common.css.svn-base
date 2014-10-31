@@ -249,7 +249,7 @@ body{
   vertical-align: -3px;
 }
 .live-pop{
-  height: 660px;
+  height: 400px;
   width: 100%;
   padding: 20px 15px 0;
   background: #eee;
@@ -493,6 +493,7 @@ body{
 .video-list-wrap .detail .icon-m{
   font-size: 20px;
   vertical-align: 0px;
+  margin-right: 10px;
 }
 .video-list-wrap .detail .audience{
   position: absolute;
@@ -506,7 +507,7 @@ body{
   text-overflow:ellipsis;
   white-space: nowrap;
 }
-.video-list-wrap .anchor span{display: inline; padding-left: 8px;}
+.video-list-wrap .anchor span{display: inline;}
 .video-list-wrap .anchor .icon-boy{ 
   color: #54abfc;
 }
@@ -518,6 +519,13 @@ body{
   float: right;
   padding-right: 15px;
   margin-top: 10px;
+}
+.game-list-name{
+ display:inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
 }
 .game-list .top-bar .operation-list li{
   float: left;
@@ -815,7 +823,6 @@ body{
 }
 .search-page .cancel-btn{
   float: right;
-  font-size: 28px;
   color: #1398e2;
   padding-top: 10px;
 }
@@ -833,7 +840,6 @@ body{
 .search-page .search-bg .input-search{
   width: 90%;
   line-height: 30px;
-  font-size: 28px;
   color: #999;
   border:none;
   background: none;
@@ -899,6 +905,7 @@ body{
   background: #1398e2;
   border-color: #1398e2;
   color: #fff;
+  transition: all .6s ease;
 }
 .search-room .video-list-wrap,.search-anchor{
   background: #fff;
@@ -926,7 +933,6 @@ body{
 .search-tab-no{
   text-align: center;
   color: #999;
-  font-size: 24px;
   padding: 60px;
 }
 /* =============================== 金币充值20141020 ========================== */
@@ -1241,7 +1247,7 @@ body{
   border-radius: 20px;
 }
 .settings .sub-btn{
-  padding: 50px 14px 0 14px;
+  padding: 50px 14px;
 }
 .settings ul li .annotation{
   font-size: 24px;
@@ -1286,7 +1292,6 @@ body{
   border-bottom:1px solid #d4d5d5;
 }
 .task-list li{
-  height: 121px;
   position: relative;
   font-size: 24px;
   background: #fff;
@@ -1385,7 +1390,7 @@ body{
   background: #eee;
 }
 .subscribe .module .title{
-  height: 80px;
+  min-height: 80px;
   position: relative;
   padding: 15px;
   border-bottom: 1px solid #cbcbcb;
@@ -1426,6 +1431,13 @@ body{
   margin-top: 20px;
   font-size: 24px;
   padding: 20px;
+}
+.loading{
+  text-align: center;
+  padding: 50px 0;
+}
+.loading img{
+  width: 62px;
 }
 /* ====================== 我的20141020 ====================== */
 .my-page{
@@ -1615,19 +1627,45 @@ body{
 .search-page .scroll-wrap{
   padding-top: 229px;
 }
-/*============== 针对iphone6等高像素手机，顶部，头部变大20141024 ================*/
-@media (min-device-width : 375px) and (max-device-width : 667px){
+/*=============== ipad ================*/
+@media (min-device-width : 768px) and (max-device-width : 1024px){ 
+  .icon-m{font-size: 42px;}
+  body{font-size: 42px;}
   .footer-bar{height: 140px; font-size: 32px;}
   .footer-bar ul li{padding-top: 25px;}
-  .footer-bar .icon-m{font-size: 48px;}
-}
-@media (min-device-width : 768px) and (max-device-width : 1024px){
-  .footer-bar{height: 140px; font-size: 32px;}
-  .footer-bar ul li{padding-top: 25px;}
-  .footer-bar .icon-m{font-size: 48px;}
+  .footer-bar .icon-m{font-size: 54px;}
   .top-bar{height: 150px;}
   .top-bar-bd{height: 146px;}
-  .home-page .top-bar .icon-m{font-size: 48px;}
+  .top-bar-bd .title{font-size: 54px;}
+  .home-page .top-bar .icon-m{font-size: 54px;}
   .home-page .top-bar img{width: 126px; height: 72px;}
   .scroll-wrap{padding-top: 150px;}
-}
+  .search-page .search-wrap{height: 146px;}
+  .search-page .search-bg{height: 65px; width: 92%;}
+  .search-page .search-bg .input-search{line-height: 1;}
+  .tab-c{font-size: 36px;}
+  .search-page .search-no{font-size: 36px;}
+  .search-history .icon-m{font-size: 40px;}
+  .search-page .top-bar{height: 250px;}
+  .search-page .scroll-wrap{padding-top: 250px;}
+  .task-list li{font-size: 36px;}
+  .task-list li .til{font-size: 48px;}
+  .task-list li .til .icon-m{font-size: 48px;}
+  .my-page .task-list .icon-right{top:60px;}
+  .my-page .my-top .icon-operate{font-size: 60px;}
+  .my-page .my-top .user-mes .name{font-size: 60px; margin-top: 0;}
+  .my-page .my-top .user-mes .money{font-size: 36px;}
+
+
+  
+  .feedback .bd{font-size: 48px;}
+  .about-me .mes-list li .tip{font-size: 36px;}
+  .home-page .title{font-size: 48px;}
+  .home-page .title{height: 60px; line-height: 60px; margin-top: -60px;}
+  .home-page .dot-box .dot{width: 15px; height: 15px; margin-left: 15px;}
+  .video-list-wrap .til{font-size: 39px;}
+  .video-list-wrap .detail{font-size: 31px;}
+  .video-list-wrap .detail .icon-m{font-size: 30px;}
+  .game-list-wrap ul li .game-a img{margin-bottom: 15px;}
+  .game-list-wrap ul li .game-a{padding-bottom: 15px;}
+ }

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="maximum-scale=1,minimum-scale=1,user-scalable=1,width=device-width,initial-scale=1"/>
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/common-s.css">
+  <link rel="stylesheet" href="../css/font-icon.css">
+  <link rel="stylesheet" href="../css/api.css">
+  <title>观看历史</title>
+</head>
+<body>
+<div class="wrap">
+  <!-- 观看历史 -->
+  <div class="subscribe">
+    <!-- top顶部 -->
+    <div class="top-bar">
+      <div class="top-bar-bd">
+        <p class="title">
+          <i class="icon-m icon-left"></i>
+          观看历史
+        </p>
+      </div>
+      <div class="top-bar-line"></div>
+    </div>
+    <!-- top顶部 -->
+
+    <div class="video-list-wrap">
+      <ul class="clearfix">
+        <li>
+          <img src="../image/pic01.jpg" alt="" class="game-pic">
+          <div class="til">微笑19:00准时开播</div>
+          <div class="detail clearfix">
+            <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+            <p class="anchor">
+              <i class="icon-m icon-boy"></i><span>微笑</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="../image/pic01.jpg" alt="" class="game-pic">
+          <div class="til">微笑19:00准时开播</div>
+          <div class="detail clearfix">
+            <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+            <p class="anchor">
+              <i class="icon-m icon-boy"></i><span>微笑</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="../image/pic01.jpg" alt="" class="game-pic">
+          <div class="til">微笑19:00准时开播</div>
+          <div class="detail clearfix">
+            <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+            <p class="anchor">
+              <i class="icon-m icon-boy"></i><span>微笑</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="../image/pic01.jpg" alt="" class="game-pic">
+          <div class="til">微笑19:00准时开播</div>
+          <div class="detail clearfix">
+            <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+            <p class="anchor">
+              <i class="icon-m icon-boy"></i><span>微笑</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="../image/pic01.jpg" alt="" class="game-pic">
+          <div class="til">微笑19:00准时开播</div>
+          <div class="detail clearfix">
+            <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+            <p class="anchor">
+              <i class="icon-m icon-boy"></i><span>微笑</span>
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="../image/pic01.jpg" alt="" class="game-pic">
+          <div class="til">微笑19:00准时开播</div>
+          <div class="detail clearfix">
+            <span class="audience"><i class="icon-m icon-spectator"></i>8888</span>
+            <p class="anchor">
+              <i class="icon-m icon-boy"></i><span>微笑</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <!-- 观看历史 end-->
+</div>
+</body>
+</html>

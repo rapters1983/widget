@@ -101,11 +101,11 @@ apiready = function() {
 			  	self.refleshLiveList(data['rooms']);
           if(self.refresh == 1){
             api.refreshHeaderLoadDone();
-            api.toast({
-              msg: '刷新完成',
-              duration:2000,
-              location: 'top'
-            });
+            // api.toast({
+            //   msg: '刷新完成',
+            //   duration:2000,
+            //   location: 'top'
+            // });
           }
 			  }else{
           self.renderLiveData(data['rooms']);
@@ -114,11 +114,11 @@ apiready = function() {
         if(20 == data['rooms'].length){
         	self.ajaxing = 0;  												//返回不足20条则表示加载完毕
         }else{
-          api.toast({
-            msg: '已经加载完啦',
-            duration:2000,
-            location: 'top'
-          });
+          // api.toast({
+          //   msg: '已经加载完啦',
+          //   duration:2000,
+          //   location: 'top'
+          // });
         }
       });
     },

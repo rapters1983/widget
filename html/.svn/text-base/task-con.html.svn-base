@@ -15,11 +15,12 @@
 <div class="wrap">
   <!-- 每日任务 -->
   <div class="task">
-    
-    <div class="bd">
+    <div class="scroll-rwrap">
+    <div class="bd" style="padding-top:0;">
       <ul class="task-list" id="taskList">
         
       </ul>
+    </div>
     </div>
 
   </div>

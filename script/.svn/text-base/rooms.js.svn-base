@@ -540,9 +540,6 @@ apiready = function(){
     // });
   }
 
-
-
-
   //打开分享界面
   window.onShareBtnPressed = function(data) {
     if(typeof data == 'string')
@@ -552,9 +549,9 @@ apiready = function(){
         url: '../html/share.html?id='+yp.query('id'),
         rect:{
             x:0,
-            y:api.frameHeight - 330 - 50,
+            y:api.frameHeight - 200 - 50,
             w:api.frameWidth,
-            h:330
+            h:200
         },
         pageParam: {'domain' : data['domain'], 'title' : data['title'], 'imgUrl' : data['bpic']},
         bounces: true,

@@ -7,9 +7,9 @@
  * ============================================= */
 
 apiready = function() {
-  	// var sinaWeiBo = api.require('sinaWeiBo');
+  var sinaWeiBo = api.require('sinaWeiBo');
   var qqObj = api.require('qq');
-  	// var weiXin = api.require('weiXin');
+  var weiXin = api.require('weiXin');
 	var ui = {
 		$shareList : $('#shareList')
 	}
@@ -42,8 +42,8 @@ apiready = function() {
         case 'qq':
           qqObj.shareNews({
                url:url
-              ,title:title
-              // ,description:'xxxx'
+              ,title:'我正在#战旗TV#观看大神'+domain+'的现场直播：'
+              ,description:'【'+title+'】，精彩炫酷，大家速速来围观！'
               ,imgUrl:imgUrl
           }, function(ret, err) {
             if(ret.status) {
@@ -54,27 +54,48 @@ apiready = function() {
           });
           break;
         case 'sina':
+          sinaWeiBo.sendRequest({
+              contentType: 'text',
+              text: '我正在#战旗TV#观看大神'+domain+'的现场直播：【'+title+'】，精彩炫酷，大家速速来围观！（分享自@战旗TV直播平台）',
+              imageUrl: imgUrl,
+              media : {
+                webpageUrl : url
+              }
+          },function(ret,err){
+              if (ret.status) {
+                  api.alert({
+                      title: '发表微博',
+                      msg: '发表成功',
+                      buttons: ['确定']
+                  });
+              }else{
+                  api.alert({
+                      title: '发表微博',
+                      msg: '发表失败',
+                      buttons: ['确定']
+                  });
+              };
+          });
           break;
         case 'weixin':
-          // weiXin.sendRequest({
-          //     scene:'timeline',
-          //     contentType:'web_page',
-          //     title:'测试用标题',
-          //     description:'测试用内容',
-          //     thumbUrl:'fs://a.png',
-          //     contentUrl: 'http://www.baidu.com/'
-          // },function(ret,err){
-          //     if(ret.status){
-          //         api.alert({title: '发表微信',msg: '发表成功', buttons: ['确定']});
-          //     } else{
-          //         api.alert({title: '发表失败',msg: err.msg,buttons: ['确定']});
-          //     };
-          // });
+          weiXin.sendRequest({
+              scene:'timeline',
+              contentType:'web_page',
+              title:'我正在#战旗TV#观看大神'+domain+'的现场直播：',
+              description:'【'+title+'】，精彩炫酷，大家速速来围观！（分享自@战旗TV直播平台）',
+              thumbUrl:imgUrl,
+              contentUrl: url
+          },function(ret,err){
+              if(ret.status){
+                  api.alert({title: '发表微信',msg: '发表成功', buttons: ['确定']});
+              } else {
+                  api.alert({title: '发表失败',msg: err.msg,buttons: ['确定']});
+              };
+          });
           break;
 
       }
 		}
-
 
 
 	}
@@ -85,4 +106,11 @@ apiready = function() {
 
 
 }
+
+
+// 我正在#战旗TV#观看大神CaoMei的现场直播：【早上刀架在脖子也起不来，2点起来直播 -。-】，精彩炫酷，大家速速来围观！
+
+// 新浪文案
+// 我正在#战旗TV#观看大神CaoMei的现场直播：【早上刀架在脖子也起不来，2点起来直播 -。-】，精彩炫酷，大家速速来围观！（分享自@战旗TV直播平台）
+
 

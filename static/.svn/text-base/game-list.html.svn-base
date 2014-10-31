@@ -36,37 +36,37 @@
         <li>
           <div class="game-a">
             <img src="../image/game.jpg" alt="">
-            英雄联盟
+            <p class="game-list-name">英雄联盟</p>
           </div>
         </li>
         <li>
           <div class="game-a">
             <img src="../image/game.jpg" alt="">
-            英雄联盟
+            <p class="game-list-name">英雄联盟</p>
           </div>
         </li>
         <li>
           <div class="game-a">
             <img src="../image/game.jpg" alt="">
-            英雄联盟
+            <p class="game-list-name">英雄联盟</p>
           </div>
         </li>
         <li>
           <div class="game-a">
             <img src="../image/game.jpg" alt="">
-            英雄联盟
+            <p class="game-list-name">英雄联盟</p>
           </div>
         </li>
         <li>
           <div class="game-a">
             <img src="../image/game.jpg" alt="">
-            英雄联盟
+            <p class="game-list-name">英雄联盟</p>
           </div>
         </li>
         <li>
           <div class="game-a">
             <img src="../image/game.jpg" alt="">
-            英雄联盟
+            <p class="game-list-name">英雄联盟</p>
           </div>
         </li>
       </ul>
