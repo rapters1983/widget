@@ -81,6 +81,14 @@ apiready = function() {
             },function(ret,err){
               if (ret.status) {
                 $api.setStorage('weibo', 'ok');
+                sinaWeiBo.sendRequest({
+                    contentType: 'text',
+                    text: '我正在#战旗TV#观看大神'+domain+'的现场直播：【'+title+'】，精彩炫酷，大家速速来围观！（分享自@战旗TV直播平台）',
+                    imageUrl: imgUrl,
+                    media : {
+                      webpageUrl : url
+                    }
+                },function(ret,err){});
               }else{
                 api.alert({msg:'授权失败'+err.msg});
                 $api.setStorage('weibo', 'not');

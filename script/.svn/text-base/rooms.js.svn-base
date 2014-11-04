@@ -177,6 +177,10 @@ apiready = function(){
     listen : function()　{
       var self = this;
 
+      window.addEventListener("orientationchange",function(obj){
+         zhanqi.orientationDidChanged({'orientation':window.orientation});
+      });
+
       //点击聊天区域隐藏分享
       $('#liveRoom').on('click',  function() {
         api.closeFrame({
@@ -581,6 +585,8 @@ function setScreenOriention(data)
     });  
   }
 }
+
+
 
 // rapters1983@hotmail.com
 

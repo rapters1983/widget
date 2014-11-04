@@ -20,7 +20,7 @@
     <!-- 聊天对话部分 -->
     <div id="chatList" class="bd">
       <div class="title">欢迎来到<i id="anchorName"></i>的直播间，喜欢就点击右上角订阅吧。</div>
-      <ul class="chat-list">
+      <ul class="chat-list" style="padding-bottom:20px;">
         <!-- <li class="myself">
           <span class="name"><i class="name-bg grade-1">荷蛋</i>名字你爸妈知道吗？：</span>艾玛，圣剑快出旋风斩啊！！！
         </li>
