@@ -19,6 +19,18 @@ apiready = function() {
 		},
 		view: function() {
       var self = this;
+      yp.ajax({
+          url: URLConfig('switch'),  
+          method: 'get',
+          dataType: 'json'
+      },function(ret,err){
+        if(ret['code'] == 0) {
+          if(ret['data']['switch'] == 1) {
+            $('#wealth').removeClass('hidden');
+            $('#task').removeClass('hidden');
+          }
+        }
+      });
       fInitInfo();
 		},
 		listen: function()　{

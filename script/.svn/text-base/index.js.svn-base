@@ -90,8 +90,8 @@ function openTab(type, pageParam){
   var headPos = $('#head').outerHeight();
   var height = 0;
   if(api.systemType === 'ios') {
-    headPos = $('#head').outerHeight()/window.devicePixelRatio;
-    height = api.winHeight - $('#head').outerHeight()/window.devicePixelRatio - $('#footer').outerHeight()/window.devicePixelRatio;
+    headPos = $('#head').outerHeight()/2;
+    height = api.winHeight - $('#head').outerHeight()/2 - $('#footer').outerHeight()/2;
   } else {
     height =  api.winHeight - $('#head').outerHeight() - $('#footer').outerHeight();
   }
@@ -111,7 +111,6 @@ function openTab(type, pageParam){
       hidden: true
     });
   }
-
   //如果打开home页则不显示头部
   if(type == 'home'){
     headPos = 0;

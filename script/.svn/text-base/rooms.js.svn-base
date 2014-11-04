@@ -96,7 +96,7 @@ apiready = function(){
     view : function() {
       //初始化
       if(api.systemType === 'ios') {
-        $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio + 20);
+        $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio + 20*window.devicePixelRatio);
         $('#liveRoom').height(api.frameHeight*window.devicePixelRatio - api.frameWidth*9/16*window.devicePixelRatio - 50*window.devicePixelRatio);
       }else{
         $('body').height(api.frameHeight).css('padding-top',api.frameWidth*9/16 + 20);
@@ -113,40 +113,43 @@ apiready = function(){
     },
 
     initNativeModel : function(roomId) {
-        var param = {
-           'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
-          ,'x' : 0
-          ,'y' : 0
-          ,'w' : api.frameWidth
-          ,'h' : api.frameWidth*9/16
-          ,'roomId' : roomId
-          ,'fixedOn' : 'rooms'
-        }
-        
-        zhanqi.playVideo(param);
+      var headPos = 0;
+      if(api.systemType == 'ios') {
+        headPos = 20
+      }
+      var param = {
+         'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
+        ,'x' : 0
+        ,'y' : headPos
+        ,'w' : api.frameWidth
+        ,'h' : api.frameWidth*9/16
+        ,'roomId' : roomId
+        ,'fixedOn' : 'rooms'
+      }
+      
+      zhanqi.playVideo(param);
 
-        yp.ajax({
-            url: URLConfig('switch'),
-            method: 'get',
-            dataType: 'json'
-        },function(ret,err){
-          alert(JSON.stringify(ret));
-          if(ret['code'] == 0) {
-            var param2 = {
-               'x' : 0
-              ,'y' : api.frameHeight - 50
-              ,'w' : api.frameWidth
-              ,'h' : 50
-              ,'fixedOn' : 'rooms'
-            }
-            if(ret['data']['switch'] == 0) {
-              param2['hideGift'] = true;
-            }else{
-              param2['hideGift'] = true;
-            }
-            zhanqi.showInputView(param2);
+      yp.ajax({
+          url: URLConfig('switch'),
+          method: 'get',
+          dataType: 'json'
+      },function(ret,err){
+        if(ret['code'] == 0) {
+          var param2 = {
+             'x' : 0
+            ,'y' : api.frameHeight - 50
+            ,'w' : api.frameWidth
+            ,'h' : 50
+            ,'fixedOn' : 'rooms'
           }
-        });
+          if(ret['data']['switch'] == 0) {
+            param2['hideGift'] = true;
+          }else{
+            param2['hideGift'] = false;
+          }
+          zhanqi.showInputView(param2);
+        }
+      });
 
         
     },
@@ -174,6 +177,13 @@ apiready = function(){
     listen : function()　{
       var self = this;
 
+      //点击聊天区域隐藏分享
+      $('#liveRoom').on('click',  function() {
+        api.closeFrame({
+          name: 'share'
+        });
+        zhanqi.closeGiftFrame({});
+      });
 
       //选择礼物
       $('#giftList').on('click',  'li', function() {
@@ -527,12 +537,12 @@ function closeGiftFrame() {
 
     api.closeFrame({
      name: 'share'
-     });
+    });
 }
 
 function changeGiftStatus() {
-    var zhanqi = api.require('zhanqiMD');
-    zhanqi.closeGiftFrame({});
+  var zhanqi = api.require('zhanqiMD');
+  zhanqi.closeGiftFrame({});
 }
 
 
@@ -557,6 +567,19 @@ function getRoomInfo(data) {
   }
   fansTitle = data['fansTitle'];
   $('#anchorName').text(data['nickname']);
+}
+
+function setScreenOriention(data)
+{
+  if(typeof data == 'string') {
+    data = eval('('+data+')');
+  }
+  direction = data['direction'];
+  if(api) {
+    api.setScreenOrientation({
+     orientation: direction
+    });  
+  }
 }
 
 // rapters1983@hotmail.com

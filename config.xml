@@ -37,7 +37,7 @@
     <param name="urlScheme" value="wx192fb7e6245e4897"/>
     <param name="apiKey" value="wx192fb7e6245e4897"/>
   </feature>
-  <feature name=" sinaWeiBo">
+  <feature name="sinaWeiBo">
     <param name="urlScheme" value="wb638703876"/>
     <param name="apiKey" value="638703876"/>
     <param name="rgistUrl" value="http://www.zhanqi.tv"/>

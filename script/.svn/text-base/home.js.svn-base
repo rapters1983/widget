@@ -42,6 +42,18 @@
     });
 
     fInitInfo();
+    
+    yp.ajax({
+        url: URLConfig('switch'),  
+        method: 'get',
+        dataType: 'json'
+    },function(ret,err){
+      if(ret['code'] == 0) {
+        if(ret['data']['switch'] == 1) {
+          $('#payArea').removeClass('hidden');
+        }
+      }
+    });
 
     // 个人资料
     $('#personal').on('click', function() {

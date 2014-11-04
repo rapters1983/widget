@@ -59,11 +59,14 @@ apiready = function(){
               if(ret) {
                 if(ret.code == 0) {
                   self.fLoginCallback(ret['data']);
+                  $api.setStorage('qq','ok');
                 } else{
                   api.alert({msg: ret.message});
+                  $api.setStorage('qq','not');
                 }
               } else {
                 api.alert({msg: '网络似乎出现了异常'});
+                $api.setStorage('qq','not');
               }
             });
           } else{

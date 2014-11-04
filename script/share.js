@@ -22,6 +22,14 @@ apiready = function() {
 		},
 
 		view : function() {
+      weiXin.registerApp(
+        function(ret,err){
+          if (!ret.status) {
+            api.alert({msg:err.msg});
+          }
+        }
+      );
+
 		},
 
 		listen : function() {
@@ -38,8 +46,20 @@ apiready = function() {
         , title =  api.pageParam['title']
         , imgUrl =  api.pageParam['imgUrl']
       var url = 'http://www.zhanqi.tv/' + domain;
+      var user = $api.getStorage('user');
+      if(user && user['uid']) {
+        url = 'http://www.zhanqi.tv/' + domain + '?_p=' + user['uid'];
+      }
       switch(name) {
         case 'qq':
+          var isQQAuth = $api.getStorage('qq');
+          if(isQQAuth == 'not' || !isQQAuth) {
+            qqObj.login(function(ret,err){
+                $api.setStorage('qq', 'ok');
+            });
+            return;
+          }
+        
           qqObj.shareNews({
                url:url
               ,title:'我正在#战旗TV#观看大神'+domain+'的现场直播：'
@@ -54,6 +74,20 @@ apiready = function() {
           });
           break;
         case 'sina':
+          var isWeiBoAuth = $api.getStorage('weibo');
+          if(isWeiBoAuth == 'not' || !isWeiBoAuth) {
+             sinaWeiBo.auth({
+                redirectUrl: 'http://www.zhanqi.tv'
+            },function(ret,err){
+              if (ret.status) {
+                $api.setStorage('weibo', 'ok');
+              }else{
+                api.alert({msg:'授权失败'+err.msg});
+                $api.setStorage('weibo', 'not');
+              }
+            });
+            return;
+          }
           sinaWeiBo.sendRequest({
               contentType: 'text',
               text: '我正在#战旗TV#观看大神'+domain+'的现场直播：【'+title+'】，精彩炫酷，大家速速来围观！（分享自@战旗TV直播平台）',
@@ -61,21 +95,7 @@ apiready = function() {
               media : {
                 webpageUrl : url
               }
-          },function(ret,err){
-              if (ret.status) {
-                  api.alert({
-                      title: '发表微博',
-                      msg: '发表成功',
-                      buttons: ['确定']
-                  });
-              }else{
-                  api.alert({
-                      title: '发表微博',
-                      msg: '发表失败',
-                      buttons: ['确定']
-                  });
-              };
-          });
+          },function(ret,err){});
           break;
         case 'weixin':
           weiXin.sendRequest({
@@ -85,13 +105,7 @@ apiready = function() {
               description:'【'+title+'】，精彩炫酷，大家速速来围观！（分享自@战旗TV直播平台）',
               thumbUrl:imgUrl,
               contentUrl: url
-          },function(ret,err){
-              if(ret.status){
-                  api.alert({title: '发表微信',msg: '发表成功', buttons: ['确定']});
-              } else {
-                  api.alert({title: '发表失败',msg: err.msg,buttons: ['确定']});
-              };
-          });
+          },function(ret,err){});
           break;
 
       }

@@ -6,7 +6,7 @@
  * 框架方法和配置
  * ============================================= */
 
-var BASE_URL = 'http://m.zhanqi.tv/';
+var BASE_URL = 'http://www.zhanqi.tv/';
 // ajax地址配置
 // var URLConfig = {
 //   'gameIndex': BASE_URL + 'api/static/game.index/index.json'
@@ -105,8 +105,7 @@ $(function() {
   }else{ //普通页  在html文件夹里
     cssSrc = '../css/'
   }
-
-  if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
+  if( window.navigator.appVersion.match(/iphone/gi)) {
     scale = 0.5;
     htmlStr += '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
     +'<link type="text/css" rel="styleSheet" href="'+cssSrc+'common.css" />'
@@ -114,7 +113,17 @@ $(function() {
     htmlStr += '<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +', minimum-scale=' + scale + ', user-scalable=no" />'
     +'<link type="text/css" rel="styleSheet" href="'+cssSrc+'common-s.css" />'
   }
-  $('head').append(htmlStr)
+  $('head').append(htmlStr);
+
+  // if(api.systemType == 'android') {
+  //   if($('.top-bar')[0]) {
+  //     $('.top-bar').height(50);
+  //   }
+  //   if('.top-bar-bd'[0]) {
+  //     $('.top-bar-bd').css({'height':'48px', 'padding-top' : '12px !important;'});
+  //   }
+  // }
+
 });
 
 /* 静默登录 */

@@ -1623,9 +1623,9 @@ body{
   left: 0;
   z-index: 10;
 }
-.search-page .top-bar{height: 229px;}
+.search-page .top-bar{height: 228px;}
 .search-page .scroll-wrap{
-  padding-top: 229px;
+  padding-top: 228px;
 }
 /*=============== ipad ================*/
 @media (min-device-width : 768px) and (max-device-width : 1024px){ 
@@ -1655,9 +1655,6 @@ body{
   .my-page .my-top .icon-operate{font-size: 60px;}
   .my-page .my-top .user-mes .name{font-size: 60px; margin-top: 0;}
   .my-page .my-top .user-mes .money{font-size: 36px;}
-
-
-  
   .feedback .bd{font-size: 48px;}
   .about-me .mes-list li .tip{font-size: 36px;}
   .home-page .title{font-size: 48px;}
