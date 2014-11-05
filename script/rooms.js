@@ -125,6 +125,11 @@ apiready = function(){
         ,'h' : api.frameWidth*9/16
         ,'roomId' : roomId
         ,'fixedOn' : 'rooms'
+
+        ,'_x' : 0
+        ,'_y' : api.frameHeight - 50
+        ,'_w' : api.frameWidth
+        ,'_h' : 50
       }
       
       zhanqi.playVideo(param);
