@@ -132,7 +132,8 @@ apiready = function(){
       yp.ajax({
           url: URLConfig('switch'),
           method: 'get',
-          dataType: 'json'
+          dataType: 'json',
+          notLoad: true
       },function(ret,err){
         if(ret['code'] == 0) {
           var param2 = {
@@ -177,10 +178,6 @@ apiready = function(){
     listen : function()　{
       var self = this;
 
-      window.addEventListener("orientationchange",function(obj){
-         zhanqi.orientationDidChanged({'orientation':window.orientation});
-      });
-
       //点击聊天区域隐藏分享
       $('#liveRoom').on('click',  function() {
         api.closeFrame({
@@ -214,7 +211,8 @@ apiready = function(){
       yp.ajax({
           url: URLConfig('getGiftList',{'roomid':id}),
           method: 'get',
-          dataType: 'json'
+          dataType: 'json',
+          notLoad: true
       },function(ret,err){
         self.renderGiftList(ret['data']);
       });
@@ -224,7 +222,8 @@ apiready = function(){
       yp.ajax({
           url: URLConfig('recordWatch',{'roomid':roomId}),
           method: 'get',
-          dataType: 'json'
+          dataType: 'json',
+          notLoad: true
       },$.noop);
     },
 
