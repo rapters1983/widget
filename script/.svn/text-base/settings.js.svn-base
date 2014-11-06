@@ -211,12 +211,10 @@
             settings['submit'] = true;
             zhanqi.onGetSettingDataFromWeb(settings);
             if(yp.query('isRoom')) {
-              alert('leval')
               zhanqi.onBackToLiveScene({});
             }
             api.closeWin();
           }catch(e){
-            alert(e)
           }
         });
 

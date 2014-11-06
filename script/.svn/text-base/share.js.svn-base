@@ -56,10 +56,22 @@ apiready = function() {
           if(isQQAuth == 'not' || !isQQAuth) {
             qqObj.login(function(ret,err){
                 $api.setStorage('qq', 'ok');
+                qqObj.shareNews({
+                     url:url
+                    ,title:'我正在#战旗TV#观看大神'+domain+'的现场直播：'
+                    ,description:'【'+title+'】，精彩炫酷，大家速速来围观！'
+                    ,imgUrl:imgUrl
+                }, function(ret, err) {
+                  if(ret.status) {
+                    api.alert({'msg' : '分享成功'});
+                  }else{
+                    api.alert({'msg' : err.msg});
+                  }
+                });
             });
             return;
           }
-        
+          
           qqObj.shareNews({
                url:url
               ,title:'我正在#战旗TV#观看大神'+domain+'的现场直播：'

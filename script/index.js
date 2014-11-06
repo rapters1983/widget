@@ -114,7 +114,7 @@ function openTab(type, pageParam){
   //如果打开home页则不显示头部
   if(type == 'home'){
     headPos = 0;
-    height = height + 64;
+    // height = height + 64;
     bounces = false;
   }
   //record page id
@@ -150,12 +150,13 @@ function openTab(type, pageParam){
       });
       if(type == 'home'){
         var height = api.winHeight;
+        
         if(api.systemType === 'ios') {
           height = api.winHeight -  $('#footer').outerHeight()/window.devicePixelRatio  - 105;
         } else {
           height = api.frameHeight -  $('#footer').outerHeight() - 105;
         }
-        
+
         var headPos = 105;   //物理像素 头部
 
         api.openFrame({
@@ -304,8 +305,8 @@ apiready = function() {
   var ui = {
   }
 
-  var zhanqi = api.require('zhanqiMD'); 
-  zhanqi.onAppStarted({});
+  // var zhanqi = api.require('zhanqiMD'); 
+  // zhanqi.onAppStarted({});
   var oPage = {
     init : function() {
       this.view();

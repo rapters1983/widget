@@ -1567,9 +1567,9 @@ body{
   width: 100%;
   height: 45px;
 }
-.my-page .bd{
+/*.my-page .bd{
   padding-bottom: 63px;
-}
+}*/
 .my-page .task-list .icon-right{
   position: absolute;
   right: 8px;

@@ -96,6 +96,7 @@ apiready = function(){
     view : function() {
       //初始化
       if(api.systemType === 'ios') {
+        window.devicePixelRatio = 2;
         $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio + 20*window.devicePixelRatio);
         $('#liveRoom').height(api.frameHeight*window.devicePixelRatio - api.frameWidth*9/16*window.devicePixelRatio - 50*window.devicePixelRatio);
       }else{
@@ -133,30 +134,40 @@ apiready = function(){
       }
       
       zhanqi.playVideo(param);
-
-      yp.ajax({
+      
+      if(api.systemType === 'android') {
+        var param2 = {
+           'x' : 0
+          ,'y' : api.frameHeight - 50
+          ,'w' : api.frameWidth
+          ,'h' : 50
+          ,'fixedOn' : 'rooms'
+        }
+        zhanqi.showInputView(param2);
+      }else{
+        yp.ajax({
           url: URLConfig('switch'),
           method: 'get',
           dataType: 'json',
           notLoad: true
-      },function(ret,err){
-        if(ret['code'] == 0) {
-          var param2 = {
-             'x' : 0
-            ,'y' : api.frameHeight - 50
-            ,'w' : api.frameWidth
-            ,'h' : 50
-            ,'fixedOn' : 'rooms'
+        },function(ret,err){
+          if(ret['code'] == 0) {
+            var param2 = {
+               'x' : 0
+              ,'y' : api.frameHeight - 50
+              ,'w' : api.frameWidth
+              ,'h' : 50
+              ,'fixedOn' : 'rooms'
+            }
+            if(ret['data']['switch'] == 0) {
+              param2['hideGift'] = true;
+            }else{
+              param2['hideGift'] = false;
+            }
+            zhanqi.showInputView(param2);
           }
-          if(ret['data']['switch'] == 0) {
-            param2['hideGift'] = true;
-          }else{
-            param2['hideGift'] = false;
-          }
-          zhanqi.showInputView(param2);
-        }
-      });
-
+        });
+      }
         
     },
 

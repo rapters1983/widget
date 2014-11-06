@@ -37,6 +37,11 @@ apiready = function(){
       }else{
         $('#conWrap, .landing').height(api.winHeight - $('.top-bar').height());
       }
+
+      if(yp.query('isRoom')) {
+        ui.$btn_reg.addClass('hidden');
+      }
+
     },
     listen : function()　{
       var self = this;
