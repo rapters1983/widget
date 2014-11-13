@@ -216,7 +216,6 @@ apiready = function(){
           values: {'account' : accountCont, 'password' : pwdCont}
         }
       }, function(ret, error) {
-        alert(JSON.stringify(ret))
         if(ret) {
           if(ret.code == 0) {
             self.fLoginCallback(ret['data'], pwdCont);

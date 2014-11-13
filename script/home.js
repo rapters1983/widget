@@ -57,7 +57,25 @@
     //     }
     //   });
     // }
+
+    function getRich() {
+      yp.ajax({
+          url: URLConfig('getRich'),
+          method: 'get',
+          dataType: 'json'
+      },function(ret,err){
+        if(ret['code'] == 0) {
+          coin = ret['data']['coin']['count'];
+          gold = ret['data']['gold']['count'];
+
+          $('#gold').text(gold);
+          $('#coin').text(coin);
+      });
+    }
     
+    setInterval(function() {
+      getRich();
+    },5000);
 
     // 个人资料
     $('#personal').on('click', function() {

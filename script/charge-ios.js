@@ -70,11 +70,6 @@ apiready = function(){
       });
     },
     fSubmit: function() {
-      alert(JSON.stringify({
-        'product' : product,
-        'count' : 1,
-        'price' : price
-      }))
       zhanqi.onPayForProduct({
         'product' : product,
         'count' : 1,

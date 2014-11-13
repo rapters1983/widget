@@ -305,18 +305,18 @@ apiready = function() {
   var ui = {
   }
 
-  var zhanqi = api.require('zhanqiMD'); 
+  // var zhanqi = api.require('zhanqiMD'); 
 
-  var user = $api.getStorage('user');
-  if(!$.isEmptyObject(user)) {
-    zhanqi.onAppStarted({
-      userName : user['account'],
-      token : user['token'],
-      userAvatar : user['avatar'] 
-    });
-  }else{
-    zhanqi.onAppStarted({});
-  }
+  // var user = $api.getStorage('user');
+  // if(!$.isEmptyObject(user)) {
+  //   zhanqi.onAppStarted({
+  //     userName : user['account'],
+  //     token : user['token'],
+  //     userAvatar : user['avatar'] 
+  //   });
+  // }else{
+  //   zhanqi.onAppStarted({});
+  // }
   
 
   var oPage = {
