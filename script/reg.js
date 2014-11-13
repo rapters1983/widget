@@ -312,14 +312,14 @@ apiready = function(){
       if(!!pwdCont) {
         $api.setStorage('password', pwdCont);
       }
-      if(yp.query('isRoom')) { //直播间
+      // if(yp.query('isRoom')) { //直播间
         zhanqi.onLoginSuccess({
            'userName': user['account']
           ,'userAvatar':user['avatar']
           ,'token':user['token']
         });
         zhanqi.onBackToLiveScene({});
-      }
+      // }
       api.closeWin({
         name: 'landing',
         animation: {

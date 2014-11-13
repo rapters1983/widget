@@ -544,10 +544,10 @@ apiready = function(){
 }
 
 function loginBackScript() {
-    var zhanqi = api.require('zhanqiMD');
-    var data = $api.getStorage('userParam');
+    // var zhanqi = api.require('zhanqiMD');
+    // var data = $api.getStorage('userParam');
     $('#chatList').find('ul').html('');
-    zhanqi.onLoginSuccess(data);
+    // zhanqi.onLoginSuccess(data);
 }
 
 function sendGiftBack(){

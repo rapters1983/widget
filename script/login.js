@@ -220,25 +220,25 @@ apiready = function(){
       if(!!pwdCont) {
         $api.setStorage('password', pwdCont);
       }
-      if(yp.query('isRoom')) {
+      // if(yp.query('isRoom')) {
         var userParam = {
           'userName' : user['account'],
           'userAvatar' : user['avatar'],
           'token' : user['token']
         }
-        $api.setStorage('userParam',userParam);
-        api.execScript({
-          name : 'rooms',
-          script : 'loginBackScript();'
-        });
+        // api.execScript({
+        //   name : 'rooms',
+        //   script : 'loginBackScript();'
+        // });
+        zhanqi.onLoginSuccess(userParam);
         zhanqi.onBackToLiveScene({});
-      }else{
-        zhanqi.onLoginSuccessWithoutRoom({
-          'userName' : user['account'],
-          'token' : user['token'],
-          'userAvatar' : user['avatar']
-        });
-      }
+      // }else{
+      //   zhanqi.onLoginSuccessWithoutRoom({
+      //     'userName' : user['account'],
+      //     'token' : user['token'],
+      //     'userAvatar' : user['avatar']
+      //   });
+      // }
       api.closeWin({
         name: 'register',
         animation: {
