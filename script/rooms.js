@@ -98,6 +98,10 @@ apiready = function(){
       if(api.systemType === 'ios') {
         window.devicePixelRatio = 2;
         $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio + 20*window.devicePixelRatio);
+        if(api.systemType == 'ios' && ( api.systemVersion.indexOf('6.') > -1 &&  api.systemVersion.indexOf('5.') > -1)) {
+          $('body').height(api.frameHeight*window.devicePixelRatio).css('padding-top',api.frameWidth*9/16*window.devicePixelRatio);
+        }
+
         $('#liveRoom').height(api.frameHeight*window.devicePixelRatio - api.frameWidth*9/16*window.devicePixelRatio - 50*window.devicePixelRatio);
       }else{
         $('body').height(api.frameHeight).css('padding-top',api.frameWidth*9/16 + 20);
@@ -115,9 +119,10 @@ apiready = function(){
 
     initNativeModel : function(roomId) {
       var headPos = 0;
-      if(api.systemType == 'ios') {
+      if(api.systemType == 'ios' && ( api.systemVersion.indexOf('6.') < 0 && api.systemVersion.indexOf('5.') < 0)) {
         headPos = 20
       }
+
       var param = {
          'token' : $api.getStorage('user')?$api.getStorage('user')['token'] : ''
         ,'x' : 0
@@ -131,6 +136,13 @@ apiready = function(){
         ,'_y' : api.frameHeight - 50
         ,'_w' : api.frameWidth
         ,'_h' : 50
+
+      }
+
+      var user = $api.getStorage('user');
+      if(!$.isEmptyObject(user)) {
+        param['userName'] = user['account'];
+        param['userAvatar'] = user['avatar'];
       }
       
       zhanqi.playVideo(param);

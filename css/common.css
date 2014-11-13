@@ -209,7 +209,6 @@ body{
   height: 23px;
   margin-right: 8px;
   font-size: 16px;
-  background: url(../image/grade-icon.png);
   vertical-align: 2px;
   padding: 2px 0 0 7px;
 }
@@ -219,28 +218,29 @@ body{
 .live-room .grade-6,.live-room .grade-7,.live-room .grade-8,.live-room .grade-9,.live-room .grade-10,
 .live-room .grade-11,.live-room .grade-12,.live-room .grade-13,.live-room .grade-14,.live-room .grade-15{color: #fff;
 }
-.live-room .grade-2{background-position: 0 -30px;}
-.live-room .grade-3{background-position: 0 -61px;}
-.live-room .grade-4{background-position: 0 -91px;}
-.live-room .grade-5{background-position: 0 -121px;}
-.live-room .grade-6{background-position: 0 -151px;}
-.live-room .grade-7{background-position: 0 -181px;}
-.live-room .grade-8{background-position: 0 -211px;}
-.live-room .grade-9{background-position: 0 -242px;}
-.live-room .grade-10{background-position: 0 -271px;}
-.live-room .grade-11{background-position: 0 -301px;}
-.live-room .grade-12{background-position: 0 -331px;}
-.live-room .grade-13{background-position: 0 -361px;}
-.live-room .grade-14{background-position: 0 -391px;}
-.live-room .grade-15{background-position: 0 -421px;}
+.live-room .grade-1{background: url(../image/g_01.png);}
+.live-room .grade-2{background: url(../image/g_02.png);}
+.live-room .grade-3{background: url(../image/g_03.png);}
+.live-room .grade-4{background: url(../image/g_04.png);}
+.live-room .grade-5{background: url(../image/g_05.png);}
+.live-room .grade-6{background: url(../image/g_06.png);}
+.live-room .grade-7{background: url(../image/g_07.png);}
+.live-room .grade-8{background: url(../image/g_08.png);}
+.live-room .grade-9{background: url(../image/g_09.png);}
+.live-room .grade-10{background: url(../image/g_10.png);}
+.live-room .grade-11{background: url(../image/g_11.png);}
+.live-room .grade-12{background: url(../image/g_12.png);}
+.live-room .grade-13{background: url(../image/g_13.png);}
+.live-room .grade-14{background: url(../image/g_14.png);}
+.live-room .grade-15{background: url(../image/g_15.png);}
 .live-room .admin{
   color: #fff;
-  background-position: -80px 0;
+  background: url(../image/g_16.png);
   padding-left: 18px;
 }
 .live-room .anchor{
   color: #fff;
-  background-position: -80px -29px;
+  background: url(../image/g_17.png);
   padding-left: 18px;
 }
 .live-room .qq-face{
@@ -1628,7 +1628,7 @@ body{
   padding-top: 228px;
 }
 /*=============== ipad ================*/
-@media (min-device-width : 768px) and (max-device-width : 1024px){ 
+@media (min-device-width : 768px) and (max-device-width : 1024px){  
   .icon-m{font-size: 42px;}
   body{font-size: 42px;}
   .footer-bar{height: 140px; font-size: 32px;}
@@ -1665,4 +1665,9 @@ body{
   .video-list-wrap .detail .icon-m{font-size: 30px;}
   .game-list-wrap ul li .game-a img{margin-bottom: 15px;}
   .game-list-wrap ul li .game-a{padding-bottom: 15px;}
- }
+}
+/* 系统6.0 顶部不留白 */
+/*.top-bar {height: 130px;}
+.top-bar-bd {height: 126px; padding-top:32px !important;}
+.search-page .top-bar {height: 240px;}
+.search-page .search-wrap {height: 136px; padding-top: 38px;}*/

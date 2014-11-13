@@ -24,15 +24,15 @@ function URLConfig(which, data) {
     case 'bannerIndex':
       return BASE_URL + 'api/touch/apps.banner?rand='+data['id']+'';
     case 'liveIndex':
-      return BASE_URL + 'api/static/live.index/index.json';
+      return BASE_URL + 'api/static/live.index/index.json?rand=' + (+new Date());
     case 'liveList':
-      return BASE_URL + 'api/static/live.hots/'+data['num']+'-'+data['page']+'.json';
+      return BASE_URL + 'api/static/live.hots/'+data['num']+'-'+data['page']+'.json?rand=' + (+new Date());
     case 'gameList':
-      return BASE_URL + 'api/static/game.lists/'+data['num']+'-'+data['page']+'.json';
+      return BASE_URL + 'api/static/game.lists/'+data['num']+'-'+data['page']+'.json?rand=' + (+new Date());
     case 'gameLive':
-      return BASE_URL + 'api/static/game.lives/'+data['id']+'/'+data['num']+'-'+data['page']+'.json';
+      return BASE_URL + 'api/static/game.lives/'+data['id']+'/'+data['num']+'-'+data['page']+'.json?rand=' + (+new Date());
     case 'search':
-      return BASE_URL + 'api/touch/search?t='+data['t']+'&q='+data['q']+'&page='+data['page']+'&nums='+data['num'];
+      return BASE_URL + 'api/touch/search?t='+data['t']+'&q='+encodeURIComponent(data['q'])+'&page='+data['page']+'&nums='+data['num'];
     case 'followList':
       return BASE_URL + 'api/user/follow.listall';
     case 'unfollow':
@@ -176,6 +176,27 @@ function silenceLoginFn(pageName, fnName, isRoom, fn2Name) {
   });
   
 }
+
+/* 缓存图片 */
+function cachePic(spic, cachePath) {
+  if(api && api.connectionType != 'none') {
+    api.download({
+      url: spic,
+      savePath: cachePath,
+      report: true,
+      cache: true,
+      allowResume:true
+    },function(ret,err){
+      if(ret.savePath) {
+        var cachePathKey = ret.savePath.substring(ret.savePath.lastIndexOf('/') + 1);
+        $api.setStorage(cachePathKey,ret.savePath);
+      }
+    });
+  }
+}
+
+
+
 
 /* 框架初始化 */
 +function(win, $) {

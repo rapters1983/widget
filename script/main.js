@@ -40,6 +40,16 @@ apiready = function() {
 
       self.loadData();
 
+      //初始化
+      var width = api.winWidth;
+      if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
+        $('.hd').height(width*9/16*window.devicePixelRatio);
+        $('.hd').find('.show-pic').height(width*9/16*window.devicePixelRatio);
+      }else{
+        $('.hd').height(parseInt(width*9/16));       
+        $('.hd').find('.show-pic').height(width*9/16);
+      }
+
     },
     listen : function() {
       var self = this;
@@ -111,17 +121,18 @@ apiready = function() {
 
     loadData : function() {
       var self = this;
+      // api.connectionType wifi  none
       //slider
       self.getDataIndex(URLConfig('bannerIndex', {
         'id' : +new Date()
       }), function(data) {
         if(data['data'] instanceof Array && data['data'].length < 1 || $.isEmptyObject(data['data'])) return;
         self.renderSlider(data['data']);
-      });
+      },'bannerIndex');
       //6条热门直播 加载完毕后
       self.getDataIndex(URLConfig('liveIndex'), function(data) {
         self.renderLiveData(data['lives']);
-      });
+      },'liveIndex');
       //英雄联盟
       self.getDataIndex(URLConfig('gameLiveIndex', {
         'id' : 6
@@ -129,7 +140,7 @@ apiready = function() {
       , 'page' : 1
       }), function(data) {
         self.renderGameLiveData(data['data']['rooms'], ui.$lolList);
-      });
+      },'gameLiveIndex');
       //dota2
       self.getDataIndex(URLConfig('gameLiveIndex', {
         'id' : 10
@@ -137,7 +148,7 @@ apiready = function() {
       , 'page' : 1
       }), function(data) {
         self.renderGameLiveData(data['data']['rooms'], ui.$dota2List);
-      });
+      },'gameLiveIndex');
       //三国杀
       self.getDataIndex(URLConfig('gameLiveIndex', {
         'id' : 13
@@ -145,7 +156,7 @@ apiready = function() {
       , 'page' : 1
       }), function(data) {
         self.renderGameLiveData(data['data']['rooms'], ui.$sgsList);
-      });
+      },'gameLiveIndex');
       //其它
       self.getDataIndex(URLConfig('otherLiveIndex'), function(data) {
         $('body').append(data['data']['rooms']);
@@ -159,7 +170,7 @@ apiready = function() {
         //     location: 'top'
         //   });
         // }
-      });
+      },'otherLiveIndex');
 
       //惰性加载
       $('img.lazy').lazyload({
@@ -169,18 +180,28 @@ apiready = function() {
 
     },
 
-    getDataIndex : function(url,callback) {
+    getDataIndex : function(url,callback,which) {
       var self = this;
+
+      if(api.connectionType === 'none') {
+        var data = $api.getStorage(which);
+        if(data) {
+          callback(data);
+        }
+        return;
+      }
       $.ajax({
         url : url,
         type : 'get',
         dataType : 'json',
+        // async : false,
         headers: {
          'User-Agent': 'Zhanqi.tv Api Client'
         },
         success : function(ret) {
           if(ret) {
             if(ret['code'] == 0) {
+              $api.setStorage(which,ret);   //更新缓存
               callback(ret);
             } else {
               api.alert({msg : ret['message']});
@@ -191,58 +212,6 @@ apiready = function() {
           }
         }
       });
-      // return;
-      // yp.ajax({
-      //   url : url,
-      //   method : 'get',
-      //   timeout : 2000,
-      //   dataType : 'json'
-      // }, function(ret, err) {
-      //   alert('success back')
-      //   if(ret) {
-      //     if(ret['code'] == 0) {
-      //       callback(ret);
-      //     } else {
-      //       api.alert({msg : ret['message']});
-      //     }
-      //   } else{
-      //     self.failCount++;
-      //     self.overTime();
-      //   }
-      // });
-      // $.ajax({
-      //   url : url,
-      //   type : 'get',
-      //   dataType : 'json',
-      //   timeout : 2000,
-      //   headers: {
-      //     'User-Agent': 'Zhanqi.tv Api Client'
-      //   },
-      //   success : function(data) {
-      //     if(data) {
-      //       if(data['code'] == 0) {
-      //         callback(data);
-      //       } else{
-      //         api.toast({
-      //           msg: '出错了，请重试！',
-      //           duration: 2000,
-      //           location: 'top'
-      //         });
-      //       }
-      //     } else{
-      //       api.toast({
-      //         msg: '数据异常，请重试！',
-      //         duration: 2000,
-      //         location: 'top'
-      //       });
-      //     }
-      //   },
-      //   error: function(err) {
-      //     self.failCount++;
-      //     self.overTime();
-      //   }
-      // });
-
     },
     //游戏的四个直播
     renderGameLiveData : function(data, $dom) {
@@ -261,7 +230,22 @@ apiready = function() {
         $self.find('.til').empty().text(data[i]['title']);
         $self.find('.js-online').empty().text(online);
         $self.find('.js-nickname').empty().text(data[i]['nickname']);
-        $self.find('img').attr('data-original', data[i]['bpic']);
+
+
+
+        var bpic = data[i]['bpic'];
+        
+        var cachePath = bpic.substring(bpic.lastIndexOf('/') + 1);
+        var cacheSpic = $api.getStorage(cachePath);
+        
+        if(api.connectionType === 'none' && cacheSpic) {
+          bpic = cacheSpic;
+        }
+        $self.find('img').attr('data-original', bpic);
+
+        //缓存&&更新图片
+        cachePic(bpic, cachePath);
+
       })
     },
     //热门直播
@@ -280,8 +264,21 @@ apiready = function() {
         $self.find('.til').empty().text(data[i]['title']);
         $self.find('.js-online').empty().text(online);
         $self.find('.js-nickname').empty().text(data[i]['nickname']);
-        $self.find('img').attr('src', data[i]['bpic']);
-      })
+
+        var bpic = data[i]['bpic'];
+
+        var cachePath = bpic.substring(bpic.lastIndexOf('/') + 1);
+        var cacheSpic = $api.getStorage(cachePath);
+
+        if(api.connectionType === 'none' && cacheSpic) {
+          bpic = cacheSpic;
+        }
+        $self.find('img').attr('src', bpic);
+
+        //缓存&&更新图片
+        cachePic(bpic, cachePath);
+
+      });
     },
     //渲染首页swipe插件
     renderSlider : function(data) {
@@ -289,9 +286,9 @@ apiready = function() {
       if(window.isSlided){
         window.mySwipe.kill();
       }
+      var htmlStr = '';
       //初始化
       var width = api.winWidth;
-      var htmlStr = '';
       if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
         $('.hd').height(width*9/16*window.devicePixelRatio);
       }else{
@@ -307,14 +304,27 @@ apiready = function() {
           title = data[i]['room']['title'];
         }
 
+        
+        var cachePath = spic.substring(spic.lastIndexOf('/') + 1);
+        var cacheSpic = $api.getStorage(cachePath);
+
+        if(api.connectionType === 'none' && cacheSpic) {
+          spic = cacheSpic;
+        }
+
         htmlStr += '<li name="enterRooms" tapmode="active" id="'+ id +'">'
         if( window.devicePixelRatio == 2 && window.navigator.appVersion.match(/iphone/gi)) {
-          htmlStr += '<img src="'+ spic +'" style="height:'+width*9/16*window.devicePixelRatio+'px" class="show-pic" />'
+          
+          htmlStr += '<img cachePath="'+cachePath+'" src="'+ spic +'" style="height:'+width*9/16*window.devicePixelRatio+'px" class="show-pic" />'
         }else{
           htmlStr += '<img src="'+ spic +'" style="height:'+width*9/16+'px" class="show-pic" />'
         }
           htmlStr +=  '<p class="title">'+ title +'</p>'
                   +  '</li>';
+
+        //缓存&&更新图片
+        cachePic(spic, cachePath);
+
       }
       var pointerStr = '<span class="dot active"></span>';
       for(var i=1; i<data.length; i++) {
@@ -322,6 +332,9 @@ apiready = function() {
       }
       $('#dotBox').empty().html(pointerStr);
       $('#banner-content').empty().html(htmlStr);
+
+
+
       var slide = $api.byId('slider');
       window.mySwipe = Swipe(slide, {
         // startSlide: 2,

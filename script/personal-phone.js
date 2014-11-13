@@ -184,7 +184,6 @@ apiready = function(){
           params[paramArray[i]['name']] = paramArray[i]['value'];
         }
       }
-      alert(JSON.stringify(params));
       yp.ajax({
         url: URLConfig('bindPhone'),
         method: 'post',
@@ -198,7 +197,6 @@ apiready = function(){
             var user = $api.getStorage('user');
             user.mobile = params.mobile;
             $api.setStorage('user', user);
-            alert(JSON.stringify(user));
             api.execScript({
               name: 'personal',
               script: 'fInitInfo();'

@@ -54,6 +54,8 @@
             $('#titleName, #titleArea, #zhanqiSuport, #zhanqiSuportArea').removeClass('hidden');
             if(api.systemType == 'ios') {
               $('#evaluation').removeClass('hidden');
+            } else {  //android 下禁止显示 关于我们 给我评价
+              $('#aboutUs, #evaluation').addClass('hidden');
             }
           }
         }catch(e) { }

@@ -200,16 +200,15 @@ body{
   margin: 0 3px;
   width: 20px;
   height: 20px;
-  vertical-align: -10px;
+  vertical-align: -5px;
 }
 .live-room .name-bg{
   display: inline-block;
-  width: 56px;
-  height: 23px;
+  width: 36px;
+  height: 22px;
   margin-right: 4px;
-  background-image: url(../image/grade-icon.png);
-  vertical-align: 2px;
-  padding: 4px 0 0 10px;
+  background-size: contain !important;
+  padding: 0 0 0 3px;
 }
 .live-room .grade-1,.live-room .grade-2,.live-room .grade-3,.live-room .grade-4,.live-room .grade-5{
   color: #7a7a7a;
@@ -217,29 +216,32 @@ body{
 .live-room .grade-6,.live-room .grade-7,.live-room .grade-8,.live-room .grade-9,.live-room .grade-10,
 .live-room .grade-11,.live-room .grade-12,.live-room .grade-13,.live-room .grade-14,.live-room .grade-15{color: #fff;
 }
-.live-room .grade-2{background-position: 0 -30px;}
-.live-room .grade-3{background-position: 0 -61px;}
-.live-room .grade-4{background-position: 0 -91px;}
-.live-room .grade-5{background-position: 0 -121px;}
-.live-room .grade-6{background-position: 0 -151px;}
-.live-room .grade-7{background-position: 0 -181px;}
-.live-room .grade-8{background-position: 0 -211px;}
-.live-room .grade-9{background-position: 0 -242px;}
-.live-room .grade-10{background-position: 0 -271px;}
-.live-room .grade-11{background-position: 0 -301px;}
-.live-room .grade-12{background-position: 0 -331px;}
-.live-room .grade-13{background-position: 0 -361px;}
-.live-room .grade-14{background-position: 0 -391px;}
-.live-room .grade-15{background-position: 0 -421px;}
+.live-room .grade-1{background: url(../image/g_01.png) no-repeat;}
+.live-room .grade-2{background: url(../image/g_02.png) no-repeat;}
+.live-room .grade-3{background: url(../image/g_03.png) no-repeat;}
+.live-room .grade-4{background: url(../image/g_04.png) no-repeat;}
+.live-room .grade-5{background: url(../image/g_05.png) no-repeat;}
+.live-room .grade-6{background: url(../image/g_06.png) no-repeat;}
+.live-room .grade-7{background: url(../image/g_07.png) no-repeat;}
+.live-room .grade-8{background: url(../image/g_08.png) no-repeat;}
+.live-room .grade-9{background: url(../image/g_09.png) no-repeat;}
+.live-room .grade-10{background: url(../image/g_10.png) no-repeat;}
+.live-room .grade-11{background: url(../image/g_11.png) no-repeat;}
+.live-room .grade-12{background: url(../image/g_12.png) no-repeat;}
+.live-room .grade-13{background: url(../image/g_13.png) no-repeat;}
+.live-room .grade-14{background: url(../image/g_14.png) no-repeat;}
+.live-room .grade-15{background: url(../image/g_15.png) no-repeat;}
 .live-room .admin{
   color: #fff;
-  background-position: -80px 0;
-  padding-left: 20px;
+  background: url(../image/g_16.png) no-repeat;;
+  padding-left: 10px;
+  height: 22px;
 }
 .live-room .anchor{
+  height: 22px;
   color: #fff;
-  background-position: -80px -29px;
-  padding-left: 20px;
+  background: url(../image/g_17.png) no-repeat;;
+  padding-left: 10px;
 }
 .live-room .qq-face{
   width: 12px;

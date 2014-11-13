@@ -125,6 +125,15 @@ apiready = function() {
 
     getDataIndex : function(url,callback) {
       var self = this;
+
+      if(api.connectionType === 'none' && self.pageNow == 1) {
+        var data = $api.getStorage('live');
+        if(data) {
+          callback(data);
+        }
+        return;
+      }
+
       yp.ajax({
         url : url,
         method : 'get',
@@ -133,6 +142,9 @@ apiready = function() {
       }, function(ret, err) {
         if(ret) {
           if(ret['code'] == 0) {
+            if(self.pageNow == 1) {
+              $api.setStorage('live',ret['data']);   //更新缓存
+            }
             callback(ret['data']);
           } else{
             api.alert({msg : ret['message']});
@@ -165,11 +177,12 @@ apiready = function() {
             $self.attr('id', id);
             $self.attr('which', which);
             $self.attr('fansTitle', fansTitle);
-            $self.find('img').attr('src', bpic);
             $self.find('.til').empty().text(title);
             $self.find('.js-online').empty().text(online);
             $self.find('.js-nickname').empty().text(nickname);
             $self.find('.anchor').find('i').removeClass('icon-boy icon-girl').addClass(gender);
+            
+
           }else{
             $self.remove();
           }
@@ -198,8 +211,19 @@ apiready = function() {
         for(var i= loadedNum; i<data.length; i++) {
           var gender = data[i]['gender']==2? 'icon-boy' : 'icon-girl';
           var online = data[i]['online']>10000? Math.round(data[i]['online']/1000)/10+'万' : data[i]['online'];
+
+          var bpic = data[i]['bpic'];
+          var cachePath = bpic.substring(bpic.lastIndexOf('/') + 1);
+          var cacheSpic = $api.getStorage(cachePath);
+          
+          if(api.connectionType === 'none' && cacheSpic) {
+            bpic = cacheSpic;
+          }
+          //缓存&&更新图片
+          cachePic(bpic, cachePath);
+
           htmlStr += '<li id="'+data[i]['id']+'" name="enterRooms">'
-          + '<img src="'+data[i]['bpic']+'" alt="" class="game-pic">'
+          + '<img src="'+bpic+'" alt="" class="game-pic">'
           + '<div class="til">'+data[i]['title']+'</div>'
           + '<div class="detail clearfix">'
           + '<span class="audience"><i class="icon-m icon-spectator"></i>'

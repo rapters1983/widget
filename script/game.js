@@ -114,6 +114,15 @@ apiready = function() {
 
     getDataIndex : function(url,callback) {
       var self = this;
+      if(api.connectionType === 'none' && self.pageNow == 1) {
+        var data = $api.getStorage('game');
+        if(data) {
+          callback(data);
+        }
+        return;
+      }
+
+
       yp.ajax({
         url : url,
         method : 'get',
@@ -122,6 +131,9 @@ apiready = function() {
       }, function(ret, err) {
         if(ret) {
           if(ret['code'] == 0) {
+            if(self.pageNow == 1) {
+              $api.setStorage('game',ret['data']);   //更新缓存
+            }
             callback(ret['data']);
           } else{
             api.alert({msg : ret['message']});
@@ -138,14 +150,15 @@ apiready = function() {
       var htmlStr = '';
       var loadedNum = ui.$gameList.find('li').length
       var i = data.length;
-
       if(i < loadedNum){
         ui.$gameList.find('li').each(function(){
           $self = $(this);
           var idx = $self.index();
           if(idx < i){
             $self.find('.js-gamename').empty().text(data[idx]['name']);
-            $self.find('img').attr('src', data[idx]['spic']);
+            var spic = data[idx]['spic'];
+            $self.find('img').attr('src', spic);
+     
           }else{
             $self.remove();
           }
@@ -155,11 +168,25 @@ apiready = function() {
           $self = $(this);
           var idx = $self.index();
           $self.find('.js-gamename').empty().text(data[idx]['name']);
-          $self.find('img').attr('src', data[idx]['spic']);
+          var spic = data[idx]['spic'];
+          $self.find('img').attr('src', spic);
+
         })
         for(var i= loadedNum; i<data.length; i++) {
+          var spic = data[i]['spic'];
+          // alert('spic>'+ spic)
+          var cachePathKey = spic.substring(spic.lastIndexOf('/') + 1);
+          // alert('cachePathKey>'+cachePathKey)
+          var cacheSpic = $api.getStorage(cachePathKey);
+          // alert('cacheSpic>'+cacheSpic)
+          if(api.connectionType === 'none' && cacheSpic) {
+            spic = cacheSpic;
+          }
+          //缓存&&更新图片
+          cachePic(spic, cachePathKey);
+
           htmlStr += '<li id="'+data[i]['id']+'">'
-          + '<div class="game-a"><img src="'+ data[i]['spic'] +'" width="'+ width +'">'
+          + '<div class="game-a"><img src="'+ spic +'" width="'+ width +'">'
           + '<span class="js-gamename">'+ data[i]['name'] + '</span><div></li>';
         }
         ui.$gameList.append(htmlStr);

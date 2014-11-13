@@ -213,6 +213,7 @@ apiready = function(){
     fLoginCallback: function(data, pwdCont) {
       var self = this;
       var user = data;
+
       if(!!user) {
         $api.setStorage('user', user);
       }
@@ -221,7 +222,7 @@ apiready = function(){
       }
       if(yp.query('isRoom')) {
         var userParam = {
-          'userName' : user['nickname'],
+          'userName' : user['account'],
           'userAvatar' : user['avatar'],
           'token' : user['token']
         }
@@ -231,6 +232,12 @@ apiready = function(){
           script : 'loginBackScript();'
         });
         zhanqi.onBackToLiveScene({});
+      }else{
+        zhanqi.onLoginSuccessWithoutRoom({
+          'userName' : user['account'],
+          'token' : user['token'],
+          'userAvatar' : user['avatar']
+        });
       }
       api.closeWin({
         name: 'register',

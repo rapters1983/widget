@@ -222,6 +222,7 @@ function Swipe(container, options) {
   }
 
   function stop() {
+
     delay = 0;
     clearTimeout(interval);
 
@@ -237,11 +238,13 @@ function Swipe(container, options) {
   var events = {
 
     handleEvent: function(event) {
+
       switch (event.type) {
         case 'touchstart': this.start(event); break;
         case 'touchmove': this.move(event); break;
         case 'touchend': this.end(event); break;    //modify by Alon Zhang
         // case 'touchend': offloadFn(this.end(event)); break;
+        case 'touchcancel': this.end(event); break;   //add by Alon Zhang
         case 'webkitTransitionEnd':
         case 'msTransitionEnd':
         case 'oTransitionEnd':
@@ -278,6 +281,8 @@ function Swipe(container, options) {
       // attach touchmove and touchend listeners
       element.addEventListener('touchmove', this, false);
       element.addEventListener('touchend', this, false);
+      //add by Alon Zhang
+      element.addEventListener('touchcancel', this, false);
 
     },
     move: function(event) {
@@ -417,6 +422,8 @@ function Swipe(container, options) {
       // kill touchmove and touchend event listeners until touchstart called again
       element.removeEventListener('touchmove', events, false);
       element.removeEventListener('touchend', events, false);
+      //add by Alon Zhang
+      element.removeEventListener('touchcancel', events, false);
 
       //add by Alon Zhang
       //resume slide

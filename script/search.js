@@ -55,14 +55,19 @@ yp.ready(function() {
           clearTimeout(self.texting);
           self.texting = null;
         }
-        self.texting = setTimeout(function(){
-          oPage.searching(keyword);
-        }, 500);
-      }).on('keyup', function(){
+        // self.texting = setTimeout(function(){
+        //   oPage.searching(keyword);
+        // }, 500);
+
+      }).on('keyup', function(event){
         var keyword = $(this).val();
         if(keyword.length == ''){
           ui.$result.addClass('hidden');
           self.renderSearchHistory();
+        }else{
+          if(event.keyCode == 13) {
+            oPage.searching(keyword);
+          }
         }
       })
       //点击历史记录
@@ -173,12 +178,13 @@ yp.ready(function() {
       ui.$liveList.empty();
       ui.$hostList.empty();
       self.searchData(keyword, 0);
-      self.searchData(keyword, 1);
+      // self.searchData(keyword, 1);
     }
   , searchData: function(keyword, idx){
       var self = this;
       var searchType = self.searchType[idx];
       var pageNow = self.pageNow[idx];
+      keyword = keyword.replace(/\s+/g, '');
       self.getDataAjax(URLConfig('search', {
         'num': 10
       , 'page': pageNow
@@ -229,13 +235,15 @@ yp.ready(function() {
         dataType : 'json'
       }, function(ret, err) {
         if(ret) {
+          if($.isEmptyObject(ret)) {
+            callback([]);
+            return;
+          }
           if(ret['code'] == 0) {
             callback(ret['data']);
           } else{
-            api.alert({msg : ret['message']});
+            // api.alert({msg : ret['message']});
           }
-        } else{
-          api.alert({msg: '网络似乎出现了异常'});
         }
       });
     }

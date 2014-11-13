@@ -314,7 +314,7 @@ apiready = function(){
       }
       if(yp.query('isRoom')) { //直播间
         zhanqi.onLoginSuccess({
-           'userName': user['nickname']
+           'userName': user['account']
           ,'userAvatar':user['avatar']
           ,'token':user['token']
         });

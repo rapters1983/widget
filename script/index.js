@@ -306,7 +306,19 @@ apiready = function() {
   }
 
   // var zhanqi = api.require('zhanqiMD'); 
-  // zhanqi.onAppStarted({});
+
+  // var user = $api.getStorage('user');
+  // if(!$.isEmptyObject(user)) {
+  //   zhanqi.onAppStarted({
+  //     userName : user['account'],
+  //     token : user['token'],
+  //     userAvatar : user['avatar'] 
+  //   });
+  // }else{
+  //   zhanqi.onAppStarted({});
+  // }
+  
+
   var oPage = {
     init : function() {
       this.view();
