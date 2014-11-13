@@ -25,6 +25,9 @@ apiready = function(){
     , $list_chargeType: $('#list-chargeType')
   };
 
+  var product = 'com.gameabc.zhanqiIPhone.420gold', price = 6, gold = 420;
+  var zhanqi = api.require('zhanqiMD');
+
   var oPage = {
     init : function() {
       this.view();
@@ -47,6 +50,9 @@ apiready = function(){
         var $this = $(this);
         ui.$list_chargeType.find('.active').removeClass('active');
         $this.addClass('active');
+        product = $(this).attr('proid');
+        price = $(this).attr('data-rmb');
+        gold = $(this).attr('data-gold');
       });
       
       // 立即充值
@@ -64,42 +70,39 @@ apiready = function(){
       });
     },
     fSubmit: function() {
-      var self = this;
-      var data = {
-        account: '1111'
-      , payType: '支付宝'
-      , gold: 1000
-      , coin: 1000
-      };
-      api.openWin({
-        name: 'recharge-ok'
-      , url: '../html/recharge-ok.html'
-      , delay: 100
-      , pageParam: data
+      alert(JSON.stringify({
+        'product' : product,
+        'count' : 1,
+        'price' : price
+      }))
+      zhanqi.onPayForProduct({
+        'product' : product,
+        'count' : 1,
+        'price' : price
       });
-      // yp.ajax({
-      //     url: URLConfig('sGetRichUrl')
-      //   , method: 'post'
-      //   , dataType: 'json'
-      //   , data: {
-      //     values: {}
-      //   }
-      //   }, function(ret, err) {
-      //     if(ret) {
-      //       if(ret['code'] == 0) {
-      //         // ...
-      //       } else{
-      //         api.alert({msg : ret['message']});
-      //       }
-      //     } else{
-      //       api.alert({
-      //         msg:('错误码：'+err.code+'；错误信息：'+err.msg+'网络状态码：'+err.statusCode)
-      //       });
-      //     }
-      //   });
+      // api.openWin({
+      //   name: 'recharge-ok'
+      // , url: '../html/recharge-ok.html'
+      // , delay: 100
+      // , pageParam: data
+      // });
     }
   }
   oPage.init();
+
+  window.onRechargeSuccess = function() {
+    api.openWin({
+      name: 'recharge-ok'
+    , url: '../html/recharge-ok.html'
+    , delay: 100
+    , pageParam: {
+        'gold' : gold,
+        'account' : $api.getStorage('user')['account'],
+        'coin' : gold
+      }
+    });
+  }
+
 }
 
 // 初始化页面数据

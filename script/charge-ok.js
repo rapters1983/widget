@@ -43,7 +43,7 @@ apiready = function(){
 function fInitInfo() {
   var data = api.pageParam;
   $('#txt-account').text(data.account);
-  $('#txt-payType').text(data.payType);
+  // $('#txt-payType').text(data.payType);
   $('#txt-gold').text(data.gold);
   $('#txt-coin').text(data.coin);
 

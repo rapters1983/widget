@@ -29,6 +29,18 @@ apiready = function(){
     init : function() {      
       this.view();
       this.listen();
+
+
+      // api.ajax({
+      //   url: URLConfig('logout'),
+      //   method: 'post',
+      //   headers: {
+      //     'User-Agent': 'Zhanqi.tv Api Client'
+      //   },
+      //   dataType: 'json'
+      // }, function(ret, err){
+      // });
+
     },
     view : function() {
       //初始化内容高度
@@ -40,6 +52,12 @@ apiready = function(){
 
       if(yp.query('isRoom')) {
         ui.$btn_reg.addClass('hidden');
+      }
+
+      var account = $api.getStorage('account');
+
+      if(account) {
+        ui.$txt_account.val(account);
       }
 
     },
@@ -198,6 +216,7 @@ apiready = function(){
           values: {'account' : accountCont, 'password' : pwdCont}
         }
       }, function(ret, error) {
+        alert(JSON.stringify(ret))
         if(ret) {
           if(ret.code == 0) {
             self.fLoginCallback(ret['data'], pwdCont);
@@ -216,6 +235,7 @@ apiready = function(){
 
       if(!!user) {
         $api.setStorage('user', user);
+        $api.setStorage('account', user['account']);
       }
       if(!!pwdCont) {
         $api.setStorage('password', pwdCont);
@@ -226,11 +246,16 @@ apiready = function(){
           'userAvatar' : user['avatar'],
           'token' : user['token']
         }
+        // $api.setStorage('userParam',userParam);
         // api.execScript({
         //   name : 'rooms',
         //   script : 'loginBackScript();'
         // });
+
+        // var data = $api.getStorage('userParam');
+        // $('#chatList').find('ul').html('');
         zhanqi.onLoginSuccess(userParam);
+
         zhanqi.onBackToLiveScene({});
       // }else{
       //   zhanqi.onLoginSuccessWithoutRoom({

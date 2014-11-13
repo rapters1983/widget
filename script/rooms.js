@@ -176,6 +176,7 @@ apiready = function(){
             }else{
               param2['hideGift'] = false;
             }
+            
             zhanqi.showInputView(param2);
           }
         });
@@ -417,13 +418,14 @@ apiready = function(){
         data = eval('('+data+')');
       }
       data = data['data'];
-
       if(selfGid == data['gid']) {
         if(data['show'] == 1) {
           htmlStr += '<li class="myself">'
               +  '  <span class="name">'
-              +  '    <i class="name-bg grade-'+data['level']+'">'+fansTitle+'</i>'
-              +  '  </span>'+data['nickname']+'送给主播<i class="count">' + data['count'] +'</i>'+ data['classifier']
+              if(data['level'] != 0) {
+                htmlStr +=  '<i class="name-bg grade-'+data['level']+'">'+fansTitle+'</i>'
+              }
+             htmlStr  +=  '  </span>'+data['nickname']+'送给主播<i class="count">' + data['count'] +'</i>'+ data['classifier']
               +  '  <img src="'+data['icon']+'" alt="" class="gift-icon">'
               // +  '  <i class="count">'+data['count']+'</i>'
               +  '</li>'
@@ -439,8 +441,11 @@ apiready = function(){
       }else{
         if(data['show'] == 1) {
           htmlStr += '<li>'
-              +  '  <span class="name">'
-              +  '    <i class="name-bg grade-'+data['level']+'">'+fansTitle+'</i>'
+                  +  '  <span class="name">'
+              if(data['level'] != 0) {
+                htmlStr +=  '<i class="name-bg grade-'+data['level']+'">'+fansTitle+'</i>'
+              }
+              htmlStr +=  '    <i class="name-bg grade-'+data['level']+'">'+fansTitle+'</i>'
               +  '  </span>'+data['nickname']+'送给主播<i class="count">' + data['count'] +'</i>'+ data['classifier']
               +  '  <img src="'+data['icon']+'" alt="" class="gift-icon">'
               // +  '  <i class="count">'+data['count']+'</i>'

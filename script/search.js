@@ -178,7 +178,7 @@ yp.ready(function() {
       ui.$liveList.empty();
       ui.$hostList.empty();
       self.searchData(keyword, 0);
-      // self.searchData(keyword, 1);
+      self.searchData(keyword, 1);
     }
   , searchData: function(keyword, idx){
       var self = this;

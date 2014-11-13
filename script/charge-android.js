@@ -40,12 +40,15 @@ apiready = function(){
       // 支付宝充值
       ui.$btn_zfb.on('click', function() {
 
-        api.openWin({
-          name: 'recharge-affirm', 
-          url: '../html/recharge-affirm.html', 
-          delay: 100,
-          bgColor:'#FFF'
-        });
+        
+        // api.openWin({
+        //   name: 'recharge-affirm', 
+        //   url: '../html/recharge-affirm.html', 
+        //   delay: 100,
+        //   bgColor:'#FFF'
+        // });
+
+
       });
       
       // 网银充值
